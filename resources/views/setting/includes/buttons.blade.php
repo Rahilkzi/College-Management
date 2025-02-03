@@ -7,5 +7,6 @@
         <a class="{!! request()->is('setting/payment-gateway')?'btn-success':'btn-primary' !!} btn-sm " href="{{ route('setting.payment-gateway') }}"><i class="fa fa-dollar" aria-hidden="true"></i>&nbsp;Payment Gateway</a>
 
     </div>
+    
 </div>
 <hr class="hr-4">
