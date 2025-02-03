@@ -90,10 +90,6 @@ Route::group(['prefix' => 'user-guardian/',          'as' => 'user-guardian',   
     Route::get('students',                      ['as' => '.students',               'middleware' => ['permission:guardian-student-list'],           'uses' => 'HomeController@students']);
     Route::get('students/{id}/profile',         ['as' => '.students.profile',       'middleware' => ['permission:guardian-student-profile'],        'uses' => 'HomeController@studentProfile']);
     Route::get('students/{id}/fees',            ['as' => '.students.fees',          'middleware' => ['permission:guardian-student-fees'],           'uses' => 'HomeController@fees']);
-    Route::get('students/{id}/library',         ['as' => '.students.library',       'middleware' => ['permission:guardian-student-library'],        'uses' => 'HomeController@library']);
-    Route::get('students/{id}/attendance',      ['as' => '.students.attendance',    'middleware' => ['permission:guardian-student-attendance'],     'uses' => 'HomeController@attendance']);
-    Route::get('students/{id}/hostel',          ['as' => '.students.hostel',        'middleware' => ['permission:guardian-student-hostel'],         'uses' => 'HomeController@hostel']);
-    Route::get('students/{id}/transport',       ['as' => '.students.transport',     'middleware' => ['permission:guardian-student-transport'],      'uses' => 'HomeController@transport']);
     Route::get('students/{id}/subject',         ['as' => '.students.subject',       'middleware' => ['permission:guardian-student-course'],        'uses' => 'HomeController@subject']);
     Route::get('students/{id}/download',        ['as' => '.students.download',      'middleware' => ['permission:guardian-student-download'],       'uses' => 'HomeController@download']);
 

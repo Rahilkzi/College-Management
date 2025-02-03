@@ -34,49 +34,9 @@
         </li>
         @endpermission
 
-        {{-- Library --}}
-        @permission('student-library')
-        <li class="{!! request()->is('user-student/library*')?'active':'' !!} hover">
-            <a href="{{ route('user-student.library') }}" >
-                <i class="menu-icon fa fa-book" aria-hidden="true"></i>
-                <span class="menu-text">Library</span>
-            </a>
-            <b class="arrow"></b>
-        </li>
-        @endpermission
 
-        {{-- Attendance --}}
-        @permission('student-attendance')
-        <li class="{!! request()->is('user-student/attendance*')?'active':'' !!} hover">
-            <a href="{{ route('user-student.attendance') }}">
-                <i class="menu-icon fa fa-calendar" aria-hidden="true"></i>
-                <span class="menu-text"> Attendance</span>
-            </a>
-            <b class="arrow"></b>
-        </li>
-        @endpermission
 
-        {{-- Hostel --}}
-        @permission('student-hostel')
-        <li class="{!! request()->is('user-student/hostel*')?'active':'' !!} hover">
-            <a href="{{ route('user-student.hostel') }}">
-                <i class="menu-icon  fa fa-bed" aria-hidden="true"></i>
-                <span class="menu-text"> Hostels </span>
-            </a>
-            <b class="arrow"></b>
-        </li>
-        @endpermission
 
-        {{-- Transport --}}
-        @permission('student-transport')
-        <li class="{!! request()->is('user-student/transport*')?'active':'' !!} hover">
-            <a href="{{ route('user-student.transport') }}">
-                <i class="menu-icon  fa fa-bus" aria-hidden="true"></i>
-                <span class="menu-text"> Transport </span>
-            </a>
-            <b class="arrow"></b>
-        </li>
-        @endpermission
 
         {{-- Subject --}}
         @permission('student-course')
