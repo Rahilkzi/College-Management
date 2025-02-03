@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 4.6.5.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 04, 2020 at 07:55 PM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.3
+-- Generation Time: Jan 29, 2025 at 08:36 AM
+-- Server version: 10.1.21-MariaDB
+-- PHP Version: 7.1.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -19,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `test`
+-- Database: `college`
 --
 
 -- --------------------------------------------------------
@@ -42,9 +40,9 @@ CREATE TABLE `academic_infos` (
   `percentage` int(11) DEFAULT NULL,
   `division_grade` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `major_subjects` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `remark` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `remark` text COLLATE utf8mb4_unicode_ci,
   `sorting_order` int(10) UNSIGNED DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -63,7 +61,7 @@ CREATE TABLE `account_categories` (
   `ac_type` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `dr` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `cr` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -193,8 +191,21 @@ CREATE TABLE `addressinfos` (
   `home_phone` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `mobile_1` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `mobile_2` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `addressinfos`
+--
+
+INSERT INTO `addressinfos` (`id`, `created_at`, `updated_at`, `created_by`, `last_updated_by`, `students_id`, `address`, `state`, `country`, `temp_address`, `temp_state`, `temp_country`, `home_phone`, `mobile_1`, `mobile_2`, `status`) VALUES
+(1, '2025-01-27 06:08:26', '2025-01-27 06:08:26', 1, NULL, 1, 'LANJA', 'MAHARASHTRA', 'INDIA', 'LANJA', 'MAHARASHTRA', 'INDIA', '08208775966', '08208775966', '08208775966', 1),
+(2, '2025-01-28 15:15:08', '2025-01-28 15:15:08', 1, NULL, 4, 'LANJA', 'MAHARASHTRA', 'INDIA', 'LANJA', 'MAHARASHTRA', 'INDIA', '0000000000', '0000000000', '0000000000', 1),
+(3, '2025-01-28 15:24:11', '2025-01-28 15:24:11', 1, NULL, 5, 'KATHMANDU', '2 NO', 'NEPAL', 'KATHMANDU', '3 NO', 'NEPAL', '977-31-23078', '977-98989898', '977-91239123', 1),
+(4, '2025-01-28 15:24:11', '2025-01-28 15:24:11', 1, NULL, 6, 'KATHMANDU', 'BAGMATI8', 'INDIA', 'KATHMANDU', '4 NO', 'NEPAL', '977-31-23079', '977-98989898', '977-91239123', 1),
+(5, '2025-01-28 15:24:11', '2025-01-28 15:24:11', 1, NULL, 7, 'KATHMANDU', 'UP', 'NEPAL', 'KATHMANDU', '5 NO', 'NEPAL', '977-31-23080', '977-98989898', '977-91239123', 1),
+(6, '2025-01-28 15:24:11', '2025-01-28 15:24:11', 1, NULL, 8, 'KATHMANDU', 'PUNJAB', 'INDIA', 'KATHMANDU', '6 NO', 'NEPAL', '977-31-23081', '977-98989898', '977-91239123', 1),
+(7, '2025-01-28 15:24:11', '2025-01-28 15:24:11', 1, NULL, 9, 'KATHMANDU', '3 NO', 'NEPAL', 'KATHMANDU', '7 NO', 'NEPAL', '977-31-23082', '977-98989898', '977-91239123', 1);
 
 -- --------------------------------------------------------
 
@@ -209,11 +220,11 @@ CREATE TABLE `alert_settings` (
   `created_by` int(10) UNSIGNED NOT NULL,
   `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
   `event` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `sms` tinyint(1) NOT NULL DEFAULT 1,
-  `email` tinyint(1) NOT NULL DEFAULT 1,
+  `sms` tinyint(1) NOT NULL DEFAULT '1',
+  `email` tinyint(1) NOT NULL DEFAULT '1',
   `subject` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `template` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -258,172 +269,10 @@ CREATE TABLE `assets` (
   `created_by` int(10) UNSIGNED NOT NULL,
   `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
   `title` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `quantity` int(11) NOT NULL DEFAULT 0,
-  `rate` int(11) NOT NULL DEFAULT 0,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `quantity` int(11) NOT NULL DEFAULT '0',
+  `rate` int(11) NOT NULL DEFAULT '0',
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `assignments`
---
-
-CREATE TABLE `assignments` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `created_by` int(10) UNSIGNED NOT NULL,
-  `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
-  `years_id` int(10) UNSIGNED NOT NULL,
-  `semesters_id` int(10) UNSIGNED NOT NULL,
-  `subjects_id` int(10) UNSIGNED NOT NULL,
-  `publish_date` datetime NOT NULL,
-  `end_date` datetime NOT NULL,
-  `title` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `file` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `assignment_answers`
---
-
-CREATE TABLE `assignment_answers` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `created_by` int(10) UNSIGNED NOT NULL,
-  `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
-  `assignments_id` int(10) UNSIGNED NOT NULL,
-  `students_id` int(10) UNSIGNED NOT NULL,
-  `answer_text` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `file` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `approve_status` tinyint(1) DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `attendances`
---
-
-CREATE TABLE `attendances` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `created_by` int(10) UNSIGNED NOT NULL,
-  `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
-  `attendees_type` int(11) NOT NULL,
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `years_id` int(10) UNSIGNED NOT NULL,
-  `months_id` int(10) UNSIGNED NOT NULL,
-  `day_1` int(11) NOT NULL DEFAULT 0,
-  `day_2` int(11) NOT NULL DEFAULT 0,
-  `day_3` int(11) NOT NULL DEFAULT 0,
-  `day_4` int(11) NOT NULL DEFAULT 0,
-  `day_5` int(11) NOT NULL DEFAULT 0,
-  `day_6` int(11) NOT NULL DEFAULT 0,
-  `day_7` int(11) NOT NULL DEFAULT 0,
-  `day_8` int(11) NOT NULL DEFAULT 0,
-  `day_9` int(11) NOT NULL DEFAULT 0,
-  `day_10` int(11) NOT NULL DEFAULT 0,
-  `day_11` int(11) NOT NULL DEFAULT 0,
-  `day_12` int(11) NOT NULL DEFAULT 0,
-  `day_13` int(11) NOT NULL DEFAULT 0,
-  `day_14` int(11) NOT NULL DEFAULT 0,
-  `day_15` int(11) NOT NULL DEFAULT 0,
-  `day_16` int(11) NOT NULL DEFAULT 0,
-  `day_17` int(11) NOT NULL DEFAULT 0,
-  `day_18` int(11) NOT NULL DEFAULT 0,
-  `day_19` int(11) NOT NULL DEFAULT 0,
-  `day_20` int(11) NOT NULL DEFAULT 0,
-  `day_21` int(11) NOT NULL DEFAULT 0,
-  `day_22` int(11) NOT NULL DEFAULT 0,
-  `day_23` int(11) NOT NULL DEFAULT 0,
-  `day_24` int(11) NOT NULL DEFAULT 0,
-  `day_25` int(11) NOT NULL DEFAULT 0,
-  `day_26` int(11) NOT NULL DEFAULT 0,
-  `day_27` int(11) NOT NULL DEFAULT 0,
-  `day_28` int(11) NOT NULL DEFAULT 0,
-  `day_29` int(11) NOT NULL DEFAULT 0,
-  `day_30` int(11) NOT NULL DEFAULT 0,
-  `day_31` int(11) NOT NULL DEFAULT 0,
-  `day_32` int(11) NOT NULL DEFAULT 0,
-  `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `attendance_certificates`
---
-
-CREATE TABLE `attendance_certificates` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `created_by` int(10) UNSIGNED NOT NULL,
-  `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
-  `students_id` int(10) UNSIGNED NOT NULL,
-  `date_of_issue` date NOT NULL,
-  `year_of_study` varchar(9) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `percentage_of_attendance` varchar(3) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ref_text` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `attendance_masters`
---
-
-CREATE TABLE `attendance_masters` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `created_by` int(10) UNSIGNED NOT NULL,
-  `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
-  `year` int(10) UNSIGNED NOT NULL,
-  `month` int(10) UNSIGNED NOT NULL,
-  `day_in_month` int(11) NOT NULL,
-  `holiday` int(11) NOT NULL,
-  `open` int(11) NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `attendance_statuses`
---
-
-CREATE TABLE `attendance_statuses` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `created_by` int(10) UNSIGNED NOT NULL,
-  `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
-  `title` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `display_class` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `attendance_statuses`
---
-
-INSERT INTO `attendance_statuses` (`id`, `created_at`, `updated_at`, `created_by`, `last_updated_by`, `title`, `display_class`, `status`) VALUES
-(1, '2020-05-04 17:10:05', '2020-05-04 17:10:05', 1, NULL, 'PRESENT', 'btn-primary', 1),
-(2, '2020-05-04 17:10:05', '2020-05-04 17:10:05', 1, NULL, 'ABSENT', 'btn-danger', 1),
-(3, '2020-05-04 17:10:05', '2020-05-04 17:10:05', 1, NULL, 'LATE', 'btn-warning', 1),
-(4, '2020-05-04 17:10:05', '2020-05-04 17:10:05', 1, NULL, 'LEAVE', 'btn-success', 1),
-(5, '2020-05-04 17:10:05', '2020-05-04 17:10:05', 1, NULL, 'HOLIDAY', 'btn-info', 1);
 
 -- --------------------------------------------------------
 
@@ -438,15 +287,180 @@ CREATE TABLE `audits` (
   `event` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `auditable_type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `auditable_id` bigint(20) UNSIGNED NOT NULL,
-  `old_values` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `new_values` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `url` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `old_values` text COLLATE utf8mb4_unicode_ci,
+  `new_values` text COLLATE utf8mb4_unicode_ci,
+  `url` text COLLATE utf8mb4_unicode_ci,
   `ip_address` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `user_agent` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `tags` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `user_agent` text COLLATE utf8mb4_unicode_ci,
+  `tags` text COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `audits`
+--
+
+INSERT INTO `audits` (`id`, `user_type`, `user_id`, `event`, `auditable_type`, `auditable_id`, `old_values`, `new_values`, `url`, `ip_address`, `user_agent`, `tags`, `created_at`, `updated_at`) VALUES
+(1, 'App\\User', 1, 'updated', 'App\\User', 1, '{\"last_login_at\":null,\"last_login_ip\":null}', '{\"last_login_at\":\"2025-01-27 11:16:54\",\"last_login_ip\":\"::1\"}', 'http://localhost/CollegeManagementSystem/public/login', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-27 05:46:55', '2025-01-27 05:46:55'),
+(2, 'App\\User', 1, 'created', 'App\\Models\\StudentBatch', 1, '[]', '{\"title\":\"2025\",\"created_by\":1,\"id\":1}', 'http://localhost/CollegeManagementSystem/public/student-batch/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-27 05:49:58', '2025-01-27 05:49:58'),
+(3, 'App\\User', 1, 'created', 'App\\Models\\GradingType', 1, '[]', '{\"title\":\"College level\",\"created_by\":1,\"slug\":\"College-level\",\"id\":1}', 'http://localhost/CollegeManagementSystem/public/grading/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-27 05:50:57', '2025-01-27 05:50:57'),
+(4, 'App\\User', 1, 'created', 'App\\Models\\GradingScale', 1, '[]', '{\"gradingType_id\":1,\"name\":\"A\",\"percentage_from\":\"100\",\"percentage_to\":\"90\",\"grade_point\":\"10\",\"description\":\"O\",\"created_by\":1,\"id\":1}', 'http://localhost/CollegeManagementSystem/public/grading/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-27 05:50:57', '2025-01-27 05:50:57'),
+(5, 'App\\User', 1, 'created', 'App\\Models\\StaffDesignation', 1, '[]', '{\"title\":\"Hello\",\"created_by\":1,\"id\":1}', 'http://localhost/CollegeManagementSystem/public/staff/designation/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-27 05:52:06', '2025-01-27 05:52:06'),
+(6, 'App\\User', 1, 'created', 'App\\Models\\Staff', 1, '[]', '{\"reg_no\":\"69\",\"join_date\":\"2025-01-01\",\"designation\":\"1\",\"first_name\":\"REHAN\",\"middle_name\":\"NAUSHAD\",\"last_name\":\"NEVAREKAR\",\"father_name\":\"NAUSHAD\",\"mother_name\":\"REHANA\",\"date_of_birth\":\"2003-12-02\",\"gender\":\"MALE\",\"blood_group\":\"O+\",\"nationality\":\"INDIA\",\"mother_tongue\":\"URDU\",\"email\":\"nrehanyt@gmail.com\",\"home_phone\":\"08329735698\",\"mobile_1\":\"08329735698\",\"mobile_2\":\"08329735698\",\"address\":\"LANJA\",\"state\":\"MAHARASHTRA\",\"country\":\"INDIA\",\"temp_address\":\"LANJA\",\"temp_state\":\"MAHARASHTRA\",\"temp_country\":\"INDIA\",\"qualification\":\"UG\",\"experience\":\"NO\",\"experience_info\":\"none\",\"other_info\":\"thankyou\",\"created_by\":1,\"staff_image\":\"\",\"id\":1}', 'http://localhost/CollegeManagementSystem/public/staff/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-27 05:54:03', '2025-01-27 05:54:03'),
+(7, 'App\\User', 1, 'created', 'App\\Models\\TransactionHead', 4, '[]', '{\"created_by\":1,\"tr_head\":\"REHAN NAUSHAD NEVAREKAR  [69]\",\"ref_id\":1,\"acc_id\":76,\"id\":4}', 'http://localhost/CollegeManagementSystem/public/staff/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-27 05:54:03', '2025-01-27 05:54:03'),
+(8, 'App\\User', 1, 'created', 'App\\Models\\Subject', 1, '[]', '{\"title\":\"english\",\"code\":\"99\",\"full_mark_theory\":\"10\",\"pass_mark_theory\":null,\"full_mark_practical\":null,\"pass_mark_practical\":null,\"credit_hour\":null,\"sub_type\":\"Compulsory\",\"class_type\":\"Theory\",\"staff_id\":\"0\",\"description\":null,\"created_by\":1,\"id\":1}', 'http://localhost/CollegeManagementSystem/public/subject/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-27 05:55:01', '2025-01-27 05:55:01'),
+(9, 'App\\User', 1, 'created', 'App\\Models\\Semester', 1, '[]', '{\"semester\":\"6\",\"gradingType_id\":\"1\",\"staff_id\":\"1\",\"created_by\":1,\"slug\":\"6\",\"id\":1}', 'http://localhost/CollegeManagementSystem/public/semester/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-27 05:55:30', '2025-01-27 05:55:30'),
+(10, 'App\\User', 1, 'created', 'App\\Models\\Faculty', 1, '[]', '{\"faculty\":\"bsc\",\"faculty_code\":\"99\",\"created_by\":1,\"id\":1}', 'http://localhost/CollegeManagementSystem/public/faculty/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-27 05:56:09', '2025-01-27 05:56:09'),
+(11, 'App\\User', 1, 'created', 'App\\Models\\Year', 4, '[]', '{\"title\":\"2000\",\"created_by\":1,\"id\":4}', 'http://localhost/CollegeManagementSystem/public/year/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-27 05:56:39', '2025-01-27 05:56:39'),
+(12, 'App\\User', 1, 'created', 'App\\Models\\Download', 1, '[]', '{\"semesters_id\":\"1\",\"subjects_id\":\"1\",\"title\":\"gg\",\"description\":\"good morning\",\"created_by\":1,\"file\":\"7843_gg.jpg\",\"id\":1}', 'http://localhost/CollegeManagementSystem/public/download/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-27 05:58:41', '2025-01-27 05:58:41'),
+(13, 'App\\User', 1, 'created', 'App\\Models\\BookCategory', 1, '[]', '{\"title\":\"btgmi\",\"created_by\":1,\"slug\":\"btgmi\",\"id\":1}', 'http://localhost/CollegeManagementSystem/public/library/book/category/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-27 06:01:08', '2025-01-27 06:01:08'),
+(14, 'App\\User', 1, 'created', 'App\\Models\\BookMaster', 1, '[]', '{\"isbn_number\":\"69\",\"code\":\"69\",\"title\":\"bgmi\",\"sub_title\":\"gg\",\"categories\":\"1\",\"edition\":\"12\",\"edition_year\":\"2003\",\"language\":\"urdu\",\"publisher\":\"rehan\",\"publish_year\":\"2003\",\"series\":\"2\",\"author\":\"rehaaan\",\"rack_location\":\"lanja\",\"price\":\"780\",\"total_pages\":\"82\",\"source\":\"d\",\"notes\":\"dd\",\"created_by\":1,\"image\":\"7220.jpg\",\"id\":1}', 'http://localhost/CollegeManagementSystem/public/library/book/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-27 06:03:01', '2025-01-27 06:03:01'),
+(15, 'App\\User', 1, 'created', 'App\\Models\\Book', 1, '[]', '{\"book_masters_id\":1,\"book_code\":\"691\",\"created_by\":1,\"book_status\":1,\"id\":1}', 'http://localhost/CollegeManagementSystem/public/library/book/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-27 06:03:01', '2025-01-27 06:03:01'),
+(16, 'App\\User', 1, 'created', 'App\\Models\\Book', 2, '[]', '{\"book_masters_id\":1,\"book_code\":\"692\",\"created_by\":1,\"book_status\":1,\"id\":2}', 'http://localhost/CollegeManagementSystem/public/library/book/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-27 06:03:01', '2025-01-27 06:03:01'),
+(17, 'App\\User', 1, 'created', 'App\\Models\\Book', 3, '[]', '{\"book_masters_id\":1,\"book_code\":\"693\",\"created_by\":1,\"book_status\":1,\"id\":3}', 'http://localhost/CollegeManagementSystem/public/library/book/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-27 06:03:01', '2025-01-27 06:03:01'),
+(18, 'App\\User', 1, 'created', 'App\\Models\\Book', 4, '[]', '{\"book_masters_id\":1,\"book_code\":\"694\",\"created_by\":1,\"book_status\":1,\"id\":4}', 'http://localhost/CollegeManagementSystem/public/library/book/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-27 06:03:01', '2025-01-27 06:03:01'),
+(19, 'App\\User', 1, 'created', 'App\\Models\\Book', 5, '[]', '{\"book_masters_id\":1,\"book_code\":\"695\",\"created_by\":1,\"book_status\":1,\"id\":5}', 'http://localhost/CollegeManagementSystem/public/library/book/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-27 06:03:01', '2025-01-27 06:03:01'),
+(20, 'App\\User', 1, 'created', 'App\\Models\\Book', 6, '[]', '{\"book_masters_id\":1,\"book_code\":\"696\",\"created_by\":1,\"book_status\":1,\"id\":6}', 'http://localhost/CollegeManagementSystem/public/library/book/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-27 06:03:01', '2025-01-27 06:03:01'),
+(21, 'App\\User', 1, 'created', 'App\\Models\\Book', 7, '[]', '{\"book_masters_id\":1,\"book_code\":\"697\",\"created_by\":1,\"book_status\":1,\"id\":7}', 'http://localhost/CollegeManagementSystem/public/library/book/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-27 06:03:01', '2025-01-27 06:03:01'),
+(22, 'App\\User', 1, 'created', 'App\\Models\\Book', 8, '[]', '{\"book_masters_id\":1,\"book_code\":\"698\",\"created_by\":1,\"book_status\":1,\"id\":8}', 'http://localhost/CollegeManagementSystem/public/library/book/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-27 06:03:01', '2025-01-27 06:03:01'),
+(23, 'App\\User', 1, 'created', 'App\\Models\\Book', 9, '[]', '{\"book_masters_id\":1,\"book_code\":\"699\",\"created_by\":1,\"book_status\":1,\"id\":9}', 'http://localhost/CollegeManagementSystem/public/library/book/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-27 06:03:01', '2025-01-27 06:03:01'),
+(24, 'App\\User', 1, 'created', 'App\\Models\\Student', 1, '[]', '{\"reg_no\":\"1\",\"reg_date\":\"2025-01-08\",\"university_reg\":\"01\",\"faculty\":\"1\",\"semester\":\"1\",\"batch\":\"1\",\"academic_status\":\"5\",\"first_name\":\"FAISAL\",\"middle_name\":\"REHAN\",\"last_name\":\"NEVAREKAR\",\"date_of_birth\":\"2004-04-12\",\"gender\":\"OTHER\",\"blood_group\":\"O+\",\"religion\":\"MUSLIM\",\"caste\":\"OPEN\",\"nationality\":\"INDIAN\",\"mother_tongue\":\"URDU\",\"email\":\"faisalnaik955@gmail.com\",\"extra_info\":\"none\",\"created_by\":1,\"student_image\":\"\",\"student_signature\":\"\",\"id\":1}', 'http://localhost/CollegeManagementSystem/public/student/register', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-27 06:08:26', '2025-01-27 06:08:26'),
+(25, 'App\\User', 1, 'created', 'App\\Models\\Addressinfo', 1, '[]', '{\"home_phone\":\"08208775966\",\"mobile_1\":\"08208775966\",\"mobile_2\":\"08208775966\",\"address\":\"LANJA\",\"state\":\"MAHARASHTRA\",\"country\":\"INDIA\",\"temp_address\":\"LANJA\",\"temp_state\":\"MAHARASHTRA\",\"temp_country\":\"INDIA\",\"created_by\":1,\"students_id\":1,\"id\":1}', 'http://localhost/CollegeManagementSystem/public/student/register', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-27 06:08:26', '2025-01-27 06:08:26'),
+(26, 'App\\User', 1, 'created', 'App\\Models\\ParentDetail', 1, '[]', '{\"grandfather_first_name\":\"PIRYA\",\"grandfather_middle_name\":\"A\",\"grandfather_last_name\":\"NAIK\",\"father_first_name\":\"A\",\"father_middle_name\":\"B\",\"father_last_name\":\"NAIK\",\"father_eligibility\":\"12\",\"father_occupation\":\"SSC\",\"father_office\":\"12\",\"father_office_number\":\"08208775966\",\"father_residence_number\":\"08208775966\",\"father_mobile_1\":\"08208775966\",\"father_mobile_2\":\"08208775966\",\"father_email\":\"faisalnaik955@gmail.com\",\"mother_first_name\":\"X\",\"mother_middle_name\":\"Y\",\"mother_last_name\":\"Z\",\"mother_eligibility\":\"YES\",\"mother_occupation\":\"SSC\",\"mother_office\":\"08208775966\",\"mother_office_number\":\"08208775966\",\"mother_residence_number\":\"08208775966\",\"mother_mobile_1\":\"08208775966\",\"mother_mobile_2\":\"08208775966\",\"mother_email\":\"faisalnaik955@gmail.com\",\"created_by\":1,\"father_image\":\"\",\"mother_image\":\"\",\"students_id\":1,\"id\":1}', 'http://localhost/CollegeManagementSystem/public/student/register', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-27 06:08:26', '2025-01-27 06:08:26'),
+(27, 'App\\User', 1, 'created', 'App\\Models\\GuardianDetail', 1, '[]', '{\"guardian_first_name\":\"A\",\"guardian_middle_name\":\"B\",\"guardian_last_name\":\"NAIK\",\"guardian_eligibility\":\"12\",\"guardian_occupation\":\"SSC\",\"guardian_office\":\"12\",\"guardian_office_number\":\"08208775966\",\"guardian_residence_number\":\"08208775966\",\"guardian_mobile_1\":\"08208775966\",\"guardian_mobile_2\":\"08208775966\",\"guardian_email\":\"faisalnaik955@gmail.com\",\"guardian_relation\":\"FATHER\",\"guardian_address\":\"LANJA\",\"created_by\":1,\"guardian_image\":\"\",\"id\":1}', 'http://localhost/CollegeManagementSystem/public/student/register', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-27 06:08:26', '2025-01-27 06:08:26'),
+(28, 'App\\User', 1, 'created', 'App\\Models\\RoomType', 1, '[]', '{\"title\":\"AC\",\"created_by\":1,\"id\":1}', 'http://localhost/CollegeManagementSystem/public/hostel/room-type/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-27 06:33:16', '2025-01-27 06:33:16'),
+(29, 'App\\User', 1, 'created', 'App\\Models\\Hostel', 1, '[]', '{\"name\":\"ACS\",\"address\":\"Lanja\",\"contact_detail\":\"08208775966\",\"description\":\"none\",\"warden\":\"08208775966\",\"warden_contact\":\"08208775966\",\"type\":\"Boys\",\"status\":1,\"created_by\":1,\"id\":1}', 'http://localhost/CollegeManagementSystem/public/hostel/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-27 06:33:33', '2025-01-27 06:33:33'),
+(30, 'App\\User', 1, 'created', 'App\\Models\\Room', 1, '[]', '{\"hostels_id\":1,\"room_number\":1,\"room_type\":\"1\",\"created_by\":1,\"id\":1}', 'http://localhost/CollegeManagementSystem/public/hostel/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-27 06:33:33', '2025-01-27 06:33:33'),
+(31, 'App\\User', 1, 'created', 'App\\Models\\Room', 2, '[]', '{\"hostels_id\":1,\"room_number\":2,\"room_type\":\"1\",\"created_by\":1,\"id\":2}', 'http://localhost/CollegeManagementSystem/public/hostel/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-27 06:33:33', '2025-01-27 06:33:33'),
+(32, 'App\\User', 1, 'created', 'App\\Models\\BedStatus', 7, '[]', '{\"title\":\"goog\",\"created_by\":1,\"id\":7}', 'http://localhost/CollegeManagementSystem/public/bed-status/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-27 06:34:02', '2025-01-27 06:34:02'),
+(33, 'App\\User', 1, 'updated', 'App\\User', 1, '{\"last_login_at\":\"2025-01-27 11:16:54\"}', '{\"last_login_at\":\"2025-01-27 13:14:07\"}', 'http://localhost/CollegeManagementSystem/public/login', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-27 07:44:07', '2025-01-27 07:44:07'),
+(34, 'App\\User', 1, 'updated', 'App\\User', 1, '{\"last_login_at\":\"2025-01-27 13:14:07\"}', '{\"last_login_at\":\"2025-01-28 17:47:40\"}', 'http://localhost/CollegeManagementSystem/public/login', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 12:17:40', '2025-01-28 12:17:40'),
+(35, 'App\\User', 1, 'updated', 'App\\User', 1, '{\"last_login_at\":\"2025-01-28 17:47:40\"}', '{\"last_login_at\":\"2025-01-28 19:13:51\"}', 'http://localhost/CollegeManagementSystem/public/login', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 13:43:51', '2025-01-28 13:43:51'),
+(36, 'App\\User', 1, 'updated', 'App\\Models\\Student', 1, '{\"academic_status\":5}', '{\"academic_status\":\"1\"}', 'http://localhost/College/public/student/transfering', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 14:03:36', '2025-01-28 14:03:36'),
+(37, 'App\\User', 1, 'created', 'App\\Models\\StaffDesignation', 2, '[]', '{\"title\":\"HIII\",\"created_by\":1,\"id\":2}', 'http://localhost/College/public/staff/designation/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 14:51:47', '2025-01-28 14:51:47'),
+(38, 'App\\User', 1, 'created', 'App\\Models\\StaffDesignation', 3, '[]', '{\"title\":\"HEYY\",\"created_by\":1,\"id\":3}', 'http://localhost/College/public/staff/designation/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 14:51:53', '2025-01-28 14:51:53'),
+(39, 'App\\User', 1, 'created', 'App\\Models\\StaffDesignation', 4, '[]', '{\"title\":\"BYE\",\"created_by\":1,\"id\":4}', 'http://localhost/College/public/staff/designation/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 14:52:01', '2025-01-28 14:52:01'),
+(40, 'App\\User', 1, 'created', 'App\\Models\\StaffDesignation', 5, '[]', '{\"title\":\"YYY\",\"created_by\":1,\"id\":5}', 'http://localhost/College/public/staff/designation/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 14:52:07', '2025-01-28 14:52:07'),
+(41, 'App\\User', 1, 'created', 'App\\Models\\Staff', 2, '[]', '{\"reg_no\":\"1\",\"join_date\":\"2025-01-01\",\"designation\":\"2\",\"first_name\":\"RAKESH\",\"middle_name\":\"SIR\",\"last_name\":\"SURVE\",\"father_name\":\"-\",\"mother_name\":\"-\",\"date_of_birth\":\"2025-01-01\",\"gender\":\"MALE\",\"blood_group\":\"A+\",\"nationality\":\"INDIAN\",\"mother_tongue\":\"ENGLISH\",\"email\":\"surve@rakesh.com\",\"home_phone\":\"0000000000\",\"mobile_1\":\"0000000000\",\"mobile_2\":\"0000000000\",\"address\":\"LANJA\",\"state\":\"MAHARASHTRA\",\"country\":\"INDIA\",\"temp_address\":\"LANJA\",\"temp_state\":\"MAHARASHTRA\",\"temp_country\":\"INDIA\",\"qualification\":\"HSC\",\"experience\":\"1 YEAR\",\"experience_info\":\"none\",\"other_info\":\"none\",\"created_by\":1,\"staff_image\":\"\",\"id\":2}', 'http://localhost/College/public/staff/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 14:54:22', '2025-01-28 14:54:22'),
+(42, 'App\\User', 1, 'created', 'App\\Models\\TransactionHead', 5, '[]', '{\"created_by\":1,\"tr_head\":\"RAKESH SIR SURVE  [1]\",\"ref_id\":2,\"acc_id\":76,\"id\":5}', 'http://localhost/College/public/staff/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 14:54:22', '2025-01-28 14:54:22'),
+(43, 'App\\User', 1, 'created', 'App\\Models\\Staff', 3, '[]', '{\"reg_no\":\"2\",\"join_date\":\"2025-01-02\",\"designation\":\"3\",\"first_name\":\"SIDDHESH\",\"middle_name\":\"SIR\",\"last_name\":\"KHAWALE\",\"father_name\":\"-\",\"mother_name\":\"-\",\"date_of_birth\":\"2025-01-02\",\"gender\":\"MALE\",\"blood_group\":\"A-\",\"nationality\":\"INDIAN\",\"mother_tongue\":\"ENGLISH\",\"email\":\"khawale@siddhesh.com\",\"home_phone\":\"1111111111\",\"mobile_1\":\"1111111111\",\"mobile_2\":\"1111111111\",\"address\":\"LANJA\",\"state\":\"MAHARASHTRA\",\"country\":\"INDIA\",\"temp_address\":\"LANJA\",\"temp_state\":\"MAHARASHTRA\",\"temp_country\":\"INDIA\",\"qualification\":\"HSC\",\"experience\":\"1 YEAR\",\"experience_info\":\"none\",\"other_info\":\"none\",\"created_by\":1,\"staff_image\":\"\",\"id\":3}', 'http://localhost/College/public/staff/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 14:55:58', '2025-01-28 14:55:58'),
+(44, 'App\\User', 1, 'created', 'App\\Models\\TransactionHead', 6, '[]', '{\"created_by\":1,\"tr_head\":\"SIDDHESH SIR KHAWALE  [2]\",\"ref_id\":3,\"acc_id\":76,\"id\":6}', 'http://localhost/College/public/staff/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 14:55:58', '2025-01-28 14:55:58'),
+(45, 'App\\User', 1, 'created', 'App\\Models\\Staff', 4, '[]', '{\"reg_no\":\"3\",\"join_date\":\"2025-01-03\",\"designation\":\"4\",\"first_name\":\"ANUP\",\"middle_name\":\"SIR\",\"last_name\":\"DESAI\",\"father_name\":\"-\",\"mother_name\":\"-\",\"date_of_birth\":\"2025-01-03\",\"gender\":\"MALE\",\"blood_group\":\"B+\",\"nationality\":\"INDIAN\",\"mother_tongue\":\"ENGLISH\",\"email\":\"anup@sardesai.com\",\"home_phone\":\"2222222222\",\"mobile_1\":\"2222222222\",\"mobile_2\":\"2222222222\",\"address\":\"LANJA\",\"state\":\"MAHARASHTRA\",\"country\":\"INDIA\",\"temp_address\":\"LANJA\",\"temp_state\":\"MAHARASHTRA\",\"temp_country\":\"INDIA\",\"qualification\":\"HSC\",\"experience\":\"1 YEAR\",\"experience_info\":\"none\",\"other_info\":\"none\",\"created_by\":1,\"staff_image\":\"\",\"id\":4}', 'http://localhost/College/public/staff/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 14:57:32', '2025-01-28 14:57:32'),
+(46, 'App\\User', 1, 'created', 'App\\Models\\TransactionHead', 7, '[]', '{\"created_by\":1,\"tr_head\":\"ANUP SIR DESAI  [3]\",\"ref_id\":4,\"acc_id\":76,\"id\":7}', 'http://localhost/College/public/staff/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 14:57:32', '2025-01-28 14:57:32'),
+(47, 'App\\User', 1, 'created', 'App\\Models\\Staff', 5, '[]', '{\"reg_no\":\"4\",\"join_date\":\"2025-01-04\",\"designation\":\"5\",\"first_name\":\"AVANTIKA\",\"middle_name\":\"MAAM\",\"last_name\":\"KELUSKAR\",\"father_name\":\"-\",\"mother_name\":\"-\",\"date_of_birth\":\"2025-01-05\",\"gender\":\"FEMALE\",\"blood_group\":\"B-\",\"nationality\":\"INDIAN\",\"mother_tongue\":\"ENGLISH\",\"email\":\"avantika@gmail.com\",\"home_phone\":\"5555555555\",\"mobile_1\":\"5555555555\",\"mobile_2\":\"5555555555\",\"address\":\"LANJA\",\"state\":\"MAHARASHTRA\",\"country\":\"INDIA\",\"temp_address\":\"LANJA\",\"temp_state\":\"MAHARASHTRA\",\"temp_country\":\"INDIA\",\"qualification\":\"HSC\",\"experience\":\"1 YEAR\",\"experience_info\":\"none\",\"other_info\":\"none\",\"created_by\":1,\"staff_image\":\"\",\"id\":5}', 'http://localhost/College/public/staff/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 14:59:09', '2025-01-28 14:59:09'),
+(48, 'App\\User', 1, 'created', 'App\\Models\\TransactionHead', 8, '[]', '{\"created_by\":1,\"tr_head\":\"AVANTIKA MAAM KELUSKAR  [4]\",\"ref_id\":5,\"acc_id\":76,\"id\":8}', 'http://localhost/College/public/staff/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 14:59:09', '2025-01-28 14:59:09'),
+(49, 'App\\User', 1, 'created', 'App\\Models\\Faculty', 2, '[]', '{\"faculty\":\"BCOM\",\"faculty_code\":\"1\",\"created_by\":1,\"id\":2}', 'http://localhost/College/public/faculty/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:01:38', '2025-01-28 15:01:38'),
+(50, 'App\\User', 1, 'created', 'App\\Models\\Faculty', 3, '[]', '{\"faculty\":\"BA\",\"faculty_code\":\"2\",\"created_by\":1,\"id\":3}', 'http://localhost/College/public/faculty/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:01:47', '2025-01-28 15:01:47'),
+(51, 'App\\User', 1, 'created', 'App\\Models\\Faculty', 4, '[]', '{\"faculty\":\"MCA\",\"faculty_code\":\"3\",\"created_by\":1,\"id\":4}', 'http://localhost/College/public/faculty/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:01:56', '2025-01-28 15:01:56'),
+(52, 'App\\User', 1, 'deleted', 'App\\Models\\Faculty', 2, '{\"id\":2,\"created_by\":1,\"last_updated_by\":null,\"faculty\":\"BCOM\",\"faculty_code\":\"1\",\"status\":1}', '[]', 'http://localhost/College/public/faculty/2/delete', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:02:07', '2025-01-28 15:02:07'),
+(53, 'App\\User', 1, 'deleted', 'App\\Models\\Faculty', 3, '{\"id\":3,\"created_by\":1,\"last_updated_by\":null,\"faculty\":\"BA\",\"faculty_code\":\"2\",\"status\":1}', '[]', 'http://localhost/College/public/faculty/3/delete', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:02:12', '2025-01-28 15:02:12'),
+(54, 'App\\User', 1, 'deleted', 'App\\Models\\Faculty', 4, '{\"id\":4,\"created_by\":1,\"last_updated_by\":null,\"faculty\":\"MCA\",\"faculty_code\":\"3\",\"status\":1}', '[]', 'http://localhost/College/public/faculty/4/delete', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:02:17', '2025-01-28 15:02:17'),
+(55, 'App\\User', 1, 'created', 'App\\Models\\Faculty', 5, '[]', '{\"faculty\":\"BCOM\",\"faculty_code\":\"2\",\"created_by\":1,\"id\":5}', 'http://localhost/College/public/faculty/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:02:28', '2025-01-28 15:02:28'),
+(56, 'App\\User', 1, 'created', 'App\\Models\\Faculty', 6, '[]', '{\"faculty\":\"BA\",\"faculty_code\":\"3\",\"created_by\":1,\"id\":6}', 'http://localhost/College/public/faculty/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:02:37', '2025-01-28 15:02:37'),
+(57, 'App\\User', 1, 'created', 'App\\Models\\Faculty', 7, '[]', '{\"faculty\":\"MCA\",\"faculty_code\":\"4\",\"created_by\":1,\"id\":7}', 'http://localhost/College/public/faculty/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:02:48', '2025-01-28 15:02:48'),
+(58, 'App\\User', 1, 'created', 'App\\Models\\Faculty', 8, '[]', '{\"faculty\":\"PG\",\"faculty_code\":\"5\",\"created_by\":1,\"id\":8}', 'http://localhost/College/public/faculty/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:02:56', '2025-01-28 15:02:56'),
+(59, 'App\\User', 1, 'created', 'App\\Models\\GradingType', 2, '[]', '{\"title\":\"COLLEGE\",\"created_by\":1,\"slug\":\"COLLEGE\",\"id\":2}', 'http://localhost/College/public/grading/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:04:41', '2025-01-28 15:04:41'),
+(60, 'App\\User', 1, 'created', 'App\\Models\\GradingScale', 2, '[]', '{\"gradingType_id\":2,\"name\":\"B\",\"percentage_from\":\"89\",\"percentage_to\":\"80\",\"grade_point\":\"8\",\"description\":\"pass\",\"created_by\":1,\"id\":2}', 'http://localhost/College/public/grading/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:04:41', '2025-01-28 15:04:41'),
+(61, 'App\\User', 1, 'created', 'App\\Models\\Student', 4, '[]', '{\"reg_no\":\"2\",\"reg_date\":\"2025-01-01\",\"university_reg\":\"1\",\"faculty\":\"5\",\"semester\":\"1\",\"batch\":\"1\",\"academic_status\":\"2\",\"first_name\":\"RAHIL\",\"middle_name\":\"SIRAJ\",\"last_name\":\"KAZI\",\"date_of_birth\":\"2025-01-01\",\"gender\":\"MALE\",\"blood_group\":\"A+\",\"religion\":\"MUSLIM\",\"caste\":\"OPEN\",\"nationality\":\"INDIA\",\"mother_tongue\":\"HINDI\",\"email\":\"kazirahil@gmail.com\",\"extra_info\":\"none\",\"created_by\":1,\"student_image\":\"\",\"student_signature\":\"\",\"id\":4}', 'http://localhost/College/public/student/register', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:15:08', '2025-01-28 15:15:08'),
+(62, 'App\\User', 1, 'created', 'App\\Models\\Addressinfo', 2, '[]', '{\"home_phone\":\"0000000000\",\"mobile_1\":\"0000000000\",\"mobile_2\":\"0000000000\",\"address\":\"LANJA\",\"state\":\"MAHARASHTRA\",\"country\":\"INDIA\",\"temp_address\":\"LANJA\",\"temp_state\":\"MAHARASHTRA\",\"temp_country\":\"INDIA\",\"created_by\":1,\"students_id\":4,\"id\":2}', 'http://localhost/College/public/student/register', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:15:08', '2025-01-28 15:15:08'),
+(63, 'App\\User', 1, 'created', 'App\\Models\\ParentDetail', 2, '[]', '{\"grandfather_first_name\":\"SIRAJ\",\"grandfather_middle_name\":\"-\",\"grandfather_last_name\":\"KAZI\",\"father_first_name\":\"SIRAJ\",\"father_middle_name\":\"-\",\"father_last_name\":\"KAZI\",\"father_eligibility\":\"OK\",\"father_occupation\":\"NONE\",\"father_office\":\"NONE\",\"father_office_number\":\"0000000000\",\"father_residence_number\":\"0000000000\",\"father_mobile_1\":\"0000000000\",\"father_mobile_2\":\"0000000000\",\"father_email\":\"kazirahil@gmail.com\",\"mother_first_name\":\"NONE\",\"mother_middle_name\":\"-\",\"mother_last_name\":\"-\",\"mother_eligibility\":\"--\",\"mother_occupation\":\"-\",\"mother_office\":\"-\",\"mother_office_number\":\"-\",\"mother_residence_number\":\"-\",\"mother_mobile_1\":\"-\",\"mother_mobile_2\":\"-\",\"mother_email\":\"-\",\"created_by\":1,\"father_image\":\"\",\"mother_image\":\"\",\"students_id\":4,\"id\":2}', 'http://localhost/College/public/student/register', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:15:08', '2025-01-28 15:15:08'),
+(64, 'App\\User', 1, 'created', 'App\\Models\\GuardianDetail', 2, '[]', '{\"guardian_first_name\":\"SIRAJ\",\"guardian_middle_name\":\"-\",\"guardian_last_name\":\"KAZI\",\"guardian_eligibility\":\"OK\",\"guardian_occupation\":\"NONE\",\"guardian_office\":\"NONE\",\"guardian_office_number\":\"0000000000\",\"guardian_residence_number\":\"0000000000\",\"guardian_mobile_1\":\"0000000000\",\"guardian_mobile_2\":\"0000000000\",\"guardian_email\":\"-\",\"guardian_relation\":\"FATHER\",\"guardian_address\":\"-\",\"created_by\":1,\"guardian_image\":\"\",\"id\":2}', 'http://localhost/College/public/student/register', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:15:08', '2025-01-28 15:15:08'),
+(65, 'App\\User', 1, 'created', 'App\\Models\\Student', 5, '[]', '{\"reg_no\":\"STUD-0001\",\"reg_date\":\"2018-01-06\",\"university_reg\":\"11-22-2018\",\"faculty\":\"1\",\"semester\":\"1\",\"academic_status\":\"1\",\"batch\":\"1\",\"first_name\":\"UTTAM\",\"middle_name\":\"RAJ\",\"last_name\":\"YADU\",\"date_of_birth\":\"2001-08-05\",\"gender\":\"MALE\",\"blood_group\":\"B+\",\"religion\":\"hindu\",\"caste\":\"madheshi\",\"nationality\":\"NEPALI\",\"mother_tongue\":\"MAITHILI\",\"email\":\"student@gmail.com\",\"extra_info\":\"\",\"created_by\":1,\"id\":5}', 'http://localhost/College/public/student/import', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:24:11', '2025-01-28 15:24:11'),
+(66, 'App\\User', 1, 'created', 'App\\Models\\Addressinfo', 3, '[]', '{\"students_id\":5,\"home_phone\":\"977-31-23078\",\"mobile_1\":\"977-98989898\",\"mobile_2\":\"977-91239123\",\"address\":\"KATHMANDU\",\"state\":\"2 NO\",\"country\":\"NEPAL\",\"temp_address\":\"KATHMANDU\",\"temp_state\":\"3 NO\",\"temp_country\":\"NEPAL\",\"created_by\":1,\"id\":3}', 'http://localhost/College/public/student/import', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:24:11', '2025-01-28 15:24:11'),
+(67, 'App\\User', 1, 'created', 'App\\Models\\ParentDetail', 3, '[]', '{\"students_id\":5,\"grandfather_first_name\":\"HARI\",\"grandfather_middle_name\":\"KRISHNA\",\"grandfather_last_name\":\"THAPA\",\"father_first_name\":\"DEMO\",\"father_middle_name\":\"TEST\",\"father_last_name\":\"FATHER\",\"father_eligibility\":\"BA\",\"father_occupation\":\"GOV JOB\",\"father_office\":\"SS GOV RESEARCH\",\"father_office_number\":\"977-31-23078\",\"father_residence_number\":\"977-31-23078\",\"father_mobile_1\":\"977-98989898\",\"father_mobile_2\":\"977-91239123\",\"father_email\":\"father@gmail.com\",\"mother_first_name\":\"DEMO\",\"mother_middle_name\":\"TEST\",\"mother_last_name\":\"MOTHER\",\"mother_eligibility\":\"BA\",\"mother_occupation\":\"GOV JOB\",\"mother_office\":\"SS GOV RESEARCH\",\"mother_office_number\":\"977-31-23078\",\"mother_residence_number\":\"977-31-23078\",\"mother_mobile_1\":\"977-98989898\",\"mother_mobile_2\":\"977-91239123\",\"mother_email\":\"mother@gmail.com\",\"created_by\":1,\"id\":3}', 'http://localhost/College/public/student/import', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:24:11', '2025-01-28 15:24:11'),
+(68, 'App\\User', 1, 'created', 'App\\Models\\GuardianDetail', 3, '[]', '{\"guardian_first_name\":\"DEMO\",\"guardian_middle_name\":\"student\",\"guardian_last_name\":\"GUARDIAN\",\"guardian_eligibility\":\"BA\",\"guardian_occupation\":\"GOV JOB\",\"guardian_office\":\"SS GOV RESEARCH\",\"guardian_office_number\":\"977-31-23078\",\"guardian_residence_number\":\"977-31-23078\",\"guardian_mobile_1\":\"977-98989898\",\"guardian_mobile_2\":\"977-91239123\",\"guardian_email\":\"guardian@gmail.com\",\"guardian_relation\":\"FATHER\",\"guardian_address\":\"KATHMANDU\",\"created_by\":1,\"id\":3}', 'http://localhost/College/public/student/import', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:24:11', '2025-01-28 15:24:11'),
+(69, 'App\\User', 1, 'created', 'App\\Models\\Student', 6, '[]', '{\"reg_no\":\"STUD-0002\",\"reg_date\":\"2018-02-06\",\"university_reg\":\"11-22-2019\",\"faculty\":\"1\",\"semester\":\"1\",\"academic_status\":\"2\",\"batch\":\"1\",\"first_name\":\"KAUSHAL\",\"middle_name\":\"KUMAR\",\"last_name\":\"KSHETRI\",\"date_of_birth\":\"2002-09-05\",\"gender\":\"MALE\",\"blood_group\":\"A+\",\"religion\":\"hindu\",\"caste\":\"madheshi\",\"nationality\":\"INDIAN\",\"mother_tongue\":\"HINDI\",\"email\":\"student1@gmail.com\",\"extra_info\":\"\",\"created_by\":1,\"id\":6}', 'http://localhost/College/public/student/import', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:24:11', '2025-01-28 15:24:11'),
+(70, 'App\\User', 1, 'created', 'App\\Models\\Addressinfo', 4, '[]', '{\"students_id\":6,\"home_phone\":\"977-31-23079\",\"mobile_1\":\"977-98989898\",\"mobile_2\":\"977-91239123\",\"address\":\"KATHMANDU\",\"state\":\"BAGMATI8\",\"country\":\"INDIA\",\"temp_address\":\"KATHMANDU\",\"temp_state\":\"4 NO\",\"temp_country\":\"NEPAL\",\"created_by\":1,\"id\":4}', 'http://localhost/College/public/student/import', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:24:11', '2025-01-28 15:24:11'),
+(71, 'App\\User', 1, 'created', 'App\\Models\\ParentDetail', 4, '[]', '{\"students_id\":6,\"grandfather_first_name\":\"HARI\",\"grandfather_middle_name\":\"KRISHNA\",\"grandfather_last_name\":\"THAPA\",\"father_first_name\":\"DEMO\",\"father_middle_name\":\"TEST\",\"father_last_name\":\"FATHER\",\"father_eligibility\":\"MA\",\"father_occupation\":\"GOV JOB\",\"father_office\":\"SS GOV RESEARCH\",\"father_office_number\":\"977-31-23079\",\"father_residence_number\":\"977-31-23079\",\"father_mobile_1\":\"977-98989899\",\"father_mobile_2\":\"977-91239124\",\"father_email\":\"father1@gmail.com\",\"mother_first_name\":\"DEMO\",\"mother_middle_name\":\"TEST\",\"mother_last_name\":\"MOTHER\",\"mother_eligibility\":\"MA\",\"mother_occupation\":\"GOV JOB\",\"mother_office\":\"SS GOV RESEARCH\",\"mother_office_number\":\"977-31-23079\",\"mother_residence_number\":\"977-31-23079\",\"mother_mobile_1\":\"977-98989899\",\"mother_mobile_2\":\"977-91239124\",\"mother_email\":\"mother1@gmail.com\",\"created_by\":1,\"id\":4}', 'http://localhost/College/public/student/import', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:24:11', '2025-01-28 15:24:11'),
+(72, 'App\\User', 1, 'created', 'App\\Models\\GuardianDetail', 4, '[]', '{\"guardian_first_name\":\"DEMO\",\"guardian_middle_name\":\"TEST\",\"guardian_last_name\":\"GUARDIAN\",\"guardian_eligibility\":\"MA\",\"guardian_occupation\":\"GOV JOB\",\"guardian_office\":\"SS GOV RESEARCH\",\"guardian_office_number\":\"977-31-23079\",\"guardian_residence_number\":\"977-31-23079\",\"guardian_mobile_1\":\"977-98989899\",\"guardian_mobile_2\":\"977-91239124\",\"guardian_email\":\"guardian1@gmail.com\",\"guardian_relation\":\"FATHER\",\"guardian_address\":\"KATHMANDU\",\"created_by\":1,\"id\":4}', 'http://localhost/College/public/student/import', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:24:11', '2025-01-28 15:24:11'),
+(73, 'App\\User', 1, 'created', 'App\\Models\\Student', 7, '[]', '{\"reg_no\":\"STUD-0003\",\"reg_date\":\"2018-03-06\",\"university_reg\":\"11-22-2020\",\"faculty\":\"1\",\"semester\":\"1\",\"academic_status\":\"3\",\"batch\":\"1\",\"first_name\":\"PRIYANSHU\",\"middle_name\":\"DEVI\",\"last_name\":\"SHARMA\",\"date_of_birth\":\"2003-10-05\",\"gender\":\"MALE\",\"blood_group\":\"A-\",\"religion\":\"hindu\",\"caste\":\"madheshi\",\"nationality\":\"NEPALI\",\"mother_tongue\":\"NEPALI\",\"email\":\"student2@gmail.com\",\"extra_info\":\"\",\"created_by\":1,\"id\":7}', 'http://localhost/College/public/student/import', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:24:11', '2025-01-28 15:24:11'),
+(74, 'App\\User', 1, 'created', 'App\\Models\\Addressinfo', 5, '[]', '{\"students_id\":7,\"home_phone\":\"977-31-23080\",\"mobile_1\":\"977-98989898\",\"mobile_2\":\"977-91239123\",\"address\":\"KATHMANDU\",\"state\":\"UP\",\"country\":\"NEPAL\",\"temp_address\":\"KATHMANDU\",\"temp_state\":\"5 NO\",\"temp_country\":\"NEPAL\",\"created_by\":1,\"id\":5}', 'http://localhost/College/public/student/import', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:24:11', '2025-01-28 15:24:11'),
+(75, 'App\\User', 1, 'created', 'App\\Models\\ParentDetail', 5, '[]', '{\"students_id\":7,\"grandfather_first_name\":\"HARI\",\"grandfather_middle_name\":\"KRISHNA\",\"grandfather_last_name\":\"THAPA\",\"father_first_name\":\"DEMO\",\"father_middle_name\":\"TEST\",\"father_last_name\":\"FATHER\",\"father_eligibility\":\"BA\",\"father_occupation\":\"GOV JOB\",\"father_office\":\"SS GOV RESEARCH\",\"father_office_number\":\"977-31-23080\",\"father_residence_number\":\"977-31-23080\",\"father_mobile_1\":\"977-98989900\",\"father_mobile_2\":\"977-91239125\",\"father_email\":\"father2@gmail.com\",\"mother_first_name\":\"DEMO\",\"mother_middle_name\":\"TEST\",\"mother_last_name\":\"MOTHER\",\"mother_eligibility\":\"BA\",\"mother_occupation\":\"GOV JOB\",\"mother_office\":\"SS GOV RESEARCH\",\"mother_office_number\":\"977-31-23080\",\"mother_residence_number\":\"977-31-23080\",\"mother_mobile_1\":\"977-98989900\",\"mother_mobile_2\":\"977-91239125\",\"mother_email\":\"mother2@gmail.com\",\"created_by\":1,\"id\":5}', 'http://localhost/College/public/student/import', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:24:11', '2025-01-28 15:24:11'),
+(76, 'App\\User', 1, 'created', 'App\\Models\\GuardianDetail', 5, '[]', '{\"guardian_first_name\":\"DEMO\",\"guardian_middle_name\":\"TEST\",\"guardian_last_name\":\"GUARDIAN\",\"guardian_eligibility\":\"BA\",\"guardian_occupation\":\"GOV JOB\",\"guardian_office\":\"SS GOV RESEARCH\",\"guardian_office_number\":\"977-31-23080\",\"guardian_residence_number\":\"977-31-23080\",\"guardian_mobile_1\":\"977-98989900\",\"guardian_mobile_2\":\"977-91239125\",\"guardian_email\":\"guardian2@gmail.com\",\"guardian_relation\":\"FATHER\",\"guardian_address\":\"KATHMANDU\",\"created_by\":1,\"id\":5}', 'http://localhost/College/public/student/import', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:24:11', '2025-01-28 15:24:11'),
+(77, 'App\\User', 1, 'created', 'App\\Models\\Student', 8, '[]', '{\"reg_no\":\"STUD-0004\",\"reg_date\":\"2018-04-06\",\"university_reg\":\"11-22-2021\",\"faculty\":\"1\",\"semester\":\"1\",\"academic_status\":\"4\",\"batch\":\"1\",\"first_name\":\"PAYAL\",\"middle_name\":\"\",\"last_name\":\"TRIMURTI\",\"date_of_birth\":\"2001-11-05\",\"gender\":\"MALE\",\"blood_group\":\"O+\",\"religion\":\"hindu\",\"caste\":\"madheshi\",\"nationality\":\"INDIAN\",\"mother_tongue\":\"THARU\",\"email\":\"student3@gmail.com\",\"extra_info\":\"\",\"created_by\":1,\"id\":8}', 'http://localhost/College/public/student/import', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:24:11', '2025-01-28 15:24:11'),
+(78, 'App\\User', 1, 'created', 'App\\Models\\Addressinfo', 6, '[]', '{\"students_id\":8,\"home_phone\":\"977-31-23081\",\"mobile_1\":\"977-98989898\",\"mobile_2\":\"977-91239123\",\"address\":\"KATHMANDU\",\"state\":\"PUNJAB\",\"country\":\"INDIA\",\"temp_address\":\"KATHMANDU\",\"temp_state\":\"6 NO\",\"temp_country\":\"NEPAL\",\"created_by\":1,\"id\":6}', 'http://localhost/College/public/student/import', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:24:11', '2025-01-28 15:24:11'),
+(79, 'App\\User', 1, 'created', 'App\\Models\\ParentDetail', 6, '[]', '{\"students_id\":8,\"grandfather_first_name\":\"HARI\",\"grandfather_middle_name\":\"KRISHNA\",\"grandfather_last_name\":\"THAPA\",\"father_first_name\":\"DEMO\",\"father_middle_name\":\"TEST\",\"father_last_name\":\"FATHER\",\"father_eligibility\":\"MA\",\"father_occupation\":\"GOV JOB\",\"father_office\":\"SS GOV RESEARCH\",\"father_office_number\":\"977-31-23081\",\"father_residence_number\":\"977-31-23081\",\"father_mobile_1\":\"977-98989901\",\"father_mobile_2\":\"977-91239126\",\"father_email\":\"father3@gmail.com\",\"mother_first_name\":\"DEMO\",\"mother_middle_name\":\"TEST\",\"mother_last_name\":\"MOTHER\",\"mother_eligibility\":\"MA\",\"mother_occupation\":\"GOV JOB\",\"mother_office\":\"SS GOV RESEARCH\",\"mother_office_number\":\"977-31-23081\",\"mother_residence_number\":\"977-31-23081\",\"mother_mobile_1\":\"977-98989901\",\"mother_mobile_2\":\"977-91239126\",\"mother_email\":\"mother3@gmail.com\",\"created_by\":1,\"id\":6}', 'http://localhost/College/public/student/import', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:24:11', '2025-01-28 15:24:11'),
+(80, 'App\\User', 1, 'created', 'App\\Models\\GuardianDetail', 6, '[]', '{\"guardian_first_name\":\"DEMO\",\"guardian_middle_name\":\"TEST\",\"guardian_last_name\":\"GUARDIAN\",\"guardian_eligibility\":\"MA\",\"guardian_occupation\":\"GOV JOB\",\"guardian_office\":\"SS GOV RESEARCH\",\"guardian_office_number\":\"977-31-23081\",\"guardian_residence_number\":\"977-31-23081\",\"guardian_mobile_1\":\"977-98989901\",\"guardian_mobile_2\":\"977-91239126\",\"guardian_email\":\"guardian3@gmail.com\",\"guardian_relation\":\"FATHER\",\"guardian_address\":\"KATHMANDU\",\"created_by\":1,\"id\":6}', 'http://localhost/College/public/student/import', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:24:11', '2025-01-28 15:24:11'),
+(81, 'App\\User', 1, 'created', 'App\\Models\\Student', 9, '[]', '{\"reg_no\":\"STUD-0005\",\"reg_date\":\"2018-05-06\",\"university_reg\":\"11-22-2022\",\"faculty\":\"1\",\"semester\":\"1\",\"academic_status\":\"1\",\"batch\":\"1\",\"first_name\":\"HARI\",\"middle_name\":\"\",\"last_name\":\"ADHIKARI\",\"date_of_birth\":\"2004-12-05\",\"gender\":\"MALE\",\"blood_group\":\"B+\",\"religion\":\"hindu\",\"caste\":\"madheshi\",\"nationality\":\"NEPALI\",\"mother_tongue\":\"ENGLISH\",\"email\":\"student4@gmail.com\",\"extra_info\":\"\",\"created_by\":1,\"id\":9}', 'http://localhost/College/public/student/import', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:24:11', '2025-01-28 15:24:11'),
+(82, 'App\\User', 1, 'created', 'App\\Models\\Addressinfo', 7, '[]', '{\"students_id\":9,\"home_phone\":\"977-31-23082\",\"mobile_1\":\"977-98989898\",\"mobile_2\":\"977-91239123\",\"address\":\"KATHMANDU\",\"state\":\"3 NO\",\"country\":\"NEPAL\",\"temp_address\":\"KATHMANDU\",\"temp_state\":\"7 NO\",\"temp_country\":\"NEPAL\",\"created_by\":1,\"id\":7}', 'http://localhost/College/public/student/import', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:24:11', '2025-01-28 15:24:11');
+INSERT INTO `audits` (`id`, `user_type`, `user_id`, `event`, `auditable_type`, `auditable_id`, `old_values`, `new_values`, `url`, `ip_address`, `user_agent`, `tags`, `created_at`, `updated_at`) VALUES
+(83, 'App\\User', 1, 'created', 'App\\Models\\ParentDetail', 7, '[]', '{\"students_id\":9,\"grandfather_first_name\":\"HARI\",\"grandfather_middle_name\":\"KRISHNA\",\"grandfather_last_name\":\"THAPA\",\"father_first_name\":\"DEMO\",\"father_middle_name\":\"TEST\",\"father_last_name\":\"FATHER\",\"father_eligibility\":\"BA\",\"father_occupation\":\"GOV JOB\",\"father_office\":\"SS GOV RESEARCH\",\"father_office_number\":\"977-31-23082\",\"father_residence_number\":\"977-31-23082\",\"father_mobile_1\":\"977-98989902\",\"father_mobile_2\":\"977-91239127\",\"father_email\":\"father4@gmail.com\",\"mother_first_name\":\"DEMO\",\"mother_middle_name\":\"TEST\",\"mother_last_name\":\"MOTHER\",\"mother_eligibility\":\"BA\",\"mother_occupation\":\"GOV JOB\",\"mother_office\":\"SS GOV RESEARCH\",\"mother_office_number\":\"977-31-23082\",\"mother_residence_number\":\"977-31-23082\",\"mother_mobile_1\":\"977-98989902\",\"mother_mobile_2\":\"977-91239127\",\"mother_email\":\"mother4@gmail.com\",\"created_by\":1,\"id\":7}', 'http://localhost/College/public/student/import', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:24:11', '2025-01-28 15:24:11'),
+(84, 'App\\User', 1, 'created', 'App\\Models\\GuardianDetail', 7, '[]', '{\"guardian_first_name\":\"DEMO\",\"guardian_middle_name\":\"TEST\",\"guardian_last_name\":\"GUARDIAN\",\"guardian_eligibility\":\"BA\",\"guardian_occupation\":\"GOV JOB\",\"guardian_office\":\"SS GOV RESEARCH\",\"guardian_office_number\":\"977-31-23082\",\"guardian_residence_number\":\"977-31-23082\",\"guardian_mobile_1\":\"977-98989902\",\"guardian_mobile_2\":\"977-91239127\",\"guardian_email\":\"guardian4@gmail.com\",\"guardian_relation\":\"FATHER\",\"guardian_address\":\"KATHMANDU\",\"created_by\":1,\"id\":7}', 'http://localhost/College/public/student/import', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:24:11', '2025-01-28 15:24:11'),
+(85, 'App\\User', 1, 'updated', 'App\\Models\\GradingScale', 1, '{\"last_updated_by\":null}', '{\"last_updated_by\":1}', 'http://localhost/College/public/grading/1/update', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:27:12', '2025-01-28 15:27:12'),
+(86, 'App\\User', 1, 'updated', 'App\\Models\\GradingType', 1, '{\"last_updated_by\":null,\"title\":\"College level\"}', '{\"last_updated_by\":1,\"title\":\"COLLEGE LEVEL1\"}', 'http://localhost/College/public/grading/1/update', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:27:12', '2025-01-28 15:27:12'),
+(87, 'App\\User', 1, 'updated', 'App\\Models\\GradingType', 1, '{\"title\":\"COLLEGE LEVEL1\"}', '{\"title\":\"COLLEGE LEVEL\"}', 'http://localhost/College/public/grading/1/update', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:27:23', '2025-01-28 15:27:23'),
+(88, 'App\\User', 1, 'updated', 'App\\Models\\Subject', 1, '{\"last_updated_by\":null,\"staff_id\":0}', '{\"last_updated_by\":1,\"staff_id\":\"1\"}', 'http://localhost/College/public/subject/1/update', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:29:34', '2025-01-28 15:29:34'),
+(89, 'App\\User', 1, 'created', 'App\\Models\\Semester', 2, '[]', '{\"semester\":\"1\",\"gradingType_id\":\"2\",\"staff_id\":\"5\",\"created_by\":1,\"slug\":\"1\",\"id\":2}', 'http://localhost/College/public/semester/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:31:05', '2025-01-28 15:31:05'),
+(90, 'App\\User', 1, 'deleted', 'App\\Models\\Semester', 2, '{\"id\":2,\"created_by\":1,\"last_updated_by\":null,\"semester\":\"1\",\"slug\":\"1\",\"staff_id\":5,\"gradingType_id\":2,\"status\":1}', '[]', 'http://localhost/College/public/semester/2/delete', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:31:15', '2025-01-28 15:31:15'),
+(91, 'App\\User', 1, 'created', 'App\\Models\\Year', 5, '[]', '{\"title\":\"2025\",\"created_by\":1,\"id\":5}', 'http://localhost/College/public/year/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:31:43', '2025-01-28 15:31:43'),
+(92, 'App\\User', 1, 'updated', 'App\\Models\\Subject', 1, '{\"full_mark_theory\":10,\"pass_mark_theory\":null,\"full_mark_practical\":null,\"pass_mark_practical\":null,\"credit_hour\":null}', '{\"full_mark_theory\":\"75\",\"pass_mark_theory\":\"30\",\"full_mark_practical\":\"25\",\"pass_mark_practical\":\"15\",\"credit_hour\":\"2\"}', 'http://localhost/College/public/subject/1/update', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:41:00', '2025-01-28 15:41:00'),
+(93, 'App\\User', 1, 'updated', 'App\\Models\\Faculty', 1, '{\"last_updated_by\":null,\"faculty\":\"bsc\"}', '{\"last_updated_by\":1,\"faculty\":\"BSC\"}', 'http://localhost/College/public/faculty/1/update', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:47:14', '2025-01-28 15:47:14'),
+(94, 'App\\User', 1, 'created', 'App\\Models\\Semester', 3, '[]', '{\"semester\":\"1\",\"gradingType_id\":\"2\",\"staff_id\":\"5\",\"created_by\":1,\"slug\":\"1\",\"id\":3}', 'http://localhost/College/public/semester/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:47:46', '2025-01-28 15:47:46'),
+(95, 'App\\User', 1, 'created', 'App\\Models\\Semester', 4, '[]', '{\"semester\":\"2\",\"gradingType_id\":\"2\",\"staff_id\":\"5\",\"created_by\":1,\"slug\":\"2\",\"id\":4}', 'http://localhost/College/public/semester/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:50:46', '2025-01-28 15:50:46'),
+(96, 'App\\User', 1, 'created', 'App\\Models\\Faculty', 9, '[]', '{\"faculty\":\"8\",\"faculty_code\":\"9\",\"created_by\":1,\"id\":9}', 'http://localhost/College/public/faculty/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:51:41', '2025-01-28 15:51:41'),
+(97, 'App\\User', 1, 'created', 'App\\Models\\Faculty', 10, '[]', '{\"faculty\":\"9TH\",\"faculty_code\":\"10\",\"created_by\":1,\"id\":10}', 'http://localhost/College/public/faculty/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:52:07', '2025-01-28 15:52:07'),
+(98, 'App\\User', 1, 'updated', 'App\\Models\\Faculty', 6, '{\"status\":1}', '{\"status\":0}', 'http://localhost/College/public/faculty/6/in-active', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:52:18', '2025-01-28 15:52:18'),
+(99, 'App\\User', 1, 'updated', 'App\\Models\\Faculty', 6, '{\"status\":0}', '{\"status\":1}', 'http://localhost/College/public/faculty/6/active', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:52:23', '2025-01-28 15:52:23'),
+(100, 'App\\User', 1, 'updated', 'App\\Models\\Faculty', 9, '{\"last_updated_by\":null,\"faculty\":\"8\"}', '{\"last_updated_by\":1,\"faculty\":\"8TH\"}', 'http://localhost/College/public/faculty/9/update', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:52:36', '2025-01-28 15:52:36'),
+(101, 'App\\User', 1, 'created', 'App\\Models\\Faculty', 11, '[]', '{\"faculty\":\"10TH\",\"faculty_code\":\"11\",\"created_by\":1,\"id\":11}', 'http://localhost/College/public/faculty/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:52:45', '2025-01-28 15:52:45'),
+(102, 'App\\User', 1, 'created', 'App\\Models\\Faculty', 13, '[]', '{\"faculty\":\"11TH\",\"faculty_code\":\"12\",\"created_by\":1,\"id\":13}', 'http://localhost/College/public/faculty/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:53:06', '2025-01-28 15:53:06'),
+(103, 'App\\User', 1, 'created', 'App\\Models\\Faculty', 14, '[]', '{\"faculty\":\"12TH\",\"faculty_code\":\"13\",\"created_by\":1,\"id\":14}', 'http://localhost/College/public/faculty/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 15:53:15', '2025-01-28 15:53:15'),
+(104, 'App\\User', 1, 'updated', 'App\\User', 1, '{\"last_login_at\":\"2025-01-28 19:13:51\"}', '{\"last_login_at\":\"2025-01-28 23:20:58\"}', 'http://localhost/College/public/login', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 17:50:58', '2025-01-28 17:50:58'),
+(105, 'App\\User', 1, 'updated', 'App\\Models\\GeneralSetting', 1, '{\"salogan\":null,\"copyright\":null,\"address\":null,\"phone\":null,\"email\":null,\"favicon\":null,\"logo\":null,\"print_header\":null,\"print_footer\":null,\"time_zones_id\":null}', '{\"salogan\":\"sologan\",\"copyright\":\"TP SHETTEY\",\"address\":\"Lanja\",\"phone\":\"08329735698\",\"email\":\"nrehanyt@gmail.com\",\"favicon\":\"9720.jpeg\",\"logo\":\"9774.jpeg\",\"print_header\":\"<p>u<\\/p>\",\"print_footer\":\"<p>u<\\/p>\",\"time_zones_id\":\"274\"}', 'http://localhost/College/public/setting/general/1/update', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 18:03:15', '2025-01-28 18:03:15'),
+(106, 'App\\User', 1, 'updated', 'App\\Models\\GeneralSetting', 1, '{\"copyright\":\"TP SHETTEY\"}', '{\"copyright\":\"Copyright\\u00a92025.TP SHETTEY\"}', 'http://localhost/College/public/setting/general/1/update', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 17:49:31', '2025-01-28 17:49:31'),
+(107, 'App\\User', 1, 'updated', 'App\\Models\\GeneralSetting', 1, '{\"copyright\":\"Copyright\\u00a92025.TP SHETTEY\"}', '{\"copyright\":\"Copyright\\u00a92025.TP SHETTEY right reserved\"}', 'http://localhost/College/public/setting/general/1/update', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 17:49:42', '2025-01-28 17:49:42'),
+(108, 'App\\User', 1, 'updated', 'App\\Models\\GeneralSetting', 1, '{\"salogan\":\"sologan\",\"copyright\":\"Copyright\\u00a92025.TP SHETTEY right reserved\",\"phone\":\"08329735698\",\"email\":\"nrehanyt@gmail.com\"}', '{\"salogan\":null,\"copyright\":\"Copyright \\u00a9 2025.TP SHETTEY right reserved\",\"phone\":\"0000000000\",\"email\":\"tpshettey@gmail.com\"}', 'http://localhost/College/public/setting/general/1/update', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 17:50:23', '2025-01-28 17:50:23'),
+(109, 'App\\User', 1, 'created', 'App\\Models\\Exam', 1, '[]', '{\"title\":\"march-2025\",\"created_by\":1,\"id\":1}', 'http://localhost/College/public/exam/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 17:57:35', '2025-01-28 17:57:35'),
+(110, 'App\\User', 1, 'created', 'App\\Models\\ExamSchedule', 1, '[]', '{\"years_id\":\"5\",\"months_id\":\"3\",\"exams_id\":\"1\",\"faculty_id\":\"14\",\"semesters_id\":\"3\",\"subjects_id\":\"1\",\"date\":\"2025-01-01\",\"start_time\":\"10:10\",\"end_time\":\"12:09\",\"full_mark_theory\":\"75\",\"pass_mark_theory\":\"30\",\"full_mark_practical\":\"25\",\"pass_mark_practical\":\"15\",\"sorting_order\":1,\"created_by\":1,\"id\":1}', 'http://localhost/College/public/exam/schedule/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 17:58:26', '2025-01-28 17:58:26'),
+(111, 'App\\User', 1, 'created', 'App\\Models\\ExamSchedule', 2, '[]', '{\"years_id\":\"5\",\"months_id\":\"3\",\"exams_id\":\"1\",\"faculty_id\":\"1\",\"semesters_id\":\"1\",\"subjects_id\":\"1\",\"date\":\"2025-03-11\",\"start_time\":\"02:20\",\"end_time\":\"10:00\",\"full_mark_theory\":\"75\",\"pass_mark_theory\":\"30\",\"full_mark_practical\":\"25\",\"pass_mark_practical\":\"15\",\"sorting_order\":1,\"created_by\":1,\"id\":2}', 'http://localhost/College/public/exam/schedule/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 18:01:34', '2025-01-28 18:01:34'),
+(112, 'App\\User', 1, 'created', 'App\\Models\\ExamMarkLedger', 1, '[]', '{\"exam_schedule_id\":2,\"students_id\":\"1\",\"obtain_mark_theory\":0,\"obtain_mark_practical\":0,\"absent_theory\":0,\"absent_practical\":0,\"sorting_order\":1,\"created_by\":1,\"id\":1}', 'http://localhost/College/public/exam/mark-ledger/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 18:06:19', '2025-01-28 18:06:19'),
+(113, 'App\\User', 1, 'created', 'App\\Models\\ExamMarkLedger', 2, '[]', '{\"exam_schedule_id\":2,\"students_id\":\"5\",\"obtain_mark_theory\":\"50\",\"obtain_mark_practical\":\"50\",\"absent_theory\":0,\"absent_practical\":0,\"sorting_order\":2,\"created_by\":1,\"id\":2}', 'http://localhost/College/public/exam/mark-ledger/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 18:06:19', '2025-01-28 18:06:19'),
+(114, 'App\\User', 1, 'created', 'App\\Models\\ExamMarkLedger', 3, '[]', '{\"exam_schedule_id\":2,\"students_id\":\"6\",\"obtain_mark_theory\":\"50\",\"obtain_mark_practical\":\"50\",\"absent_theory\":0,\"absent_practical\":0,\"sorting_order\":3,\"created_by\":1,\"id\":3}', 'http://localhost/College/public/exam/mark-ledger/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 18:06:19', '2025-01-28 18:06:19'),
+(115, 'App\\User', 1, 'created', 'App\\Models\\ExamMarkLedger', 4, '[]', '{\"exam_schedule_id\":2,\"students_id\":\"7\",\"obtain_mark_theory\":0,\"obtain_mark_practical\":0,\"absent_theory\":0,\"absent_practical\":0,\"sorting_order\":4,\"created_by\":1,\"id\":4}', 'http://localhost/College/public/exam/mark-ledger/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 18:06:19', '2025-01-28 18:06:19'),
+(116, 'App\\User', 1, 'created', 'App\\Models\\ExamMarkLedger', 5, '[]', '{\"exam_schedule_id\":2,\"students_id\":\"8\",\"obtain_mark_theory\":0,\"obtain_mark_practical\":0,\"absent_theory\":0,\"absent_practical\":0,\"sorting_order\":5,\"created_by\":1,\"id\":5}', 'http://localhost/College/public/exam/mark-ledger/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 18:06:19', '2025-01-28 18:06:19'),
+(117, 'App\\User', 1, 'created', 'App\\Models\\ExamMarkLedger', 6, '[]', '{\"exam_schedule_id\":2,\"students_id\":\"9\",\"obtain_mark_theory\":0,\"obtain_mark_practical\":0,\"absent_theory\":0,\"absent_practical\":0,\"sorting_order\":6,\"created_by\":1,\"id\":6}', 'http://localhost/College/public/exam/mark-ledger/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 18:06:19', '2025-01-28 18:06:19'),
+(118, 'App\\User', 1, 'created', 'App\\Models\\BonafideCertificate', 1, '[]', '{\"date_of_issue\":\"2025-01-28T18:10:16.435067Z\",\"period\":\"2025-2026\",\"course\":\"BSC\",\"character\":\"STUDENT\",\"students_id\":\"1\",\"created_by\":1,\"ref_text\":\"{\\\"date_of_issue\\\":\\\"2025-01-28T18:10:16.435067Z\\\",\\\"period\\\":\\\"2025-2026\\\",\\\"course\\\":\\\"BSC\\\",\\\"character\\\":\\\"STUDENT\\\",\\\"students_id\\\":\\\"1\\\",\\\"faculty\\\":\\\"1\\\",\\\"semester\\\":\\\"1\\\",\\\"reg_no\\\":\\\"1\\\",\\\"reg_date\\\":\\\"2025-01-08\\\",\\\"university_reg\\\":\\\"01\\\",\\\"first_name\\\":\\\"FAISAL\\\",\\\"middle_name\\\":\\\"REHAN\\\",\\\"last_name\\\":\\\"NEVAREKAR\\\",\\\"date_of_birth\\\":\\\"2004-04-12\\\",\\\"gender\\\":\\\"OTHER\\\",\\\"blood_group\\\":\\\"O+\\\",\\\"nationality\\\":\\\"INDIAN\\\",\\\"religion\\\":\\\"MUSLIM\\\",\\\"caste\\\":\\\"OPEN\\\",\\\"issue_certificate\\\":\\\"Issue\\\",\\\"created_by\\\":1}\",\"id\":1}', 'http://localhost/College/public/certificate/bonafide/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 18:10:16', '2025-01-28 18:10:16'),
+(119, 'App\\User', 1, 'created', 'App\\Models\\CertificateHistory', 1, '[]', '{\"students_id\":\"1\",\"certificate\":\"bonafide\",\"certificate_id\":1,\"history_type\":\"Created\",\"ref_text\":\"{\\\"date_of_issue\\\":\\\"2025-01-28T18:10:16.435067Z\\\",\\\"period\\\":\\\"2025-2026\\\",\\\"course\\\":\\\"BSC\\\",\\\"character\\\":\\\"STUDENT\\\",\\\"students_id\\\":\\\"1\\\",\\\"faculty\\\":\\\"1\\\",\\\"semester\\\":\\\"1\\\",\\\"reg_no\\\":\\\"1\\\",\\\"reg_date\\\":\\\"2025-01-08\\\",\\\"university_reg\\\":\\\"01\\\",\\\"first_name\\\":\\\"FAISAL\\\",\\\"middle_name\\\":\\\"REHAN\\\",\\\"last_name\\\":\\\"NEVAREKAR\\\",\\\"date_of_birth\\\":\\\"2004-04-12\\\",\\\"gender\\\":\\\"OTHER\\\",\\\"blood_group\\\":\\\"O+\\\",\\\"nationality\\\":\\\"INDIAN\\\",\\\"religion\\\":\\\"MUSLIM\\\",\\\"caste\\\":\\\"OPEN\\\",\\\"issue_certificate\\\":\\\"Issue\\\",\\\"created_by\\\":1}\",\"created_by\":1,\"id\":1}', 'http://localhost/College/public/certificate/bonafide/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 18:10:16', '2025-01-28 18:10:16'),
+(120, 'App\\User', 1, 'created', 'App\\Models\\TransferCertificate', 1, '[]', '{\"tc_num\":\"A00001\",\"date_of_issue\":\"2025-01-28T18:12:05.026233Z\",\"date_of_leaving\":\"2025-01-12T18:30:00.000000Z\",\"character\":\"DF200\",\"leaving_time_class\":\"2345\",\"paid_fee_status\":\"2000\",\"qualified_to_promote\":\"234\",\"students_id\":\"1\",\"created_by\":1,\"ref_text\":\"{\\\"tc_num\\\":\\\"A00001\\\",\\\"date_of_issue\\\":\\\"2025-01-28T18:12:05.026233Z\\\",\\\"date_of_leaving\\\":\\\"2025-01-12T18:30:00.000000Z\\\",\\\"character\\\":\\\"DF200\\\",\\\"leaving_time_class\\\":\\\"2345\\\",\\\"paid_fee_status\\\":\\\"2000\\\",\\\"qualified_to_promote\\\":\\\"234\\\",\\\"students_id\\\":\\\"1\\\",\\\"faculty\\\":\\\"1\\\",\\\"semester\\\":\\\"1\\\",\\\"reg_no\\\":\\\"1\\\",\\\"reg_date\\\":\\\"2025-01-08\\\",\\\"university_reg\\\":\\\"01\\\",\\\"first_name\\\":\\\"FAISAL\\\",\\\"middle_name\\\":\\\"REHAN\\\",\\\"last_name\\\":\\\"NEVAREKAR\\\",\\\"date_of_birth\\\":\\\"2004-04-12\\\",\\\"gender\\\":\\\"OTHER\\\",\\\"blood_group\\\":\\\"O+\\\",\\\"nationality\\\":\\\"INDIAN\\\",\\\"religion\\\":\\\"MUSLIM\\\",\\\"caste\\\":\\\"OPEN\\\",\\\"issue_certificate\\\":\\\"Issue\\\",\\\"created_by\\\":1}\",\"id\":1}', 'http://localhost/College/public/certificate/transfer/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 18:12:05', '2025-01-28 18:12:05'),
+(121, 'App\\User', 1, 'created', 'App\\Models\\CertificateHistory', 2, '[]', '{\"students_id\":\"1\",\"certificate\":\"transfer\",\"certificate_id\":1,\"history_type\":\"Created\",\"ref_text\":\"{\\\"tc_num\\\":\\\"A00001\\\",\\\"date_of_issue\\\":\\\"2025-01-28T18:12:05.026233Z\\\",\\\"date_of_leaving\\\":\\\"2025-01-12T18:30:00.000000Z\\\",\\\"character\\\":\\\"DF200\\\",\\\"leaving_time_class\\\":\\\"2345\\\",\\\"paid_fee_status\\\":\\\"2000\\\",\\\"qualified_to_promote\\\":\\\"234\\\",\\\"students_id\\\":\\\"1\\\",\\\"faculty\\\":\\\"1\\\",\\\"semester\\\":\\\"1\\\",\\\"reg_no\\\":\\\"1\\\",\\\"reg_date\\\":\\\"2025-01-08\\\",\\\"university_reg\\\":\\\"01\\\",\\\"first_name\\\":\\\"FAISAL\\\",\\\"middle_name\\\":\\\"REHAN\\\",\\\"last_name\\\":\\\"NEVAREKAR\\\",\\\"date_of_birth\\\":\\\"2004-04-12\\\",\\\"gender\\\":\\\"OTHER\\\",\\\"blood_group\\\":\\\"O+\\\",\\\"nationality\\\":\\\"INDIAN\\\",\\\"religion\\\":\\\"MUSLIM\\\",\\\"caste\\\":\\\"OPEN\\\",\\\"issue_certificate\\\":\\\"Issue\\\",\\\"created_by\\\":1}\",\"created_by\":1,\"id\":2}', 'http://localhost/College/public/certificate/transfer/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 18:12:05', '2025-01-28 18:12:05'),
+(122, 'App\\User', 1, 'deleted', 'App\\Models\\TransferCertificate', 1, '{\"id\":1,\"created_by\":1,\"last_updated_by\":null,\"students_id\":1,\"date_of_issue\":\"2025-01-28\",\"date_of_leaving\":\"2025-01-13\",\"tc_num\":\"A00001\",\"leaving_time_class\":\"2345\",\"qualified_to_promote\":\"234\",\"paid_fee_status\":\"2000\",\"character\":\"DF200\",\"ref_text\":\"{\\\"tc_num\\\":\\\"A00001\\\",\\\"date_of_issue\\\":\\\"2025-01-28T18:12:05.026233Z\\\",\\\"date_of_leaving\\\":\\\"2025-01-12T18:30:00.000000Z\\\",\\\"character\\\":\\\"DF200\\\",\\\"leaving_time_class\\\":\\\"2345\\\",\\\"paid_fee_status\\\":\\\"2000\\\",\\\"qualified_to_promote\\\":\\\"234\\\",\\\"students_id\\\":\\\"1\\\",\\\"faculty\\\":\\\"1\\\",\\\"semester\\\":\\\"1\\\",\\\"reg_no\\\":\\\"1\\\",\\\"reg_date\\\":\\\"2025-01-08\\\",\\\"university_reg\\\":\\\"01\\\",\\\"first_name\\\":\\\"FAISAL\\\",\\\"middle_name\\\":\\\"REHAN\\\",\\\"last_name\\\":\\\"NEVAREKAR\\\",\\\"date_of_birth\\\":\\\"2004-04-12\\\",\\\"gender\\\":\\\"OTHER\\\",\\\"blood_group\\\":\\\"O+\\\",\\\"nationality\\\":\\\"INDIAN\\\",\\\"religion\\\":\\\"MUSLIM\\\",\\\"caste\\\":\\\"OPEN\\\",\\\"issue_certificate\\\":\\\"Issue\\\",\\\"created_by\\\":1}\",\"status\":1}', '[]', 'http://localhost/College/public/certificate/transfer/1/delete', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 18:12:23', '2025-01-28 18:12:23'),
+(123, 'App\\User', 1, 'deleted', 'App\\Models\\CertificateTemplate', 1, '{\"id\":1,\"created_by\":1,\"last_updated_by\":null,\"certificate\":\"ATTENDANCE\",\"template\":\"<table class=\\\"table table-bordered\\\"> <tbody> <tr> <td>01.<\\/td> <td style=\\\"text-align: right; \\\">Name of Student :&nbsp;<\\/td> <td width=\\\"50%\\\" style=\\\"text-align: left;\\\"><b>{{student_name}}<\\/b><br><\\/td> <\\/tr> <tr> <td>02.<\\/td> <td style=\\\"text-align: right; \\\">Reg. No.&nbsp;:&nbsp;<\\/td> <td width=\\\"50%\\\" style=\\\"text-align: left;\\\"><span style=\\\"font-weight: 700;\\\">{{reg_no}}<\\/span><br><\\/td> <\\/tr> <tr> <td>03.<\\/td> <td style=\\\"text-align: right; \\\">University Reg. No.&nbsp;:&nbsp;<\\/td> <td width=\\\"50%\\\" style=\\\"text-align: left;\\\"><span style=\\\"font-weight: 700;\\\">{{university_reg}}<\\/span><br><\\/td> <\\/tr> <tr> <td>04.<\\/td> <td style=\\\"text-align: right; \\\">Faculty\\/Level&nbsp;:&nbsp;<\\/td> <td width=\\\"50%\\\" style=\\\"text-align: left;\\\"><span style=\\\"font-weight: 700;\\\">{{faculty}}<\\/span><br><\\/td> <\\/tr><tr><td>05.<\\/td><td style=\\\"text-align: right; \\\">Batch :&nbsp;<br><\\/td><td width=\\\"50%\\\" style=\\\"text-align: left;\\\"><span style=\\\"font-weight: 700;\\\">{{batch}}<\\/span><br><\\/td><\\/tr> <tr> <td>06.<\\/td> <td style=\\\"text-align: right; \\\">Year of Study&nbsp;:&nbsp;<\\/td> <td width=\\\"50%\\\" style=\\\"text-align: left;\\\"><span style=\\\"font-weight: 700;\\\">{{year_of_study}}<\\/span><br><\\/td> <\\/tr> <tr> <td>07.<\\/td> <td style=\\\"text-align: right; \\\">Percentage of Attendance Secured&nbsp;:&nbsp;<\\/td> <td width=\\\"50%\\\" style=\\\"text-align: left;\\\"><b>{{percentage_of_attendance}}%<\\/b><br><\\/td> <\\/tr> <\\/tbody><\\/table>\",\"background_image\":null,\"custom_css\":\".subpage{padding: 100px;}\",\"student_photo\":0,\"background_status\":0,\"status\":1}', '[]', 'http://localhost/College/public/certificate/template/1/delete', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 18:14:19', '2025-01-28 18:14:19'),
+(124, 'App\\User', 1, 'updated', 'App\\Models\\Download', 1, '{\"last_updated_by\":null,\"title\":\"gg\"}', '{\"last_updated_by\":1,\"title\":\"test\"}', 'http://localhost/College/public/download/eyJpdiI6Ik9DOXA3UnJvN3psMzVrb3p6SkFxV3c9PSIsInZhbHVlIjoiS2tZWFhzeUZzXC9HOVFnTkxqdDgwZmc9PSIsIm1hYyI6IjdmZGE3NDg4MmE1MjBhOWYzZGFmNmQwMWFiNWEyZTFjZDE2YmQ0YjFlY2ZkYWQwMzI1MWUzZWI0OTJmNWQ5NjUifQ==/update', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 18:18:31', '2025-01-28 18:18:31'),
+(125, 'App\\User', 1, 'created', 'App\\Models\\Bank', 1, '[]', '{\"bank_name\":\"BOI\",\"ac_name\":\"Rahilkazi\",\"ac_number\":\"143238898123\",\"branch\":\"lanja\",\"created_by\":1,\"id\":1}', 'http://localhost/College/public/account/bank/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 18:21:09', '2025-01-28 18:21:09'),
+(126, 'App\\User', 1, 'created', 'App\\Models\\BankTransaction', 1, '[]', '{\"banks_id\":\"1\",\"description\":null,\"deposit_id\":\"3456789\",\"date\":\"2025-01-28\",\"dr_amt\":\"19\",\"cr_amt\":0,\"amount\":\"19\",\"created_by\":1,\"id\":1}', 'http://localhost/College/public/account/bank-transaction/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 18:21:40', '2025-01-28 18:21:40'),
+(127, 'App\\User', 1, 'deleted', 'App\\Models\\BankTransaction', 1, '{\"id\":1,\"created_by\":1,\"last_updated_by\":null,\"banks_id\":1,\"description\":null,\"deposit_id\":\"3456789\",\"date\":\"2025-01-28 00:00:00\",\"dr_amt\":19,\"cr_amt\":0,\"amount\":19,\"status\":1}', '[]', 'http://localhost/College/public/account/bank-transaction/1/delete', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 18:21:46', '2025-01-28 18:21:46'),
+(128, 'App\\User', 1, 'created', 'App\\Models\\FeeHead', 1, '[]', '{\"fee_head_title\":\"anual fees\",\"fee_head_amount\":\"300000\",\"created_by\":1,\"id\":1}', 'http://localhost/College/public/account/fees/head/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 18:23:22', '2025-01-28 18:23:22'),
+(129, 'App\\User', 1, 'created', 'App\\Models\\FeeMaster', 1, '[]', '{\"students_id\":1,\"semester\":1,\"fee_head\":\"1\",\"fee_due_date\":\"2025-01-28\",\"fee_amount\":\"2000\",\"created_by\":1,\"id\":1}', 'http://localhost/College/public/account/fees/master/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 18:24:58', '2025-01-28 18:24:58'),
+(130, 'App\\User', 1, 'created', 'App\\Models\\FeeCollection', 1, '[]', '{\"students_id\":\"1\",\"fee_masters_id\":1,\"date\":\"2025-01-06\",\"paid_amount\":2000,\"payment_mode\":\"Cash\",\"note\":null,\"created_by\":1,\"id\":1}', 'http://localhost/College/public/account/fees/due/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 18:27:24', '2025-01-28 18:27:24'),
+(131, 'App\\User', 1, 'deleted', 'App\\Models\\FeeCollection', 1, '{\"id\":1,\"created_by\":1,\"last_updated_by\":null,\"students_id\":1,\"fee_masters_id\":1,\"date\":\"2025-01-06 00:00:00\",\"paid_amount\":2000,\"discount\":null,\"fine\":null,\"payment_mode\":\"Cash\",\"note\":null,\"response\":null,\"status\":1}', '[]', 'http://localhost/College/public/account/fees/collection/1/delete', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 18:29:22', '2025-01-28 18:29:22'),
+(132, 'App\\User', 1, 'deleted', 'App\\Models\\FeeMaster', 1, '{\"id\":1,\"created_by\":1,\"last_updated_by\":null,\"students_id\":1,\"semester\":\"1\",\"fee_head\":\"1\",\"fee_due_date\":\"2025-01-28 00:00:00\",\"fee_amount\":2000,\"status\":1}', '[]', 'http://localhost/College/public/account/fees/master/1/delete', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 18:29:30', '2025-01-28 18:29:30'),
+(133, 'App\\User', 1, 'created', 'App\\Models\\FeeMaster', 2, '[]', '{\"students_id\":1,\"semester\":1,\"fee_head\":\"1\",\"fee_due_date\":\"2025-01-30\",\"fee_amount\":\"30000\",\"created_by\":1,\"id\":2}', 'http://localhost/College/public/account/fees/master/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 18:32:02', '2025-01-28 18:32:02'),
+(134, 'App\\User', 1, 'created', 'App\\Models\\FeeMaster', 3, '[]', '{\"students_id\":5,\"semester\":1,\"fee_head\":\"1\",\"fee_due_date\":\"2025-01-30\",\"fee_amount\":\"30000\",\"created_by\":1,\"id\":3}', 'http://localhost/College/public/account/fees/master/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 18:32:02', '2025-01-28 18:32:02'),
+(135, 'App\\User', 1, 'created', 'App\\Models\\FeeMaster', 4, '[]', '{\"students_id\":6,\"semester\":1,\"fee_head\":\"1\",\"fee_due_date\":\"2025-01-30\",\"fee_amount\":\"30000\",\"created_by\":1,\"id\":4}', 'http://localhost/College/public/account/fees/master/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 18:32:02', '2025-01-28 18:32:02'),
+(136, 'App\\User', 1, 'created', 'App\\Models\\FeeMaster', 5, '[]', '{\"students_id\":7,\"semester\":1,\"fee_head\":\"1\",\"fee_due_date\":\"2025-01-30\",\"fee_amount\":\"30000\",\"created_by\":1,\"id\":5}', 'http://localhost/College/public/account/fees/master/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 18:32:02', '2025-01-28 18:32:02'),
+(137, 'App\\User', 1, 'created', 'App\\Models\\FeeMaster', 6, '[]', '{\"students_id\":8,\"semester\":1,\"fee_head\":\"1\",\"fee_due_date\":\"2025-01-30\",\"fee_amount\":\"30000\",\"created_by\":1,\"id\":6}', 'http://localhost/College/public/account/fees/master/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 18:32:02', '2025-01-28 18:32:02'),
+(138, 'App\\User', 1, 'created', 'App\\Models\\FeeMaster', 7, '[]', '{\"students_id\":9,\"semester\":1,\"fee_head\":\"1\",\"fee_due_date\":\"2025-01-30\",\"fee_amount\":\"30000\",\"created_by\":1,\"id\":7}', 'http://localhost/College/public/account/fees/master/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 18:32:02', '2025-01-28 18:32:02'),
+(139, 'App\\User', 1, 'created', 'App\\Models\\FeeCollection', 2, '[]', '{\"students_id\":\"1\",\"fee_masters_id\":2,\"date\":\"2025-01-30\",\"paid_amount\":200,\"payment_mode\":\"Cash\",\"note\":\"Quick Receive\",\"created_by\":1,\"id\":2}', 'http://localhost/College/public/account/fees/quick-receive/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 18:32:31', '2025-01-28 18:32:31'),
+(140, 'App\\User', 1, 'created', 'App\\Models\\FeeHead', 2, '[]', '{\"fee_head_title\":\"TY.BCOM\",\"fee_head_amount\":\"5000\",\"created_by\":1,\"id\":2}', 'http://localhost/College/public/account/fees/head/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 18:34:33', '2025-01-28 18:34:33'),
+(141, 'App\\User', 1, 'created', 'App\\Models\\FeeMaster', 8, '[]', '{\"students_id\":4,\"semester\":1,\"fee_head\":\"1\",\"fee_due_date\":\"2025-01-29\",\"fee_amount\":\"300000\",\"created_by\":1,\"id\":8}', 'http://localhost/College/public/account/fees/master/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 18:35:38', '2025-01-28 18:35:38'),
+(142, 'App\\User', 1, 'created', 'App\\Models\\FeeMaster', 9, '[]', '{\"students_id\":4,\"semester\":1,\"fee_head\":\"2\",\"fee_due_date\":\"2025-01-14\",\"fee_amount\":\"5000\",\"created_by\":1,\"id\":9}', 'http://localhost/College/public/account/fees/master/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 18:35:38', '2025-01-28 18:35:38'),
+(143, 'App\\User', 1, 'deleted', 'App\\Models\\FeeHead', 2, '{\"id\":2,\"created_by\":1,\"last_updated_by\":null,\"fee_head_title\":\"TY.BCOM\",\"fee_head_amount\":5000,\"status\":1}', '[]', 'http://localhost/College/public/account/fees/head/2/delete', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 18:36:44', '2025-01-28 18:36:44'),
+(144, 'App\\User', 1, 'updated', 'App\\User', 1, '{\"last_login_at\":\"2025-01-28 23:20:58\"}', '{\"last_login_at\":\"2025-01-29 00:14:20\"}', 'http://localhost/College/public/login', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 18:44:20', '2025-01-28 18:44:20'),
+(145, 'App\\User', 1, 'created', 'App\\User', 2, '[]', '{\"name\":\"rahil\",\"email\":\"rahilkazi66@gmail.com\",\"password\":\"$2y$10$EjZ4tpuWuyPmwRoCthJ8heez4ITaNaP6IcZBSD82Sq.del6CmrA6u\",\"contact_number\":\"9876543\",\"address\":\"rajapur\",\"profile_image\":\"\",\"id\":2}', 'http://localhost/College/public/user/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 18:45:24', '2025-01-28 18:45:24'),
+(146, 'App\\User', 2, 'updated', 'App\\User', 2, '{\"last_login_at\":null,\"last_login_ip\":null}', '{\"last_login_at\":\"2025-01-29 00:15:40\",\"last_login_ip\":\"::1\"}', 'http://localhost/College/public/login', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 18:45:40', '2025-01-28 18:45:40'),
+(147, 'App\\User', 1, 'updated', 'App\\User', 1, '{\"last_login_at\":\"2025-01-29 00:14:20\"}', '{\"last_login_at\":\"2025-01-29 00:16:11\"}', 'http://localhost/College/public/login', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 18:46:11', '2025-01-28 18:46:11'),
+(148, 'App\\User', 2, 'updated', 'App\\User', 2, '{\"last_login_at\":\"2025-01-29 00:15:40\"}', '{\"last_login_at\":\"2025-01-29 00:18:08\"}', 'http://localhost/College/public/login', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 18:48:08', '2025-01-28 18:48:08'),
+(149, 'App\\User', 1, 'updated', 'App\\User', 1, '{\"last_login_at\":\"2025-01-29 00:16:11\"}', '{\"last_login_at\":\"2025-01-29 00:18:23\"}', 'http://localhost/College/public/login', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 18:48:23', '2025-01-28 18:48:23'),
+(150, 'App\\User', 2, 'updated', 'App\\User', 2, '{\"last_login_at\":\"2025-01-29 00:18:08\"}', '{\"last_login_at\":\"2025-01-29 00:19:36\"}', 'http://localhost/College/public/login', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 18:49:36', '2025-01-28 18:49:36'),
+(151, 'App\\User', 1, 'updated', 'App\\User', 1, '{\"last_login_at\":\"2025-01-29 00:18:23\"}', '{\"last_login_at\":\"2025-01-29 00:20:24\"}', 'http://localhost/College/public/login', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 18:50:24', '2025-01-28 18:50:24'),
+(152, 'App\\User', 1, 'updated', 'App\\Models\\GeneralSetting', 1, '{\"favicon\":\"9720.jpeg\",\"logo\":\"9774.jpeg\"}', '{\"favicon\":\"5156.png\",\"logo\":\"6514.png\"}', 'http://localhost/College/public/setting/general/1/update', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-28 19:02:48', '2025-01-28 19:02:48'),
+(153, 'App\\User', 1, 'updated', 'App\\User', 1, '{\"last_login_at\":\"2025-01-29 00:20:24\"}', '{\"last_login_at\":\"2025-01-29 09:08:59\"}', 'http://localhost/College/public/login', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-29 03:38:59', '2025-01-29 03:38:59'),
+(154, 'App\\User', 1, 'created', 'App\\Models\\BonafideCertificate', 2, '[]', '{\"date_of_issue\":\"2025-01-29T04:16:03.441642Z\",\"period\":\"2025-2026\",\"course\":\"BSC\",\"character\":\"STUDENT\",\"students_id\":\"4\",\"created_by\":1,\"ref_text\":\"{\\\"date_of_issue\\\":\\\"2025-01-29T04:16:03.441642Z\\\",\\\"period\\\":\\\"2025-2026\\\",\\\"course\\\":\\\"BSC\\\",\\\"character\\\":\\\"STUDENT\\\",\\\"students_id\\\":\\\"4\\\",\\\"faculty\\\":\\\"5\\\",\\\"semester\\\":\\\"1\\\",\\\"reg_no\\\":\\\"2\\\",\\\"reg_date\\\":\\\"2025-01-01\\\",\\\"university_reg\\\":\\\"1\\\",\\\"first_name\\\":\\\"RAHIL\\\",\\\"middle_name\\\":\\\"SIRAJ\\\",\\\"last_name\\\":\\\"KAZI\\\",\\\"date_of_birth\\\":\\\"2025-01-01\\\",\\\"gender\\\":\\\"MALE\\\",\\\"blood_group\\\":\\\"A+\\\",\\\"nationality\\\":\\\"INDIA\\\",\\\"religion\\\":\\\"MUSLIM\\\",\\\"caste\\\":\\\"OPEN\\\",\\\"issue_certificate\\\":\\\"Issue\\\",\\\"created_by\\\":1}\",\"id\":2}', 'http://localhost/College/public/certificate/bonafide/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-29 04:16:03', '2025-01-29 04:16:03'),
+(155, 'App\\User', 1, 'created', 'App\\Models\\CertificateHistory', 1, '[]', '{\"students_id\":\"4\",\"certificate\":\"bonafide\",\"certificate_id\":2,\"history_type\":\"Created\",\"ref_text\":\"{\\\"date_of_issue\\\":\\\"2025-01-29T04:16:03.441642Z\\\",\\\"period\\\":\\\"2025-2026\\\",\\\"course\\\":\\\"BSC\\\",\\\"character\\\":\\\"STUDENT\\\",\\\"students_id\\\":\\\"4\\\",\\\"faculty\\\":\\\"5\\\",\\\"semester\\\":\\\"1\\\",\\\"reg_no\\\":\\\"2\\\",\\\"reg_date\\\":\\\"2025-01-01\\\",\\\"university_reg\\\":\\\"1\\\",\\\"first_name\\\":\\\"RAHIL\\\",\\\"middle_name\\\":\\\"SIRAJ\\\",\\\"last_name\\\":\\\"KAZI\\\",\\\"date_of_birth\\\":\\\"2025-01-01\\\",\\\"gender\\\":\\\"MALE\\\",\\\"blood_group\\\":\\\"A+\\\",\\\"nationality\\\":\\\"INDIA\\\",\\\"religion\\\":\\\"MUSLIM\\\",\\\"caste\\\":\\\"OPEN\\\",\\\"issue_certificate\\\":\\\"Issue\\\",\\\"created_by\\\":1}\",\"created_by\":1,\"id\":1}', 'http://localhost/College/public/certificate/bonafide/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-29 04:16:03', '2025-01-29 04:16:03'),
+(156, 'App\\User', 1, 'deleted', 'App\\Models\\BonafideCertificate', 1, '{\"id\":1,\"created_by\":1,\"last_updated_by\":null,\"students_id\":1,\"date_of_issue\":\"2025-01-28\",\"course\":\"BSC\",\"period\":\"2025-2026\",\"character\":\"STUDENT\",\"ref_text\":\"{\\\"date_of_issue\\\":\\\"2025-01-28T18:10:16.435067Z\\\",\\\"period\\\":\\\"2025-2026\\\",\\\"course\\\":\\\"BSC\\\",\\\"character\\\":\\\"STUDENT\\\",\\\"students_id\\\":\\\"1\\\",\\\"faculty\\\":\\\"1\\\",\\\"semester\\\":\\\"1\\\",\\\"reg_no\\\":\\\"1\\\",\\\"reg_date\\\":\\\"2025-01-08\\\",\\\"university_reg\\\":\\\"01\\\",\\\"first_name\\\":\\\"FAISAL\\\",\\\"middle_name\\\":\\\"REHAN\\\",\\\"last_name\\\":\\\"NEVAREKAR\\\",\\\"date_of_birth\\\":\\\"2004-04-12\\\",\\\"gender\\\":\\\"OTHER\\\",\\\"blood_group\\\":\\\"O+\\\",\\\"nationality\\\":\\\"INDIAN\\\",\\\"religion\\\":\\\"MUSLIM\\\",\\\"caste\\\":\\\"OPEN\\\",\\\"issue_certificate\\\":\\\"Issue\\\",\\\"created_by\\\":1}\",\"status\":1}', '[]', 'http://localhost/College/public/certificate/bonafide/1/delete', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-29 04:16:15', '2025-01-29 04:16:15'),
+(157, 'App\\User', 1, 'updated', 'App\\User', 1, '{\"last_login_at\":\"2025-01-29 09:08:59\"}', '{\"last_login_at\":\"2025-01-29 11:25:50\"}', 'http://localhost/College/public/login', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-29 05:55:50', '2025-01-29 05:55:50'),
+(158, 'App\\User', 1, 'created', 'App\\Models\\FeeCollection', 3, '[]', '{\"students_id\":\"1\",\"fee_masters_id\":2,\"date\":\"2025-01-29\",\"paid_amount\":9800,\"payment_mode\":\"Cash\",\"note\":\"Quick Receive\",\"created_by\":1,\"id\":3}', 'http://localhost/College/public/account/fees/quick-receive/store', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Safari/537.36 Edg/132.0.0.0', NULL, '2025-01-29 06:15:24', '2025-01-29 06:15:24');
 
 -- --------------------------------------------------------
 
@@ -464,8 +478,15 @@ CREATE TABLE `banks` (
   `ac_name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `ac_number` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `branch` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `banks`
+--
+
+INSERT INTO `banks` (`id`, `created_at`, `updated_at`, `created_by`, `last_updated_by`, `bank_name`, `ac_name`, `ac_number`, `branch`, `status`) VALUES
+(1, '2025-01-28 18:21:09', '2025-01-28 18:21:09', 1, NULL, 'BOI', 'Rahilkazi', '143238898123', 'lanja', 1);
 
 -- --------------------------------------------------------
 
@@ -480,61 +501,14 @@ CREATE TABLE `bank_transactions` (
   `created_by` int(10) UNSIGNED NOT NULL,
   `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
   `banks_id` int(10) UNSIGNED NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci,
   `deposit_id` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
   `date` datetime NOT NULL,
-  `dr_amt` int(11) NOT NULL DEFAULT 0,
-  `cr_amt` int(11) NOT NULL DEFAULT 0,
-  `amount` int(11) NOT NULL DEFAULT 0,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `dr_amt` int(11) NOT NULL DEFAULT '0',
+  `cr_amt` int(11) NOT NULL DEFAULT '0',
+  `amount` int(11) NOT NULL DEFAULT '0',
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `beds`
---
-
-CREATE TABLE `beds` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `created_by` int(10) UNSIGNED NOT NULL,
-  `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
-  `hostels_id` int(10) UNSIGNED NOT NULL,
-  `rooms_id` int(10) UNSIGNED NOT NULL,
-  `bed_number` int(11) NOT NULL,
-  `bed_status` int(10) UNSIGNED NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `bed_statuses`
---
-
-CREATE TABLE `bed_statuses` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `created_by` int(10) UNSIGNED NOT NULL,
-  `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
-  `title` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `display_class` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `bed_statuses`
---
-
-INSERT INTO `bed_statuses` (`id`, `created_at`, `updated_at`, `created_by`, `last_updated_by`, `title`, `display_class`, `status`) VALUES
-(1, '2020-05-04 17:10:05', '2020-05-04 17:10:05', 1, NULL, 'Available', 'btn-success', 1),
-(2, '2020-05-04 17:10:05', '2020-05-04 17:10:05', 1, NULL, 'Occupied', 'btn-primary', 1),
-(3, '2020-05-04 17:10:05', '2020-05-04 17:10:05', 1, NULL, 'Damage', 'btn-danger', 1),
-(4, '2020-05-04 17:10:05', '2020-05-04 17:10:05', 1, NULL, 'UnderConstruction', 'btn-default', 1),
-(5, '2020-05-04 17:10:05', '2020-05-04 17:10:05', 1, NULL, 'UnderMaintinance', 'btn-default', 1),
-(6, '2020-05-04 17:10:05', '2020-05-04 17:10:05', 1, NULL, 'NeedMaintinance', 'btn-default', 1);
 
 -- --------------------------------------------------------
 
@@ -553,26 +527,16 @@ CREATE TABLE `bonafide_certificates` (
   `course` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `period` varchar(9) COLLATE utf8mb4_unicode_ci NOT NULL,
   `character` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ref_text` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `ref_text` text COLLATE utf8mb4_unicode_ci,
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `books`
+-- Dumping data for table `bonafide_certificates`
 --
 
-CREATE TABLE `books` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `created_by` int(10) UNSIGNED NOT NULL,
-  `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
-  `book_masters_id` int(10) UNSIGNED NOT NULL,
-  `book_code` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `book_status` int(10) UNSIGNED NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+INSERT INTO `bonafide_certificates` (`id`, `created_at`, `updated_at`, `created_by`, `last_updated_by`, `students_id`, `date_of_issue`, `course`, `period`, `character`, `ref_text`, `status`) VALUES
+(2, '2025-01-29 04:16:03', '2025-01-29 04:16:03', 1, NULL, 4, '2025-01-29', 'BSC', '2025-2026', 'STUDENT', '{\"date_of_issue\":\"2025-01-29T04:16:03.441642Z\",\"period\":\"2025-2026\",\"course\":\"BSC\",\"character\":\"STUDENT\",\"students_id\":\"4\",\"faculty\":\"5\",\"semester\":\"1\",\"reg_no\":\"2\",\"reg_date\":\"2025-01-01\",\"university_reg\":\"1\",\"first_name\":\"RAHIL\",\"middle_name\":\"SIRAJ\",\"last_name\":\"KAZI\",\"date_of_birth\":\"2025-01-01\",\"gender\":\"MALE\",\"blood_group\":\"A+\",\"nationality\":\"INDIA\",\"religion\":\"MUSLIM\",\"caste\":\"OPEN\",\"issue_certificate\":\"Issue\",\"created_by\":1}', 1);
 
 -- --------------------------------------------------------
 
@@ -588,106 +552,15 @@ CREATE TABLE `book_categories` (
   `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
   `title` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `slug` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `book_issues`
---
-
-CREATE TABLE `book_issues` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `created_by` int(10) UNSIGNED NOT NULL,
-  `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
-  `member_id` int(10) UNSIGNED NOT NULL,
-  `book_id` int(10) UNSIGNED NOT NULL,
-  `issued_on` datetime NOT NULL,
-  `due_date` datetime NOT NULL,
-  `return_date` datetime DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `book_masters`
---
-
-CREATE TABLE `book_masters` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `created_by` int(10) UNSIGNED NOT NULL,
-  `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
-  `categories` int(10) UNSIGNED DEFAULT NULL,
-  `isbn_number` varchar(25) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `code` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `title` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `sub_title` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `image` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `language` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `editor` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `edition` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `edition_year` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `publisher` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `publish_year` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `series` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `author` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `rack_location` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `price` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `total_pages` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `source` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `notes` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `book_requests`
---
-
-CREATE TABLE `book_requests` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `created_by` int(10) UNSIGNED NOT NULL,
-  `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
-  `book_masters_id` int(10) UNSIGNED NOT NULL,
-  `member_id` int(10) UNSIGNED NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `book_statuses`
---
-
-CREATE TABLE `book_statuses` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `created_by` int(10) UNSIGNED NOT NULL,
-  `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
-  `title` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `display_class` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `book_statuses`
+-- Dumping data for table `book_categories`
 --
 
-INSERT INTO `book_statuses` (`id`, `created_at`, `updated_at`, `created_by`, `last_updated_by`, `title`, `display_class`, `status`) VALUES
-(1, '2020-05-04 17:10:05', '2020-05-04 17:10:05', 1, NULL, 'Available', 'btn-success', 1),
-(2, '2020-05-04 17:10:05', '2020-05-04 17:10:05', 1, NULL, 'Issued', 'btn-primary', 1),
-(3, '2020-05-04 17:10:05', '2020-05-04 17:10:05', 1, NULL, 'Damage', 'btn-danger', 1),
-(4, '2020-05-04 17:10:05', '2020-05-04 17:10:05', 1, NULL, 'Lost', 'btn-default', 1);
+INSERT INTO `book_categories` (`id`, `created_at`, `updated_at`, `created_by`, `last_updated_by`, `title`, `slug`, `status`) VALUES
+(1, '2025-01-27 06:01:08', '2025-01-27 06:01:08', 1, NULL, 'btgmi', 'btgmi', 1);
 
 -- --------------------------------------------------------
 
@@ -702,7 +575,7 @@ CREATE TABLE `categories` (
   `created_by` int(10) UNSIGNED NOT NULL,
   `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
   `title` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -721,9 +594,16 @@ CREATE TABLE `certificate_histories` (
   `certificate` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `certificate_id` int(10) UNSIGNED NOT NULL,
   `history_type` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ref_text` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `ref_text` text COLLATE utf8mb4_unicode_ci,
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `certificate_histories`
+--
+
+INSERT INTO `certificate_histories` (`id`, `created_at`, `updated_at`, `created_by`, `last_updated_by`, `students_id`, `certificate`, `certificate_id`, `history_type`, `ref_text`, `status`) VALUES
+(1, '2025-01-29 04:16:03', '2025-01-29 04:16:03', 1, NULL, 4, 'bonafide', 2, 'Created', '{\"date_of_issue\":\"2025-01-29T04:16:03.441642Z\",\"period\":\"2025-2026\",\"course\":\"BSC\",\"character\":\"STUDENT\",\"students_id\":\"4\",\"faculty\":\"5\",\"semester\":\"1\",\"reg_no\":\"2\",\"reg_date\":\"2025-01-01\",\"university_reg\":\"1\",\"first_name\":\"RAHIL\",\"middle_name\":\"SIRAJ\",\"last_name\":\"KAZI\",\"date_of_birth\":\"2025-01-01\",\"gender\":\"MALE\",\"blood_group\":\"A+\",\"nationality\":\"INDIA\",\"religion\":\"MUSLIM\",\"caste\":\"OPEN\",\"issue_certificate\":\"Issue\",\"created_by\":1}', 1);
 
 -- --------------------------------------------------------
 
@@ -739,11 +619,11 @@ CREATE TABLE `certificate_templates` (
   `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
   `certificate` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `template` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `background_image` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `custom_css` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `student_photo` tinyint(1) NOT NULL DEFAULT 1,
-  `background_status` tinyint(1) NOT NULL DEFAULT 0,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `background_image` text COLLATE utf8mb4_unicode_ci,
+  `custom_css` text COLLATE utf8mb4_unicode_ci,
+  `student_photo` tinyint(1) NOT NULL DEFAULT '1',
+  `background_status` tinyint(1) NOT NULL DEFAULT '0',
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -751,7 +631,6 @@ CREATE TABLE `certificate_templates` (
 --
 
 INSERT INTO `certificate_templates` (`id`, `created_at`, `updated_at`, `created_by`, `last_updated_by`, `certificate`, `template`, `background_image`, `custom_css`, `student_photo`, `background_status`, `status`) VALUES
-(1, '2020-05-04 17:10:07', '2020-05-04 17:10:07', 1, NULL, 'ATTENDANCE', '<table class=\"table table-bordered\"> <tbody> <tr> <td>01.</td> <td style=\"text-align: right; \">Name of Student :&nbsp;</td> <td width=\"50%\" style=\"text-align: left;\"><b>{{student_name}}</b><br></td> </tr> <tr> <td>02.</td> <td style=\"text-align: right; \">Reg. No.&nbsp;:&nbsp;</td> <td width=\"50%\" style=\"text-align: left;\"><span style=\"font-weight: 700;\">{{reg_no}}</span><br></td> </tr> <tr> <td>03.</td> <td style=\"text-align: right; \">University Reg. No.&nbsp;:&nbsp;</td> <td width=\"50%\" style=\"text-align: left;\"><span style=\"font-weight: 700;\">{{university_reg}}</span><br></td> </tr> <tr> <td>04.</td> <td style=\"text-align: right; \">Faculty/Level&nbsp;:&nbsp;</td> <td width=\"50%\" style=\"text-align: left;\"><span style=\"font-weight: 700;\">{{faculty}}</span><br></td> </tr><tr><td>05.</td><td style=\"text-align: right; \">Batch :&nbsp;<br></td><td width=\"50%\" style=\"text-align: left;\"><span style=\"font-weight: 700;\">{{batch}}</span><br></td></tr> <tr> <td>06.</td> <td style=\"text-align: right; \">Year of Study&nbsp;:&nbsp;</td> <td width=\"50%\" style=\"text-align: left;\"><span style=\"font-weight: 700;\">{{year_of_study}}</span><br></td> </tr> <tr> <td>07.</td> <td style=\"text-align: right; \">Percentage of Attendance Secured&nbsp;:&nbsp;</td> <td width=\"50%\" style=\"text-align: left;\"><b>{{percentage_of_attendance}}%</b><br></td> </tr> </tbody></table>', NULL, '.subpage{padding: 100px;}', 0, 0, 1),
 (2, '2020-05-04 17:10:07', '2020-05-04 17:10:07', 1, NULL, 'TRANSFER', '<table class=\"table table-bordered\"> <tbody> <tr> <td style=\"text-align: right;\"><span style=\"text-align: right;\">TC No. :&nbsp;</span><br></td> <td style=\"text-align: left;\"><span style=\"font-weight: 700;\">{{tc_num}}</span><br></td> <td rowspan=\"5\">{{student_image}}</td> </tr> <tr> <td style=\"text-align: right; \"><span style=\"text-align: right;\">Faculty/Level :&nbsp;</span><br></td> <td style=\"text-align: left;\"><span style=\"font-weight: 700;\">{{faculty}}</span><br></td> </tr> <tr> <td style=\"text-align: right; \"><span style=\"text-align: right;\">Admission No./Reg.No. :</span><br></td> <td style=\"text-align: left;\"><span style=\"font-weight: 700;\">{{reg_no}}</span><br></td> </tr> <tr> <td style=\"text-align: right;\"><span style=\"text-align: right;\">University Reg. No. :</span><br></td> <td style=\"text-align: left;\"><b>{{university_reg}}</b><br></td> </tr><tr><td style=\"text-align: right;\">Batch. :<br></td><td style=\"text-align: left;\"><span style=\"font-weight: 700;\">{{batch}}</span><br></td></tr> </tbody></table><table class=\"table table-bordered\"> <tbody> <tr> <td>01.</td> <td style=\"text-align: right; \">Name of Student :&nbsp;</td> <td width=\"50%\" style=\"text-align: left;\"><b>{{student_name}}</b><br></td> </tr> <tr> <td>02.</td> <td style=\"text-align: right; \">Name of Father.&nbsp;:&nbsp;</td> <td width=\"50%\" style=\"text-align: left;\"><b>{{parents_name}}</b><br></td> </tr> <tr> <td>03.</td> <td style=\"text-align: right; \">Date of Birth :&nbsp;</td> <td width=\"50%\" style=\"text-align: left;\"><span style=\"font-weight: 700;\">{{date_of_birth}}</span><br></td> </tr> <tr> <td>04.</td> <td style=\"text-align: right; \">Gender :&nbsp;</td> <td width=\"50%\" style=\"text-align: left;\"><span style=\"font-weight: 700;\">{{gender}}</span><br></td> </tr> <tr> <td>05.</td> <td style=\"text-align: right; \">Nationality :&nbsp;</td> <td width=\"50%\" style=\"text-align: left;\"><span style=\"font-weight: 700;\">{{nationality}}</span><br></td> </tr> <tr> <td>06.</td> <td style=\"text-align: right; \">Religion :&nbsp;</td> <td width=\"50%\" style=\"text-align: left;\"><b>{{religion}}</b><br></td> </tr> <tr> <td>07.</td> <td style=\"text-align: right; \">Community &amp; Caste :&nbsp;</td> <td width=\"50%\" style=\"text-align: left;\"><span style=\"font-weight: 700;\">{{caste}}</span><br></td> </tr> <tr> <td>08.</td> <td style=\"text-align: right; \">Date of Admission :&nbsp;</td> <td width=\"50%\" style=\"text-align: left;\"><span style=\"font-weight: 700;\">{{reg_date}}</span><br></td> </tr> <tr> <td>09.</td> <td style=\"text-align: right; \">Date of Leaving :&nbsp;</td> <td width=\"50%\" style=\"text-align: left;\"><b>{{date_of_leaving}}</b><br></td> </tr> <tr> <td>10.</td> <td style=\"text-align: right;\">Class studied at the time of leaving :&nbsp;</td> <td width=\"50%\" style=\"text-align: left;\"><b>{{leaving_time_class}}</b><br></td> </tr> <tr> <td>11.</td> <td style=\"text-align: right; \">Whether qualified for promotion to higher class :&nbsp;</td> <td width=\"50%\" style=\"text-align: left;\"><b>{{qualified_to_promote}}</b><br></td> </tr> <tr> <td>12.</td> <td style=\"text-align: right; \">Whether the student has paid all Balance fees to the college :&nbsp;</td> <td width=\"50%\" style=\"text-align: left;\"><b>{{paid_fee_status}}</b><br></td> </tr> <tr> <td>13.</td> <td style=\"text-align: right; \">Conduct and Character :&nbsp;</td> <td width=\"50%\" style=\"text-align: left;\"><span style=\"font-weight: 700;\">{{character}}</span><br></td> </tr> </tbody></table>', NULL, '.subpage{padding: 100px;}', 0, 0, 1),
 (3, '2020-05-04 17:10:07', '2020-05-04 17:10:07', 1, NULL, 'CHARACTER', '<p>This is to certify that&nbsp;<span style=\"color: rgb(57, 57, 57);\"><b>{{student_name}}</b></span>&nbsp;Son of&nbsp;<span style=\"color: rgb(57, 57, 57);\"><b>{{father_name}}</b> </span>&amp;&nbsp;<span style=\"color: rgb(57, 57, 57);\"><b>{{mother_name}}</b></span>, Permanent Address<b>&nbsp;<span style=\"color: rgb(57, 57, 57);\">{{address}}</span></b>, is known to me for about&nbsp;<span style=\"color: rgb(57, 57, 57);\"><b>{{year}}</b></span>&nbsp;years. He is a citizen of&nbsp;<span style=\"color: rgb(57, 57, 57);\"><b>{{country}}</b>&nbsp;</span>by birth.</p><p><br></p><p>To the best of my knowledge, he bears a <b>{{character}}</b> character and is not involved in such activities which are against the state freedom and peace. I wish all success and prosperity in his life.</p>', NULL, '.subpage{padding: 100px;}', 0, 0, 1),
 (4, '2020-05-04 17:10:07', '2020-05-04 17:10:07', 1, NULL, 'BONAFIDE', 'This is to certify that <b>{{student_name}} </b>Reg No. <b>{{reg_no}}</b>   Son of <b>{{parents_name}}</b> is a bonafide student of this College in the <b>{{course}}</b> course during the period <b>{{period}}</b>. His/Her Date of Birth as per our School/College record is <b>{{date_of_birth}}</b>.His/Her Conduct and Character are <b>{{character}}</b>.', NULL, '.subpage{padding: 100px;}', 0, 0, 1),
@@ -776,8 +655,8 @@ CREATE TABLE `character_certificates` (
   `cc_num` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `year` varchar(4) COLLATE utf8mb4_unicode_ci NOT NULL,
   `character` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ref_text` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `ref_text` text COLLATE utf8mb4_unicode_ci,
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -797,8 +676,8 @@ CREATE TABLE `course_completion_certificates` (
   `course` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `period` varchar(9) COLLATE utf8mb4_unicode_ci NOT NULL,
   `character` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ref_text` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `ref_text` text COLLATE utf8mb4_unicode_ci,
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -820,10 +699,10 @@ CREATE TABLE `customers` (
   `mobile_1` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `mobile_2` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `extra_info` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `customer_image` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `extra_info` text COLLATE utf8mb4_unicode_ci,
+  `customer_image` text COLLATE utf8mb4_unicode_ci,
   `customer_status` int(10) UNSIGNED DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -839,7 +718,7 @@ CREATE TABLE `customer_statuses` (
   `created_by` int(10) UNSIGNED NOT NULL,
   `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
   `title` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -866,7 +745,7 @@ CREATE TABLE `days` (
   `created_by` int(10) UNSIGNED NOT NULL,
   `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
   `title` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -898,8 +777,8 @@ CREATE TABLE `documents` (
   `member_id` int(10) UNSIGNED NOT NULL,
   `title` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `file` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `description` text COLLATE utf8mb4_unicode_ci,
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -917,27 +796,17 @@ CREATE TABLE `downloads` (
   `semesters_id` int(10) UNSIGNED DEFAULT NULL,
   `subjects_id` int(10) UNSIGNED DEFAULT NULL,
   `title` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `file` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `description` text COLLATE utf8mb4_unicode_ci,
+  `file` text COLLATE utf8mb4_unicode_ci,
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `eating_times`
+-- Dumping data for table `downloads`
 --
 
-CREATE TABLE `eating_times` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `created_by` int(10) UNSIGNED NOT NULL,
-  `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
-  `title` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `time` time DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+INSERT INTO `downloads` (`id`, `created_at`, `updated_at`, `created_by`, `last_updated_by`, `semesters_id`, `subjects_id`, `title`, `description`, `file`, `status`) VALUES
+(1, '2025-01-27 05:58:41', '2025-01-28 18:18:31', 1, 1, 1, 1, 'test', 'good morning', '7843_gg.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -957,7 +826,7 @@ CREATE TABLE `email_settings` (
   `user_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `encryption` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -973,8 +842,15 @@ CREATE TABLE `exams` (
   `created_by` int(10) UNSIGNED NOT NULL,
   `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
   `title` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `exams`
+--
+
+INSERT INTO `exams` (`id`, `created_at`, `updated_at`, `created_by`, `last_updated_by`, `title`, `status`) VALUES
+(1, '2025-01-28 17:57:34', '2025-01-28 17:57:34', 1, NULL, 'march-2025', 1);
 
 -- --------------------------------------------------------
 
@@ -990,13 +866,25 @@ CREATE TABLE `exam_mark_ledgers` (
   `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
   `exam_schedule_id` int(10) UNSIGNED NOT NULL,
   `students_id` int(10) UNSIGNED NOT NULL,
-  `obtain_mark_theory` int(11) NOT NULL DEFAULT 0,
-  `absent_theory` tinyint(1) NOT NULL DEFAULT 0,
-  `obtain_mark_practical` int(11) NOT NULL DEFAULT 0,
-  `absent_practical` tinyint(1) NOT NULL DEFAULT 0,
+  `obtain_mark_theory` int(11) NOT NULL DEFAULT '0',
+  `absent_theory` tinyint(1) NOT NULL DEFAULT '0',
+  `obtain_mark_practical` int(11) NOT NULL DEFAULT '0',
+  `absent_practical` tinyint(1) NOT NULL DEFAULT '0',
   `sorting_order` int(10) UNSIGNED NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `exam_mark_ledgers`
+--
+
+INSERT INTO `exam_mark_ledgers` (`id`, `created_at`, `updated_at`, `created_by`, `last_updated_by`, `exam_schedule_id`, `students_id`, `obtain_mark_theory`, `absent_theory`, `obtain_mark_practical`, `absent_practical`, `sorting_order`, `status`) VALUES
+(1, '2025-01-28 18:06:19', '2025-01-28 18:06:19', 1, NULL, 2, 1, 0, 0, 0, 0, 1, 1),
+(2, '2025-01-28 18:06:19', '2025-01-28 18:06:19', 1, NULL, 2, 5, 50, 0, 50, 0, 2, 1),
+(3, '2025-01-28 18:06:19', '2025-01-28 18:06:19', 1, NULL, 2, 6, 50, 0, 50, 0, 3, 1),
+(4, '2025-01-28 18:06:19', '2025-01-28 18:06:19', 1, NULL, 2, 7, 0, 0, 0, 0, 4, 1),
+(5, '2025-01-28 18:06:19', '2025-01-28 18:06:19', 1, NULL, 2, 8, 0, 0, 0, 0, 5, 1),
+(6, '2025-01-28 18:06:19', '2025-01-28 18:06:19', 1, NULL, 2, 9, 0, 0, 0, 0, 6, 1);
 
 -- --------------------------------------------------------
 
@@ -1019,14 +907,21 @@ CREATE TABLE `exam_schedules` (
   `date` datetime NOT NULL,
   `start_time` time NOT NULL,
   `end_time` time NOT NULL,
-  `full_mark_theory` int(11) NOT NULL DEFAULT 0,
-  `pass_mark_theory` int(11) NOT NULL DEFAULT 0,
-  `full_mark_practical` int(11) NOT NULL DEFAULT 0,
-  `pass_mark_practical` int(11) NOT NULL DEFAULT 0,
+  `full_mark_theory` int(11) NOT NULL DEFAULT '0',
+  `pass_mark_theory` int(11) NOT NULL DEFAULT '0',
+  `full_mark_practical` int(11) NOT NULL DEFAULT '0',
+  `pass_mark_practical` int(11) NOT NULL DEFAULT '0',
   `sorting_order` int(10) UNSIGNED NOT NULL,
-  `publish_status` tinyint(1) NOT NULL DEFAULT 0,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `publish_status` tinyint(1) NOT NULL DEFAULT '0',
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `exam_schedules`
+--
+
+INSERT INTO `exam_schedules` (`id`, `created_at`, `updated_at`, `created_by`, `last_updated_by`, `years_id`, `months_id`, `exams_id`, `faculty_id`, `semesters_id`, `subjects_id`, `date`, `start_time`, `end_time`, `full_mark_theory`, `pass_mark_theory`, `full_mark_practical`, `pass_mark_practical`, `sorting_order`, `publish_status`, `status`) VALUES
+(2, '2025-01-28 18:01:34', '2025-01-29 06:13:16', 1, NULL, 5, 3, 1, 1, 1, 1, '2025-03-11 00:00:00', '02:20:00', '10:00:00', 75, 30, 25, 15, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -1042,8 +937,24 @@ CREATE TABLE `faculties` (
   `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
   `faculty` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `faculty_code` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `faculties`
+--
+
+INSERT INTO `faculties` (`id`, `created_at`, `updated_at`, `created_by`, `last_updated_by`, `faculty`, `faculty_code`, `status`) VALUES
+(1, '2025-01-27 05:56:09', '2025-01-28 15:47:14', 1, 1, 'BSC', '99', 1),
+(5, '2025-01-28 15:02:28', '2025-01-28 15:02:28', 1, NULL, 'BCOM', '2', 1),
+(6, '2025-01-28 15:02:37', '2025-01-28 15:52:23', 1, NULL, 'BA', '3', 1),
+(7, '2025-01-28 15:02:48', '2025-01-28 15:02:48', 1, NULL, 'MCA', '4', 1),
+(8, '2025-01-28 15:02:56', '2025-01-28 15:02:56', 1, NULL, 'PG', '5', 1),
+(9, '2025-01-28 15:51:41', '2025-01-28 15:52:36', 1, 1, '8TH', '9', 1),
+(10, '2025-01-28 15:52:07', '2025-01-28 15:52:07', 1, NULL, '9TH', '10', 1),
+(11, '2025-01-28 15:52:45', '2025-01-28 15:52:45', 1, NULL, '10TH', '11', 1),
+(13, '2025-01-28 15:53:06', '2025-01-28 15:53:06', 1, NULL, '11TH', '12', 1),
+(14, '2025-01-28 15:53:15', '2025-01-28 15:53:15', 1, NULL, '12TH', '13', 1);
 
 -- --------------------------------------------------------
 
@@ -1058,6 +969,27 @@ CREATE TABLE `faculty_semester` (
   `faculty_id` int(10) UNSIGNED NOT NULL,
   `semester_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `faculty_semester`
+--
+
+INSERT INTO `faculty_semester` (`id`, `created_at`, `updated_at`, `faculty_id`, `semester_id`) VALUES
+(1, NULL, NULL, 1, 1),
+(2, NULL, NULL, 5, 1),
+(3, NULL, NULL, 6, 1),
+(4, NULL, NULL, 7, 1),
+(5, NULL, NULL, 8, 1),
+(6, NULL, NULL, 9, 3),
+(7, NULL, NULL, 9, 4),
+(8, NULL, NULL, 10, 3),
+(9, NULL, NULL, 10, 4),
+(10, NULL, NULL, 11, 3),
+(11, NULL, NULL, 11, 4),
+(12, NULL, NULL, 13, 3),
+(13, NULL, NULL, 13, 4),
+(14, NULL, NULL, 14, 3),
+(15, NULL, NULL, 14, 4);
 
 -- --------------------------------------------------------
 
@@ -1079,9 +1011,17 @@ CREATE TABLE `fee_collections` (
   `fine` int(11) DEFAULT NULL,
   `payment_mode` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
   `note` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `response` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `response` text COLLATE utf8mb4_unicode_ci,
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `fee_collections`
+--
+
+INSERT INTO `fee_collections` (`id`, `created_at`, `updated_at`, `created_by`, `last_updated_by`, `students_id`, `fee_masters_id`, `date`, `paid_amount`, `discount`, `fine`, `payment_mode`, `note`, `response`, `status`) VALUES
+(2, '2025-01-28 18:32:31', '2025-01-28 18:32:31', 1, NULL, 1, 2, '2025-01-30 00:00:00', 200, NULL, NULL, 'Cash', 'Quick Receive', NULL, 1),
+(3, '2025-01-29 06:15:23', '2025-01-29 06:15:23', 1, NULL, 1, 2, '2025-01-29 00:00:00', 9800, NULL, NULL, 'Cash', 'Quick Receive', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -1097,8 +1037,15 @@ CREATE TABLE `fee_heads` (
   `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
   `fee_head_title` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `fee_head_amount` int(11) NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `fee_heads`
+--
+
+INSERT INTO `fee_heads` (`id`, `created_at`, `updated_at`, `created_by`, `last_updated_by`, `fee_head_title`, `fee_head_amount`, `status`) VALUES
+(1, '2025-01-28 18:23:22', '2025-01-28 18:23:22', 1, NULL, 'anual fees', 300000, 1);
 
 -- --------------------------------------------------------
 
@@ -1117,77 +1064,22 @@ CREATE TABLE `fee_masters` (
   `fee_head` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `fee_due_date` datetime NOT NULL,
   `fee_amount` int(11) NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `food_categories`
+-- Dumping data for table `fee_masters`
 --
 
-CREATE TABLE `food_categories` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `created_by` int(10) UNSIGNED NOT NULL,
-  `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
-  `title` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `food_items`
---
-
-CREATE TABLE `food_items` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `created_by` int(10) UNSIGNED NOT NULL,
-  `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
-  `foodCategories_id` int(10) UNSIGNED NOT NULL,
-  `title` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `price` int(11) DEFAULT NULL,
-  `image` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `food_item_food_schedule`
---
-
-CREATE TABLE `food_item_food_schedule` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `food_schedule_id` int(10) UNSIGNED NOT NULL,
-  `food_item_id` int(10) UNSIGNED NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `food_schedules`
---
-
-CREATE TABLE `food_schedules` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `created_by` int(10) UNSIGNED NOT NULL,
-  `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
-  `hostels_id` int(10) UNSIGNED NOT NULL,
-  `days_id` int(10) UNSIGNED NOT NULL,
-  `eating_times_id` int(10) UNSIGNED NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+INSERT INTO `fee_masters` (`id`, `created_at`, `updated_at`, `created_by`, `last_updated_by`, `students_id`, `semester`, `fee_head`, `fee_due_date`, `fee_amount`, `status`) VALUES
+(2, '2025-01-28 18:32:02', '2025-01-28 18:32:02', 1, NULL, 1, '1', '1', '2025-01-30 00:00:00', 30000, 1),
+(3, '2025-01-28 18:32:02', '2025-01-28 18:32:02', 1, NULL, 5, '1', '1', '2025-01-30 00:00:00', 30000, 1),
+(4, '2025-01-28 18:32:02', '2025-01-28 18:32:02', 1, NULL, 6, '1', '1', '2025-01-30 00:00:00', 30000, 1),
+(5, '2025-01-28 18:32:02', '2025-01-28 18:32:02', 1, NULL, 7, '1', '1', '2025-01-30 00:00:00', 30000, 1),
+(6, '2025-01-28 18:32:02', '2025-01-28 18:32:02', 1, NULL, 8, '1', '1', '2025-01-30 00:00:00', 30000, 1),
+(7, '2025-01-28 18:32:02', '2025-01-28 18:32:02', 1, NULL, 9, '1', '1', '2025-01-30 00:00:00', 30000, 1),
+(8, '2025-01-28 18:35:38', '2025-01-28 18:35:38', 1, NULL, 4, '1', '1', '2025-01-29 00:00:00', 300000, 1),
+(9, '2025-01-28 18:35:38', '2025-01-28 18:35:38', 1, NULL, 4, '1', '2', '2025-01-14 00:00:00', 5000, 1);
 
 -- --------------------------------------------------------
 
@@ -1203,15 +1095,15 @@ CREATE TABLE `general_settings` (
   `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
   `institute` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `salogan` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `copyright` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `copyright` text COLLATE utf8mb4_unicode_ci,
+  `address` text COLLATE utf8mb4_unicode_ci,
   `phone` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `website` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `favicon` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `logo` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `print_header` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `print_footer` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `favicon` text COLLATE utf8mb4_unicode_ci,
+  `logo` text COLLATE utf8mb4_unicode_ci,
+  `print_header` text COLLATE utf8mb4_unicode_ci,
+  `print_footer` text COLLATE utf8mb4_unicode_ci,
   `facebook` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `twitter` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `linkedIn` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
@@ -1223,25 +1115,25 @@ CREATE TABLE `general_settings` (
   `pinterest` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `wordpress` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `time_zones_id` int(10) UNSIGNED DEFAULT NULL,
-  `quick_menu` tinyint(1) NOT NULL DEFAULT 1,
-  `public_registration` tinyint(1) NOT NULL DEFAULT 1,
-  `front_desk` tinyint(1) NOT NULL DEFAULT 1,
-  `student_staff` tinyint(1) NOT NULL DEFAULT 1,
-  `account` tinyint(1) NOT NULL DEFAULT 1,
-  `inventory` tinyint(1) NOT NULL DEFAULT 1,
-  `library` tinyint(1) NOT NULL DEFAULT 1,
-  `attendance` tinyint(1) NOT NULL DEFAULT 1,
-  `exam` tinyint(1) NOT NULL DEFAULT 1,
-  `certificate` tinyint(1) NOT NULL DEFAULT 1,
-  `hostel` tinyint(1) NOT NULL DEFAULT 1,
-  `transport` tinyint(1) NOT NULL DEFAULT 1,
-  `assignment` tinyint(1) NOT NULL DEFAULT 1,
-  `upload_download` tinyint(1) NOT NULL DEFAULT 1,
-  `meeting` tinyint(1) NOT NULL DEFAULT 1,
-  `alert` tinyint(1) NOT NULL DEFAULT 1,
-  `academic` tinyint(1) NOT NULL DEFAULT 1,
-  `help` tinyint(1) NOT NULL DEFAULT 1,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `quick_menu` tinyint(1) NOT NULL DEFAULT '1',
+  `public_registration` tinyint(1) NOT NULL DEFAULT '1',
+  `front_desk` tinyint(1) NOT NULL DEFAULT '1',
+  `student_staff` tinyint(1) NOT NULL DEFAULT '1',
+  `account` tinyint(1) NOT NULL DEFAULT '1',
+  `inventory` tinyint(1) NOT NULL DEFAULT '1',
+  `library` tinyint(1) NOT NULL DEFAULT '1',
+  `attendance` tinyint(1) NOT NULL DEFAULT '1',
+  `exam` tinyint(1) NOT NULL DEFAULT '1',
+  `certificate` tinyint(1) NOT NULL DEFAULT '1',
+  `hostel` tinyint(1) NOT NULL DEFAULT '1',
+  `transport` tinyint(1) NOT NULL DEFAULT '1',
+  `assignment` tinyint(1) NOT NULL DEFAULT '1',
+  `upload_download` tinyint(1) NOT NULL DEFAULT '1',
+  `meeting` tinyint(1) NOT NULL DEFAULT '1',
+  `alert` tinyint(1) NOT NULL DEFAULT '1',
+  `academic` tinyint(1) NOT NULL DEFAULT '1',
+  `help` tinyint(1) NOT NULL DEFAULT '1',
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -1249,7 +1141,7 @@ CREATE TABLE `general_settings` (
 --
 
 INSERT INTO `general_settings` (`id`, `created_at`, `updated_at`, `created_by`, `last_updated_by`, `institute`, `salogan`, `copyright`, `address`, `phone`, `email`, `website`, `favicon`, `logo`, `print_header`, `print_footer`, `facebook`, `twitter`, `linkedIn`, `youtube`, `googlePlus`, `instagram`, `whatsApp`, `skype`, `pinterest`, `wordpress`, `time_zones_id`, `quick_menu`, `public_registration`, `front_desk`, `student_staff`, `account`, `inventory`, `library`, `attendance`, `exam`, `certificate`, `hostel`, `transport`, `assignment`, `upload_download`, `meeting`, `alert`, `academic`, `help`, `status`) VALUES
-(1, '2020-05-04 17:10:05', '2020-05-04 17:10:05', 1, 1, 'Unlimited EduFirm', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
+(1, '2020-05-04 17:10:05', '2025-01-28 19:02:48', 1, 1, 'TP SHETTEY', NULL, 'Copyright © 2025.TP SHETTEY right reserved', 'Lanja', '0000000000', 'tpshettey@gmail.com', NULL, '5156.png', '6514.png', '<p>u</p>', '<p>u</p>', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 274, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -1269,8 +1161,16 @@ CREATE TABLE `grading_scales` (
   `percentage_to` int(11) NOT NULL,
   `grade_point` int(11) DEFAULT NULL,
   `description` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `grading_scales`
+--
+
+INSERT INTO `grading_scales` (`id`, `created_at`, `updated_at`, `created_by`, `last_updated_by`, `gradingType_id`, `name`, `percentage_from`, `percentage_to`, `grade_point`, `description`, `status`) VALUES
+(1, '2025-01-27 05:50:57', '2025-01-28 15:27:12', 1, 1, 1, 'A', 100, 90, 10, 'O', 1),
+(2, '2025-01-28 15:04:41', '2025-01-28 15:04:41', 1, NULL, 2, 'B', 89, 80, 8, 'pass', 1);
 
 -- --------------------------------------------------------
 
@@ -1286,8 +1186,16 @@ CREATE TABLE `grading_types` (
   `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
   `title` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `slug` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `grading_types`
+--
+
+INSERT INTO `grading_types` (`id`, `created_at`, `updated_at`, `created_by`, `last_updated_by`, `title`, `slug`, `status`) VALUES
+(1, '2025-01-27 05:50:57', '2025-01-28 15:27:23', 1, 1, 'COLLEGE LEVEL', 'College-level', 1),
+(2, '2025-01-28 15:04:41', '2025-01-28 15:04:41', 1, NULL, 'COLLEGE', 'COLLEGE', 1);
 
 -- --------------------------------------------------------
 
@@ -1314,49 +1222,22 @@ CREATE TABLE `guardian_details` (
   `guardian_email` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `guardian_relation` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `guardian_address` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `guardian_image` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `guardian_image` text COLLATE utf8mb4_unicode_ci,
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `hostels`
+-- Dumping data for table `guardian_details`
 --
 
-CREATE TABLE `hostels` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `created_by` int(10) UNSIGNED NOT NULL,
-  `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
-  `name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `type` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `address` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `contact_detail` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `warden` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `warden_contact` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `hostel_meals`
---
-
-CREATE TABLE `hostel_meals` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `created_by` int(10) UNSIGNED NOT NULL,
-  `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
-  `hostels_id` int(10) UNSIGNED NOT NULL,
-  `days_id` int(10) UNSIGNED NOT NULL,
-  `foods_id` int(10) UNSIGNED NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+INSERT INTO `guardian_details` (`id`, `created_at`, `updated_at`, `created_by`, `last_updated_by`, `guardian_first_name`, `guardian_middle_name`, `guardian_last_name`, `guardian_eligibility`, `guardian_occupation`, `guardian_office`, `guardian_office_number`, `guardian_residence_number`, `guardian_mobile_1`, `guardian_mobile_2`, `guardian_email`, `guardian_relation`, `guardian_address`, `guardian_image`, `status`) VALUES
+(1, '2025-01-27 06:08:26', '2025-01-27 06:08:26', 1, NULL, 'A', 'B', 'NAIK', '12', 'SSC', '12', '08208775966', '08208775966', '08208775966', '08208775966', 'faisalnaik955@gmail.com', 'FATHER', 'LANJA', '', 1),
+(2, '2025-01-28 15:15:08', '2025-01-28 15:15:08', 1, NULL, 'SIRAJ', '-', 'KAZI', 'OK', 'NONE', 'NONE', '0000000000', '0000000000', '0000000000', '0000000000', '-', 'FATHER', '-', '', 1),
+(3, '2025-01-28 15:24:11', '2025-01-28 15:24:11', 1, NULL, 'DEMO', 'student', 'GUARDIAN', 'BA', 'GOV JOB', 'SS GOV RESEARCH', '977-31-23078', '977-31-23078', '977-98989898', '977-91239123', 'guardian@gmail.com', 'FATHER', 'KATHMANDU', NULL, 1),
+(4, '2025-01-28 15:24:11', '2025-01-28 15:24:11', 1, NULL, 'DEMO', 'TEST', 'GUARDIAN', 'MA', 'GOV JOB', 'SS GOV RESEARCH', '977-31-23079', '977-31-23079', '977-98989899', '977-91239124', 'guardian1@gmail.com', 'FATHER', 'KATHMANDU', NULL, 1),
+(5, '2025-01-28 15:24:11', '2025-01-28 15:24:11', 1, NULL, 'DEMO', 'TEST', 'GUARDIAN', 'BA', 'GOV JOB', 'SS GOV RESEARCH', '977-31-23080', '977-31-23080', '977-98989900', '977-91239125', 'guardian2@gmail.com', 'FATHER', 'KATHMANDU', NULL, 1),
+(6, '2025-01-28 15:24:11', '2025-01-28 15:24:11', 1, NULL, 'DEMO', 'TEST', 'GUARDIAN', 'MA', 'GOV JOB', 'SS GOV RESEARCH', '977-31-23081', '977-31-23081', '977-98989901', '977-91239126', 'guardian3@gmail.com', 'FATHER', 'KATHMANDU', NULL, 1),
+(7, '2025-01-28 15:24:11', '2025-01-28 15:24:11', 1, NULL, 'DEMO', 'TEST', 'GUARDIAN', 'BA', 'GOV JOB', 'SS GOV RESEARCH', '977-31-23082', '977-31-23082', '977-98989902', '977-91239127', 'guardian4@gmail.com', 'FATHER', 'KATHMANDU', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -1385,102 +1266,6 @@ CREATE TABLE `jobs` (
   `available_at` int(10) UNSIGNED NOT NULL,
   `created_at` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `library_circulations`
---
-
-CREATE TABLE `library_circulations` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `created_by` int(10) UNSIGNED NOT NULL,
-  `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
-  `user_type` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `code_prefix` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `issue_limit_days` int(10) UNSIGNED DEFAULT NULL,
-  `issue_limit_books` int(10) UNSIGNED DEFAULT NULL,
-  `fine_per_day` int(10) UNSIGNED DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `library_circulations`
---
-
-INSERT INTO `library_circulations` (`id`, `created_at`, `updated_at`, `created_by`, `last_updated_by`, `user_type`, `slug`, `code_prefix`, `issue_limit_days`, `issue_limit_books`, `fine_per_day`, `status`) VALUES
-(1, '2020-05-04 17:10:05', '2020-05-04 17:10:05', 1, NULL, 'Student', 'student', 'STUDLIB', 7, 5, 5, 1),
-(2, '2020-05-04 17:10:05', '2020-05-04 17:10:05', 1, NULL, 'Staff', 'staff', 'STALIB', 15, 5, 0, 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `library_members`
---
-
-CREATE TABLE `library_members` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `created_by` int(10) UNSIGNED NOT NULL,
-  `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
-  `user_type` int(10) UNSIGNED NOT NULL,
-  `member_id` int(10) UNSIGNED NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `meetings`
---
-
-CREATE TABLE `meetings` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `created_by` int(10) UNSIGNED NOT NULL,
-  `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
-  `semesters_id` int(10) UNSIGNED NOT NULL,
-  `subjects_id` int(10) UNSIGNED NOT NULL,
-  `meeting_id` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `topic` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `start_time` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `duration` int(11) NOT NULL,
-  `timezone` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `start_url` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `join_url` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `history_type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ref_text` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `meeting_settings`
---
-
-CREATE TABLE `meeting_settings` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `identity` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `logo` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `link` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `config` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `meeting_settings`
---
-
-INSERT INTO `meeting_settings` (`id`, `created_at`, `updated_at`, `identity`, `logo`, `link`, `config`, `status`) VALUES
-(1, NULL, NULL, 'Zoom', 'zoom', 'https://zoom.us', '{\"Key\":\"\",\"Secret\":\"\",\"Email\":\"\"}', 1);
 
 -- --------------------------------------------------------
 
@@ -1629,7 +1414,7 @@ CREATE TABLE `months` (
   `created_by` int(10) UNSIGNED NOT NULL,
   `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
   `title` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -1665,8 +1450,8 @@ CREATE TABLE `notes` (
   `member_type` varchar(8) COLLATE utf8mb4_unicode_ci NOT NULL,
   `member_id` int(10) UNSIGNED NOT NULL,
   `subject` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `note` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `note` text COLLATE utf8mb4_unicode_ci,
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -1685,8 +1470,8 @@ CREATE TABLE `notices` (
   `message` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `publish_date` datetime NOT NULL,
   `end_date` datetime NOT NULL,
-  `display_group` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `display_group` text COLLATE utf8mb4_unicode_ci,
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -1706,9 +1491,9 @@ CREATE TABLE `online_payments` (
   `amount` int(11) NOT NULL,
   `payment_gateway` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `ref_no` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `ref_text` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `note` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 0
+  `ref_text` text COLLATE utf8mb4_unicode_ci,
+  `note` text COLLATE utf8mb4_unicode_ci,
+  `status` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -1749,10 +1534,23 @@ CREATE TABLE `parent_details` (
   `mother_mobile_1` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `mother_mobile_2` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `mother_email` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `father_image` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `mother_image` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `father_image` text COLLATE utf8mb4_unicode_ci,
+  `mother_image` text COLLATE utf8mb4_unicode_ci,
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `parent_details`
+--
+
+INSERT INTO `parent_details` (`id`, `created_at`, `updated_at`, `created_by`, `last_updated_by`, `students_id`, `grandfather_first_name`, `grandfather_middle_name`, `grandfather_last_name`, `father_first_name`, `father_middle_name`, `father_last_name`, `father_eligibility`, `father_occupation`, `father_office`, `father_office_number`, `father_residence_number`, `father_mobile_1`, `father_mobile_2`, `father_email`, `mother_first_name`, `mother_middle_name`, `mother_last_name`, `mother_eligibility`, `mother_occupation`, `mother_office`, `mother_office_number`, `mother_residence_number`, `mother_mobile_1`, `mother_mobile_2`, `mother_email`, `father_image`, `mother_image`, `status`) VALUES
+(1, '2025-01-27 06:08:26', '2025-01-27 06:08:26', 1, NULL, 1, 'PIRYA', 'A', 'NAIK', 'A', 'B', 'NAIK', '12', 'SSC', '12', '08208775966', '08208775966', '08208775966', '08208775966', 'faisalnaik955@gmail.com', 'X', 'Y', 'Z', 'YES', 'SSC', '08208775966', '08208775966', '08208775966', '08208775966', '08208775966', 'faisalnaik955@gmail.com', '', '', 1),
+(2, '2025-01-28 15:15:08', '2025-01-28 15:15:08', 1, NULL, 4, 'SIRAJ', '-', 'KAZI', 'SIRAJ', '-', 'KAZI', 'OK', 'NONE', 'NONE', '0000000000', '0000000000', '0000000000', '0000000000', 'kazirahil@gmail.com', 'NONE', '-', '-', '--', '-', '-', '-', '-', '-', '-', '-', '', '', 1),
+(3, '2025-01-28 15:24:11', '2025-01-28 15:24:11', 1, NULL, 5, 'HARI', 'KRISHNA', 'THAPA', 'DEMO', 'TEST', 'FATHER', 'BA', 'GOV JOB', 'SS GOV RESEARCH', '977-31-23078', '977-31-23078', '977-98989898', '977-91239123', 'father@gmail.com', 'DEMO', 'TEST', 'MOTHER', 'BA', 'GOV JOB', 'SS GOV RESEARCH', '977-31-23078', '977-31-23078', '977-98989898', '977-91239123', 'mother@gmail.com', NULL, NULL, 1),
+(4, '2025-01-28 15:24:11', '2025-01-28 15:24:11', 1, NULL, 6, 'HARI', 'KRISHNA', 'THAPA', 'DEMO', 'TEST', 'FATHER', 'MA', 'GOV JOB', 'SS GOV RESEARCH', '977-31-23079', '977-31-23079', '977-98989899', '977-91239124', 'father1@gmail.com', 'DEMO', 'TEST', 'MOTHER', 'MA', 'GOV JOB', 'SS GOV RESEARCH', '977-31-23079', '977-31-23079', '977-98989899', '977-91239124', 'mother1@gmail.com', NULL, NULL, 1),
+(5, '2025-01-28 15:24:11', '2025-01-28 15:24:11', 1, NULL, 7, 'HARI', 'KRISHNA', 'THAPA', 'DEMO', 'TEST', 'FATHER', 'BA', 'GOV JOB', 'SS GOV RESEARCH', '977-31-23080', '977-31-23080', '977-98989900', '977-91239125', 'father2@gmail.com', 'DEMO', 'TEST', 'MOTHER', 'BA', 'GOV JOB', 'SS GOV RESEARCH', '977-31-23080', '977-31-23080', '977-98989900', '977-91239125', 'mother2@gmail.com', NULL, NULL, 1),
+(6, '2025-01-28 15:24:11', '2025-01-28 15:24:11', 1, NULL, 8, 'HARI', 'KRISHNA', 'THAPA', 'DEMO', 'TEST', 'FATHER', 'MA', 'GOV JOB', 'SS GOV RESEARCH', '977-31-23081', '977-31-23081', '977-98989901', '977-91239126', 'father3@gmail.com', 'DEMO', 'TEST', 'MOTHER', 'MA', 'GOV JOB', 'SS GOV RESEARCH', '977-31-23081', '977-31-23081', '977-98989901', '977-91239126', 'mother3@gmail.com', NULL, NULL, 1),
+(7, '2025-01-28 15:24:11', '2025-01-28 15:24:11', 1, NULL, 9, 'HARI', 'KRISHNA', 'THAPA', 'DEMO', 'TEST', 'FATHER', 'BA', 'GOV JOB', 'SS GOV RESEARCH', '977-31-23082', '977-31-23082', '977-98989902', '977-91239127', 'father4@gmail.com', 'DEMO', 'TEST', 'MOTHER', 'BA', 'GOV JOB', 'SS GOV RESEARCH', '977-31-23082', '977-31-23082', '977-98989902', '977-91239127', 'mother4@gmail.com', NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -1779,7 +1577,7 @@ CREATE TABLE `payment_methods` (
   `created_by` int(10) UNSIGNED NOT NULL,
   `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
   `title` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -1805,7 +1603,7 @@ CREATE TABLE `payment_settings` (
   `logo` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
   `link` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `config` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -1833,7 +1631,7 @@ CREATE TABLE `payroll_heads` (
   `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
   `title` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `slug` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -1853,7 +1651,7 @@ CREATE TABLE `payroll_masters` (
   `payroll_head` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `due_date` datetime NOT NULL,
   `amount` int(11) NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -1868,7 +1666,7 @@ CREATE TABLE `permissions` (
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `display_name` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `description` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `group_head` tinyint(1) NOT NULL DEFAULT 0,
+  `group_head` tinyint(1) NOT NULL DEFAULT '0',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -2629,6 +2427,7 @@ INSERT INTO `permission_role` (`permission_id`, `role_id`) VALUES
 (18, 1),
 (19, 1),
 (20, 1),
+(20, 8),
 (21, 1),
 (22, 1),
 (23, 1),
@@ -2637,6 +2436,7 @@ INSERT INTO `permission_role` (`permission_id`, `role_id`) VALUES
 (26, 1),
 (27, 1),
 (28, 1),
+(28, 8),
 (29, 1),
 (30, 1),
 (31, 1),
@@ -2722,26 +2522,47 @@ INSERT INTO `permission_role` (`permission_id`, `role_id`) VALUES
 (111, 1),
 (112, 1),
 (113, 1),
+(113, 8),
 (114, 1),
+(114, 8),
 (115, 1),
+(115, 8),
 (116, 1),
+(116, 8),
 (117, 1),
+(117, 8),
 (118, 1),
+(118, 8),
 (119, 1),
+(119, 8),
 (120, 1),
+(120, 8),
 (121, 1),
+(121, 8),
 (122, 1),
+(122, 8),
 (123, 1),
+(123, 8),
 (124, 1),
+(124, 8),
 (125, 1),
+(125, 8),
 (126, 1),
+(126, 8),
 (127, 1),
+(127, 8),
 (128, 1),
+(128, 8),
 (129, 1),
+(129, 8),
 (130, 1),
+(130, 8),
 (131, 1),
+(131, 8),
 (132, 1),
+(132, 8),
 (133, 1),
+(133, 8),
 (134, 1),
 (135, 1),
 (136, 1),
@@ -3144,54 +2965,6 @@ INSERT INTO `permission_role` (`permission_id`, `role_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `postal_exchanges`
---
-
-CREATE TABLE `postal_exchanges` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `created_by` int(10) UNSIGNED NOT NULL,
-  `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
-  `type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `date` datetime NOT NULL,
-  `ref_no` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `subject` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `to` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `from` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `note` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `attachment` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `postal_exchange_types`
---
-
-CREATE TABLE `postal_exchange_types` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `created_by` int(10) UNSIGNED NOT NULL,
-  `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
-  `title` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `postal_exchange_types`
---
-
-INSERT INTO `postal_exchange_types` (`id`, `created_at`, `updated_at`, `created_by`, `last_updated_by`, `title`, `status`) VALUES
-(1, '2020-05-04 17:10:05', '2020-05-04 17:10:05', 1, NULL, 'LETTER DISPATCH', 1),
-(2, '2020-05-04 17:10:05', '2020-05-04 17:10:05', 1, NULL, 'LETTER RECEIVE', 1),
-(3, '2020-05-04 17:10:05', '2020-05-04 17:10:05', 1, NULL, 'COURIER RECEIVE', 1);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `products`
 --
 
@@ -3203,12 +2976,12 @@ CREATE TABLE `products` (
   `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
   `code` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `category_id` int(10) UNSIGNED DEFAULT 0,
-  `sub_category_id` int(10) UNSIGNED DEFAULT 0,
+  `category_id` int(10) UNSIGNED DEFAULT '0',
+  `sub_category_id` int(10) UNSIGNED DEFAULT '0',
   `warranty` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `product_image` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `product_image` text COLLATE utf8mb4_unicode_ci,
+  `description` text COLLATE utf8mb4_unicode_ci,
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -3224,9 +2997,9 @@ CREATE TABLE `product_prices` (
   `created_by` int(10) UNSIGNED NOT NULL,
   `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
   `products_id` int(10) UNSIGNED NOT NULL,
-  `cost_price` double(10,2) DEFAULT 0.00,
-  `sale_price` double(10,2) DEFAULT 0.00,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `cost_price` double(10,2) DEFAULT '0.00',
+  `sale_price` double(10,2) DEFAULT '0.00',
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -3247,7 +3020,7 @@ CREATE TABLE `purchases` (
   `grand_total_amount` int(11) NOT NULL,
   `total_discount` int(11) NOT NULL,
   `purchase_details` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -3268,7 +3041,7 @@ CREATE TABLE `purchase_details` (
   `rate` int(11) NOT NULL,
   `total_amount` int(11) NOT NULL,
   `discount` int(11) NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -3292,50 +3065,7 @@ CREATE TABLE `purchase_returns` (
   `qty` int(11) NOT NULL,
   `rate` int(11) NOT NULL,
   `total_amount` int(11) NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `residents`
---
-
-CREATE TABLE `residents` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `created_by` int(10) UNSIGNED NOT NULL,
-  `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
-  `hostels_id` int(10) UNSIGNED NOT NULL,
-  `rooms_id` int(10) UNSIGNED DEFAULT NULL,
-  `beds_id` int(10) UNSIGNED DEFAULT NULL,
-  `user_type` int(10) UNSIGNED NOT NULL,
-  `member_id` int(10) UNSIGNED NOT NULL,
-  `register_date` datetime NOT NULL,
-  `leave_date` datetime DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `resident_histories`
---
-
-CREATE TABLE `resident_histories` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `created_by` int(10) UNSIGNED NOT NULL,
-  `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
-  `years_id` int(10) UNSIGNED NOT NULL,
-  `hostels_id` int(10) UNSIGNED NOT NULL,
-  `rooms_id` int(10) UNSIGNED DEFAULT NULL,
-  `beds_id` int(10) UNSIGNED DEFAULT NULL,
-  `residents_id` int(10) UNSIGNED NOT NULL,
-  `history_type` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -3361,7 +3091,6 @@ INSERT INTO `roles` (`id`, `name`, `display_name`, `description`, `created_at`, 
 (1, 'super-admin', 'Super Admin', 'Super Admin', '2020-05-04 17:10:02', '2020-05-04 17:10:02'),
 (2, 'admin', 'Administrator', 'Administrator', '2020-05-04 17:10:02', '2020-05-04 17:10:02'),
 (3, 'account', 'Accountant', 'Accountant', '2020-05-04 17:10:02', '2020-05-04 17:10:02'),
-(4, 'library', 'Librarian', 'Librarian', '2020-05-04 17:10:02', '2020-05-04 17:10:02'),
 (5, 'staff', 'Staff', 'Staff', '2020-05-04 17:10:02', '2020-05-04 17:10:02'),
 (6, 'student', 'Student', 'Student', '2020-05-04 17:10:02', '2020-05-04 17:10:02'),
 (7, 'guardian', 'Guardian', 'Guardian', '2020-05-04 17:10:02', '2020-05-04 17:10:02'),
@@ -3383,76 +3112,8 @@ CREATE TABLE `role_user` (
 --
 
 INSERT INTO `role_user` (`user_id`, `role_id`) VALUES
-(1, 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `rooms`
---
-
-CREATE TABLE `rooms` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `created_by` int(10) UNSIGNED NOT NULL,
-  `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
-  `hostels_id` int(10) UNSIGNED NOT NULL,
-  `room_type` int(10) UNSIGNED NOT NULL,
-  `room_number` int(11) NOT NULL,
-  `rate_perbed` int(11) NOT NULL DEFAULT 0,
-  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `room_types`
---
-
-CREATE TABLE `room_types` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `created_by` int(10) UNSIGNED NOT NULL,
-  `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
-  `title` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `routes`
---
-
-CREATE TABLE `routes` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `created_by` int(10) UNSIGNED NOT NULL,
-  `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
-  `title` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `rent` int(11) NOT NULL DEFAULT 0,
-  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `route_vehicles`
---
-
-CREATE TABLE `route_vehicles` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `routes_id` int(10) UNSIGNED NOT NULL,
-  `vehicles_id` int(10) UNSIGNED NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+(1, 1),
+(2, 8);
 
 -- --------------------------------------------------------
 
@@ -3474,7 +3135,7 @@ CREATE TABLE `salary_pays` (
   `fine` int(11) DEFAULT NULL,
   `payment_mode` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
   `note` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -3529,8 +3190,17 @@ CREATE TABLE `semesters` (
   `slug` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `staff_id` int(10) UNSIGNED DEFAULT NULL,
   `gradingType_id` int(10) UNSIGNED DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `semesters`
+--
+
+INSERT INTO `semesters` (`id`, `created_at`, `updated_at`, `created_by`, `last_updated_by`, `semester`, `slug`, `staff_id`, `gradingType_id`, `status`) VALUES
+(1, '2025-01-27 05:55:30', '2025-01-27 05:55:30', 1, NULL, '6', '6', 1, 1, 1),
+(3, '2025-01-28 15:47:46', '2025-01-28 15:47:46', 1, NULL, '1', '1', 5, 2, 1),
+(4, '2025-01-28 15:50:46', '2025-01-28 15:50:46', 1, NULL, '2', '2', 5, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -3546,8 +3216,8 @@ CREATE TABLE `semester_assets` (
   `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
   `semesters_id` int(10) UNSIGNED NOT NULL,
   `assets_id` int(10) UNSIGNED NOT NULL,
-  `quantity` int(11) NOT NULL DEFAULT 0,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `quantity` int(11) NOT NULL DEFAULT '0',
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -3564,8 +3234,17 @@ CREATE TABLE `semester_subject` (
   `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
   `semester_id` int(10) UNSIGNED NOT NULL,
   `subject_id` int(10) UNSIGNED NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 0
+  `status` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `semester_subject`
+--
+
+INSERT INTO `semester_subject` (`id`, `created_at`, `updated_at`, `created_by`, `last_updated_by`, `semester_id`, `subject_id`, `status`) VALUES
+(1, NULL, NULL, 1, NULL, 1, 1, 0),
+(3, NULL, NULL, 1, NULL, 3, 1, 0),
+(4, NULL, NULL, 1, NULL, 4, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -3593,10 +3272,10 @@ CREATE TABLE `sms_emails` (
   `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
   `subject` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `message` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `sms` tinyint(1) NOT NULL DEFAULT 0,
-  `email` tinyint(1) NOT NULL DEFAULT 0,
+  `sms` tinyint(1) NOT NULL DEFAULT '0',
+  `email` tinyint(1) NOT NULL DEFAULT '0',
   `group` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -3613,7 +3292,7 @@ CREATE TABLE `sms_settings` (
   `logo` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
   `link` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `config` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -3685,9 +3364,20 @@ CREATE TABLE `staff` (
   `experience` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `experience_info` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `other_info` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `staff_image` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `staff_image` text COLLATE utf8mb4_unicode_ci,
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `staff`
+--
+
+INSERT INTO `staff` (`id`, `created_at`, `updated_at`, `created_by`, `last_updated_by`, `reg_no`, `join_date`, `designation`, `first_name`, `middle_name`, `last_name`, `father_name`, `mother_name`, `date_of_birth`, `gender`, `blood_group`, `nationality`, `address`, `state`, `country`, `temp_address`, `temp_state`, `temp_country`, `home_phone`, `mobile_1`, `mobile_2`, `mother_tongue`, `email`, `qualification`, `experience`, `experience_info`, `other_info`, `staff_image`, `status`) VALUES
+(1, '2025-01-27 05:54:03', '2025-01-27 05:54:03', 1, NULL, '69', '2025-01-01 00:00:00', 1, 'REHAN', 'NAUSHAD', 'NEVAREKAR', 'NAUSHAD', 'REHANA', '2003-12-02 00:00:00', 'MALE', 'O+', 'INDIA', 'LANJA', 'MAHARASHTRA', 'INDIA', 'LANJA', 'MAHARASHTRA', 'INDIA', '08329735698', '08329735698', '08329735698', 'URDU', 'nrehanyt@gmail.com', 'UG', 'NO', 'none', 'thankyou', '', 1),
+(2, '2025-01-28 14:54:22', '2025-01-28 14:54:22', 1, NULL, '1', '2025-01-01 00:00:00', 2, 'RAKESH', 'SIR', 'SURVE', '-', '-', '2025-01-01 00:00:00', 'MALE', 'A+', 'INDIAN', 'LANJA', 'MAHARASHTRA', 'INDIA', 'LANJA', 'MAHARASHTRA', 'INDIA', '0000000000', '0000000000', '0000000000', 'ENGLISH', 'surve@rakesh.com', 'HSC', '1 YEAR', 'none', 'none', '', 1),
+(3, '2025-01-28 14:55:58', '2025-01-28 14:55:58', 1, NULL, '2', '2025-01-02 00:00:00', 3, 'SIDDHESH', 'SIR', 'KHAWALE', '-', '-', '2025-01-02 00:00:00', 'MALE', 'A-', 'INDIAN', 'LANJA', 'MAHARASHTRA', 'INDIA', 'LANJA', 'MAHARASHTRA', 'INDIA', '1111111111', '1111111111', '1111111111', 'ENGLISH', 'khawale@siddhesh.com', 'HSC', '1 YEAR', 'none', 'none', '', 1),
+(4, '2025-01-28 14:57:32', '2025-01-28 14:57:32', 1, NULL, '3', '2025-01-03 00:00:00', 4, 'ANUP', 'SIR', 'DESAI', '-', '-', '2025-01-03 00:00:00', 'MALE', 'B+', 'INDIAN', 'LANJA', 'MAHARASHTRA', 'INDIA', 'LANJA', 'MAHARASHTRA', 'INDIA', '2222222222', '2222222222', '2222222222', 'ENGLISH', 'anup@sardesai.com', 'HSC', '1 YEAR', 'none', 'none', '', 1),
+(5, '2025-01-28 14:59:09', '2025-01-28 14:59:09', 1, NULL, '4', '2025-01-04 00:00:00', 5, 'AVANTIKA', 'MAAM', 'KELUSKAR', '-', '-', '2025-01-05 00:00:00', 'FEMALE', 'B-', 'INDIAN', 'LANJA', 'MAHARASHTRA', 'INDIA', 'LANJA', 'MAHARASHTRA', 'INDIA', '5555555555', '5555555555', '5555555555', 'ENGLISH', 'avantika@gmail.com', 'HSC', '1 YEAR', 'none', 'none', '', 1);
 
 -- --------------------------------------------------------
 
@@ -3702,8 +3392,19 @@ CREATE TABLE `staff_designations` (
   `created_by` int(10) UNSIGNED NOT NULL,
   `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
   `title` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `staff_designations`
+--
+
+INSERT INTO `staff_designations` (`id`, `created_at`, `updated_at`, `created_by`, `last_updated_by`, `title`, `status`) VALUES
+(1, '2025-01-27 05:52:06', '2025-01-27 05:52:06', 1, NULL, 'Hello', 1),
+(2, '2025-01-28 14:51:47', '2025-01-28 14:51:47', 1, NULL, 'HIII', 1),
+(3, '2025-01-28 14:51:53', '2025-01-28 14:51:53', 1, NULL, 'HEYY', 1),
+(4, '2025-01-28 14:52:01', '2025-01-28 14:52:01', 1, NULL, 'BYE', 1),
+(5, '2025-01-28 14:52:07', '2025-01-28 14:52:07', 1, NULL, 'YYY', 1);
 
 -- --------------------------------------------------------
 
@@ -3720,9 +3421,9 @@ CREATE TABLE `stocks` (
   `products_id` int(10) UNSIGNED NOT NULL,
   `transaction_type` varchar(25) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `date` datetime NOT NULL,
-  `qty_in` int(11) DEFAULT 0,
-  `qty_out` int(11) DEFAULT 0,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `qty_in` int(11) DEFAULT '0',
+  `qty_out` int(11) DEFAULT '0',
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -3756,10 +3457,23 @@ CREATE TABLE `students` (
   `mother_tongue` varchar(25) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `extra_info` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `student_image` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `student_signature` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `student_image` text COLLATE utf8mb4_unicode_ci,
+  `student_signature` text COLLATE utf8mb4_unicode_ci,
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `students`
+--
+
+INSERT INTO `students` (`id`, `created_at`, `updated_at`, `created_by`, `last_updated_by`, `reg_no`, `reg_date`, `university_reg`, `faculty`, `semester`, `academic_status`, `batch`, `first_name`, `middle_name`, `last_name`, `date_of_birth`, `gender`, `blood_group`, `religion`, `caste`, `nationality`, `mother_tongue`, `email`, `extra_info`, `student_image`, `student_signature`, `status`) VALUES
+(1, '2025-01-27 06:08:26', '2025-01-28 14:03:36', 1, NULL, '1', '2025-01-08 00:00:00', '01', 1, 1, 1, 1, 'FAISAL', 'REHAN', 'NEVAREKAR', '2004-04-12 00:00:00', 'OTHER', 'O+', 'MUSLIM', 'OPEN', 'INDIAN', 'URDU', 'faisalnaik955@gmail.com', 'none', '', '', 1),
+(4, '2025-01-28 15:15:08', '2025-01-28 15:15:08', 1, NULL, '2', '2025-01-01 00:00:00', '1', 5, 1, 2, 1, 'RAHIL', 'SIRAJ', 'KAZI', '2025-01-01 00:00:00', 'MALE', 'A+', 'MUSLIM', 'OPEN', 'INDIA', 'HINDI', 'kazirahil@gmail.com', 'none', '', '', 1),
+(5, '2025-01-28 15:24:11', '2025-01-28 15:24:11', 1, NULL, 'STUD-0001', '2018-01-06 00:00:00', '11-22-2018', 1, 1, 1, 1, 'UTTAM', 'RAJ', 'YADU', '2001-08-05 00:00:00', 'MALE', 'B+', 'hindu', 'madheshi', 'NEPALI', 'MAITHILI', 'student@gmail.com', '', NULL, NULL, 1),
+(6, '2025-01-28 15:24:11', '2025-01-28 15:24:11', 1, NULL, 'STUD-0002', '2018-02-06 00:00:00', '11-22-2019', 1, 1, 2, 1, 'KAUSHAL', 'KUMAR', 'KSHETRI', '2002-09-05 00:00:00', 'MALE', 'A+', 'hindu', 'madheshi', 'INDIAN', 'HINDI', 'student1@gmail.com', '', NULL, NULL, 1),
+(7, '2025-01-28 15:24:11', '2025-01-28 15:24:11', 1, NULL, 'STUD-0003', '2018-03-06 00:00:00', '11-22-2020', 1, 1, 3, 1, 'PRIYANSHU', 'DEVI', 'SHARMA', '2003-10-05 00:00:00', 'MALE', 'A-', 'hindu', 'madheshi', 'NEPALI', 'NEPALI', 'student2@gmail.com', '', NULL, NULL, 1),
+(8, '2025-01-28 15:24:11', '2025-01-28 15:24:11', 1, NULL, 'STUD-0004', '2018-04-06 00:00:00', '11-22-2021', 1, 1, 4, 1, 'PAYAL', '', 'TRIMURTI', '2001-11-05 00:00:00', 'MALE', 'O+', 'hindu', 'madheshi', 'INDIAN', 'THARU', 'student3@gmail.com', '', NULL, NULL, 1),
+(9, '2025-01-28 15:24:11', '2025-01-28 15:24:11', 1, NULL, 'STUD-0005', '2018-05-06 00:00:00', '11-22-2022', 1, 1, 1, 1, 'HARI', '', 'ADHIKARI', '2004-12-05 00:00:00', 'MALE', 'B+', 'hindu', 'madheshi', 'NEPALI', 'ENGLISH', 'student4@gmail.com', '', NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -3774,8 +3488,15 @@ CREATE TABLE `student_batches` (
   `created_by` int(10) UNSIGNED NOT NULL,
   `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
   `title` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `student_batches`
+--
+
+INSERT INTO `student_batches` (`id`, `created_at`, `updated_at`, `created_by`, `last_updated_by`, `title`, `status`) VALUES
+(1, '2025-01-27 05:49:58', '2025-01-27 05:49:58', 1, NULL, '2025', 1);
 
 -- --------------------------------------------------------
 
@@ -3791,6 +3512,19 @@ CREATE TABLE `student_guardians` (
   `guardians_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `student_guardians`
+--
+
+INSERT INTO `student_guardians` (`id`, `created_at`, `updated_at`, `students_id`, `guardians_id`) VALUES
+(1, '2025-01-27 06:08:26', '2025-01-27 06:08:26', 1, 1),
+(2, '2025-01-28 15:15:08', '2025-01-28 15:15:08', 4, 2),
+(3, '2025-01-28 15:24:11', '2025-01-28 15:24:11', 5, 3),
+(4, '2025-01-28 15:24:11', '2025-01-28 15:24:11', 6, 4),
+(5, '2025-01-28 15:24:11', '2025-01-28 15:24:11', 7, 5),
+(6, '2025-01-28 15:24:11', '2025-01-28 15:24:11', 8, 6),
+(7, '2025-01-28 15:24:11', '2025-01-28 15:24:11', 9, 7);
+
 -- --------------------------------------------------------
 
 --
@@ -3804,7 +3538,7 @@ CREATE TABLE `student_statuses` (
   `created_by` int(10) UNSIGNED NOT NULL,
   `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
   `title` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -3844,60 +3578,15 @@ CREATE TABLE `subjects` (
   `class_type` varchar(15) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `staff_id` int(10) UNSIGNED DEFAULT NULL,
   `description` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `subject_attendances`
+-- Dumping data for table `subjects`
 --
 
-CREATE TABLE `subject_attendances` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `created_by` int(10) UNSIGNED NOT NULL,
-  `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
-  `link_id` int(10) UNSIGNED NOT NULL,
-  `subjects_id` int(10) UNSIGNED NOT NULL,
-  `attendance_type` int(11) NOT NULL,
-  `years_id` int(10) UNSIGNED NOT NULL,
-  `months_id` int(10) UNSIGNED NOT NULL,
-  `day_1` int(11) NOT NULL DEFAULT 0,
-  `day_2` int(11) NOT NULL DEFAULT 0,
-  `day_3` int(11) NOT NULL DEFAULT 0,
-  `day_4` int(11) NOT NULL DEFAULT 0,
-  `day_5` int(11) NOT NULL DEFAULT 0,
-  `day_6` int(11) NOT NULL DEFAULT 0,
-  `day_7` int(11) NOT NULL DEFAULT 0,
-  `day_8` int(11) NOT NULL DEFAULT 0,
-  `day_9` int(11) NOT NULL DEFAULT 0,
-  `day_10` int(11) NOT NULL DEFAULT 0,
-  `day_11` int(11) NOT NULL DEFAULT 0,
-  `day_12` int(11) NOT NULL DEFAULT 0,
-  `day_13` int(11) NOT NULL DEFAULT 0,
-  `day_14` int(11) NOT NULL DEFAULT 0,
-  `day_15` int(11) NOT NULL DEFAULT 0,
-  `day_16` int(11) NOT NULL DEFAULT 0,
-  `day_17` int(11) NOT NULL DEFAULT 0,
-  `day_18` int(11) NOT NULL DEFAULT 0,
-  `day_19` int(11) NOT NULL DEFAULT 0,
-  `day_20` int(11) NOT NULL DEFAULT 0,
-  `day_21` int(11) NOT NULL DEFAULT 0,
-  `day_22` int(11) NOT NULL DEFAULT 0,
-  `day_23` int(11) NOT NULL DEFAULT 0,
-  `day_24` int(11) NOT NULL DEFAULT 0,
-  `day_25` int(11) NOT NULL DEFAULT 0,
-  `day_26` int(11) NOT NULL DEFAULT 0,
-  `day_27` int(11) NOT NULL DEFAULT 0,
-  `day_28` int(11) NOT NULL DEFAULT 0,
-  `day_29` int(11) NOT NULL DEFAULT 0,
-  `day_30` int(11) NOT NULL DEFAULT 0,
-  `day_31` int(11) NOT NULL DEFAULT 0,
-  `day_32` int(11) NOT NULL DEFAULT 0,
-  `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+INSERT INTO `subjects` (`id`, `created_at`, `updated_at`, `created_by`, `last_updated_by`, `title`, `code`, `full_mark_theory`, `pass_mark_theory`, `full_mark_practical`, `pass_mark_practical`, `credit_hour`, `sub_type`, `class_type`, `staff_id`, `description`, `status`) VALUES
+(1, '2025-01-27 05:55:01', '2025-01-28 15:41:00', 1, 1, 'english', '99', 75, 30, 25, 15, 2, 'Compulsory', 'Theory', 1, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -3913,7 +3602,7 @@ CREATE TABLE `sub_categories` (
   `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
   `category_id` int(10) UNSIGNED NOT NULL,
   `title` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -3927,7 +3616,7 @@ CREATE TABLE `time_zones` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `timezone` varchar(35) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 0
+  `status` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -3935,473 +3624,473 @@ CREATE TABLE `time_zones` (
 --
 
 INSERT INTO `time_zones` (`id`, `created_at`, `updated_at`, `timezone`, `status`) VALUES
-(1, NULL, NULL, 'Africa/Abidjan', 0),
-(2, NULL, NULL, 'Africa/Accra', 0),
-(3, NULL, NULL, 'Africa/Addis_Ababa', 0),
-(4, NULL, NULL, 'Africa/Algiers', 0),
-(5, NULL, NULL, 'Africa/Asmara', 0),
-(6, NULL, NULL, 'Africa/Asmera', 0),
-(7, NULL, NULL, 'Africa/Bamako', 0),
-(8, NULL, NULL, 'Africa/Bangui', 0),
-(9, NULL, NULL, 'Africa/Banjul', 0),
-(10, NULL, NULL, 'Africa/Bissau', 0),
-(11, NULL, NULL, 'Africa/Blantyre', 0),
-(12, NULL, NULL, 'Africa/Brazzaville', 0),
-(13, NULL, NULL, 'Africa/Bujumbura', 0),
-(14, NULL, NULL, 'Africa/Cairo', 0),
-(15, NULL, NULL, 'Africa/Casablanca', 0),
-(16, NULL, NULL, 'Africa/Ceuta', 0),
-(17, NULL, NULL, 'Africa/Conakry', 0),
-(18, NULL, NULL, 'Africa/Dakar', 0),
-(19, NULL, NULL, 'Africa/Dar_es_Salaam', 0),
-(20, NULL, NULL, 'Africa/Djibouti', 0),
-(21, NULL, NULL, 'Africa/Douala', 0),
-(22, NULL, NULL, 'Africa/El_Aaiun', 0),
-(23, NULL, NULL, 'Africa/Freetown', 0),
-(24, NULL, NULL, 'Africa/Gaborone', 0),
-(25, NULL, NULL, 'Africa/Harare', 0),
-(26, NULL, NULL, 'Africa/Johannesburg', 0),
-(27, NULL, NULL, 'Africa/Juba', 0),
-(28, NULL, NULL, 'Africa/Kampala', 0),
-(29, NULL, NULL, 'Africa/Khartoum', 0),
-(30, NULL, NULL, 'Africa/Kigali', 0),
-(31, NULL, NULL, 'Africa/Kinshasa', 0),
-(32, NULL, NULL, 'Africa/Lagos', 0),
-(33, NULL, NULL, 'Africa/Libreville', 0),
-(34, NULL, NULL, 'Africa/Lome', 0),
-(35, NULL, NULL, 'Africa/Luanda', 0),
-(36, NULL, NULL, 'Africa/Lubumbashi', 0),
-(37, NULL, NULL, 'Africa/Lusaka', 0),
-(38, NULL, NULL, 'Africa/Malabo', 0),
-(39, NULL, NULL, 'Africa/Maputo', 0),
-(40, NULL, NULL, 'Africa/Maseru', 0),
-(41, NULL, NULL, 'Africa/Mbabane', 0),
-(42, NULL, NULL, 'Africa/Mogadishu', 0),
-(43, NULL, NULL, 'Africa/Monrovia', 0),
-(44, NULL, NULL, 'Africa/Nairobi', 0),
-(45, NULL, NULL, 'Africa/Ndjamena', 0),
-(46, NULL, NULL, 'Africa/Niamey', 0),
-(47, NULL, NULL, 'Africa/Nouakchott', 0),
-(48, NULL, NULL, 'Africa/Ouagadougou', 0),
-(49, NULL, NULL, 'Africa/Porto-Novo', 0),
-(50, NULL, NULL, 'Africa/Sao_Tome', 0),
-(51, NULL, NULL, 'Africa/Timbuktu', 0),
-(52, NULL, NULL, 'Africa/Tripoli', 0),
-(53, NULL, NULL, 'Africa/Tunis', 0),
-(54, NULL, NULL, 'Africa/Windhoek', 0),
-(55, NULL, NULL, 'America/Adak', 0),
-(56, NULL, NULL, 'America/Anchorage', 0),
-(57, NULL, NULL, 'America/Anguilla', 0),
-(58, NULL, NULL, 'America/Antigua', 0),
-(59, NULL, NULL, 'America/Araguaina', 0),
-(60, NULL, NULL, 'America/Argentina/Buenos_Aires', 0),
-(61, NULL, NULL, 'America/Argentina/Catamarca', 0),
-(62, NULL, NULL, 'America/Argentina/ComodRivadavia', 0),
-(63, NULL, NULL, 'America/Argentina/Cordoba', 0),
-(64, NULL, NULL, 'America/Argentina/Jujuy', 0),
-(65, NULL, NULL, 'America/Argentina/La_Rioja', 0),
-(66, NULL, NULL, 'America/Argentina/Mendoza', 0),
-(67, NULL, NULL, 'America/Argentina/Rio_Gallegos', 0),
-(68, NULL, NULL, 'America/Argentina/Salta', 0),
-(69, NULL, NULL, 'America/Argentina/San_Juan', 0),
-(70, NULL, NULL, 'America/Argentina/San_Luis', 0),
-(71, NULL, NULL, 'America/Argentina/Tucuman', 0),
-(72, NULL, NULL, 'America/Argentina/Ushuaia', 0),
-(73, NULL, NULL, 'America/Aruba', 0),
-(74, NULL, NULL, 'America/Asuncion', 0),
-(75, NULL, NULL, 'America/Atikokan', 0),
-(76, NULL, NULL, 'America/Atka', 0),
-(77, NULL, NULL, 'America/Bahia', 0),
-(78, NULL, NULL, 'America/Bahia_Banderas', 0),
-(79, NULL, NULL, 'America/Barbados', 0),
-(80, NULL, NULL, 'America/Belem', 0),
-(81, NULL, NULL, 'America/Belize', 0),
-(82, NULL, NULL, 'America/Blanc-Sablon', 0),
-(83, NULL, NULL, 'America/Boa_Vista', 0),
-(84, NULL, NULL, 'America/Bogota', 0),
-(85, NULL, NULL, 'America/Boise', 0),
-(86, NULL, NULL, 'America/Buenos_Aires', 0),
-(87, NULL, NULL, 'America/Cambridge_Bay', 0),
-(88, NULL, NULL, 'America/Campo_Grande', 0),
-(89, NULL, NULL, 'America/Cancun', 0),
-(90, NULL, NULL, 'America/Caracas', 0),
-(91, NULL, NULL, 'America/Catamarca', 0),
-(92, NULL, NULL, 'America/Cayenne', 0),
-(93, NULL, NULL, 'America/Cayman', 0),
-(94, NULL, NULL, 'America/Chicago', 0),
-(95, NULL, NULL, 'America/Chihuahua', 0),
-(96, NULL, NULL, 'America/Coral_Harbour', 0),
-(97, NULL, NULL, 'America/Cordoba', 0),
-(98, NULL, NULL, 'America/Costa_Rica', 0),
-(99, NULL, NULL, 'America/Creston', 0),
-(100, NULL, NULL, 'America/Cuiaba', 0),
-(101, NULL, NULL, 'America/Curacao', 0),
-(102, NULL, NULL, 'America/Danmarkshavn', 0),
-(103, NULL, NULL, 'America/Dawson', 0),
-(104, NULL, NULL, 'America/Dawson_Creek', 0),
-(105, NULL, NULL, 'America/Denver', 0),
-(106, NULL, NULL, 'America/Detroit', 0),
-(107, NULL, NULL, 'America/Dominica', 0),
-(108, NULL, NULL, 'America/Edmonton', 0),
-(109, NULL, NULL, 'America/Eirunepe', 0),
-(110, NULL, NULL, 'America/El_Salvador', 0),
-(111, NULL, NULL, 'America/Ensenada', 0),
-(112, NULL, NULL, 'America/Fort_Wayne', 0),
-(113, NULL, NULL, 'America/Fortaleza', 0),
-(114, NULL, NULL, 'America/Glace_Bay', 0),
-(115, NULL, NULL, 'America/Godthab', 0),
-(116, NULL, NULL, 'America/Goose_Bay', 0),
-(117, NULL, NULL, 'America/Grand_Turk', 0),
-(118, NULL, NULL, 'America/Grenada', 0),
-(119, NULL, NULL, 'America/Guadeloupe', 0),
-(120, NULL, NULL, 'America/Guatemala', 0),
-(121, NULL, NULL, 'America/Guayaquil', 0),
-(122, NULL, NULL, 'America/Guyana', 0),
-(123, NULL, NULL, 'America/Halifax', 0),
-(124, NULL, NULL, 'America/Havana', 0),
-(125, NULL, NULL, 'America/Hermosillo', 0),
-(126, NULL, NULL, 'America/Indiana/Indianapolis', 0),
-(127, NULL, NULL, 'America/Indiana/Knox', 0),
-(128, NULL, NULL, 'America/Indiana/Marengo', 0),
-(129, NULL, NULL, 'America/Indiana/Petersburg', 0),
-(130, NULL, NULL, 'America/Indiana/Tell_City', 0),
-(131, NULL, NULL, 'America/Indiana/Vevay', 0),
-(132, NULL, NULL, 'America/Indiana/Vincennes', 0),
-(133, NULL, NULL, 'America/Indiana/Winamac', 0),
-(134, NULL, NULL, 'America/Indianapolis', 0),
-(135, NULL, NULL, 'America/Inuvik', 0),
-(136, NULL, NULL, 'America/Iqaluit', 0),
-(137, NULL, NULL, 'America/Jamaica', 0),
-(138, NULL, NULL, 'America/Jujuy', 0),
-(139, NULL, NULL, 'America/Juneau', 0),
-(140, NULL, NULL, 'America/Kentucky/Louisville', 0),
-(141, NULL, NULL, 'America/Kentucky/Monticello', 0),
-(142, NULL, NULL, 'America/Knox_IN', 0),
-(143, NULL, NULL, 'America/Kralendijk', 0),
-(144, NULL, NULL, 'America/La_Paz', 0),
-(145, NULL, NULL, 'America/Lima', 0),
-(146, NULL, NULL, 'America/Los_Angeles', 0),
-(147, NULL, NULL, 'America/Louisville', 0),
-(148, NULL, NULL, 'America/Lower_Princes', 0),
-(149, NULL, NULL, 'America/Maceio', 0),
-(150, NULL, NULL, 'America/Managua', 0),
-(151, NULL, NULL, 'America/Manaus', 0),
-(152, NULL, NULL, 'America/Marigot', 0),
-(153, NULL, NULL, 'America/Martinique', 0),
-(154, NULL, NULL, 'America/Matamoros', 0),
-(155, NULL, NULL, 'America/Mazatlan', 0),
-(156, NULL, NULL, 'America/Mendoza', 0),
-(157, NULL, NULL, 'America/Menominee', 0),
-(158, NULL, NULL, 'America/Merida', 0),
-(159, NULL, NULL, 'America/Metlakatla', 0),
-(160, NULL, NULL, 'America/Mexico_City', 0),
-(161, NULL, NULL, 'America/Miquelon', 0),
-(162, NULL, NULL, 'America/Moncton', 0),
-(163, NULL, NULL, 'America/Monterrey', 0),
-(164, NULL, NULL, 'America/Montevideo', 0),
-(165, NULL, NULL, 'America/Montreal', 0),
-(166, NULL, NULL, 'America/Montserrat', 0),
-(167, NULL, NULL, 'America/Nassau', 0),
-(168, NULL, NULL, 'America/New_York', 0),
-(169, NULL, NULL, 'America/Nipigon', 0),
-(170, NULL, NULL, 'America/Nome', 0),
-(171, NULL, NULL, 'America/Noronha', 0),
-(172, NULL, NULL, 'America/North_Dakota/Beulah', 0),
-(173, NULL, NULL, 'America/North_Dakota/Center', 0),
-(174, NULL, NULL, 'America/North_Dakota/New_Salem', 0),
-(175, NULL, NULL, 'America/Ojinaga', 0),
-(176, NULL, NULL, 'America/Panama', 0),
-(177, NULL, NULL, 'America/Pangnirtung', 0),
-(178, NULL, NULL, 'America/Paramaribo', 0),
-(179, NULL, NULL, 'America/Phoenix', 0),
-(180, NULL, NULL, 'America/Port-au-Prince', 0),
-(181, NULL, NULL, 'America/Port_of_Spain', 0),
-(182, NULL, NULL, 'America/Porto_Acre', 0),
-(183, NULL, NULL, 'America/Porto_Velho', 0),
-(184, NULL, NULL, 'America/Puerto_Rico', 0),
-(185, NULL, NULL, 'America/Rainy_River', 0),
-(186, NULL, NULL, 'America/Rankin_Inlet', 0),
-(187, NULL, NULL, 'America/Recife', 0),
-(188, NULL, NULL, 'America/Regina', 0),
-(189, NULL, NULL, 'America/Resolute', 0),
-(190, NULL, NULL, 'America/Rio_Branco', 0),
-(191, NULL, NULL, 'America/Rosario', 0),
-(192, NULL, NULL, 'America/Santa_Isabel', 0),
-(193, NULL, NULL, 'America/Santarem', 0),
-(194, NULL, NULL, 'America/Santiago', 0),
-(195, NULL, NULL, 'America/Santo_Domingo', 0),
-(196, NULL, NULL, 'America/Sao_Paulo', 0),
-(197, NULL, NULL, 'America/Scoresbysund', 0),
-(198, NULL, NULL, 'America/Shiprock', 0),
-(199, NULL, NULL, 'America/Sitka', 0),
-(200, NULL, NULL, 'America/St_Barthelemy', 0),
-(201, NULL, NULL, 'America/St_Johns', 0),
-(202, NULL, NULL, 'America/St_Kitts', 0),
-(203, NULL, NULL, 'America/St_Lucia', 0),
-(204, NULL, NULL, 'America/St_Thomas', 0),
-(205, NULL, NULL, 'America/St_Vincent', 0),
-(206, NULL, NULL, 'America/Swift_Current', 0),
-(207, NULL, NULL, 'America/Tegucigalpa', 0),
-(208, NULL, NULL, 'America/Thule', 0),
-(209, NULL, NULL, 'America/Thunder_Bay', 0),
-(210, NULL, NULL, 'America/Tijuana', 0),
-(211, NULL, NULL, 'America/Toronto', 0),
-(212, NULL, NULL, 'America/Tortola', 0),
-(213, NULL, NULL, 'America/Vancouver', 0),
-(214, NULL, NULL, 'America/Virgin', 0),
-(215, NULL, NULL, 'America/Whitehorse', 0),
-(216, NULL, NULL, 'America/Winnipeg', 0),
-(217, NULL, NULL, 'America/Yakutat', 0),
-(218, NULL, NULL, 'America/Yellowknife', 0),
-(219, NULL, NULL, 'Antarctica/Casey', 0),
-(220, NULL, NULL, 'Antarctica/Davis', 0),
-(221, NULL, NULL, 'Antarctica/DumontDUrville', 0),
-(222, NULL, NULL, 'Antarctica/Macquarie', 0),
-(223, NULL, NULL, 'Antarctica/Mawson', 0),
-(224, NULL, NULL, 'Antarctica/McMurdo', 0),
-(225, NULL, NULL, 'Antarctica/Palmer', 0),
-(226, NULL, NULL, 'Antarctica/Rothera', 0),
-(227, NULL, NULL, 'Antarctica/South_Pole', 0),
-(228, NULL, NULL, 'Antarctica/Syowa', 0),
-(229, NULL, NULL, 'Antarctica/Vostok', 0),
-(230, NULL, NULL, 'Arctic/Longyearbyen', 0),
-(231, NULL, NULL, 'Asia/Aden', 0),
-(232, NULL, NULL, 'Asia/Almaty', 0),
-(233, NULL, NULL, 'Asia/Amman', 0),
-(234, NULL, NULL, 'Asia/Anadyr', 0),
-(235, NULL, NULL, 'Asia/Aqtau', 0),
-(236, NULL, NULL, 'Asia/Aqtobe', 0),
-(237, NULL, NULL, 'Asia/Ashgabat', 0),
-(238, NULL, NULL, 'Asia/Ashkhabad', 0),
-(239, NULL, NULL, 'Asia/Baghdad', 0),
-(240, NULL, NULL, 'Asia/Bahrain', 0),
-(241, NULL, NULL, 'Asia/Baku', 0),
-(242, NULL, NULL, 'Asia/Bangkok', 0),
-(243, NULL, NULL, 'Asia/Beirut', 0),
-(244, NULL, NULL, 'Asia/Bishkek', 0),
-(245, NULL, NULL, 'Asia/Brunei', 0),
-(246, NULL, NULL, 'Asia/Calcutta', 0),
-(247, NULL, NULL, 'Asia/Choibalsan', 0),
-(248, NULL, NULL, 'Asia/Chongqing', 0),
-(249, NULL, NULL, 'Asia/Chungking', 0),
-(250, NULL, NULL, 'Asia/Colombo', 0),
-(251, NULL, NULL, 'Asia/Dacca', 0),
-(252, NULL, NULL, 'Asia/Damascus', 0),
-(253, NULL, NULL, 'Asia/Dhaka', 0),
-(254, NULL, NULL, 'Asia/Dili', 0),
-(255, NULL, NULL, 'Asia/Dubai', 0),
-(256, NULL, NULL, 'Asia/Dushanbe', 0),
-(257, NULL, NULL, 'Asia/Gaza', 0),
-(258, NULL, NULL, 'Asia/Harbin', 0),
-(259, NULL, NULL, 'Asia/Hebron', 0),
-(260, NULL, NULL, 'Asia/Ho_Chi_Minh', 0),
-(261, NULL, NULL, 'Asia/Hong_Kong', 0),
-(262, NULL, NULL, 'Asia/Hovd', 0),
-(263, NULL, NULL, 'Asia/Irkutsk', 0),
-(264, NULL, NULL, 'Asia/Istanbul', 0),
-(265, NULL, NULL, 'Asia/Jakarta', 0),
-(266, NULL, NULL, 'Asia/Jayapura', 0),
-(267, NULL, NULL, 'Asia/Jerusalem', 0),
-(268, NULL, NULL, 'Asia/Kabul', 0),
-(269, NULL, NULL, 'Asia/Kamchatka', 0),
-(270, NULL, NULL, 'Asia/Karachi', 0),
-(271, NULL, NULL, 'Asia/Kashgar', 0),
-(272, NULL, NULL, 'Asia/Kathmandu', 0),
-(273, NULL, NULL, 'Asia/Khandyga', 0),
-(274, NULL, NULL, 'Asia/Kolkata', 0),
-(275, NULL, NULL, 'Asia/Krasnoyarsk', 0),
-(276, NULL, NULL, 'Asia/Kuala_Lumpur', 0),
-(277, NULL, NULL, 'Asia/Kuching', 0),
-(278, NULL, NULL, 'Asia/Kuwait', 0),
-(279, NULL, NULL, 'Asia/Macao', 0),
-(280, NULL, NULL, 'Asia/Macau', 0),
-(281, NULL, NULL, 'Asia/Magadan', 0),
-(282, NULL, NULL, 'Asia/Makassar', 0),
-(283, NULL, NULL, 'Asia/Manila', 0),
-(284, NULL, NULL, 'Asia/Muscat', 0),
-(285, NULL, NULL, 'Asia/Nicosia', 0),
-(286, NULL, NULL, 'Asia/Novokuznetsk', 0),
-(287, NULL, NULL, 'Asia/Novosibirsk', 0),
-(288, NULL, NULL, 'Asia/Omsk', 0),
-(289, NULL, NULL, 'Asia/Oral', 0),
-(290, NULL, NULL, 'Asia/Phnom_Penh', 0),
-(291, NULL, NULL, 'Asia/Pontianak', 0),
-(292, NULL, NULL, 'Asia/Pyongyang', 0),
-(293, NULL, NULL, 'Asia/Qatar', 0),
-(294, NULL, NULL, 'Asia/Qyzylorda', 0),
-(295, NULL, NULL, 'Asia/Rangoon', 0),
-(296, NULL, NULL, 'Asia/Riyadh', 0),
-(297, NULL, NULL, 'Asia/Saigon', 0),
-(298, NULL, NULL, 'Asia/Sakhalin', 0),
-(299, NULL, NULL, 'Asia/Samarkand', 0),
-(300, NULL, NULL, 'Asia/Seoul', 0),
-(301, NULL, NULL, 'Asia/Shanghai', 0),
-(302, NULL, NULL, 'Asia/Singapore', 0),
-(303, NULL, NULL, 'Asia/Taipei', 0),
-(304, NULL, NULL, 'Asia/Tashkent', 0),
-(305, NULL, NULL, 'Asia/Tbilisi', 0),
-(306, NULL, NULL, 'Asia/Tehran', 0),
-(307, NULL, NULL, 'Asia/Tel_Aviv', 0),
-(308, NULL, NULL, 'Asia/Thimbu', 0),
-(309, NULL, NULL, 'Asia/Thimphu', 0),
-(310, NULL, NULL, 'Asia/Tokyo', 0),
-(311, NULL, NULL, 'Asia/Ujung_Pandang', 0),
-(312, NULL, NULL, 'Asia/Ulaanbaatar', 0),
-(313, NULL, NULL, 'Asia/Ulan_Bator', 0),
-(314, NULL, NULL, 'Asia/Urumqi', 0),
-(315, NULL, NULL, 'Asia/Ust-Nera', 0),
-(316, NULL, NULL, 'Asia/Vientiane', 0),
-(317, NULL, NULL, 'Asia/Vladivostok', 0),
-(318, NULL, NULL, 'Asia/Yakutsk', 0),
-(319, NULL, NULL, 'Asia/Yekaterinburg', 0),
-(320, NULL, NULL, 'Asia/Yerevan', 0),
-(321, NULL, NULL, 'Atlantic/Azores', 0),
-(322, NULL, NULL, 'Atlantic/Bermuda', 0),
-(323, NULL, NULL, 'Atlantic/Canary', 0),
-(324, NULL, NULL, 'Atlantic/Cape_Verde', 0),
-(325, NULL, NULL, 'Atlantic/Faeroe', 0),
-(326, NULL, NULL, 'Atlantic/Faroe', 0),
-(327, NULL, NULL, 'Atlantic/Jan_Mayen', 0),
-(328, NULL, NULL, 'Atlantic/Madeira', 0),
-(329, NULL, NULL, 'Atlantic/Reykjavik', 0),
-(330, NULL, NULL, 'Atlantic/South_Georgia', 0),
-(331, NULL, NULL, 'Atlantic/St_Helena', 0),
-(332, NULL, NULL, 'Atlantic/Stanley', 0),
-(333, NULL, NULL, 'Australia/ACT', 0),
-(334, NULL, NULL, 'Australia/Adelaide', 0),
-(335, NULL, NULL, 'Australia/Brisbane', 0),
-(336, NULL, NULL, 'Australia/Broken_Hill', 0),
-(337, NULL, NULL, 'Australia/Canberra', 0),
-(338, NULL, NULL, 'Australia/Currie', 0),
-(339, NULL, NULL, 'Australia/Darwin', 0),
-(340, NULL, NULL, 'Australia/Eucla', 0),
-(341, NULL, NULL, 'Australia/Hobart', 0),
-(342, NULL, NULL, 'Australia/LHI', 0),
-(343, NULL, NULL, 'Australia/Lindeman', 0),
-(344, NULL, NULL, 'Australia/Lord_Howe', 0),
-(345, NULL, NULL, 'Australia/Melbourne', 0),
-(346, NULL, NULL, 'Australia/North', 0),
-(347, NULL, NULL, 'Australia/NSW', 0),
-(348, NULL, NULL, 'Australia/Perth', 0),
-(349, NULL, NULL, 'Australia/Queensland', 0),
-(350, NULL, NULL, 'Australia/South', 0),
-(351, NULL, NULL, 'Australia/Sydney', 0),
-(352, NULL, NULL, 'Australia/Tasmania', 0),
-(353, NULL, NULL, 'Australia/Victoria', 0),
-(354, NULL, NULL, 'Australia/West', 0),
-(355, NULL, NULL, 'Australia/Yancowinna', 0),
-(356, NULL, NULL, 'Europe/Amsterdam', 0),
-(357, NULL, NULL, 'Europe/Andorra', 0),
-(358, NULL, NULL, 'Europe/Athens', 0),
-(359, NULL, NULL, 'Europe/Belfast', 0),
-(360, NULL, NULL, 'Europe/Belgrade', 0),
-(361, NULL, NULL, 'Europe/Berlin', 0),
-(362, NULL, NULL, 'Europe/Bratislava', 0),
-(363, NULL, NULL, 'Europe/Brussels', 0),
-(364, NULL, NULL, 'Europe/Bucharest', 0),
-(365, NULL, NULL, 'Europe/Budapest', 0),
-(366, NULL, NULL, 'Europe/Busingen', 0),
-(367, NULL, NULL, 'Europe/Chisinau', 0),
-(368, NULL, NULL, 'Europe/Copenhagen', 0),
-(369, NULL, NULL, 'Europe/Dublin', 0),
-(370, NULL, NULL, 'Europe/Gibraltar', 0),
-(371, NULL, NULL, 'Europe/Guernsey', 0),
-(372, NULL, NULL, 'Europe/Helsinki', 0),
-(373, NULL, NULL, 'Europe/Isle_of_Man', 0),
-(374, NULL, NULL, 'Europe/Istanbul', 0),
-(375, NULL, NULL, 'Europe/Jersey', 0),
-(376, NULL, NULL, 'Europe/Kaliningrad', 0),
-(377, NULL, NULL, 'Europe/Kiev', 0),
-(378, NULL, NULL, 'Europe/Lisbon', 0),
-(379, NULL, NULL, 'Europe/Ljubljana', 0),
-(380, NULL, NULL, 'Europe/London', 0),
-(381, NULL, NULL, 'Europe/Luxembourg', 0),
-(382, NULL, NULL, 'Europe/Madrid', 0),
-(383, NULL, NULL, 'Europe/Malta', 0),
-(384, NULL, NULL, 'Europe/Mariehamn', 0),
-(385, NULL, NULL, 'Europe/Minsk', 0),
-(386, NULL, NULL, 'Europe/Monaco', 0),
-(387, NULL, NULL, 'Europe/Moscow', 0),
-(388, NULL, NULL, 'Europe/Nicosia', 0),
-(389, NULL, NULL, 'Europe/Oslo', 0),
-(390, NULL, NULL, 'Europe/Paris', 0),
-(391, NULL, NULL, 'Europe/Podgorica', 0),
-(392, NULL, NULL, 'Europe/Prague', 0),
-(393, NULL, NULL, 'Europe/Riga', 0),
-(394, NULL, NULL, 'Europe/Rome', 0),
-(395, NULL, NULL, 'Europe/Samara', 0),
-(396, NULL, NULL, 'Europe/San_Marino', 0),
-(397, NULL, NULL, 'Europe/Sarajevo', 0),
-(398, NULL, NULL, 'Europe/Simferopol', 0),
-(399, NULL, NULL, 'Europe/Skopje', 0),
-(400, NULL, NULL, 'Europe/Sofia', 0),
-(401, NULL, NULL, 'Europe/Stockholm', 0),
-(402, NULL, NULL, 'Europe/Tallinn', 0),
-(403, NULL, NULL, 'Europe/Tirane', 0),
-(404, NULL, NULL, 'Europe/Tiraspol', 0),
-(405, NULL, NULL, 'Europe/Uzhgorod', 0),
-(406, NULL, NULL, 'Europe/Vaduz', 0),
-(407, NULL, NULL, 'Europe/Vatican', 0),
-(408, NULL, NULL, 'Europe/Vienna', 0),
-(409, NULL, NULL, 'Europe/Vilnius', 0),
-(410, NULL, NULL, 'Europe/Volgograd', 0),
-(411, NULL, NULL, 'Europe/Warsaw', 0),
-(412, NULL, NULL, 'Europe/Zagreb', 0),
-(413, NULL, NULL, 'Europe/Zaporozhye', 0),
-(414, NULL, NULL, 'Europe/Zurich', 0),
-(415, NULL, NULL, 'Indian/Antananarivo', 0),
-(416, NULL, NULL, 'Indian/Chagos', 0),
-(417, NULL, NULL, 'Indian/Christmas', 0),
-(418, NULL, NULL, 'Indian/Cocos', 0),
-(419, NULL, NULL, 'Indian/Comoro', 0),
-(420, NULL, NULL, 'Indian/Kerguelen', 0),
-(421, NULL, NULL, 'Indian/Mahe', 0),
-(422, NULL, NULL, 'Indian/Maldives', 0),
-(423, NULL, NULL, 'Indian/Mauritius', 0),
-(424, NULL, NULL, 'Indian/Mayotte', 0),
-(425, NULL, NULL, 'Indian/Reunion', 0),
-(426, NULL, NULL, 'Pacific/Apia', 0),
-(427, NULL, NULL, 'Pacific/Auckland', 0),
-(428, NULL, NULL, 'Pacific/Chatham', 0),
-(429, NULL, NULL, 'Pacific/Chuuk', 0),
-(430, NULL, NULL, 'Pacific/Easter', 0),
-(431, NULL, NULL, 'Pacific/Efate', 0),
-(432, NULL, NULL, 'Pacific/Enderbury', 0),
-(433, NULL, NULL, 'Pacific/Fakaofo', 0),
-(434, NULL, NULL, 'Pacific/Fiji', 0),
-(435, NULL, NULL, 'Pacific/Funafuti', 0),
-(436, NULL, NULL, 'Pacific/Galapagos', 0),
-(437, NULL, NULL, 'Pacific/Gambier', 0),
-(438, NULL, NULL, 'Pacific/Guadalcanal', 0),
-(439, NULL, NULL, 'Pacific/Guam', 0),
-(440, NULL, NULL, 'Pacific/Honolulu', 0),
-(441, NULL, NULL, 'Pacific/Johnston', 0),
-(442, NULL, NULL, 'Pacific/Kiritimati', 0),
-(443, NULL, NULL, 'Pacific/Kosrae', 0),
-(444, NULL, NULL, 'Pacific/Kwajalein', 0),
-(445, NULL, NULL, 'Pacific/Majuro', 0),
-(446, NULL, NULL, 'Pacific/Marquesas', 0),
-(447, NULL, NULL, 'Pacific/Midway', 0),
-(448, NULL, NULL, 'Pacific/Nauru', 0),
-(449, NULL, NULL, 'Pacific/Niue', 0),
-(450, NULL, NULL, 'Pacific/Norfolk', 0),
-(451, NULL, NULL, 'Pacific/Noumea', 0),
-(452, NULL, NULL, 'Pacific/Pago_Pago', 0),
-(453, NULL, NULL, 'Pacific/Palau', 0),
-(454, NULL, NULL, 'Pacific/Pitcairn', 0),
-(455, NULL, NULL, 'Pacific/Pohnpei', 0),
-(456, NULL, NULL, 'Pacific/Ponape', 0),
-(457, NULL, NULL, 'Pacific/Port_Moresby', 0),
-(458, NULL, NULL, 'Pacific/Rarotonga', 0),
-(459, NULL, NULL, 'Pacific/Saipan', 0),
-(460, NULL, NULL, 'Pacific/Samoa', 0),
-(461, NULL, NULL, 'Pacific/Tahiti', 0),
-(462, NULL, NULL, 'Pacific/Tarawa', 0),
-(463, NULL, NULL, 'Pacific/Tongatapu', 0),
-(464, NULL, NULL, 'Pacific/Truk', 0),
-(465, NULL, NULL, 'Pacific/Wake', 0),
-(466, NULL, NULL, 'Pacific/Wallis', 0),
-(467, NULL, NULL, 'Pacific/Yap', 0);
+(1, NULL, '2025-01-28 19:02:48', 'Africa/Abidjan', 0),
+(2, NULL, '2025-01-28 19:02:48', 'Africa/Accra', 0),
+(3, NULL, '2025-01-28 19:02:48', 'Africa/Addis_Ababa', 0),
+(4, NULL, '2025-01-28 19:02:48', 'Africa/Algiers', 0),
+(5, NULL, '2025-01-28 19:02:48', 'Africa/Asmara', 0),
+(6, NULL, '2025-01-28 19:02:48', 'Africa/Asmera', 0),
+(7, NULL, '2025-01-28 19:02:48', 'Africa/Bamako', 0),
+(8, NULL, '2025-01-28 19:02:48', 'Africa/Bangui', 0),
+(9, NULL, '2025-01-28 19:02:48', 'Africa/Banjul', 0),
+(10, NULL, '2025-01-28 19:02:48', 'Africa/Bissau', 0),
+(11, NULL, '2025-01-28 19:02:48', 'Africa/Blantyre', 0),
+(12, NULL, '2025-01-28 19:02:48', 'Africa/Brazzaville', 0),
+(13, NULL, '2025-01-28 19:02:48', 'Africa/Bujumbura', 0),
+(14, NULL, '2025-01-28 19:02:48', 'Africa/Cairo', 0),
+(15, NULL, '2025-01-28 19:02:48', 'Africa/Casablanca', 0),
+(16, NULL, '2025-01-28 19:02:48', 'Africa/Ceuta', 0),
+(17, NULL, '2025-01-28 19:02:48', 'Africa/Conakry', 0),
+(18, NULL, '2025-01-28 19:02:48', 'Africa/Dakar', 0),
+(19, NULL, '2025-01-28 19:02:48', 'Africa/Dar_es_Salaam', 0),
+(20, NULL, '2025-01-28 19:02:48', 'Africa/Djibouti', 0),
+(21, NULL, '2025-01-28 19:02:48', 'Africa/Douala', 0),
+(22, NULL, '2025-01-28 19:02:48', 'Africa/El_Aaiun', 0),
+(23, NULL, '2025-01-28 19:02:48', 'Africa/Freetown', 0),
+(24, NULL, '2025-01-28 19:02:48', 'Africa/Gaborone', 0),
+(25, NULL, '2025-01-28 19:02:48', 'Africa/Harare', 0),
+(26, NULL, '2025-01-28 19:02:48', 'Africa/Johannesburg', 0),
+(27, NULL, '2025-01-28 19:02:48', 'Africa/Juba', 0),
+(28, NULL, '2025-01-28 19:02:48', 'Africa/Kampala', 0),
+(29, NULL, '2025-01-28 19:02:48', 'Africa/Khartoum', 0),
+(30, NULL, '2025-01-28 19:02:48', 'Africa/Kigali', 0),
+(31, NULL, '2025-01-28 19:02:48', 'Africa/Kinshasa', 0),
+(32, NULL, '2025-01-28 19:02:48', 'Africa/Lagos', 0),
+(33, NULL, '2025-01-28 19:02:48', 'Africa/Libreville', 0),
+(34, NULL, '2025-01-28 19:02:48', 'Africa/Lome', 0),
+(35, NULL, '2025-01-28 19:02:48', 'Africa/Luanda', 0),
+(36, NULL, '2025-01-28 19:02:48', 'Africa/Lubumbashi', 0),
+(37, NULL, '2025-01-28 19:02:48', 'Africa/Lusaka', 0),
+(38, NULL, '2025-01-28 19:02:48', 'Africa/Malabo', 0),
+(39, NULL, '2025-01-28 19:02:48', 'Africa/Maputo', 0),
+(40, NULL, '2025-01-28 19:02:48', 'Africa/Maseru', 0),
+(41, NULL, '2025-01-28 19:02:48', 'Africa/Mbabane', 0),
+(42, NULL, '2025-01-28 19:02:48', 'Africa/Mogadishu', 0),
+(43, NULL, '2025-01-28 19:02:48', 'Africa/Monrovia', 0),
+(44, NULL, '2025-01-28 19:02:48', 'Africa/Nairobi', 0),
+(45, NULL, '2025-01-28 19:02:48', 'Africa/Ndjamena', 0),
+(46, NULL, '2025-01-28 19:02:48', 'Africa/Niamey', 0),
+(47, NULL, '2025-01-28 19:02:48', 'Africa/Nouakchott', 0),
+(48, NULL, '2025-01-28 19:02:48', 'Africa/Ouagadougou', 0),
+(49, NULL, '2025-01-28 19:02:48', 'Africa/Porto-Novo', 0),
+(50, NULL, '2025-01-28 19:02:48', 'Africa/Sao_Tome', 0),
+(51, NULL, '2025-01-28 19:02:48', 'Africa/Timbuktu', 0),
+(52, NULL, '2025-01-28 19:02:48', 'Africa/Tripoli', 0),
+(53, NULL, '2025-01-28 19:02:48', 'Africa/Tunis', 0),
+(54, NULL, '2025-01-28 19:02:48', 'Africa/Windhoek', 0),
+(55, NULL, '2025-01-28 19:02:48', 'America/Adak', 0),
+(56, NULL, '2025-01-28 19:02:48', 'America/Anchorage', 0),
+(57, NULL, '2025-01-28 19:02:48', 'America/Anguilla', 0),
+(58, NULL, '2025-01-28 19:02:48', 'America/Antigua', 0),
+(59, NULL, '2025-01-28 19:02:48', 'America/Araguaina', 0),
+(60, NULL, '2025-01-28 19:02:48', 'America/Argentina/Buenos_Aires', 0),
+(61, NULL, '2025-01-28 19:02:48', 'America/Argentina/Catamarca', 0),
+(62, NULL, '2025-01-28 19:02:48', 'America/Argentina/ComodRivadavia', 0),
+(63, NULL, '2025-01-28 19:02:48', 'America/Argentina/Cordoba', 0),
+(64, NULL, '2025-01-28 19:02:48', 'America/Argentina/Jujuy', 0),
+(65, NULL, '2025-01-28 19:02:48', 'America/Argentina/La_Rioja', 0),
+(66, NULL, '2025-01-28 19:02:48', 'America/Argentina/Mendoza', 0),
+(67, NULL, '2025-01-28 19:02:48', 'America/Argentina/Rio_Gallegos', 0),
+(68, NULL, '2025-01-28 19:02:48', 'America/Argentina/Salta', 0),
+(69, NULL, '2025-01-28 19:02:48', 'America/Argentina/San_Juan', 0),
+(70, NULL, '2025-01-28 19:02:48', 'America/Argentina/San_Luis', 0),
+(71, NULL, '2025-01-28 19:02:48', 'America/Argentina/Tucuman', 0),
+(72, NULL, '2025-01-28 19:02:48', 'America/Argentina/Ushuaia', 0),
+(73, NULL, '2025-01-28 19:02:48', 'America/Aruba', 0),
+(74, NULL, '2025-01-28 19:02:48', 'America/Asuncion', 0),
+(75, NULL, '2025-01-28 19:02:48', 'America/Atikokan', 0),
+(76, NULL, '2025-01-28 19:02:48', 'America/Atka', 0),
+(77, NULL, '2025-01-28 19:02:48', 'America/Bahia', 0),
+(78, NULL, '2025-01-28 19:02:48', 'America/Bahia_Banderas', 0),
+(79, NULL, '2025-01-28 19:02:48', 'America/Barbados', 0),
+(80, NULL, '2025-01-28 19:02:48', 'America/Belem', 0),
+(81, NULL, '2025-01-28 19:02:48', 'America/Belize', 0),
+(82, NULL, '2025-01-28 19:02:48', 'America/Blanc-Sablon', 0),
+(83, NULL, '2025-01-28 19:02:48', 'America/Boa_Vista', 0),
+(84, NULL, '2025-01-28 19:02:48', 'America/Bogota', 0),
+(85, NULL, '2025-01-28 19:02:48', 'America/Boise', 0),
+(86, NULL, '2025-01-28 19:02:48', 'America/Buenos_Aires', 0),
+(87, NULL, '2025-01-28 19:02:48', 'America/Cambridge_Bay', 0),
+(88, NULL, '2025-01-28 19:02:48', 'America/Campo_Grande', 0),
+(89, NULL, '2025-01-28 19:02:48', 'America/Cancun', 0),
+(90, NULL, '2025-01-28 19:02:48', 'America/Caracas', 0),
+(91, NULL, '2025-01-28 19:02:48', 'America/Catamarca', 0),
+(92, NULL, '2025-01-28 19:02:48', 'America/Cayenne', 0),
+(93, NULL, '2025-01-28 19:02:48', 'America/Cayman', 0),
+(94, NULL, '2025-01-28 19:02:48', 'America/Chicago', 0),
+(95, NULL, '2025-01-28 19:02:48', 'America/Chihuahua', 0),
+(96, NULL, '2025-01-28 19:02:48', 'America/Coral_Harbour', 0),
+(97, NULL, '2025-01-28 19:02:48', 'America/Cordoba', 0),
+(98, NULL, '2025-01-28 19:02:48', 'America/Costa_Rica', 0),
+(99, NULL, '2025-01-28 19:02:48', 'America/Creston', 0),
+(100, NULL, '2025-01-28 19:02:48', 'America/Cuiaba', 0),
+(101, NULL, '2025-01-28 19:02:48', 'America/Curacao', 0),
+(102, NULL, '2025-01-28 19:02:48', 'America/Danmarkshavn', 0),
+(103, NULL, '2025-01-28 19:02:48', 'America/Dawson', 0),
+(104, NULL, '2025-01-28 19:02:48', 'America/Dawson_Creek', 0),
+(105, NULL, '2025-01-28 19:02:48', 'America/Denver', 0),
+(106, NULL, '2025-01-28 19:02:48', 'America/Detroit', 0),
+(107, NULL, '2025-01-28 19:02:48', 'America/Dominica', 0),
+(108, NULL, '2025-01-28 19:02:48', 'America/Edmonton', 0),
+(109, NULL, '2025-01-28 19:02:48', 'America/Eirunepe', 0),
+(110, NULL, '2025-01-28 19:02:48', 'America/El_Salvador', 0),
+(111, NULL, '2025-01-28 19:02:48', 'America/Ensenada', 0),
+(112, NULL, '2025-01-28 19:02:48', 'America/Fort_Wayne', 0),
+(113, NULL, '2025-01-28 19:02:48', 'America/Fortaleza', 0),
+(114, NULL, '2025-01-28 19:02:48', 'America/Glace_Bay', 0),
+(115, NULL, '2025-01-28 19:02:48', 'America/Godthab', 0),
+(116, NULL, '2025-01-28 19:02:48', 'America/Goose_Bay', 0),
+(117, NULL, '2025-01-28 19:02:48', 'America/Grand_Turk', 0),
+(118, NULL, '2025-01-28 19:02:48', 'America/Grenada', 0),
+(119, NULL, '2025-01-28 19:02:48', 'America/Guadeloupe', 0),
+(120, NULL, '2025-01-28 19:02:48', 'America/Guatemala', 0),
+(121, NULL, '2025-01-28 19:02:48', 'America/Guayaquil', 0),
+(122, NULL, '2025-01-28 19:02:48', 'America/Guyana', 0),
+(123, NULL, '2025-01-28 19:02:48', 'America/Halifax', 0),
+(124, NULL, '2025-01-28 19:02:48', 'America/Havana', 0),
+(125, NULL, '2025-01-28 19:02:48', 'America/Hermosillo', 0),
+(126, NULL, '2025-01-28 19:02:48', 'America/Indiana/Indianapolis', 0),
+(127, NULL, '2025-01-28 19:02:48', 'America/Indiana/Knox', 0),
+(128, NULL, '2025-01-28 19:02:48', 'America/Indiana/Marengo', 0),
+(129, NULL, '2025-01-28 19:02:48', 'America/Indiana/Petersburg', 0),
+(130, NULL, '2025-01-28 19:02:48', 'America/Indiana/Tell_City', 0),
+(131, NULL, '2025-01-28 19:02:48', 'America/Indiana/Vevay', 0),
+(132, NULL, '2025-01-28 19:02:48', 'America/Indiana/Vincennes', 0),
+(133, NULL, '2025-01-28 19:02:48', 'America/Indiana/Winamac', 0),
+(134, NULL, '2025-01-28 19:02:48', 'America/Indianapolis', 0),
+(135, NULL, '2025-01-28 19:02:48', 'America/Inuvik', 0),
+(136, NULL, '2025-01-28 19:02:48', 'America/Iqaluit', 0),
+(137, NULL, '2025-01-28 19:02:48', 'America/Jamaica', 0),
+(138, NULL, '2025-01-28 19:02:48', 'America/Jujuy', 0),
+(139, NULL, '2025-01-28 19:02:48', 'America/Juneau', 0),
+(140, NULL, '2025-01-28 19:02:48', 'America/Kentucky/Louisville', 0),
+(141, NULL, '2025-01-28 19:02:48', 'America/Kentucky/Monticello', 0),
+(142, NULL, '2025-01-28 19:02:48', 'America/Knox_IN', 0),
+(143, NULL, '2025-01-28 19:02:48', 'America/Kralendijk', 0),
+(144, NULL, '2025-01-28 19:02:48', 'America/La_Paz', 0),
+(145, NULL, '2025-01-28 19:02:48', 'America/Lima', 0),
+(146, NULL, '2025-01-28 19:02:48', 'America/Los_Angeles', 0),
+(147, NULL, '2025-01-28 19:02:48', 'America/Louisville', 0),
+(148, NULL, '2025-01-28 19:02:48', 'America/Lower_Princes', 0),
+(149, NULL, '2025-01-28 19:02:48', 'America/Maceio', 0),
+(150, NULL, '2025-01-28 19:02:48', 'America/Managua', 0),
+(151, NULL, '2025-01-28 19:02:48', 'America/Manaus', 0),
+(152, NULL, '2025-01-28 19:02:48', 'America/Marigot', 0),
+(153, NULL, '2025-01-28 19:02:48', 'America/Martinique', 0),
+(154, NULL, '2025-01-28 19:02:48', 'America/Matamoros', 0),
+(155, NULL, '2025-01-28 19:02:48', 'America/Mazatlan', 0),
+(156, NULL, '2025-01-28 19:02:48', 'America/Mendoza', 0),
+(157, NULL, '2025-01-28 19:02:48', 'America/Menominee', 0),
+(158, NULL, '2025-01-28 19:02:48', 'America/Merida', 0),
+(159, NULL, '2025-01-28 19:02:48', 'America/Metlakatla', 0),
+(160, NULL, '2025-01-28 19:02:48', 'America/Mexico_City', 0),
+(161, NULL, '2025-01-28 19:02:48', 'America/Miquelon', 0),
+(162, NULL, '2025-01-28 19:02:48', 'America/Moncton', 0),
+(163, NULL, '2025-01-28 19:02:48', 'America/Monterrey', 0),
+(164, NULL, '2025-01-28 19:02:48', 'America/Montevideo', 0),
+(165, NULL, '2025-01-28 19:02:48', 'America/Montreal', 0),
+(166, NULL, '2025-01-28 19:02:48', 'America/Montserrat', 0),
+(167, NULL, '2025-01-28 19:02:48', 'America/Nassau', 0),
+(168, NULL, '2025-01-28 19:02:48', 'America/New_York', 0),
+(169, NULL, '2025-01-28 19:02:48', 'America/Nipigon', 0),
+(170, NULL, '2025-01-28 19:02:48', 'America/Nome', 0),
+(171, NULL, '2025-01-28 19:02:48', 'America/Noronha', 0),
+(172, NULL, '2025-01-28 19:02:48', 'America/North_Dakota/Beulah', 0),
+(173, NULL, '2025-01-28 19:02:48', 'America/North_Dakota/Center', 0),
+(174, NULL, '2025-01-28 19:02:48', 'America/North_Dakota/New_Salem', 0),
+(175, NULL, '2025-01-28 19:02:48', 'America/Ojinaga', 0),
+(176, NULL, '2025-01-28 19:02:48', 'America/Panama', 0),
+(177, NULL, '2025-01-28 19:02:48', 'America/Pangnirtung', 0),
+(178, NULL, '2025-01-28 19:02:48', 'America/Paramaribo', 0),
+(179, NULL, '2025-01-28 19:02:48', 'America/Phoenix', 0),
+(180, NULL, '2025-01-28 19:02:48', 'America/Port-au-Prince', 0),
+(181, NULL, '2025-01-28 19:02:48', 'America/Port_of_Spain', 0),
+(182, NULL, '2025-01-28 19:02:48', 'America/Porto_Acre', 0),
+(183, NULL, '2025-01-28 19:02:48', 'America/Porto_Velho', 0),
+(184, NULL, '2025-01-28 19:02:48', 'America/Puerto_Rico', 0),
+(185, NULL, '2025-01-28 19:02:48', 'America/Rainy_River', 0),
+(186, NULL, '2025-01-28 19:02:48', 'America/Rankin_Inlet', 0),
+(187, NULL, '2025-01-28 19:02:48', 'America/Recife', 0),
+(188, NULL, '2025-01-28 19:02:48', 'America/Regina', 0),
+(189, NULL, '2025-01-28 19:02:48', 'America/Resolute', 0),
+(190, NULL, '2025-01-28 19:02:48', 'America/Rio_Branco', 0),
+(191, NULL, '2025-01-28 19:02:48', 'America/Rosario', 0),
+(192, NULL, '2025-01-28 19:02:48', 'America/Santa_Isabel', 0),
+(193, NULL, '2025-01-28 19:02:48', 'America/Santarem', 0),
+(194, NULL, '2025-01-28 19:02:48', 'America/Santiago', 0),
+(195, NULL, '2025-01-28 19:02:48', 'America/Santo_Domingo', 0),
+(196, NULL, '2025-01-28 19:02:48', 'America/Sao_Paulo', 0),
+(197, NULL, '2025-01-28 19:02:48', 'America/Scoresbysund', 0),
+(198, NULL, '2025-01-28 19:02:48', 'America/Shiprock', 0),
+(199, NULL, '2025-01-28 19:02:48', 'America/Sitka', 0),
+(200, NULL, '2025-01-28 19:02:48', 'America/St_Barthelemy', 0),
+(201, NULL, '2025-01-28 19:02:48', 'America/St_Johns', 0),
+(202, NULL, '2025-01-28 19:02:48', 'America/St_Kitts', 0),
+(203, NULL, '2025-01-28 19:02:48', 'America/St_Lucia', 0),
+(204, NULL, '2025-01-28 19:02:48', 'America/St_Thomas', 0),
+(205, NULL, '2025-01-28 19:02:48', 'America/St_Vincent', 0),
+(206, NULL, '2025-01-28 19:02:48', 'America/Swift_Current', 0),
+(207, NULL, '2025-01-28 19:02:48', 'America/Tegucigalpa', 0),
+(208, NULL, '2025-01-28 19:02:48', 'America/Thule', 0),
+(209, NULL, '2025-01-28 19:02:48', 'America/Thunder_Bay', 0),
+(210, NULL, '2025-01-28 19:02:48', 'America/Tijuana', 0),
+(211, NULL, '2025-01-28 19:02:48', 'America/Toronto', 0),
+(212, NULL, '2025-01-28 19:02:48', 'America/Tortola', 0),
+(213, NULL, '2025-01-28 19:02:48', 'America/Vancouver', 0),
+(214, NULL, '2025-01-28 19:02:48', 'America/Virgin', 0),
+(215, NULL, '2025-01-28 19:02:48', 'America/Whitehorse', 0),
+(216, NULL, '2025-01-28 19:02:48', 'America/Winnipeg', 0),
+(217, NULL, '2025-01-28 19:02:48', 'America/Yakutat', 0),
+(218, NULL, '2025-01-28 19:02:48', 'America/Yellowknife', 0),
+(219, NULL, '2025-01-28 19:02:48', 'Antarctica/Casey', 0),
+(220, NULL, '2025-01-28 19:02:48', 'Antarctica/Davis', 0),
+(221, NULL, '2025-01-28 19:02:48', 'Antarctica/DumontDUrville', 0),
+(222, NULL, '2025-01-28 19:02:48', 'Antarctica/Macquarie', 0),
+(223, NULL, '2025-01-28 19:02:48', 'Antarctica/Mawson', 0),
+(224, NULL, '2025-01-28 19:02:48', 'Antarctica/McMurdo', 0),
+(225, NULL, '2025-01-28 19:02:48', 'Antarctica/Palmer', 0),
+(226, NULL, '2025-01-28 19:02:48', 'Antarctica/Rothera', 0),
+(227, NULL, '2025-01-28 19:02:48', 'Antarctica/South_Pole', 0),
+(228, NULL, '2025-01-28 19:02:48', 'Antarctica/Syowa', 0),
+(229, NULL, '2025-01-28 19:02:48', 'Antarctica/Vostok', 0),
+(230, NULL, '2025-01-28 19:02:48', 'Arctic/Longyearbyen', 0),
+(231, NULL, '2025-01-28 19:02:48', 'Asia/Aden', 0),
+(232, NULL, '2025-01-28 19:02:48', 'Asia/Almaty', 0),
+(233, NULL, '2025-01-28 19:02:48', 'Asia/Amman', 0),
+(234, NULL, '2025-01-28 19:02:48', 'Asia/Anadyr', 0),
+(235, NULL, '2025-01-28 19:02:48', 'Asia/Aqtau', 0),
+(236, NULL, '2025-01-28 19:02:48', 'Asia/Aqtobe', 0),
+(237, NULL, '2025-01-28 19:02:48', 'Asia/Ashgabat', 0),
+(238, NULL, '2025-01-28 19:02:48', 'Asia/Ashkhabad', 0),
+(239, NULL, '2025-01-28 19:02:48', 'Asia/Baghdad', 0),
+(240, NULL, '2025-01-28 19:02:48', 'Asia/Bahrain', 0),
+(241, NULL, '2025-01-28 19:02:48', 'Asia/Baku', 0),
+(242, NULL, '2025-01-28 19:02:48', 'Asia/Bangkok', 0),
+(243, NULL, '2025-01-28 19:02:48', 'Asia/Beirut', 0),
+(244, NULL, '2025-01-28 19:02:48', 'Asia/Bishkek', 0),
+(245, NULL, '2025-01-28 19:02:48', 'Asia/Brunei', 0),
+(246, NULL, '2025-01-28 19:02:48', 'Asia/Calcutta', 0),
+(247, NULL, '2025-01-28 19:02:48', 'Asia/Choibalsan', 0),
+(248, NULL, '2025-01-28 19:02:48', 'Asia/Chongqing', 0),
+(249, NULL, '2025-01-28 19:02:48', 'Asia/Chungking', 0),
+(250, NULL, '2025-01-28 19:02:48', 'Asia/Colombo', 0),
+(251, NULL, '2025-01-28 19:02:48', 'Asia/Dacca', 0),
+(252, NULL, '2025-01-28 19:02:48', 'Asia/Damascus', 0),
+(253, NULL, '2025-01-28 19:02:48', 'Asia/Dhaka', 0),
+(254, NULL, '2025-01-28 19:02:48', 'Asia/Dili', 0),
+(255, NULL, '2025-01-28 19:02:48', 'Asia/Dubai', 0),
+(256, NULL, '2025-01-28 19:02:48', 'Asia/Dushanbe', 0),
+(257, NULL, '2025-01-28 19:02:48', 'Asia/Gaza', 0),
+(258, NULL, '2025-01-28 19:02:48', 'Asia/Harbin', 0),
+(259, NULL, '2025-01-28 19:02:48', 'Asia/Hebron', 0),
+(260, NULL, '2025-01-28 19:02:48', 'Asia/Ho_Chi_Minh', 0),
+(261, NULL, '2025-01-28 19:02:48', 'Asia/Hong_Kong', 0),
+(262, NULL, '2025-01-28 19:02:48', 'Asia/Hovd', 0),
+(263, NULL, '2025-01-28 19:02:48', 'Asia/Irkutsk', 0),
+(264, NULL, '2025-01-28 19:02:48', 'Asia/Istanbul', 0),
+(265, NULL, '2025-01-28 19:02:48', 'Asia/Jakarta', 0),
+(266, NULL, '2025-01-28 19:02:48', 'Asia/Jayapura', 0),
+(267, NULL, '2025-01-28 19:02:48', 'Asia/Jerusalem', 0),
+(268, NULL, '2025-01-28 19:02:48', 'Asia/Kabul', 0),
+(269, NULL, '2025-01-28 19:02:48', 'Asia/Kamchatka', 0),
+(270, NULL, '2025-01-28 19:02:48', 'Asia/Karachi', 0),
+(271, NULL, '2025-01-28 19:02:48', 'Asia/Kashgar', 0),
+(272, NULL, '2025-01-28 19:02:48', 'Asia/Kathmandu', 0),
+(273, NULL, '2025-01-28 19:02:48', 'Asia/Khandyga', 0),
+(274, NULL, '2025-01-28 18:03:15', 'Asia/Kolkata', 1),
+(275, NULL, '2025-01-28 19:02:48', 'Asia/Krasnoyarsk', 0),
+(276, NULL, '2025-01-28 19:02:48', 'Asia/Kuala_Lumpur', 0),
+(277, NULL, '2025-01-28 19:02:48', 'Asia/Kuching', 0),
+(278, NULL, '2025-01-28 19:02:48', 'Asia/Kuwait', 0),
+(279, NULL, '2025-01-28 19:02:48', 'Asia/Macao', 0),
+(280, NULL, '2025-01-28 19:02:48', 'Asia/Macau', 0),
+(281, NULL, '2025-01-28 19:02:48', 'Asia/Magadan', 0),
+(282, NULL, '2025-01-28 19:02:48', 'Asia/Makassar', 0),
+(283, NULL, '2025-01-28 19:02:48', 'Asia/Manila', 0),
+(284, NULL, '2025-01-28 19:02:48', 'Asia/Muscat', 0),
+(285, NULL, '2025-01-28 19:02:48', 'Asia/Nicosia', 0),
+(286, NULL, '2025-01-28 19:02:48', 'Asia/Novokuznetsk', 0),
+(287, NULL, '2025-01-28 19:02:48', 'Asia/Novosibirsk', 0),
+(288, NULL, '2025-01-28 19:02:48', 'Asia/Omsk', 0),
+(289, NULL, '2025-01-28 19:02:48', 'Asia/Oral', 0),
+(290, NULL, '2025-01-28 19:02:48', 'Asia/Phnom_Penh', 0),
+(291, NULL, '2025-01-28 19:02:48', 'Asia/Pontianak', 0),
+(292, NULL, '2025-01-28 19:02:48', 'Asia/Pyongyang', 0),
+(293, NULL, '2025-01-28 19:02:48', 'Asia/Qatar', 0),
+(294, NULL, '2025-01-28 19:02:48', 'Asia/Qyzylorda', 0),
+(295, NULL, '2025-01-28 19:02:48', 'Asia/Rangoon', 0),
+(296, NULL, '2025-01-28 19:02:48', 'Asia/Riyadh', 0),
+(297, NULL, '2025-01-28 19:02:48', 'Asia/Saigon', 0),
+(298, NULL, '2025-01-28 19:02:48', 'Asia/Sakhalin', 0),
+(299, NULL, '2025-01-28 19:02:48', 'Asia/Samarkand', 0),
+(300, NULL, '2025-01-28 19:02:48', 'Asia/Seoul', 0),
+(301, NULL, '2025-01-28 19:02:48', 'Asia/Shanghai', 0),
+(302, NULL, '2025-01-28 19:02:48', 'Asia/Singapore', 0),
+(303, NULL, '2025-01-28 19:02:48', 'Asia/Taipei', 0),
+(304, NULL, '2025-01-28 19:02:48', 'Asia/Tashkent', 0),
+(305, NULL, '2025-01-28 19:02:48', 'Asia/Tbilisi', 0),
+(306, NULL, '2025-01-28 19:02:48', 'Asia/Tehran', 0),
+(307, NULL, '2025-01-28 19:02:48', 'Asia/Tel_Aviv', 0),
+(308, NULL, '2025-01-28 19:02:48', 'Asia/Thimbu', 0),
+(309, NULL, '2025-01-28 19:02:48', 'Asia/Thimphu', 0),
+(310, NULL, '2025-01-28 19:02:48', 'Asia/Tokyo', 0),
+(311, NULL, '2025-01-28 19:02:48', 'Asia/Ujung_Pandang', 0),
+(312, NULL, '2025-01-28 19:02:48', 'Asia/Ulaanbaatar', 0),
+(313, NULL, '2025-01-28 19:02:48', 'Asia/Ulan_Bator', 0),
+(314, NULL, '2025-01-28 19:02:48', 'Asia/Urumqi', 0),
+(315, NULL, '2025-01-28 19:02:48', 'Asia/Ust-Nera', 0),
+(316, NULL, '2025-01-28 19:02:48', 'Asia/Vientiane', 0),
+(317, NULL, '2025-01-28 19:02:48', 'Asia/Vladivostok', 0),
+(318, NULL, '2025-01-28 19:02:48', 'Asia/Yakutsk', 0),
+(319, NULL, '2025-01-28 19:02:48', 'Asia/Yekaterinburg', 0),
+(320, NULL, '2025-01-28 19:02:48', 'Asia/Yerevan', 0),
+(321, NULL, '2025-01-28 19:02:48', 'Atlantic/Azores', 0),
+(322, NULL, '2025-01-28 19:02:48', 'Atlantic/Bermuda', 0),
+(323, NULL, '2025-01-28 19:02:48', 'Atlantic/Canary', 0),
+(324, NULL, '2025-01-28 19:02:48', 'Atlantic/Cape_Verde', 0),
+(325, NULL, '2025-01-28 19:02:48', 'Atlantic/Faeroe', 0),
+(326, NULL, '2025-01-28 19:02:48', 'Atlantic/Faroe', 0),
+(327, NULL, '2025-01-28 19:02:48', 'Atlantic/Jan_Mayen', 0),
+(328, NULL, '2025-01-28 19:02:48', 'Atlantic/Madeira', 0),
+(329, NULL, '2025-01-28 19:02:48', 'Atlantic/Reykjavik', 0),
+(330, NULL, '2025-01-28 19:02:48', 'Atlantic/South_Georgia', 0),
+(331, NULL, '2025-01-28 19:02:48', 'Atlantic/St_Helena', 0),
+(332, NULL, '2025-01-28 19:02:48', 'Atlantic/Stanley', 0),
+(333, NULL, '2025-01-28 19:02:48', 'Australia/ACT', 0),
+(334, NULL, '2025-01-28 19:02:48', 'Australia/Adelaide', 0),
+(335, NULL, '2025-01-28 19:02:48', 'Australia/Brisbane', 0),
+(336, NULL, '2025-01-28 19:02:48', 'Australia/Broken_Hill', 0),
+(337, NULL, '2025-01-28 19:02:48', 'Australia/Canberra', 0),
+(338, NULL, '2025-01-28 19:02:48', 'Australia/Currie', 0),
+(339, NULL, '2025-01-28 19:02:48', 'Australia/Darwin', 0),
+(340, NULL, '2025-01-28 19:02:48', 'Australia/Eucla', 0),
+(341, NULL, '2025-01-28 19:02:48', 'Australia/Hobart', 0),
+(342, NULL, '2025-01-28 19:02:48', 'Australia/LHI', 0),
+(343, NULL, '2025-01-28 19:02:48', 'Australia/Lindeman', 0),
+(344, NULL, '2025-01-28 19:02:48', 'Australia/Lord_Howe', 0),
+(345, NULL, '2025-01-28 19:02:48', 'Australia/Melbourne', 0),
+(346, NULL, '2025-01-28 19:02:48', 'Australia/North', 0),
+(347, NULL, '2025-01-28 19:02:48', 'Australia/NSW', 0),
+(348, NULL, '2025-01-28 19:02:48', 'Australia/Perth', 0),
+(349, NULL, '2025-01-28 19:02:48', 'Australia/Queensland', 0),
+(350, NULL, '2025-01-28 19:02:48', 'Australia/South', 0),
+(351, NULL, '2025-01-28 19:02:48', 'Australia/Sydney', 0),
+(352, NULL, '2025-01-28 19:02:48', 'Australia/Tasmania', 0),
+(353, NULL, '2025-01-28 19:02:48', 'Australia/Victoria', 0),
+(354, NULL, '2025-01-28 19:02:48', 'Australia/West', 0),
+(355, NULL, '2025-01-28 19:02:48', 'Australia/Yancowinna', 0),
+(356, NULL, '2025-01-28 19:02:48', 'Europe/Amsterdam', 0),
+(357, NULL, '2025-01-28 19:02:48', 'Europe/Andorra', 0),
+(358, NULL, '2025-01-28 19:02:48', 'Europe/Athens', 0),
+(359, NULL, '2025-01-28 19:02:48', 'Europe/Belfast', 0),
+(360, NULL, '2025-01-28 19:02:48', 'Europe/Belgrade', 0),
+(361, NULL, '2025-01-28 19:02:48', 'Europe/Berlin', 0),
+(362, NULL, '2025-01-28 19:02:48', 'Europe/Bratislava', 0),
+(363, NULL, '2025-01-28 19:02:48', 'Europe/Brussels', 0),
+(364, NULL, '2025-01-28 19:02:48', 'Europe/Bucharest', 0),
+(365, NULL, '2025-01-28 19:02:48', 'Europe/Budapest', 0),
+(366, NULL, '2025-01-28 19:02:48', 'Europe/Busingen', 0),
+(367, NULL, '2025-01-28 19:02:48', 'Europe/Chisinau', 0),
+(368, NULL, '2025-01-28 19:02:48', 'Europe/Copenhagen', 0),
+(369, NULL, '2025-01-28 19:02:48', 'Europe/Dublin', 0),
+(370, NULL, '2025-01-28 19:02:48', 'Europe/Gibraltar', 0),
+(371, NULL, '2025-01-28 19:02:48', 'Europe/Guernsey', 0),
+(372, NULL, '2025-01-28 19:02:48', 'Europe/Helsinki', 0),
+(373, NULL, '2025-01-28 19:02:48', 'Europe/Isle_of_Man', 0),
+(374, NULL, '2025-01-28 19:02:48', 'Europe/Istanbul', 0),
+(375, NULL, '2025-01-28 19:02:48', 'Europe/Jersey', 0),
+(376, NULL, '2025-01-28 19:02:48', 'Europe/Kaliningrad', 0),
+(377, NULL, '2025-01-28 19:02:48', 'Europe/Kiev', 0),
+(378, NULL, '2025-01-28 19:02:48', 'Europe/Lisbon', 0),
+(379, NULL, '2025-01-28 19:02:48', 'Europe/Ljubljana', 0),
+(380, NULL, '2025-01-28 19:02:48', 'Europe/London', 0),
+(381, NULL, '2025-01-28 19:02:48', 'Europe/Luxembourg', 0),
+(382, NULL, '2025-01-28 19:02:48', 'Europe/Madrid', 0),
+(383, NULL, '2025-01-28 19:02:48', 'Europe/Malta', 0),
+(384, NULL, '2025-01-28 19:02:48', 'Europe/Mariehamn', 0),
+(385, NULL, '2025-01-28 19:02:48', 'Europe/Minsk', 0),
+(386, NULL, '2025-01-28 19:02:48', 'Europe/Monaco', 0),
+(387, NULL, '2025-01-28 19:02:48', 'Europe/Moscow', 0),
+(388, NULL, '2025-01-28 19:02:48', 'Europe/Nicosia', 0),
+(389, NULL, '2025-01-28 19:02:48', 'Europe/Oslo', 0),
+(390, NULL, '2025-01-28 19:02:48', 'Europe/Paris', 0),
+(391, NULL, '2025-01-28 19:02:48', 'Europe/Podgorica', 0),
+(392, NULL, '2025-01-28 19:02:48', 'Europe/Prague', 0),
+(393, NULL, '2025-01-28 19:02:48', 'Europe/Riga', 0),
+(394, NULL, '2025-01-28 19:02:48', 'Europe/Rome', 0),
+(395, NULL, '2025-01-28 19:02:48', 'Europe/Samara', 0),
+(396, NULL, '2025-01-28 19:02:48', 'Europe/San_Marino', 0),
+(397, NULL, '2025-01-28 19:02:48', 'Europe/Sarajevo', 0),
+(398, NULL, '2025-01-28 19:02:48', 'Europe/Simferopol', 0),
+(399, NULL, '2025-01-28 19:02:48', 'Europe/Skopje', 0),
+(400, NULL, '2025-01-28 19:02:48', 'Europe/Sofia', 0),
+(401, NULL, '2025-01-28 19:02:48', 'Europe/Stockholm', 0),
+(402, NULL, '2025-01-28 19:02:48', 'Europe/Tallinn', 0),
+(403, NULL, '2025-01-28 19:02:48', 'Europe/Tirane', 0),
+(404, NULL, '2025-01-28 19:02:48', 'Europe/Tiraspol', 0),
+(405, NULL, '2025-01-28 19:02:48', 'Europe/Uzhgorod', 0),
+(406, NULL, '2025-01-28 19:02:48', 'Europe/Vaduz', 0),
+(407, NULL, '2025-01-28 19:02:48', 'Europe/Vatican', 0),
+(408, NULL, '2025-01-28 19:02:48', 'Europe/Vienna', 0),
+(409, NULL, '2025-01-28 19:02:48', 'Europe/Vilnius', 0),
+(410, NULL, '2025-01-28 19:02:48', 'Europe/Volgograd', 0),
+(411, NULL, '2025-01-28 19:02:48', 'Europe/Warsaw', 0),
+(412, NULL, '2025-01-28 19:02:48', 'Europe/Zagreb', 0),
+(413, NULL, '2025-01-28 19:02:48', 'Europe/Zaporozhye', 0),
+(414, NULL, '2025-01-28 19:02:48', 'Europe/Zurich', 0),
+(415, NULL, '2025-01-28 19:02:48', 'Indian/Antananarivo', 0),
+(416, NULL, '2025-01-28 19:02:48', 'Indian/Chagos', 0),
+(417, NULL, '2025-01-28 19:02:48', 'Indian/Christmas', 0),
+(418, NULL, '2025-01-28 19:02:48', 'Indian/Cocos', 0),
+(419, NULL, '2025-01-28 19:02:48', 'Indian/Comoro', 0),
+(420, NULL, '2025-01-28 19:02:48', 'Indian/Kerguelen', 0),
+(421, NULL, '2025-01-28 19:02:48', 'Indian/Mahe', 0),
+(422, NULL, '2025-01-28 19:02:48', 'Indian/Maldives', 0),
+(423, NULL, '2025-01-28 19:02:48', 'Indian/Mauritius', 0),
+(424, NULL, '2025-01-28 19:02:48', 'Indian/Mayotte', 0),
+(425, NULL, '2025-01-28 19:02:48', 'Indian/Reunion', 0),
+(426, NULL, '2025-01-28 19:02:48', 'Pacific/Apia', 0),
+(427, NULL, '2025-01-28 19:02:48', 'Pacific/Auckland', 0),
+(428, NULL, '2025-01-28 19:02:48', 'Pacific/Chatham', 0),
+(429, NULL, '2025-01-28 19:02:48', 'Pacific/Chuuk', 0),
+(430, NULL, '2025-01-28 19:02:48', 'Pacific/Easter', 0),
+(431, NULL, '2025-01-28 19:02:48', 'Pacific/Efate', 0),
+(432, NULL, '2025-01-28 19:02:48', 'Pacific/Enderbury', 0),
+(433, NULL, '2025-01-28 19:02:48', 'Pacific/Fakaofo', 0),
+(434, NULL, '2025-01-28 19:02:48', 'Pacific/Fiji', 0),
+(435, NULL, '2025-01-28 19:02:48', 'Pacific/Funafuti', 0),
+(436, NULL, '2025-01-28 19:02:48', 'Pacific/Galapagos', 0),
+(437, NULL, '2025-01-28 19:02:48', 'Pacific/Gambier', 0),
+(438, NULL, '2025-01-28 19:02:48', 'Pacific/Guadalcanal', 0),
+(439, NULL, '2025-01-28 19:02:48', 'Pacific/Guam', 0),
+(440, NULL, '2025-01-28 19:02:48', 'Pacific/Honolulu', 0),
+(441, NULL, '2025-01-28 19:02:48', 'Pacific/Johnston', 0),
+(442, NULL, '2025-01-28 19:02:48', 'Pacific/Kiritimati', 0),
+(443, NULL, '2025-01-28 19:02:48', 'Pacific/Kosrae', 0),
+(444, NULL, '2025-01-28 19:02:48', 'Pacific/Kwajalein', 0),
+(445, NULL, '2025-01-28 19:02:48', 'Pacific/Majuro', 0),
+(446, NULL, '2025-01-28 19:02:48', 'Pacific/Marquesas', 0),
+(447, NULL, '2025-01-28 19:02:48', 'Pacific/Midway', 0),
+(448, NULL, '2025-01-28 19:02:48', 'Pacific/Nauru', 0),
+(449, NULL, '2025-01-28 19:02:48', 'Pacific/Niue', 0),
+(450, NULL, '2025-01-28 19:02:48', 'Pacific/Norfolk', 0),
+(451, NULL, '2025-01-28 19:02:48', 'Pacific/Noumea', 0),
+(452, NULL, '2025-01-28 19:02:48', 'Pacific/Pago_Pago', 0),
+(453, NULL, '2025-01-28 19:02:48', 'Pacific/Palau', 0),
+(454, NULL, '2025-01-28 19:02:48', 'Pacific/Pitcairn', 0),
+(455, NULL, '2025-01-28 19:02:48', 'Pacific/Pohnpei', 0),
+(456, NULL, '2025-01-28 19:02:48', 'Pacific/Ponape', 0),
+(457, NULL, '2025-01-28 19:02:48', 'Pacific/Port_Moresby', 0),
+(458, NULL, '2025-01-28 19:02:48', 'Pacific/Rarotonga', 0),
+(459, NULL, '2025-01-28 19:02:48', 'Pacific/Saipan', 0),
+(460, NULL, '2025-01-28 19:02:48', 'Pacific/Samoa', 0),
+(461, NULL, '2025-01-28 19:02:48', 'Pacific/Tahiti', 0),
+(462, NULL, '2025-01-28 19:02:48', 'Pacific/Tarawa', 0),
+(463, NULL, '2025-01-28 19:02:48', 'Pacific/Tongatapu', 0),
+(464, NULL, '2025-01-28 19:02:48', 'Pacific/Truk', 0),
+(465, NULL, '2025-01-28 19:02:48', 'Pacific/Wake', 0),
+(466, NULL, '2025-01-28 19:02:48', 'Pacific/Wallis', 0),
+(467, NULL, '2025-01-28 19:02:48', 'Pacific/Yap', 0);
 
 -- --------------------------------------------------------
 
@@ -4419,8 +4108,8 @@ CREATE TABLE `transactions` (
   `date` datetime NOT NULL,
   `dr_amount` int(11) DEFAULT NULL,
   `cr_amount` int(11) DEFAULT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `description` text COLLATE utf8mb4_unicode_ci,
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -4438,7 +4127,7 @@ CREATE TABLE `transaction_heads` (
   `tr_head` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
   `ref_id` int(10) UNSIGNED DEFAULT NULL,
   `acc_id` int(10) UNSIGNED NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -4448,7 +4137,12 @@ CREATE TABLE `transaction_heads` (
 INSERT INTO `transaction_heads` (`id`, `created_at`, `updated_at`, `created_by`, `last_updated_by`, `tr_head`, `ref_id`, `acc_id`, `status`) VALUES
 (1, '2020-05-04 17:10:07', '2020-05-04 17:10:07', 1, NULL, 'Cash A/C', NULL, 13, 1),
 (2, '2020-05-04 17:10:07', '2020-05-04 17:10:07', 1, NULL, 'Purchase A/C', NULL, 68, 1),
-(3, '2020-05-04 17:10:07', '2020-05-04 17:10:07', 1, NULL, 'Sales A/C', NULL, 77, 1);
+(3, '2020-05-04 17:10:07', '2020-05-04 17:10:07', 1, NULL, 'Sales A/C', NULL, 77, 1),
+(4, '2025-01-27 05:54:03', '2025-01-27 05:54:03', 1, NULL, 'REHAN NAUSHAD NEVAREKAR  [69]', 1, 76, 1),
+(5, '2025-01-28 14:54:22', '2025-01-28 14:54:22', 1, NULL, 'RAKESH SIR SURVE  [1]', 2, 76, 1),
+(6, '2025-01-28 14:55:58', '2025-01-28 14:55:58', 1, NULL, 'SIDDHESH SIR KHAWALE  [2]', 3, 76, 1),
+(7, '2025-01-28 14:57:32', '2025-01-28 14:57:32', 1, NULL, 'ANUP SIR DESAI  [3]', 4, 76, 1),
+(8, '2025-01-28 14:59:09', '2025-01-28 14:59:09', 1, NULL, 'AVANTIKA MAAM KELUSKAR  [4]', 5, 76, 1);
 
 -- --------------------------------------------------------
 
@@ -4470,47 +4164,8 @@ CREATE TABLE `transfer_certificates` (
   `qualified_to_promote` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `paid_fee_status` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `character` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ref_text` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `transport_histories`
---
-
-CREATE TABLE `transport_histories` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `created_by` int(10) UNSIGNED NOT NULL,
-  `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
-  `years_id` int(10) UNSIGNED NOT NULL,
-  `routes_id` int(10) UNSIGNED DEFAULT NULL,
-  `vehicles_id` int(10) UNSIGNED DEFAULT NULL,
-  `travellers_id` int(10) UNSIGNED NOT NULL,
-  `history_type` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `transport_users`
---
-
-CREATE TABLE `transport_users` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `created_by` int(10) UNSIGNED NOT NULL,
-  `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
-  `routes_id` int(10) UNSIGNED DEFAULT NULL,
-  `vehicles_id` int(10) UNSIGNED DEFAULT NULL,
-  `user_type` int(10) UNSIGNED NOT NULL,
-  `member_id` int(10) UNSIGNED NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `ref_text` text COLLATE utf8mb4_unicode_ci,
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -4531,10 +4186,10 @@ CREATE TABLE `users` (
   `updated_at` timestamp NULL DEFAULT NULL,
   `contact_number` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `address` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `profile_image` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `profile_image` text COLLATE utf8mb4_unicode_ci,
   `role_id` int(10) UNSIGNED DEFAULT NULL,
   `hook_id` int(10) UNSIGNED DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -4542,41 +4197,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `last_login_at`, `last_login_ip`, `created_at`, `updated_at`, `contact_number`, `address`, `profile_image`, `role_id`, `hook_id`, `status`) VALUES
-(1, 'Super Admin', 'superadmin@edufirm.com', '$2y$10$nbriw3XLSot3o4fj8QwCku2nI55AGj3Ot0I05khpDVeNRcUMq8pNW', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `vehicles`
---
-
-CREATE TABLE `vehicles` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `created_by` int(10) UNSIGNED NOT NULL,
-  `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
-  `number` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `type` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `model` varchar(25) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `vehicle_staffs`
---
-
-CREATE TABLE `vehicle_staffs` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  `vehicles_id` int(10) UNSIGNED NOT NULL,
-  `staffs_id` int(10) UNSIGNED NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+(1, 'Super Admin', 'superadmin@edufirm.com', '$2y$10$nbriw3XLSot3o4fj8QwCku2nI55AGj3Ot0I05khpDVeNRcUMq8pNW', NULL, '2025-01-29 05:55:50', '::1', NULL, '2025-01-29 05:55:50', NULL, NULL, NULL, NULL, NULL, 1),
+(2, 'rahil', 'rahilkazi66@gmail.com', '$2y$10$EjZ4tpuWuyPmwRoCthJ8heez4ITaNaP6IcZBSD82Sq.del6CmrA6u', NULL, '2025-01-28 18:49:36', '::1', '2025-01-28 18:45:24', '2025-01-28 18:49:36', '9876543', 'rajapur', '', NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -4597,9 +4219,9 @@ CREATE TABLE `vendors` (
   `mobile_1` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `mobile_2` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `email` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `extra_info` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `vendor_image` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `extra_info` text COLLATE utf8mb4_unicode_ci,
+  `vendor_image` text COLLATE utf8mb4_unicode_ci,
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -4624,9 +4246,9 @@ CREATE TABLE `visitor_logs` (
   `in_time` time NOT NULL,
   `out_time` time DEFAULT NULL,
   `token` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `note` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `attachment` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `note` text COLLATE utf8mb4_unicode_ci,
+  `attachment` text COLLATE utf8mb4_unicode_ci,
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -4642,7 +4264,7 @@ CREATE TABLE `visitor_purposes` (
   `created_by` int(10) UNSIGNED NOT NULL,
   `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
   `title` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -4658,8 +4280,8 @@ CREATE TABLE `years` (
   `created_by` int(10) UNSIGNED NOT NULL,
   `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
   `title` varchar(4) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `active_status` tinyint(1) NOT NULL DEFAULT 0,
-  `status` tinyint(1) NOT NULL DEFAULT 1
+  `active_status` tinyint(1) NOT NULL DEFAULT '0',
+  `status` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -4667,9 +4289,11 @@ CREATE TABLE `years` (
 --
 
 INSERT INTO `years` (`id`, `created_at`, `updated_at`, `created_by`, `last_updated_by`, `title`, `active_status`, `status`) VALUES
-(1, '2020-05-04 17:10:05', '2020-05-04 17:10:05', 1, NULL, '2018', 0, 0),
-(2, '2020-05-04 17:10:05', '2020-05-04 17:10:05', 1, NULL, '2019', 0, 0),
-(3, '2020-05-04 17:10:05', '2020-05-04 17:10:05', 1, NULL, '2020', 1, 1);
+(1, '2020-05-04 17:10:05', '2025-01-28 15:31:51', 1, NULL, '2018', 0, 0),
+(2, '2020-05-04 17:10:05', '2025-01-28 15:31:51', 1, NULL, '2019', 0, 0),
+(3, '2020-05-04 17:10:05', '2025-01-28 15:31:51', 1, NULL, '2020', 0, 1),
+(4, '2025-01-27 05:56:39', '2025-01-28 15:31:51', 1, NULL, '2000', 0, 1),
+(5, '2025-01-28 15:31:43', '2025-01-28 15:31:51', 1, NULL, '2025', 1, 1);
 
 --
 -- Indexes for dumped tables
@@ -4710,53 +4334,6 @@ ALTER TABLE `assets`
   ADD UNIQUE KEY `assets_title_unique` (`title`);
 
 --
--- Indexes for table `assignments`
---
-ALTER TABLE `assignments`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `assignments_years_id_foreign` (`years_id`),
-  ADD KEY `assignments_semesters_id_foreign` (`semesters_id`),
-  ADD KEY `assignments_subjects_id_foreign` (`subjects_id`);
-
---
--- Indexes for table `assignment_answers`
---
-ALTER TABLE `assignment_answers`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `assignment_answers_assignments_id_foreign` (`assignments_id`),
-  ADD KEY `assignment_answers_students_id_foreign` (`students_id`);
-
---
--- Indexes for table `attendances`
---
-ALTER TABLE `attendances`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `attendances_years_id_foreign` (`years_id`),
-  ADD KEY `attendances_months_id_foreign` (`months_id`);
-
---
--- Indexes for table `attendance_certificates`
---
-ALTER TABLE `attendance_certificates`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `attendance_certificates_students_id_unique` (`students_id`);
-
---
--- Indexes for table `attendance_masters`
---
-ALTER TABLE `attendance_masters`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `attendance_masters_year_foreign` (`year`),
-  ADD KEY `attendance_masters_month_foreign` (`month`);
-
---
--- Indexes for table `attendance_statuses`
---
-ALTER TABLE `attendance_statuses`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `attendance_statuses_title_unique` (`title`);
-
---
 -- Indexes for table `audits`
 --
 ALTER TABLE `audits`
@@ -4778,36 +4355,11 @@ ALTER TABLE `bank_transactions`
   ADD KEY `bank_transactions_banks_id_foreign` (`banks_id`);
 
 --
--- Indexes for table `beds`
---
-ALTER TABLE `beds`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `beds_hostels_id_foreign` (`hostels_id`),
-  ADD KEY `beds_rooms_id_foreign` (`rooms_id`),
-  ADD KEY `beds_bed_status_foreign` (`bed_status`);
-
---
--- Indexes for table `bed_statuses`
---
-ALTER TABLE `bed_statuses`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `bed_statuses_title_unique` (`title`);
-
---
 -- Indexes for table `bonafide_certificates`
 --
 ALTER TABLE `bonafide_certificates`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `bonafide_certificates_students_id_unique` (`students_id`);
-
---
--- Indexes for table `books`
---
-ALTER TABLE `books`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `books_book_code_unique` (`book_code`),
-  ADD KEY `books_book_masters_id_foreign` (`book_masters_id`),
-  ADD KEY `books_book_status_foreign` (`book_status`);
 
 --
 -- Indexes for table `book_categories`
@@ -4816,33 +4368,6 @@ ALTER TABLE `book_categories`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `book_categories_title_unique` (`title`),
   ADD UNIQUE KEY `book_categories_slug_unique` (`slug`);
-
---
--- Indexes for table `book_issues`
---
-ALTER TABLE `book_issues`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `book_issues_book_id_foreign` (`book_id`);
-
---
--- Indexes for table `book_masters`
---
-ALTER TABLE `book_masters`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `book_masters_categories_foreign` (`categories`);
-
---
--- Indexes for table `book_requests`
---
-ALTER TABLE `book_requests`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `book_statuses`
---
-ALTER TABLE `book_statuses`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `book_statuses_title_unique` (`title`);
 
 --
 -- Indexes for table `categories`
@@ -4911,13 +4436,6 @@ ALTER TABLE `documents`
 --
 ALTER TABLE `downloads`
   ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `eating_times`
---
-ALTER TABLE `eating_times`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `eating_times_title_unique` (`title`);
 
 --
 -- Indexes for table `email_settings`
@@ -4990,32 +4508,6 @@ ALTER TABLE `fee_masters`
   ADD KEY `fee_masters_students_id_foreign` (`students_id`);
 
 --
--- Indexes for table `food_categories`
---
-ALTER TABLE `food_categories`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `food_categories_title_unique` (`title`);
-
---
--- Indexes for table `food_items`
---
-ALTER TABLE `food_items`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `food_items_title_unique` (`title`);
-
---
--- Indexes for table `food_item_food_schedule`
---
-ALTER TABLE `food_item_food_schedule`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `food_schedules`
---
-ALTER TABLE `food_schedules`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `general_settings`
 --
 ALTER TABLE `general_settings`
@@ -5044,19 +4536,6 @@ ALTER TABLE `guardian_details`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `hostels`
---
-ALTER TABLE `hostels`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `hostels_name_unique` (`name`);
-
---
--- Indexes for table `hostel_meals`
---
-ALTER TABLE `hostel_meals`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `institutions`
 --
 ALTER TABLE `institutions`
@@ -5068,35 +4547,6 @@ ALTER TABLE `institutions`
 ALTER TABLE `jobs`
   ADD PRIMARY KEY (`id`),
   ADD KEY `jobs_queue_index` (`queue`);
-
---
--- Indexes for table `library_circulations`
---
-ALTER TABLE `library_circulations`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `library_circulations_user_type_unique` (`user_type`),
-  ADD UNIQUE KEY `library_circulations_slug_unique` (`slug`),
-  ADD UNIQUE KEY `library_circulations_code_prefix_unique` (`code_prefix`);
-
---
--- Indexes for table `library_members`
---
-ALTER TABLE `library_members`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `meetings`
---
-ALTER TABLE `meetings`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `meetings_semesters_id_foreign` (`semesters_id`),
-  ADD KEY `meetings_subjects_id_foreign` (`subjects_id`);
-
---
--- Indexes for table `meeting_settings`
---
-ALTER TABLE `meeting_settings`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `migrations`
@@ -5185,20 +4635,6 @@ ALTER TABLE `permission_role`
   ADD KEY `permission_role_role_id_foreign` (`role_id`);
 
 --
--- Indexes for table `postal_exchanges`
---
-ALTER TABLE `postal_exchanges`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `postal_exchanges_ref_no_unique` (`ref_no`);
-
---
--- Indexes for table `postal_exchange_types`
---
-ALTER TABLE `postal_exchange_types`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `postal_exchange_types_title_unique` (`title`);
-
---
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
@@ -5235,26 +4671,6 @@ ALTER TABLE `purchase_returns`
   ADD KEY `purchase_returns_products_id_foreign` (`products_id`);
 
 --
--- Indexes for table `residents`
---
-ALTER TABLE `residents`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `residents_hostels_id_foreign` (`hostels_id`),
-  ADD KEY `residents_rooms_id_foreign` (`rooms_id`),
-  ADD KEY `residents_beds_id_foreign` (`beds_id`);
-
---
--- Indexes for table `resident_histories`
---
-ALTER TABLE `resident_histories`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `resident_histories_years_id_foreign` (`years_id`),
-  ADD KEY `resident_histories_hostels_id_foreign` (`hostels_id`),
-  ADD KEY `resident_histories_rooms_id_foreign` (`rooms_id`),
-  ADD KEY `resident_histories_beds_id_foreign` (`beds_id`),
-  ADD KEY `resident_histories_residents_id_foreign` (`residents_id`);
-
---
 -- Indexes for table `roles`
 --
 ALTER TABLE `roles`
@@ -5267,34 +4683,6 @@ ALTER TABLE `roles`
 ALTER TABLE `role_user`
   ADD PRIMARY KEY (`user_id`,`role_id`),
   ADD KEY `role_user_role_id_foreign` (`role_id`);
-
---
--- Indexes for table `rooms`
---
-ALTER TABLE `rooms`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `rooms_hostels_id_foreign` (`hostels_id`),
-  ADD KEY `rooms_room_type_foreign` (`room_type`);
-
---
--- Indexes for table `room_types`
---
-ALTER TABLE `room_types`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `room_types_title_unique` (`title`);
-
---
--- Indexes for table `routes`
---
-ALTER TABLE `routes`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `routes_title_unique` (`title`);
-
---
--- Indexes for table `route_vehicles`
---
-ALTER TABLE `route_vehicles`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `salary_pays`
@@ -5423,15 +4811,6 @@ ALTER TABLE `subjects`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `subject_attendances`
---
-ALTER TABLE `subject_attendances`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `subject_attendances_years_id_foreign` (`years_id`),
-  ADD KEY `subject_attendances_months_id_foreign` (`months_id`),
-  ADD KEY `subject_attendances_subjects_id_foreign` (`subjects_id`);
-
---
 -- Indexes for table `sub_categories`
 --
 ALTER TABLE `sub_categories`
@@ -5465,41 +4844,11 @@ ALTER TABLE `transfer_certificates`
   ADD UNIQUE KEY `transfer_certificates_tc_num_unique` (`tc_num`);
 
 --
--- Indexes for table `transport_histories`
---
-ALTER TABLE `transport_histories`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `transport_histories_travellers_id_foreign` (`travellers_id`);
-
---
--- Indexes for table `transport_users`
---
-ALTER TABLE `transport_users`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `transport_users_routes_id_foreign` (`routes_id`),
-  ADD KEY `transport_users_vehicles_id_foreign` (`vehicles_id`);
-
---
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `users_email_unique` (`email`);
-
---
--- Indexes for table `vehicles`
---
-ALTER TABLE `vehicles`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `vehicles_number_unique` (`number`);
-
---
--- Indexes for table `vehicle_staffs`
---
-ALTER TABLE `vehicle_staffs`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `vehicle_staffs_staffs_id_foreign` (`staffs_id`),
-  ADD KEY `vehicle_staffs_vehicles_id_foreign` (`vehicles_id`);
 
 --
 -- Indexes for table `vendors`
@@ -5537,703 +4886,401 @@ ALTER TABLE `years`
 --
 ALTER TABLE `academic_infos`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `account_categories`
 --
 ALTER TABLE `account_categories`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
-
 --
 -- AUTO_INCREMENT for table `addressinfos`
 --
 ALTER TABLE `addressinfos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `alert_settings`
 --
 ALTER TABLE `alert_settings`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
-
 --
 -- AUTO_INCREMENT for table `assets`
 --
 ALTER TABLE `assets`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `assignments`
---
-ALTER TABLE `assignments`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `assignment_answers`
---
-ALTER TABLE `assignment_answers`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `attendances`
---
-ALTER TABLE `attendances`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `attendance_certificates`
---
-ALTER TABLE `attendance_certificates`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `attendance_masters`
---
-ALTER TABLE `attendance_masters`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `attendance_statuses`
---
-ALTER TABLE `attendance_statuses`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
 --
 -- AUTO_INCREMENT for table `audits`
 --
 ALTER TABLE `audits`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=159;
 --
 -- AUTO_INCREMENT for table `banks`
 --
 ALTER TABLE `banks`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `bank_transactions`
 --
 ALTER TABLE `bank_transactions`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `beds`
---
-ALTER TABLE `beds`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `bed_statuses`
---
-ALTER TABLE `bed_statuses`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
 --
 -- AUTO_INCREMENT for table `bonafide_certificates`
 --
 ALTER TABLE `bonafide_certificates`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `books`
---
-ALTER TABLE `books`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `book_categories`
 --
 ALTER TABLE `book_categories`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `book_issues`
---
-ALTER TABLE `book_issues`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `book_masters`
---
-ALTER TABLE `book_masters`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `book_requests`
---
-ALTER TABLE `book_requests`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `book_statuses`
---
-ALTER TABLE `book_statuses`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `certificate_histories`
 --
 ALTER TABLE `certificate_histories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `certificate_templates`
 --
 ALTER TABLE `certificate_templates`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
 --
 -- AUTO_INCREMENT for table `character_certificates`
 --
 ALTER TABLE `character_certificates`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `course_completion_certificates`
 --
 ALTER TABLE `course_completion_certificates`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `customers`
 --
 ALTER TABLE `customers`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `customer_statuses`
 --
 ALTER TABLE `customer_statuses`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
 --
 -- AUTO_INCREMENT for table `days`
 --
 ALTER TABLE `days`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
 --
 -- AUTO_INCREMENT for table `documents`
 --
 ALTER TABLE `documents`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `downloads`
 --
 ALTER TABLE `downloads`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `eating_times`
---
-ALTER TABLE `eating_times`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `email_settings`
 --
 ALTER TABLE `email_settings`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `exams`
 --
 ALTER TABLE `exams`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `exam_mark_ledgers`
 --
 ALTER TABLE `exam_mark_ledgers`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `exam_schedules`
 --
 ALTER TABLE `exam_schedules`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `faculties`
 --
 ALTER TABLE `faculties`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `faculty_semester`
 --
 ALTER TABLE `faculty_semester`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT for table `fee_collections`
 --
 ALTER TABLE `fee_collections`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `fee_heads`
 --
 ALTER TABLE `fee_heads`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `fee_masters`
 --
 ALTER TABLE `fee_masters`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `food_categories`
---
-ALTER TABLE `food_categories`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `food_items`
---
-ALTER TABLE `food_items`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `food_item_food_schedule`
---
-ALTER TABLE `food_item_food_schedule`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `food_schedules`
---
-ALTER TABLE `food_schedules`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `general_settings`
 --
 ALTER TABLE `general_settings`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT for table `grading_scales`
 --
 ALTER TABLE `grading_scales`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `grading_types`
 --
 ALTER TABLE `grading_types`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `guardian_details`
 --
 ALTER TABLE `guardian_details`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `hostels`
---
-ALTER TABLE `hostels`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `hostel_meals`
---
-ALTER TABLE `hostel_meals`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `institutions`
 --
 ALTER TABLE `institutions`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `jobs`
 --
 ALTER TABLE `jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `library_circulations`
---
-ALTER TABLE `library_circulations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `library_members`
---
-ALTER TABLE `library_members`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `meetings`
---
-ALTER TABLE `meetings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `meeting_settings`
---
-ALTER TABLE `meeting_settings`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
-
 --
 -- AUTO_INCREMENT for table `months`
 --
 ALTER TABLE `months`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
-
 --
 -- AUTO_INCREMENT for table `notes`
 --
 ALTER TABLE `notes`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `notices`
 --
 ALTER TABLE `notices`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `online_payments`
 --
 ALTER TABLE `online_payments`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `parent_details`
 --
 ALTER TABLE `parent_details`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `payment_methods`
 --
 ALTER TABLE `payment_methods`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT for table `payment_settings`
 --
 ALTER TABLE `payment_settings`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
 --
 -- AUTO_INCREMENT for table `payroll_heads`
 --
 ALTER TABLE `payroll_heads`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `payroll_masters`
 --
 ALTER TABLE `payroll_masters`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=714;
-
---
--- AUTO_INCREMENT for table `postal_exchanges`
---
-ALTER TABLE `postal_exchanges`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `postal_exchange_types`
---
-ALTER TABLE `postal_exchange_types`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `product_prices`
 --
 ALTER TABLE `product_prices`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `purchases`
 --
 ALTER TABLE `purchases`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `purchase_details`
 --
 ALTER TABLE `purchase_details`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `purchase_returns`
 --
 ALTER TABLE `purchase_returns`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `residents`
---
-ALTER TABLE `residents`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `resident_histories`
---
-ALTER TABLE `resident_histories`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT for table `rooms`
---
-ALTER TABLE `rooms`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `room_types`
---
-ALTER TABLE `room_types`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `routes`
---
-ALTER TABLE `routes`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `route_vehicles`
---
-ALTER TABLE `route_vehicles`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `salary_pays`
 --
 ALTER TABLE `salary_pays`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `sales`
 --
 ALTER TABLE `sales`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `sales_details`
 --
 ALTER TABLE `sales_details`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `sales_returns`
 --
 ALTER TABLE `sales_returns`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `semesters`
 --
 ALTER TABLE `semesters`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `semester_assets`
 --
 ALTER TABLE `semester_assets`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `semester_subject`
 --
 ALTER TABLE `semester_subject`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `settings`
 --
 ALTER TABLE `settings`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `sms_emails`
 --
 ALTER TABLE `sms_emails`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `sms_settings`
 --
 ALTER TABLE `sms_settings`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
-
 --
 -- AUTO_INCREMENT for table `staff`
 --
 ALTER TABLE `staff`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `staff_designations`
 --
 ALTER TABLE `staff_designations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `stocks`
 --
 ALTER TABLE `stocks`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `student_batches`
 --
 ALTER TABLE `student_batches`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `student_guardians`
 --
 ALTER TABLE `student_guardians`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `student_statuses`
 --
 ALTER TABLE `student_statuses`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
 --
 -- AUTO_INCREMENT for table `subjects`
 --
 ALTER TABLE `subjects`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `subject_attendances`
---
-ALTER TABLE `subject_attendances`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `sub_categories`
 --
 ALTER TABLE `sub_categories`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `time_zones`
 --
 ALTER TABLE `time_zones`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=468;
-
 --
 -- AUTO_INCREMENT for table `transactions`
 --
 ALTER TABLE `transactions`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `transaction_heads`
 --
 ALTER TABLE `transaction_heads`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `transfer_certificates`
 --
 ALTER TABLE `transfer_certificates`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `transport_histories`
---
-ALTER TABLE `transport_histories`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `transport_users`
---
-ALTER TABLE `transport_users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `vehicles`
---
-ALTER TABLE `vehicles`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `vehicle_staffs`
---
-ALTER TABLE `vehicle_staffs`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `vendors`
 --
 ALTER TABLE `vendors`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `visitor_logs`
 --
 ALTER TABLE `visitor_logs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `visitor_purposes`
 --
 ALTER TABLE `visitor_purposes`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT for table `years`
 --
 ALTER TABLE `years`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- Constraints for dumped tables
 --
@@ -6251,78 +5298,16 @@ ALTER TABLE `addressinfos`
   ADD CONSTRAINT `addressinfos_students_id_foreign` FOREIGN KEY (`students_id`) REFERENCES `students` (`id`);
 
 --
--- Constraints for table `assignments`
---
-ALTER TABLE `assignments`
-  ADD CONSTRAINT `assignments_semesters_id_foreign` FOREIGN KEY (`semesters_id`) REFERENCES `semesters` (`id`),
-  ADD CONSTRAINT `assignments_subjects_id_foreign` FOREIGN KEY (`subjects_id`) REFERENCES `subjects` (`id`),
-  ADD CONSTRAINT `assignments_years_id_foreign` FOREIGN KEY (`years_id`) REFERENCES `years` (`id`);
-
---
--- Constraints for table `assignment_answers`
---
-ALTER TABLE `assignment_answers`
-  ADD CONSTRAINT `assignment_answers_assignments_id_foreign` FOREIGN KEY (`assignments_id`) REFERENCES `assignments` (`id`),
-  ADD CONSTRAINT `assignment_answers_students_id_foreign` FOREIGN KEY (`students_id`) REFERENCES `students` (`id`);
-
---
--- Constraints for table `attendances`
---
-ALTER TABLE `attendances`
-  ADD CONSTRAINT `attendances_months_id_foreign` FOREIGN KEY (`months_id`) REFERENCES `months` (`id`),
-  ADD CONSTRAINT `attendances_years_id_foreign` FOREIGN KEY (`years_id`) REFERENCES `years` (`id`);
-
---
--- Constraints for table `attendance_certificates`
---
-ALTER TABLE `attendance_certificates`
-  ADD CONSTRAINT `attendance_certificates_students_id_foreign` FOREIGN KEY (`students_id`) REFERENCES `students` (`id`);
-
---
--- Constraints for table `attendance_masters`
---
-ALTER TABLE `attendance_masters`
-  ADD CONSTRAINT `attendance_masters_month_foreign` FOREIGN KEY (`month`) REFERENCES `months` (`id`),
-  ADD CONSTRAINT `attendance_masters_year_foreign` FOREIGN KEY (`year`) REFERENCES `years` (`id`);
-
---
 -- Constraints for table `bank_transactions`
 --
 ALTER TABLE `bank_transactions`
   ADD CONSTRAINT `bank_transactions_banks_id_foreign` FOREIGN KEY (`banks_id`) REFERENCES `banks` (`id`);
 
 --
--- Constraints for table `beds`
---
-ALTER TABLE `beds`
-  ADD CONSTRAINT `beds_bed_status_foreign` FOREIGN KEY (`bed_status`) REFERENCES `bed_statuses` (`id`),
-  ADD CONSTRAINT `beds_hostels_id_foreign` FOREIGN KEY (`hostels_id`) REFERENCES `hostels` (`id`),
-  ADD CONSTRAINT `beds_rooms_id_foreign` FOREIGN KEY (`rooms_id`) REFERENCES `rooms` (`id`);
-
---
 -- Constraints for table `bonafide_certificates`
 --
 ALTER TABLE `bonafide_certificates`
   ADD CONSTRAINT `bonafide_certificates_students_id_foreign` FOREIGN KEY (`students_id`) REFERENCES `students` (`id`);
-
---
--- Constraints for table `books`
---
-ALTER TABLE `books`
-  ADD CONSTRAINT `books_book_masters_id_foreign` FOREIGN KEY (`book_masters_id`) REFERENCES `book_masters` (`id`),
-  ADD CONSTRAINT `books_book_status_foreign` FOREIGN KEY (`book_status`) REFERENCES `book_statuses` (`id`);
-
---
--- Constraints for table `book_issues`
---
-ALTER TABLE `book_issues`
-  ADD CONSTRAINT `book_issues_book_id_foreign` FOREIGN KEY (`book_id`) REFERENCES `books` (`id`);
-
---
--- Constraints for table `book_masters`
---
-ALTER TABLE `book_masters`
-  ADD CONSTRAINT `book_masters_categories_foreign` FOREIGN KEY (`categories`) REFERENCES `book_categories` (`id`);
 
 --
 -- Constraints for table `certificate_histories`
@@ -6392,13 +5377,6 @@ ALTER TABLE `grading_scales`
   ADD CONSTRAINT `grading_scales_gradingtype_id_foreign` FOREIGN KEY (`gradingType_id`) REFERENCES `grading_types` (`id`);
 
 --
--- Constraints for table `meetings`
---
-ALTER TABLE `meetings`
-  ADD CONSTRAINT `meetings_semesters_id_foreign` FOREIGN KEY (`semesters_id`) REFERENCES `semesters` (`id`),
-  ADD CONSTRAINT `meetings_subjects_id_foreign` FOREIGN KEY (`subjects_id`) REFERENCES `subjects` (`id`);
-
---
 -- Constraints for table `parent_details`
 --
 ALTER TABLE `parent_details`
@@ -6435,115 +5413,6 @@ ALTER TABLE `purchase_details`
 ALTER TABLE `purchase_returns`
   ADD CONSTRAINT `purchase_returns_products_id_foreign` FOREIGN KEY (`products_id`) REFERENCES `products` (`id`),
   ADD CONSTRAINT `purchase_returns_vendors_id_foreign` FOREIGN KEY (`vendors_id`) REFERENCES `vendors` (`id`);
-
---
--- Constraints for table `residents`
---
-ALTER TABLE `residents`
-  ADD CONSTRAINT `residents_beds_id_foreign` FOREIGN KEY (`beds_id`) REFERENCES `beds` (`id`),
-  ADD CONSTRAINT `residents_hostels_id_foreign` FOREIGN KEY (`hostels_id`) REFERENCES `hostels` (`id`),
-  ADD CONSTRAINT `residents_rooms_id_foreign` FOREIGN KEY (`rooms_id`) REFERENCES `rooms` (`id`);
-
---
--- Constraints for table `resident_histories`
---
-ALTER TABLE `resident_histories`
-  ADD CONSTRAINT `resident_histories_beds_id_foreign` FOREIGN KEY (`beds_id`) REFERENCES `beds` (`id`),
-  ADD CONSTRAINT `resident_histories_hostels_id_foreign` FOREIGN KEY (`hostels_id`) REFERENCES `hostels` (`id`),
-  ADD CONSTRAINT `resident_histories_residents_id_foreign` FOREIGN KEY (`residents_id`) REFERENCES `residents` (`id`),
-  ADD CONSTRAINT `resident_histories_rooms_id_foreign` FOREIGN KEY (`rooms_id`) REFERENCES `rooms` (`id`),
-  ADD CONSTRAINT `resident_histories_years_id_foreign` FOREIGN KEY (`years_id`) REFERENCES `years` (`id`);
-
---
--- Constraints for table `role_user`
---
-ALTER TABLE `role_user`
-  ADD CONSTRAINT `role_user_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `role_user_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `rooms`
---
-ALTER TABLE `rooms`
-  ADD CONSTRAINT `rooms_hostels_id_foreign` FOREIGN KEY (`hostels_id`) REFERENCES `hostels` (`id`),
-  ADD CONSTRAINT `rooms_room_type_foreign` FOREIGN KEY (`room_type`) REFERENCES `room_types` (`id`);
-
---
--- Constraints for table `salary_pays`
---
-ALTER TABLE `salary_pays`
-  ADD CONSTRAINT `salary_pays_salary_masters_id_foreign` FOREIGN KEY (`salary_masters_id`) REFERENCES `payroll_masters` (`id`),
-  ADD CONSTRAINT `salary_pays_staff_id_foreign` FOREIGN KEY (`staff_id`) REFERENCES `staff` (`id`);
-
---
--- Constraints for table `semester_subject`
---
-ALTER TABLE `semester_subject`
-  ADD CONSTRAINT `semester_subject_semester_id_foreign` FOREIGN KEY (`semester_id`) REFERENCES `semesters` (`id`),
-  ADD CONSTRAINT `semester_subject_subject_id_foreign` FOREIGN KEY (`subject_id`) REFERENCES `subjects` (`id`);
-
---
--- Constraints for table `staff`
---
-ALTER TABLE `staff`
-  ADD CONSTRAINT `staff_designation_foreign` FOREIGN KEY (`designation`) REFERENCES `staff_designations` (`id`);
-
---
--- Constraints for table `students`
---
-ALTER TABLE `students`
-  ADD CONSTRAINT `students_academic_status_foreign` FOREIGN KEY (`academic_status`) REFERENCES `student_statuses` (`id`),
-  ADD CONSTRAINT `students_batch_foreign` FOREIGN KEY (`batch`) REFERENCES `student_batches` (`id`),
-  ADD CONSTRAINT `students_faculty_foreign` FOREIGN KEY (`faculty`) REFERENCES `faculties` (`id`),
-  ADD CONSTRAINT `students_semester_foreign` FOREIGN KEY (`semester`) REFERENCES `semesters` (`id`);
-
---
--- Constraints for table `student_guardians`
---
-ALTER TABLE `student_guardians`
-  ADD CONSTRAINT `student_guardians_guardians_id_foreign` FOREIGN KEY (`guardians_id`) REFERENCES `guardian_details` (`id`),
-  ADD CONSTRAINT `student_guardians_students_id_foreign` FOREIGN KEY (`students_id`) REFERENCES `students` (`id`);
-
---
--- Constraints for table `subject_attendances`
---
-ALTER TABLE `subject_attendances`
-  ADD CONSTRAINT `subject_attendances_months_id_foreign` FOREIGN KEY (`months_id`) REFERENCES `months` (`id`),
-  ADD CONSTRAINT `subject_attendances_subjects_id_foreign` FOREIGN KEY (`subjects_id`) REFERENCES `subjects` (`id`),
-  ADD CONSTRAINT `subject_attendances_years_id_foreign` FOREIGN KEY (`years_id`) REFERENCES `years` (`id`);
-
---
--- Constraints for table `transactions`
---
-ALTER TABLE `transactions`
-  ADD CONSTRAINT `transactions_tr_head_id_foreign` FOREIGN KEY (`tr_head_id`) REFERENCES `transaction_heads` (`id`);
-
---
--- Constraints for table `transfer_certificates`
---
-ALTER TABLE `transfer_certificates`
-  ADD CONSTRAINT `transfer_certificates_students_id_foreign` FOREIGN KEY (`students_id`) REFERENCES `students` (`id`);
-
---
--- Constraints for table `transport_histories`
---
-ALTER TABLE `transport_histories`
-  ADD CONSTRAINT `transport_histories_travellers_id_foreign` FOREIGN KEY (`travellers_id`) REFERENCES `transport_users` (`id`);
-
---
--- Constraints for table `transport_users`
---
-ALTER TABLE `transport_users`
-  ADD CONSTRAINT `transport_users_routes_id_foreign` FOREIGN KEY (`routes_id`) REFERENCES `routes` (`id`),
-  ADD CONSTRAINT `transport_users_vehicles_id_foreign` FOREIGN KEY (`vehicles_id`) REFERENCES `vehicles` (`id`);
-
---
--- Constraints for table `vehicle_staffs`
---
-ALTER TABLE `vehicle_staffs`
-  ADD CONSTRAINT `vehicle_staffs_staffs_id_foreign` FOREIGN KEY (`staffs_id`) REFERENCES `staff` (`id`),
-  ADD CONSTRAINT `vehicle_staffs_vehicles_id_foreign` FOREIGN KEY (`vehicles_id`) REFERENCES `vehicles` (`id`);
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
