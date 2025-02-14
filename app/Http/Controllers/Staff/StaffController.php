@@ -243,46 +243,47 @@ class StaffController extends CollegeBaseController
 
     public function delete(Request $request, $id)
     {
-        $errCount = 0;
         $errors = [];
-        if (!$row = Staff::find($id)) return parent::invalidRequest();
 
-        //User
-        $userInfo = User::where(['role_id' => 5, 'hook_id'=> $id])->first();
-        if($userInfo) {
-            $errCount = $errCount+1;
+        $row = Staff::find($id);
+        if (!$row) {
+            return parent::invalidRequest();
+        }
+
+        // Check if associated user exists
+        if (User::where(['role_id' => 5, 'hook_id' => $id])->exists()) {
             $errors[] = "User Found, Please Delete.";
         }
 
-        //Document & Notes
-            //Documents
-            $document = $row->staffDocuments()->get();
-            if($document->count() > 0){
-                $errCount = $errCount+1;
-                $errors[] = "Documents Found, Please Delete.";
-            }
+        // Check if associated documents exist
+        if ($row->staffDocuments()->exists()) {
+            $errors[] = "Documents Found, Please Delete.";
+        }
 
-            //Notes
-            $notes = $row->staffNotes()->get();
-            if($notes->count() > 0){
-            $errCount = $errCount+1;
+        // Check if associated notes exist
+        if ($row->staffNotes()->exists()) {
             $errors[] = "Notes Found, Please Delete.";
         }
 
-        //Payroll Master, Salary Pay
-        $payrollMaster = $row->payrollMaster()->get();
-        if($payrollMaster->count() > 0){
-            $paySalary = $row->paySalary()->get();
-            if($paySalary->count() > 0){
-                $errCount = $errCount+1;
+        // Check payroll master and salary pay
+        if ($row->payrollMaster()->exists()) {
+            if ($row->paySalary()->exists()) {
                 $errors[] = "Salary Paid Found, Please Delete.";
             }
-            $errCount = $errCount+1;
             $errors[] = "Salary Master Found, Please Delete.";
         }
 
+        // If there are errors, return them
+        if (!empty($errors)) {
+            return response()->json(['errors' => $errors], 400);
+        }
 
+        // Perform deletion
+        $row->delete();
+
+        return back();
     }
+
 
     public function active(request $request, $id)
     {
