@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 14, 2025 at 08:47 AM
+-- Generation Time: Feb 14, 2025 at 08:54 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -334,6 +334,26 @@ INSERT INTO `attendances` (`id`, `created_at`, `updated_at`, `created_by`, `last
 (13, '2025-02-13 16:47:44', '2025-02-13 16:47:44', 1, 1, 1, 5, 6, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1),
 (14, '2025-02-13 16:47:44', '2025-02-13 16:47:44', 1, 1, 1, 6, 6, 1, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1),
 (15, '2025-02-13 16:47:44', '2025-02-13 16:47:44', 1, 1, 1, 7, 6, 1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `attendance_certificates`
+--
+
+CREATE TABLE `attendance_certificates` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `created_by` int(10) UNSIGNED NOT NULL,
+  `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
+  `students_id` int(10) UNSIGNED NOT NULL,
+  `date_of_issue` date NOT NULL,
+  `year_of_study` varchar(9) NOT NULL,
+  `percentage_of_attendance` varchar(3) NOT NULL,
+  `ref_text` text DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -4484,6 +4504,13 @@ ALTER TABLE `attendances`
   ADD KEY `attendances_months_id_foreign` (`months_id`);
 
 --
+-- Indexes for table `attendance_certificates`
+--
+ALTER TABLE `attendance_certificates`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `attendance_certificates_students_id_unique` (`students_id`);
+
+--
 -- Indexes for table `attendance_masters`
 --
 ALTER TABLE `attendance_masters`
@@ -5083,6 +5110,12 @@ ALTER TABLE `attendances`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
+-- AUTO_INCREMENT for table `attendance_certificates`
+--
+ALTER TABLE `attendance_certificates`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `attendance_masters`
 --
 ALTER TABLE `attendance_masters`
@@ -5566,6 +5599,12 @@ ALTER TABLE `addressinfos`
 ALTER TABLE `attendances`
   ADD CONSTRAINT `attendances_months_id_foreign` FOREIGN KEY (`months_id`) REFERENCES `months` (`id`),
   ADD CONSTRAINT `attendances_years_id_foreign` FOREIGN KEY (`years_id`) REFERENCES `years` (`id`);
+
+--
+-- Constraints for table `attendance_certificates`
+--
+ALTER TABLE `attendance_certificates`
+  ADD CONSTRAINT `attendance_certificates_students_id_foreign` FOREIGN KEY (`students_id`) REFERENCES `students` (`id`);
 
 --
 -- Constraints for table `attendance_masters`

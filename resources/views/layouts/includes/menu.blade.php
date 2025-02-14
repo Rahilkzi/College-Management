@@ -641,84 +641,91 @@
         {{-- Examination --}}
         @ability('super-admin', 'certificate')
             @if(isset($generalSetting) && $generalSetting->certificate == 1)
-                <li class="{!! request()->is('certificate*') ? 'active' : '' !!} hover">
-                <a href="#" class="dropdown-toggle">
-                    <i class="menu-icon fa fa-certificate"  aria-hidden="true"></i>
-                    <span class="menu-text"> Certificate</span>
+                    <li class="{!! request()->is('certificate*') ? 'active' : '' !!} hover">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="menu-icon fa fa-certificate"  aria-hidden="true"></i>
+                        <span class="menu-text"> Certificate</span>
 
-                    <b class="arrow fa fa-angle-down"></b>
-                </a>
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a>
 
-                <b class="arrow"></b>
+                    <b class="arrow"></b>
 
-                <ul class="submenu">
-                    <li class="{!! request()->is('certificate/issue') ? 'active' : '' !!} hover">
-                        <a href="{{ route('certificate.issue') }}">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            Issue Certificate
-                        </a>
-                        <b class="arrow"></b>
-                    </li>
+                    <ul class="submenu">
+                        <li class="{!! request()->is('certificate/issue') ? 'active' : '' !!} hover">
+                            <a href="{{ route('certificate.issue') }}">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                Issue Certificate
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
 
-                  
+                            <li class="{!! request()->is('certificate/attendance*') ? 'active' : '' !!} hover">
+                                <a href="{{ route('certificate.attendance') }}">
+                                    <i class="menu-icon fa fa-caret-right"></i>
+                                    Attendance Certificate
+                                </a>
+                                <b class="arrow"></b>
+                            </li>
 
-                    <li class="{!! request()->is('certificate/transfer*') ? 'active' : '' !!} hover">
-                        <a href="{{ route('certificate.transfer') }}">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            Transfer Certificate
-                        </a>
-                        <b class="arrow"></b>
-                    </li>
 
-                    <li class="{!! request()->is('certificate/character*') ? 'active' : '' !!} hover">
-                        <a href="{{ route('certificate.character') }}">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            Character Certificate
-                        </a>
-                        <b class="arrow"></b>
-                    </li>
+                        <li class="{!! request()->is('certificate/transfer*') ? 'active' : '' !!} hover">
+                            <a href="{{ route('certificate.transfer') }}">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                Transfer Certificate
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
 
-                    <li class="{!! request()->is('certificate/bonafide*') ? 'active' : '' !!} hover">
-                        <a href="{{ route('certificate.bonafide') }}">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            Bonafide Certificate
-                        </a>
-                        <b class="arrow"></b>
-                    </li>
+                        <li class="{!! request()->is('certificate/character*') ? 'active' : '' !!} hover">
+                            <a href="{{ route('certificate.character') }}">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                Character Certificate
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
 
-                    <li class="{!! request()->is('certificate/course-completion*') ? 'active' : '' !!} hover">
-                        <a href="{{ route('certificate.course-completion') }}">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            Course Completion Cer.
-                        </a>
-                        <b class="arrow"></b>
-                    </li>
+                        <li class="{!! request()->is('certificate/bonafide*') ? 'active' : '' !!} hover">
+                            <a href="{{ route('certificate.bonafide') }}">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                Bonafide Certificate
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
 
-                    <li class="{!! request()->is('certificate/issue-history*') ? 'active' : '' !!} hover">
-                        <a href="{{ route('certificate.issue-history') }}">
-                            <i class="menu-icon fa fa-history"></i>
-                            Issue History
-                        </a>
+                        <li class="{!! request()->is('certificate/course-completion*') ? 'active' : '' !!} hover">
+                            <a href="{{ route('certificate.course-completion') }}">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                Course Completion Cer.
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
 
-                        <b class="arrow"></b>
-                    </li>
+                        <li class="{!! request()->is('certificate/issue-history*') ? 'active' : '' !!} hover">
+                            <a href="{{ route('certificate.issue-history') }}">
+                                <i class="menu-icon fa fa-history"></i>
+                                Issue History
+                            </a>
 
-                    <li class="{!! request()->is('certificate/generate*') ? 'active' : '' !!} hover">
-                        <a href="{{ route('certificate.generate') }}">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            Custom Print
-                        </a>
-                        <b class="arrow"></b>
-                    </li>
-                    <li class="{!! request()->is('certificate/template*') ? 'active' : '' !!} hover">
-                        <a href="{{ route('certificate.template') }}">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            Certificate Template
-                        </a>
-                        <b class="arrow"></b>
-                    </li>
-                </ul>
-            </li>
+                            <b class="arrow"></b>
+                        </li>
+
+                        <li class="{!! request()->is('certificate/generate*') ? 'active' : '' !!} hover">
+                            <a href="{{ route('certificate.generate') }}">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                Custom Print
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li class="{!! request()->is('certificate/template*') ? 'active' : '' !!} hover">
+                            <a href="{{ route('certificate.template') }}">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                Certificate Template
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                    </ul>
+                </li>
             @endif
         @endability
 
