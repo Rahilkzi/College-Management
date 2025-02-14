@@ -8,7 +8,7 @@ class Student extends BaseModel
 {
     protected $fillable = ['created_by', 'last_updated_by', 'reg_no', 'reg_date', 'university_reg','faculty','semester','batch',
         'academic_status', 'first_name', 'middle_name', 'last_name', 'date_of_birth', 'gender', 'blood_group', 'nationality',
-        'religion', 'caste','mother_tongue', 'email', 'extra_info', 'student_image','student_signature','status'];
+        'religion', 'caste','mother_tongue', 'email', 'extra_info', 'student_image','student_signature','status', 'serial_no'];
 
     public function address()
     {

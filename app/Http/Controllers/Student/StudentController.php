@@ -259,18 +259,18 @@ class StudentController extends CollegeBaseController
     public function view($id)
     {
         $data = [];
-        $data['student'] = Student::select('students.id','students.reg_no', 'students.reg_date', 'students.university_reg',
+        $data['student'] = Student::select('students.id','students.reg_no', 'students.reg_date', 'students.serial_no',
             'students.faculty','students.semester','students.batch', 'students.academic_status', 'students.first_name', 'students.middle_name',
             'students.last_name', 'students.date_of_birth', 'students.gender', 'students.blood_group',  'students.religion', 'students.caste','students.nationality',
             'students.mother_tongue', 'students.email', 'students.extra_info', 'students.status', 'pd.grandfather_first_name',
             'pd.grandfather_middle_name', 'pd.grandfather_last_name', 'pd.father_first_name', 'pd.father_middle_name',
-            'pd.father_last_name', 'pd.father_eligibility', 'pd.father_occupation', 'pd.father_office', 'pd.father_office_number',
+            'pd.father_last_name', 'pd.father_qualification', 'pd.father_occupation', 'pd.father_office', 'pd.father_office_number',
             'pd.father_residence_number', 'pd.father_mobile_1', 'pd.father_mobile_2', 'pd.father_email', 'pd.mother_first_name',
-            'pd.mother_middle_name', 'pd.mother_last_name', 'pd.mother_eligibility', 'pd.mother_occupation', 'pd.mother_office',
+            'pd.mother_middle_name', 'pd.mother_last_name', 'pd.mother_qualification', 'pd.mother_occupation', 'pd.mother_office',
             'pd.mother_office_number', 'pd.mother_residence_number', 'pd.mother_mobile_1', 'pd.mother_mobile_2', 'pd.mother_email',
             'ai.address', 'ai.state', 'ai.country', 'ai.temp_address', 'ai.temp_state', 'ai.temp_country', 'ai.home_phone',
             'ai.mobile_1', 'ai.mobile_2', 'gd.id as guardian_id', 'gd.guardian_first_name', 'gd.guardian_middle_name', 'gd.guardian_last_name',
-            'gd.guardian_eligibility', 'gd.guardian_occupation', 'gd.guardian_office', 'gd.guardian_office_number', 'gd.guardian_residence_number',
+            'gd.guardian_qualification', 'gd.guardian_occupation', 'gd.guardian_office', 'gd.guardian_office_number', 'gd.guardian_residence_number',
             'gd.guardian_mobile_1', 'gd.guardian_mobile_2', 'gd.guardian_email', 'gd.guardian_relation', 'gd.guardian_address',
             'students.student_image','students.student_signature', 'pd.father_image', 'pd.mother_image', 'gd.guardian_image')
             ->where('students.id','=',$id)
@@ -438,20 +438,20 @@ class StudentController extends CollegeBaseController
     {
         $data = [];
 
-        $data['row'] = Student::select('students.id','students.reg_no', 'students.reg_date', 'students.university_reg',
+        $data['row'] = Student::select('students.id','students.reg_no', 'students.reg_date', 'students.serial_no',
             'students.faculty','students.semester','students.batch', 'students.academic_status', 'students.first_name', 'students.middle_name',
             'students.last_name', 'students.date_of_birth', 'students.gender', 'students.blood_group', 'students.religion', 'students.caste', 'students.nationality',
             'students.mother_tongue', 'students.email', 'students.extra_info','students.student_image', 'students.student_signature', 'students.status',
             'pd.grandfather_first_name',
             'pd.grandfather_middle_name', 'pd.grandfather_last_name', 'pd.father_first_name', 'pd.father_middle_name',
-            'pd.father_last_name', 'pd.father_eligibility', 'pd.father_occupation', 'pd.father_office', 'pd.father_office_number',
+            'pd.father_last_name', 'pd.father_qualification', 'pd.father_occupation', 'pd.father_office', 'pd.father_office_number',
             'pd.father_residence_number', 'pd.father_mobile_1', 'pd.father_mobile_2', 'pd.father_email', 'pd.mother_first_name',
-            'pd.mother_middle_name', 'pd.mother_last_name', 'pd.mother_eligibility', 'pd.mother_occupation', 'pd.mother_office',
+            'pd.mother_middle_name', 'pd.mother_last_name', 'pd.mother_qualification', 'pd.mother_occupation', 'pd.mother_office',
             'pd.mother_office_number', 'pd.mother_residence_number', 'pd.mother_mobile_1', 'pd.mother_mobile_2', 'pd.mother_email',
             'pd.father_image', 'pd.mother_image',
             'ai.address', 'ai.state', 'ai.country', 'ai.temp_address', 'ai.temp_state', 'ai.temp_country', 'ai.home_phone',
             'ai.mobile_1', 'ai.mobile_2', 'gd.id as guardians_id', 'gd.guardian_first_name', 'gd.guardian_middle_name', 'gd.guardian_last_name',
-            'gd.guardian_eligibility', 'gd.guardian_occupation', 'gd.guardian_office', 'gd.guardian_office_number',
+            'gd.guardian_qualification', 'gd.guardian_occupation', 'gd.guardian_office', 'gd.guardian_office_number',
             'gd.guardian_residence_number', 'gd.guardian_mobile_1', 'gd.guardian_mobile_2', 'gd.guardian_email',
             'gd.guardian_relation', 'gd.guardian_address', 'gd.guardian_image')
             ->where('students.id','=',$id)
@@ -573,7 +573,7 @@ class StudentController extends CollegeBaseController
             'father_first_name'         =>  $request->father_first_name,
             'father_middle_name'        =>  $request->father_middle_name,
             'father_last_name'          =>  $request->father_last_name,
-            'father_eligibility'        =>  $request->father_eligibility,
+            'father_qualification'        =>  $request->father_qualification,
             'father_occupation'         =>  $request->father_occupation,
             'father_office'             =>  $request->father_office,
             'father_office_number'      =>  $request->father_office_number,
@@ -584,7 +584,7 @@ class StudentController extends CollegeBaseController
             'mother_first_name'         =>  $request->mother_first_name,
             'mother_middle_name'        =>  $request->mother_middle_name,
             'mother_last_name'          =>  $request->mother_last_name,
-            'mother_eligibility'        =>  $request->mother_eligibility,
+            'mother_qualification'        =>  $request->mother_qualification,
             'mother_occupation'         =>  $request->mother_occupation,
             'mother_office'             =>  $request->mother_office,
             'mother_office_number'      =>  $request->mother_office_number,
@@ -604,7 +604,7 @@ class StudentController extends CollegeBaseController
                 'guardian_first_name'         =>  $request->guardian_first_name,
                 'guardian_middle_name'        =>  $request->guardian_middle_name,
                 'guardian_last_name'          =>  $request->guardian_last_name,
-                'guardian_eligibility'        =>  $request->guardian_eligibility,
+                'guardian_qualification'        =>  $request->guardian_qualification,
                 'guardian_occupation'         =>  $request->guardian_occupation,
                 'guardian_office'             =>  $request->guardian_office,
                 'guardian_office_number'      =>  $request->guardian_office_number,
@@ -945,7 +945,7 @@ class StudentController extends CollegeBaseController
         if ($request->has('q')) {
 
             $guardians = GuardianDetail::select('id','guardian_first_name',
-                'guardian_middle_name', 'guardian_last_name', 'guardian_eligibility',
+                'guardian_middle_name', 'guardian_last_name', 'guardian_qualification',
                 'guardian_occupation', 'guardian_office', 'guardian_office_number',
                 'guardian_residence_number', 'guardian_mobile_1', 'guardian_mobile_2',
                 'guardian_email', 'guardian_relation', 'guardian_address','guardian_image')
@@ -1102,7 +1102,7 @@ class StudentController extends CollegeBaseController
                 'father_first_name'             => 'max:25',
                 'father_middle_name'            => 'max:25',
                 'father_last_name'              => 'max:25',
-                'father_eligibility'            => 'max:50',
+                'father_qualification'            => 'max:50',
                 'father_occupation'             => 'max:50',
                 'father_office'                 => 'max:100',
                 'father_office_number'          => 'max:25',
@@ -1113,7 +1113,7 @@ class StudentController extends CollegeBaseController
                 'mother_first_name'             => 'max:25',
                 'mother_middle_name'            => 'max:25',
                 'mother_last_name'              => 'max:25',
-                'mother_eligibility'            => 'max:50',
+                'mother_qualification'            => 'max:50',
                 'mother_occupation'             => 'max:50',
                 'mother_office'                 => 'max:100',
                 'mother_office_number'          => 'max:25',
@@ -1136,7 +1136,7 @@ class StudentController extends CollegeBaseController
             $student = Student::create([
                 "reg_no"                => $row['reg_no'],
                 "reg_date"              => $reg_date,
-                "university_reg"        => $row['university_reg'],
+                "serial_no"             => $row['serial_no'],
                 "faculty"               => $row['faculty'],
                 "semester"              => $row['semester'],
                 "academic_status"       => $row['academic_status'],
@@ -1182,7 +1182,7 @@ class StudentController extends CollegeBaseController
                     "father_first_name"         => $row['father_first_name'],
                     "father_middle_name"        => $row['father_middle_name'],
                     "father_last_name"          => $row['father_last_name'],
-                    "father_eligibility"        => $row['father_eligibility'],
+                    "father_qualification"        => $row['father_qualification'],
                     "father_occupation"         => $row['father_occupation'],
                     "father_office"             => $row['father_office'],
                     "father_office_number"      => $row['father_office_number'],
@@ -1193,7 +1193,7 @@ class StudentController extends CollegeBaseController
                     "mother_first_name"         => $row['mother_first_name'],
                     "mother_middle_name"        => $row['mother_middle_name'],
                     "mother_last_name"          => $row['mother_last_name'],
-                    "mother_eligibility"        => $row['mother_eligibility'],
+                    "mother_qualification"        => $row['mother_qualification'],
                     "mother_occupation"         => $row['mother_occupation'],
                     "mother_office"             => $row['mother_office'],
                     "mother_office_number"      => $row['mother_office_number'],
@@ -1210,7 +1210,7 @@ class StudentController extends CollegeBaseController
                     "guardian_first_name"         => $row['guardian_first_name'],
                     "guardian_middle_name"        => $row['guardian_middle_name'],
                     "guardian_last_name"          => $row['guardian_last_name'],
-                    "guardian_eligibility"        => $row['guardian_eligibility'],
+                    "guardian_qualification"        => $row['guardian_qualification'],
                     "guardian_occupation"         => $row['guardian_occupation'],
                     "guardian_office"             => $row['guardian_office'],
                     "guardian_office_number"      => $row['guardian_office_number'],
@@ -1243,11 +1243,11 @@ class StudentController extends CollegeBaseController
     public function studentNameAutocomplete(Request $request)
     {
         if ($request->has('q')) {
-            $students = Student::select('students.id', 'students.reg_no', 'students.university_reg',
+            $students = Student::select('students.id', 'students.reg_no', 'students.serial_no',
                 'students.first_name', 'students.middle_name', 'students.last_name', 'students.semester','students.email',
                 'ai.mobile_1', 'ai.mobile_2')
                 ->where('students.reg_no', 'like', '%'.$request->get('q').'%')
-                ->orWhere('students.university_reg', 'like', '%'.$request->get('q').'%')
+                ->orWhere('students.serial_no', 'like', '%'.$request->get('q').'%')
                 ->orWhere('students.first_name', 'like', '%'.$request->get('q').'%')
                 ->orWhere('students.middle_name', 'like', '%'.$request->get('q').'%')
                 ->orWhere('students.last_name', 'like', '%'.$request->get('q').'%')

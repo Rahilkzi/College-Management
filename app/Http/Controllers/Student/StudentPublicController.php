@@ -83,6 +83,7 @@ class StudentPublicController extends CollegeBaseController
         //check user&student with valid email
         $validator = Validator::make($request->all(), [
             'email'     => 'max:100 | unique:users,email',
+            'serial_no' => 'max:100 | unique:students,serial_no',
         ]);
 
         if ($validator->fails()) {
@@ -190,20 +191,20 @@ class StudentPublicController extends CollegeBaseController
     {
         $data = [];
 
-        $data['row'] = Student::select('students.id','students.reg_no', 'students.reg_date', 'students.university_reg',
+        $data['row'] = Student::select('students.id','students.reg_no', 'students.reg_date', 'students.serial_no',
             'students.faculty','students.semester','students.batch', 'students.academic_status', 'students.first_name', 'students.middle_name',
             'students.last_name', 'students.date_of_birth', 'students.gender', 'students.blood_group', 'students.religion', 'students.caste', 'students.nationality',
             'students.mother_tongue', 'students.email', 'students.extra_info','students.student_image', 'students.student_signature', 'students.status',
             'pd.grandfather_first_name',
             'pd.grandfather_middle_name', 'pd.grandfather_last_name', 'pd.father_first_name', 'pd.father_middle_name',
-            'pd.father_last_name', 'pd.father_eligibility', 'pd.father_occupation', 'pd.father_office', 'pd.father_office_number',
+            'pd.father_last_name', 'pd.father_qualification', 'pd.father_occupation', 'pd.father_office', 'pd.father_office_number',
             'pd.father_residence_number', 'pd.father_mobile_1', 'pd.father_mobile_2', 'pd.father_email', 'pd.mother_first_name',
-            'pd.mother_middle_name', 'pd.mother_last_name', 'pd.mother_eligibility', 'pd.mother_occupation', 'pd.mother_office',
+            'pd.mother_middle_name', 'pd.mother_last_name', 'pd.mother_qualification', 'pd.mother_occupation', 'pd.mother_office',
             'pd.mother_office_number', 'pd.mother_residence_number', 'pd.mother_mobile_1', 'pd.mother_mobile_2', 'pd.mother_email',
             'pd.father_image', 'pd.mother_image',
             'ai.address', 'ai.state', 'ai.country', 'ai.temp_address', 'ai.temp_state', 'ai.temp_country', 'ai.home_phone',
             'ai.mobile_1', 'ai.mobile_2', 'gd.id as guardians_id', 'gd.guardian_first_name', 'gd.guardian_middle_name', 'gd.guardian_last_name',
-            'gd.guardian_eligibility', 'gd.guardian_occupation', 'gd.guardian_office', 'gd.guardian_office_number',
+            'gd.guardian_qualification', 'gd.guardian_occupation', 'gd.guardian_office', 'gd.guardian_office_number',
             'gd.guardian_residence_number', 'gd.guardian_mobile_1', 'gd.guardian_mobile_2', 'gd.guardian_email',
             'gd.guardian_relation', 'gd.guardian_address', 'gd.guardian_image')
             ->where('students.id','=',$id)
@@ -321,7 +322,7 @@ class StudentPublicController extends CollegeBaseController
             'father_first_name'         =>  $request->father_first_name,
             'father_middle_name'        =>  $request->father_middle_name,
             'father_last_name'          =>  $request->father_last_name,
-            'father_eligibility'        =>  $request->father_eligibility,
+            'father_qualification'        =>  $request->father_qualification,
             'father_occupation'         =>  $request->father_occupation,
             'father_office'             =>  $request->father_office,
             'father_office_number'      =>  $request->father_office_number,
@@ -332,7 +333,7 @@ class StudentPublicController extends CollegeBaseController
             'mother_first_name'         =>  $request->mother_first_name,
             'mother_middle_name'        =>  $request->mother_middle_name,
             'mother_last_name'          =>  $request->mother_last_name,
-            'mother_eligibility'        =>  $request->mother_eligibility,
+            'mother_qualification'        =>  $request->mother_qualification,
             'mother_occupation'         =>  $request->mother_occupation,
             'mother_office'             =>  $request->mother_office,
             'mother_office_number'      =>  $request->mother_office_number,
@@ -353,7 +354,7 @@ class StudentPublicController extends CollegeBaseController
                 'guardian_first_name'         =>  $request->guardian_first_name,
                 'guardian_middle_name'        =>  $request->guardian_middle_name,
                 'guardian_last_name'          =>  $request->guardian_last_name,
-                'guardian_eligibility'        =>  $request->guardian_eligibility,
+                'guardian_qualification'        =>  $request->guardian_qualification,
                 'guardian_occupation'         =>  $request->guardian_occupation,
                 'guardian_office'             =>  $request->guardian_office,
                 'guardian_office_number'      =>  $request->guardian_office_number,
