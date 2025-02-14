@@ -670,196 +670,76 @@ class StudentController extends CollegeBaseController
 
     public function delete(Request $request, $id)
     {
-        $errCount = 0;
-        $errors = [];
         if (!$row = Student::find($id)) return parent::invalidRequest();
 
-        //User
-            $userInfo = User::where(['role_id' => 6, 'hook_id'=> $id])->first();
-            if($userInfo) {
-                $errCount = $errCount+1;
-                $errors[] = "User Found, Please Delete.";
-            }
+        // Begin database transaction
+        DB::beginTransaction();
+        try {
+            // Delete user accounts
+            User::where(['role_id' => 6, 'hook_id'=> $id])->delete();
+            User::where(['role_id' => 7, 'hook_id'=> $id])->delete();
 
-        //Document & Notes
-            //Documents
-            $document = $row->studentDocuments()->get();
-            if($document->count() > 0){
-                $errCount = $errCount+1;
-                $errors[] = "Documents Found, Please Delete.";
-            }
+            // Delete documents and notes
+            $row->studentDocuments()->delete();
+            $row->studentNotes()->delete();
 
-            //Notes
-            $notes = $row->studentNotes()->get();
-            if($notes->count() > 0){
-                $errCount = $errCount+1;
-                $errors[] = "Notes Found, Please Delete.";
-            }
+            // Delete certificates
+            $row->certificateHistory()->delete();
+            $row->attendanceCertificate()->delete();
+            $row->bonafideCertificate()->delete();
+            $row->courseCompletionCertificate()->delete();
+            $row->transferCertificate()->delete();
 
-        //Assignment
-            $assignmentAnswer = $row->assignmentAnswers()->get();
-            if($assignmentAnswer->count() > 0){
-                $errCount = $errCount+1;
-                $errors[] = "Assignment Answer Found, Please Delete.";
-            }
+            // Delete academic records
+            $row->markLedger()->delete();
+            $row->regularAttendance()->delete();
+            $row->academicInfo()->delete();
 
-        //Transport
-            $transportUser = $row->transportUser()->get();
-            if($transportUser->count() > 0){
-                $transportHistory = TransportHistory::where('travellers_id',$transportUser->first()->id)->get();
-                if($transportHistory->count() > 0){
-                    $errCount = $errCount+1;
-                    $errors[] = "Transport History Found, Please Delete.";
-                }
-                $errCount = $errCount+1;
-                $errors[] = "Transport User Found, Please Delete.";
-            }
+            // Delete fee records
+            $row->feeCollect()->delete();
+            $row->feeMaster()->delete();
 
-  
-        //Certificates
-            //Certificate History
-            $certificateHistories = $row->certificateHistory()->get();
-            if($certificateHistories->count() > 0){
-                $errCount = $errCount+1;
-                $errors[] = "Certificate History Found, Please Delete.";
-            }
-
-            //attendance certificate
-            $attendanceCertificates = $row->attendanceCertificate()->get();
-            if($attendanceCertificates->count() > 0){
-                $errCount = $errCount+1;
-                $errors[] = "Attendance Certificate Found, Please Delete.";
-            }
-
-            //bonafied Certificate
-            $bonafideCertificates = $row->bonafideCertificate()->get();
-            if($bonafideCertificates->count() > 0){
-                $errCount = $errCount+1;
-                $errors[] = "Bonafied Certificate Found, Please Delete.";
-            }
-
-            //Course Completion Certificate
-            $courseCompletionCertificates = $row->courseCompletionCertificate()->get();
-            if($courseCompletionCertificates->count() > 0){
-                $errCount = $errCount+1;
-                $errors[] = "Course Completion Certificate Found, Please Delete.";
-            }
-
-            //Transfer Certificate
-            $transferCertificates = $row->transferCertificate()->get();
-            if($transferCertificates->count() > 0){
-                $errCount = $errCount+1;
-                $errors[] = "Transfer Certificate Found, Please Delete.";
-            }
-
-        //exam mark ledger
-            $examMarkLedger = $row->markLedger()->get();
-            if($examMarkLedger->count() > 0){
-                $errCount = $errCount+1;
-                $errors[] = "Mark Ledger Found, Please Delete.";
-            }
-
-        //attendance (regular & Subject)
-            //Regular Attendance
-            $attendacne = $row->regularAttendance()->get();
-            if($attendacne->count() > 0){
-                $errCount = $errCount+1;
-                $errors[] = "Regular Attendance Found, Please Delete.";
-            }
-
-            //Subject Attendance
-            $subjectAttendance = $row->subjectAttendance()->get();
-            if($subjectAttendance->count() > 0){
-                $errCount = $errCount+1;
-                $errors[] = "Subject Attendance Found, Please Delete.";
-            }
-
-        //library Membership & History
-            $libraryMember = $row->libraryMember()->get();
-            if($libraryMember->count() > 0){
-                $bookIssue = BookIssue::where('member_id',$libraryMember->first()->id)->get();
-                if($bookIssue->count() > 0){
-                    $errCount = $errCount+1;
-                    $errors[] = "Book Issue Found, Please Delete.";
-                }
-                $errCount = $errCount+1;
-                $errors[] = "Library Member Found, Please Delete.";
-            }
-
-        //Fee Master, Fee Collection
-            $feeMaster = $row->feeMaster()->get();
-            if($feeMaster->count() > 0){
-                $feeCollection = $row->feeCollect()->get();
-                if($feeCollection->count() > 0){
-                    $errCount = $errCount+1;
-                    $errors[] = "Fee Collection Found, Please Delete.";
-                }
-                $errCount = $errCount+1;
-                $errors[] = "Fee Master Found, Please Delete.";
-            }
-
-
-        //Academic Info
-        $academicInfo = $row->academicInfo()->get();
-        if($academicInfo->count() > 0){
-            $errCount = $errCount+1;
-            $errors[] = "Academic Info Found, Please Delete.";
-        }
-
-        //parent Info
-            $parentInfo = $row->parents()->first();
-            if(isset($parentInfo)){
-                $parentInfo->delete();
-                $errCount = $errCount+1;
-                $errors[] = "Parent Info Found, Please Delete.";
-            }
-
-        //address info
-            $addressInfo = $row->address()->first();
-            if(isset($addressInfo)){
-                $addressInfo->delete();
-                $errCount = $errCount+1;
-                $errors[] = "Address Info Found, Please Delete.";
-            }
-
-        //guardian info
+            // Delete parent, address and guardian info
+            $row->parents()->delete();
+            $row->address()->delete();
+            
+            // Delete guardian link and guardian if no other students linked
             $guardian = $row->guardian()->first();
-            if(isset($guardian)){
-                //$guardian->delete();
-                $guardianDetail = GuardianDetail::find($guardian->id);
-            if($guardianDetail){
-                $errCount = $errCount+1;
-                $errors[] = "Guardian Detail Info Found, Please Delete.";
+            if($guardian) {
+                $studentGuardian = StudentGuardian::where('students_id', $row->id)->first();
+                if($studentGuardian) {
+                    // Check if guardian is linked to other students
+                    $otherLinks = StudentGuardian::where('guardians_id', $guardian->id)
+                        ->where('students_id', '!=', $row->id)
+                        ->count();
+                        
+                    if($otherLinks == 0) {
+                        // Delete guardian if not linked to other students
+                        GuardianDetail::find($guardian->id)->delete();
+                    }
+                    $studentGuardian->delete();
+                }
             }
 
-        }
-
-        if($errCount > 0){
-            $request->session()->flash($this->message_warning, $this->panel.' not delete. If you want to erase student data, please check err below and request administrator to delete all the data first.');
-            return back()->withErrors($errors);
-        }else{
-            //remove images
+            // Delete student images
             if (file_exists($this->folder_path.$row->student_image))
                 @unlink($this->folder_path.$row->student_image);
 
             if (file_exists($this->folder_path.$row->student_signature))
                 @unlink($this->folder_path.$row->student_signature);
 
-            /*$this->parent_folder_path = public_path().DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'parents'.DIRECTORY_SEPARATOR;
-            if (file_exists($this->parent_folder_path.$row->reg_no.'_father'.'.*'))
-                @unlink($this->parent_folder_path.$row->reg_no.'_father'.'.*');
-
-            if (file_exists($this->parent_folder_path.$row->reg_no.'_mother'.'.*'))
-                @unlink($this->parent_folder_path.$row->reg_no.'_mother'.'.*');
-
-            if (file_exists($this->parent_folder_path.$row->reg_no.'_guardian'.'.*'))
-                @unlink($this->parent_folder_path.$row->reg_no.'_guardian'.'.*');*/
-
+            // Finally delete student
             $row->delete();
+
+            DB::commit();
             $request->session()->flash($this->message_success, $this->panel.' Deleted Successfully.');
+
+        } catch (\Exception $e) {
+            DB::rollback();
+            $request->session()->flash($this->message_danger, 'Failed to delete '.$this->panel.'. Please try again.');
+            return back();
         }
 
-        //return redirect()->route($this->base_route);
         return back();
     }
 

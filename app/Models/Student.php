@@ -63,36 +63,7 @@ class Student extends BaseModel
         return $this->hasMany(ExamMarkLedger::class, 'students_id', 'id');
     }
 
-    //assignment Answer
-    public function assignmentAnswers()
-    {
-        return $this->hasMany(AssignmentAnswer::class,'students_id','id');
 
-    }
-
-    //Library Member
-    public function libraryMember()
-    {
-        return $this->hasMany(LibraryMember::class,'member_id','id')->where('user_type','=',1);
-    }
-
-    //Library Book Requested by Member
-    /*public function bookRequest()
-    {
-        return $this->hasMany(BookRequest::class,'member_id','id');
-    }*/
-
-    //transport User
-    public function transportUser()
-    {
-        return $this->hasMany(TransportUser::class,'member_id','id')->where('user_type','=',1);
-    }
-
-    //Hostel Resident
-    public function hostelResident()
-    {
-        return $this->hasMany(Resident::class,'member_id','id')->where('user_type','=',1);
-    }
 
     //Regular Attendance
     public function regularAttendance()
