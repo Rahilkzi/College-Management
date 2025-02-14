@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 13, 2025 at 05:35 PM
+-- Generation Time: Feb 14, 2025 at 08:47 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -338,6 +338,26 @@ INSERT INTO `attendances` (`id`, `created_at`, `updated_at`, `created_by`, `last
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `attendance_masters`
+--
+
+CREATE TABLE `attendance_masters` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `created_by` int(10) UNSIGNED NOT NULL,
+  `last_updated_by` int(10) UNSIGNED DEFAULT NULL,
+  `year` int(10) UNSIGNED NOT NULL,
+  `month` int(10) UNSIGNED NOT NULL,
+  `day_in_month` int(11) NOT NULL,
+  `holiday` int(11) NOT NULL,
+  `open` int(11) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `attendance_statuses`
 --
 
@@ -578,7 +598,10 @@ INSERT INTO `audits` (`id`, `user_type`, `user_id`, `event`, `auditable_type`, `
 (183, 'App\\User', 1, 'created', 'App\\Models\\Year', 6, '[]', '{\"title\":2024,\"created_by\":1,\"id\":6}', 'http://localhost/College/public/attendance/student/import', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', NULL, '2025-02-13 16:47:44', '2025-02-13 16:47:44'),
 (184, 'App\\User', 1, 'created', 'App\\Models\\Attendance', 13, '[]', '{\"attendees_type\":1,\"link_id\":5,\"years_id\":6,\"months_id\":1,\"day_1\":\"1\",\"created_by\":1,\"last_updated_by\":1,\"id\":13}', 'http://localhost/College/public/attendance/student/import', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', NULL, '2025-02-13 16:47:44', '2025-02-13 16:47:44'),
 (185, 'App\\User', 1, 'created', 'App\\Models\\Attendance', 14, '[]', '{\"attendees_type\":1,\"link_id\":6,\"years_id\":6,\"months_id\":1,\"day_2\":\"2\",\"created_by\":1,\"last_updated_by\":1,\"id\":14}', 'http://localhost/College/public/attendance/student/import', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', NULL, '2025-02-13 16:47:44', '2025-02-13 16:47:44'),
-(186, 'App\\User', 1, 'created', 'App\\Models\\Attendance', 15, '[]', '{\"attendees_type\":1,\"link_id\":7,\"years_id\":6,\"months_id\":1,\"day_1\":\"3\",\"created_by\":1,\"last_updated_by\":1,\"id\":15}', 'http://localhost/College/public/attendance/student/import', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', NULL, '2025-02-13 16:47:44', '2025-02-13 16:47:44');
+(186, 'App\\User', 1, 'created', 'App\\Models\\Attendance', 15, '[]', '{\"attendees_type\":1,\"link_id\":7,\"years_id\":6,\"months_id\":1,\"day_1\":\"3\",\"created_by\":1,\"last_updated_by\":1,\"id\":15}', 'http://localhost/College/public/attendance/student/import', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', NULL, '2025-02-13 16:47:44', '2025-02-13 16:47:44'),
+(187, 'App\\User', 1, 'updated', 'App\\User', 1, '{\"last_login_at\":\"2025-01-29 11:25:50\"}', '{\"last_login_at\":\"2025-02-14 13:12:21\"}', 'http://localhost/College/public/login', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', NULL, '2025-02-14 07:42:21', '2025-02-14 07:42:21'),
+(188, 'App\\User', 1, 'updated', 'App\\User', 1, '{\"last_login_at\":\"2025-02-14 13:12:21\"}', '{\"last_login_at\":\"2025-02-14 13:16:27\"}', 'http://localhost/College/public/login', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', NULL, '2025-02-14 07:46:27', '2025-02-14 07:46:27'),
+(189, 'App\\User', 1, 'updated', 'App\\User', 1, '{\"last_login_at\":\"2025-02-14 13:16:27\"}', '{\"last_login_at\":\"2025-02-14 13:17:45\"}', 'http://localhost/College/public/login', '::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/133.0.0.0 Safari/537.36', NULL, '2025-02-14 07:47:45', '2025-02-14 07:47:45');
 
 -- --------------------------------------------------------
 
@@ -4315,7 +4338,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `last_login_at`, `last_login_ip`, `created_at`, `updated_at`, `contact_number`, `address`, `profile_image`, `role_id`, `hook_id`, `status`) VALUES
-(1, 'Super Admin', 'superadmin@edufirm.com', '$2y$10$nbriw3XLSot3o4fj8QwCku2nI55AGj3Ot0I05khpDVeNRcUMq8pNW', NULL, '2025-01-29 05:55:50', '::1', NULL, '2025-01-29 05:55:50', NULL, NULL, NULL, NULL, NULL, 1),
+(1, 'Super Admin', 'superadmin@edufirm.com', '$2y$10$nbriw3XLSot3o4fj8QwCku2nI55AGj3Ot0I05khpDVeNRcUMq8pNW', NULL, '2025-02-14 07:47:45', '::1', NULL, '2025-02-14 07:47:45', NULL, NULL, NULL, NULL, NULL, 1),
 (2, 'rahil', 'rahilkazi66@gmail.com', '$2y$10$EjZ4tpuWuyPmwRoCthJ8heez4ITaNaP6IcZBSD82Sq.del6CmrA6u', NULL, '2025-01-28 18:49:36', '::1', '2025-01-28 18:45:24', '2025-01-28 18:49:36', '9876543', 'rajapur', '', NULL, NULL, 1);
 
 -- --------------------------------------------------------
@@ -4459,6 +4482,14 @@ ALTER TABLE `attendances`
   ADD PRIMARY KEY (`id`),
   ADD KEY `attendances_years_id_foreign` (`years_id`),
   ADD KEY `attendances_months_id_foreign` (`months_id`);
+
+--
+-- Indexes for table `attendance_masters`
+--
+ALTER TABLE `attendance_masters`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `attendance_masters_year_foreign` (`year`),
+  ADD KEY `attendance_masters_month_foreign` (`month`);
 
 --
 -- Indexes for table `attendance_statuses`
@@ -5052,6 +5083,12 @@ ALTER TABLE `attendances`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
+-- AUTO_INCREMENT for table `attendance_masters`
+--
+ALTER TABLE `attendance_masters`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `attendance_statuses`
 --
 ALTER TABLE `attendance_statuses`
@@ -5061,7 +5098,7 @@ ALTER TABLE `attendance_statuses`
 -- AUTO_INCREMENT for table `audits`
 --
 ALTER TABLE `audits`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=187;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=190;
 
 --
 -- AUTO_INCREMENT for table `banks`
@@ -5529,6 +5566,13 @@ ALTER TABLE `addressinfos`
 ALTER TABLE `attendances`
   ADD CONSTRAINT `attendances_months_id_foreign` FOREIGN KEY (`months_id`) REFERENCES `months` (`id`),
   ADD CONSTRAINT `attendances_years_id_foreign` FOREIGN KEY (`years_id`) REFERENCES `years` (`id`);
+
+--
+-- Constraints for table `attendance_masters`
+--
+ALTER TABLE `attendance_masters`
+  ADD CONSTRAINT `attendance_masters_month_foreign` FOREIGN KEY (`month`) REFERENCES `months` (`id`),
+  ADD CONSTRAINT `attendance_masters_year_foreign` FOREIGN KEY (`year`) REFERENCES `years` (`id`);
 
 --
 -- Constraints for table `bank_transactions`
