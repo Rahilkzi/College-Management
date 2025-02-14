@@ -113,14 +113,19 @@ class FacultyController extends CollegeBaseController
 
     public function delete(Request $request, $id)
     {
-        if (!$row = Faculty::find($id)) return parent::invalidRequest();
+        if (!$row = Faculty::find($id))
+            return parent::invalidRequest();
 
-        $row->delete();
+        // Pehle related semesters ko detach karo
         $row->semester()->detach();
 
-        $request->session()->flash($this->message_success, $this->panel.' Deleted Successfully.');
+        // Fir faculty ko delete karo
+        $row->delete();
+
+        $request->session()->flash($this->message_success, $this->panel . ' Deleted Successfully.');
         return redirect()->route($this->base_route);
     }
+
 
     public function bulkAction(Request $request)
     {
