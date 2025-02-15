@@ -22,24 +22,24 @@
   ),
   'intervention/image' => 
   array (
-    'aliases' => 
-    array (
-      'Image' => 'Intervention\\Image\\Facades\\Image',
-    ),
     'providers' => 
     array (
       0 => 'Intervention\\Image\\ImageServiceProvider',
     ),
+    'aliases' => 
+    array (
+      'Image' => 'Intervention\\Image\\Facades\\Image',
+    ),
   ),
   'knox/pesapal' => 
   array (
-    'aliases' => 
-    array (
-      'Pesapal' => 'Knox\\Pesapal\\Facades\\Pesapal',
-    ),
     'providers' => 
     array (
       0 => 'Knox\\Pesapal\\PesapalServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Pesapal' => 'Knox\\Pesapal\\Facades\\Pesapal',
     ),
   ),
   'laravel/tinker' => 
@@ -120,24 +120,24 @@
   ),
   'srmklive/paypal' => 
   array (
-    'aliases' => 
-    array (
-      'PayPal' => 'Srmklive\\PayPal\\Facades\\PayPal',
-    ),
     'providers' => 
     array (
       0 => 'Srmklive\\PayPal\\Providers\\PayPalServiceProvider',
     ),
+    'aliases' => 
+    array (
+      'PayPal' => 'Srmklive\\PayPal\\Facades\\PayPal',
+    ),
   ),
   'unicodeveloper/laravel-paystack' => 
   array (
-    'aliases' => 
-    array (
-      'Paystack' => 'Unicodeveloper\\Paystack\\Facades\\Paystack',
-    ),
     'providers' => 
     array (
       0 => 'Unicodeveloper\\Paystack\\PaystackServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Paystack' => 'Unicodeveloper\\Paystack\\Facades\\Paystack',
     ),
   ),
 );

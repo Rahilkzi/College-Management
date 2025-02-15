@@ -1325,6 +1325,7 @@ class StudentController extends CollegeBaseController
                 "date_of_birth"         => $date_of_birth,
                 "gender"                => $row['gender'],
                 "blood_group"           => $row['blood_group'],
+                "adhar_no"              => $row['adhar_no'],
                 "religion"              => $row['religion'],
                 "caste"                 => $row['caste'],
                 "nationality"           => $row['nationality'],
