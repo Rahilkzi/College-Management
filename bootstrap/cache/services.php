@@ -52,6 +52,7 @@
     48 => 'OwenIt\\Auditing\\AuditingServiceProvider',
     49 => 'Srmklive\\PayPal\\Providers\\PayPalServiceProvider',
     50 => 'Unicodeveloper\\Paystack\\PaystackServiceProvider',
+    51 => 'SimpleSoftwareIO\\QrCode\\QrCodeServiceProvider',
   ),
   'eager' => 
   array (

@@ -79,7 +79,7 @@
 
                     {!! Form::label('gender', 'Gender', ['class' => 'col-sm-1 control-label']) !!}
                     <div class="col-sm-3">
-                        {!! Form::select('gender', ['' => '','MALE' => 'MALE', 'FEMALE' => 'FEMALE', 'OTHER' => 'OTHER'], null, ['class'=>'form-control border-form',"required","readonly"]); !!}
+                        {!! Form::select('gender', ['' => '','MALE' => 'MALE', 'FEMALE' => 'FEMALE', 'OTHER' => 'OTHER'], null, ['class'=>'form-control border-form',"required","readonly"]) !!}
                         @include('includes.form_fields_validation_message', ['name' => 'gender'])
                     </div>
 

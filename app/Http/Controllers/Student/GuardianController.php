@@ -87,7 +87,7 @@ class GuardianController extends CollegeBaseController
     {
         $data = [];
         $data['guardian'] = GuardianDetail::select('id', 'guardian_first_name', 'guardian_middle_name', 'guardian_last_name',
-            'guardian_eligibility', 'guardian_occupation', 'guardian_office', 'guardian_office_number', 'guardian_residence_number',
+            'guardian_qualification', 'guardian_occupation', 'guardian_office', 'guardian_office_number', 'guardian_residence_number',
             'guardian_mobile_1', 'guardian_mobile_2', 'guardian_email', 'guardian_relation', 'guardian_address','guardian_image',  'status')
             ->where('id',$id)
             ->first();
@@ -103,7 +103,7 @@ class GuardianController extends CollegeBaseController
     {
         $data = [];
         $data['row'] = GuardianDetail::select('id',  'id', 'guardian_first_name', 'guardian_middle_name', 'guardian_last_name',
-            'guardian_eligibility', 'guardian_occupation', 'guardian_office', 'guardian_office_number', 'guardian_residence_number',
+            'guardian_qualification', 'guardian_occupation', 'guardian_office', 'guardian_office_number', 'guardian_residence_number',
             'guardian_mobile_1', 'guardian_mobile_2', 'guardian_email', 'guardian_relation', 'guardian_address','guardian_image',  'status')
             ->where('id',$id)
             ->first();
@@ -138,7 +138,7 @@ class GuardianController extends CollegeBaseController
             'guardian_first_name'         =>  $request->guardian_first_name,
             'guardian_middle_name'        =>  $request->guardian_middle_name,
             'guardian_last_name'          =>  $request->guardian_last_name,
-            'guardian_eligibility'        =>  $request->guardian_eligibility,
+            'guardian_qualification'      =>  $request->guardian_qualification,
             'guardian_occupation'         =>  $request->guardian_occupation,
             'guardian_office'             =>  $request->guardian_office,
             'guardian_office_number'      =>  $request->guardian_office_number,
