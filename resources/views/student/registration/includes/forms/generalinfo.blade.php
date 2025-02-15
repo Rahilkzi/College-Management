@@ -140,14 +140,20 @@
 </div>
 
 <div class="form-group">
+    {!! Form::label('adhar_no', 'Aadhaar No', ['class' => 'col-sm-2 control-label']) !!}
+    <div class="col-sm-2">
+        {!! Form::text('adhar_no', null, ["placeholder" => "", "class" => "form-control border-form upper", "required"]) !!}
+        @include('includes.form_fields_validation_message', ['name' => 'adhar_no'])
+    </div>
+
     {!! Form::label('religion', 'Religion', ['class' => 'col-sm-2 control-label']) !!}
-    <div class="col-sm-3">
+    <div class="col-sm-2">
         {!! Form::text('religion', null, ["placeholder" => "", "class" => "form-control border-form upper"]) !!}
         @include('includes.form_fields_validation_message', ['name' => 'religion'])
     </div>
 
     {!! Form::label('caste', 'Caste', ['class' => 'col-sm-2 control-label']) !!}
-    <div class="col-sm-5">
+    <div class="col-sm-2">
         {!! Form::text('caste', null, ["class" => "form-control border-form upper"]) !!}
         @include('includes.form_fields_validation_message', ['name' => 'caste'])
     </div>

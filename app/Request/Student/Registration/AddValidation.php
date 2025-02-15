@@ -33,6 +33,7 @@ class AddValidation extends FormRequest
             'last_name'                     => 'required | max:25',
             'date_of_birth'                 => 'required',
             'gender'                        => 'required',
+            'adhar_no'                      => 'required | unique:students,adhar_no',
             'religion'                      =>'max:25',
             'caste'                         =>'max:25',
             'nationality'                   => 'required | max:25',
@@ -93,6 +94,7 @@ class AddValidation extends FormRequest
     {
         return [
             'reg_no.unique'                  => 'Enter Unique Reg.No.',
+            'adhar_no.unique'                => 'Enter Unique Aadhaar No.',
 
         ];
     }

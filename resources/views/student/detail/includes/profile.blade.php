@@ -125,6 +125,8 @@
                 @endif
 
             </div>
+
+            
             <div class="profile-info-row">
                 @if($data['student']->faculty != "")
                     <div class="profile-info-name"> Faculty: </div>
@@ -141,7 +143,31 @@
                     </div>
                 @endif
             </div>
+
+                <div class="profile-info-row">
+                    @if($data['student']->reg_no != "")
+                        <div class="profile-info-name"> Reg. No.: </div>
+                        <div class="profile-info-value">
+                            <span class="editable" id="reg_no">{{ $data['student']->reg_no }}</span>
+                        </div>
+                    @endif
+                    @if($data['student']->reg_date != "")
+                        <div class="profile-info-name"> Reg. Date :</div>
+                        <div class="profile-info-value">
+                            <span class="editable"
+                                id="reg_date">{{ \Carbon\Carbon::parse($data['student']->reg_date)->format('d/m/Y')}}</span>
+                        </div>
+                    @endif
+                </div>
+            
+            
             <div class="profile-info-row">
+                            @if($data['student']->serial_no != "")
+                                <div class="profile-info-name"> Serial No.: </div>
+                                <div class="profile-info-value">
+                                    <span class="editable" id="serial_no">{{ $data['student']->serial_no }}</span>
+                                </div>
+                            @endif
                 @if($data['student']->batch != "")
                     <div class="profile-info-name"> Batch: </div>
                     <div class="profile-info-value">
@@ -151,35 +177,23 @@
                 @endif
             </div>
 
-            <div class="profile-info-row">
-                @if($data['student']->reg_no != "")
-                    <div class="profile-info-name"> Reg. No.: </div>
-                    <div class="profile-info-value">
-                        <span class="editable" id="reg_no">{{ $data['student']->reg_no }}</span>
-                    </div>
-                @endif
-                @if($data['student']->reg_date != "")
-                    <div class="profile-info-name"> Reg. Date :</div>
-                    <div class="profile-info-value">
-                        <span class="editable"
-                            id="reg_date">{{ \Carbon\Carbon::parse($data['student']->reg_date)->format('d/m/Y')}}</span>
-                    </div>
-                @endif
-            </div>
+      
+            
 
 
             <div class="profile-info-row">
-                @if($data['student']->serial_no != "")
-                    <div class="profile-info-name"> Serial No.: </div>
-                    <div class="profile-info-value">
-                        <span class="editable" id="serial_no">{{ $data['student']->serial_no }}</span>
-                    </div>
-                @endif
+             
                 @if($data['student']->date_of_birth != "")
                     <div class="profile-info-name"> DOB : </div>
                     <div class="profile-info-value">
                         <span class="editable"
                             id="date_of_birth">{{ \Carbon\Carbon::parse($data['student']->date_of_birth)->format('d/m/Y')}}</span>
+                    </div>
+                @endif
+                @if($data['student']->adhar_no != "")
+                    <div class="profile-info-name"> Aadhaar No.: </div>
+                    <div class="profile-info-value">
+                        <span class="editable" id="adhar_no">{{ $data['student']->adhar_no }}</span>
                     </div>
                 @endif
             </div>
@@ -581,7 +595,7 @@
             <span class="profile-picture">
                 @if($data['student']->reg_no != '')
                             {!! QrCode::size(200)->generate($data['student']->first_name . ' ' .
-                    $data['student']->middle_name . ' ' . $data['student']->last_name . '[' . $data['student']->reg_no . ']') !!}
+        $data['student']->middle_name . ' ' . $data['student']->last_name . '[' . $data['student']->reg_no . ']') !!}
                 @else
                 @endif
             </span>

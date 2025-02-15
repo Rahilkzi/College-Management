@@ -210,6 +210,7 @@ class StudentPublicController extends CollegeBaseController
             'students.date_of_birth',
             'students.gender',
             'students.blood_group',
+            'students.adhar_no',
             'students.religion',
             'students.caste',
             'students.nationality',
