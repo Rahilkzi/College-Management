@@ -118,7 +118,7 @@ You have these functions to interact with the API:
   * `cover_image` - Full path to the IMAGE you want to upload as a cover image.
 
 ### Quantity
-  * `quantity` - Set to 0 for unlimited sales. If you set it to say 10, a total of 10 sales will be allowed after which the product will be made unavailable.
+  * `quantity` - Set to 0 for T.P Shetye sales. If you set it to say 10, a total of 10 sales will be allowed after which the product will be made unavailable.
 
 ### Post Purchase Note
   * `note` - A post-purchase note, will only displayed after successful payment. Will also be included in the ticket/ receipt that is sent as attachment to the email sent to buyer. This will not be shown if the payment fails.

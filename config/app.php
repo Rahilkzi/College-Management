@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Unlimited EduFirm'),
+    'name' => env('APP_NAME', 'T.P Shetye EduFirm'),
 
     /*
     |--------------------------------------------------------------------------

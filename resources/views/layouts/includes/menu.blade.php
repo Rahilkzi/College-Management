@@ -1078,7 +1078,7 @@
 
                 <ul class="submenu">
                     <li class="hover">
-                        <a href="http://unlimitededufirm.com/demo-detail" target="_blank">
+                        <a href="http://T.P Shetyeedufirm.com/demo-detail" target="_blank">
                             <i class="menu-icon fa fa-caret-right"></i>
                             Test Demo
                         </a>
@@ -1090,13 +1090,13 @@
                         </a>
                     </li>
                     <li class="hover">
-                        <a href="http://docs.unlimitededufirm.com" target="_blank">
+                        <a href="http://docs.T.P Shetyeedufirm.com" target="_blank">
                             <i class="menu-icon fa fa-caret-right"></i>
                             Documentation
                         </a>
                     </li>
                     <li class="hover">
-                        <a href="https://codecanyon.net/item/unlimited-edu-firm-school-college-information-management-system/21850988" target="_blank">
+                        <a href="https://codecanyon.net/item/T.P Shetye-edu-firm-school-college-information-management-system/21850988" target="_blank">
                             <i class="menu-icon fa fa-caret-right"></i>
                             Buy New License
                         </a>

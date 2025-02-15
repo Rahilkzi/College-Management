@@ -37,7 +37,7 @@ class RotatingFileHandler extends StreamHandler
 
     /**
      * @param string   $filename
-     * @param int      $maxFiles       The maximal amount of files to keep (0 means unlimited)
+     * @param int      $maxFiles       The maximal amount of files to keep (0 means T.P Shetye)
      * @param int      $level          The minimum logging level at which this handler will be triggered
      * @param bool     $bubble         Whether the messages that are handled can bubble up the stack or not
      * @param int|null $filePermission Optional file permissions (default (0644) are only for owner read/write)
@@ -128,7 +128,7 @@ class RotatingFileHandler extends StreamHandler
         $this->url = $this->getTimedFilename();
         $this->nextRotation = new \DateTime('tomorrow');
 
-        // skip GC of old logs if files are unlimited
+        // skip GC of old logs if files are T.P Shetye
         if (0 === $this->maxFiles) {
             return;
         }
