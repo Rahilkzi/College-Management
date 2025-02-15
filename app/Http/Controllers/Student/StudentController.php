@@ -44,6 +44,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Image, URL;
 use ViewHelper;
+use Illuminate\Support\Facades\Log;
 
 class StudentController extends CollegeBaseController
 {
@@ -108,156 +109,188 @@ class StudentController extends CollegeBaseController
 
     public function register(AddValidation $request)
     {
-        if(!isset($request->reg_no)){
-            //RegNo Generator Start
-            $oldStudent = Student::where('faculty',$request->faculty)->orderBy('id', 'DESC')->first();
-            if (!$oldStudent){
-                $sn = 1;
+        DB::beginTransaction();
+        try {
+            Log::info('Starting student registration process', [
+                'reg_no' => $request->reg_no,
+                'faculty' => $request->faculty
+            ]);
+
+            if(!isset($request->reg_no)){
+                //RegNo Generator Start
+                $oldStudent = Student::where('faculty',$request->faculty)->orderBy('id', 'DESC')->first();
+                if (!$oldStudent){
+                    $sn = 1;
+                }else{
+                    $oldReg = intval(substr($oldStudent->reg_no,-4));
+                    $sn = $oldReg + 1;
+                }
+
+                $sn = substr("00000{$sn}", -4);
+                $year = intval(substr(Year::where('active_status','=',1)->first()->title,-2));
+                $faculty = Faculty::find(intval($request->faculty));
+                $facultyCode = $faculty->faculty_code;
+                //$regNum = $faculty.'-'.$year.'-'.$sn;
+                $regNum = $facultyCode.$year.$sn;
+                //reg generator End
+                $request->request->add(['reg_no' => $regNum]);
             }else{
-                $oldReg = intval(substr($oldStudent->reg_no,-4));
-                $sn = $oldReg + 1;
+                $request->request->add(['reg_no' => $request->reg_no]);
             }
 
-            $sn = substr("00000{$sn}", -4);
-            $year = intval(substr(Year::where('active_status','=',1)->first()->title,-2));
-            $faculty = Faculty::find(intval($request->faculty));
-            $facultyCode = $faculty->faculty_code;
-            //$regNum = $faculty.'-'.$year.'-'.$sn;
-            $regNum = $facultyCode.$year.$sn;
-            //reg generator End
-            $request->request->add(['reg_no' => $regNum]);
-        }else{
-            $request->request->add(['reg_no' => $request->reg_no]);
-        }
+            if ($request->hasFile('student_main_image')){
+                $student_image = $request->file('student_main_image');
+                $student_image_name = $request->reg_no.'.'.$student_image->getClientOriginalExtension();
+                $student_image->move(public_path().DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'studentProfile'.DIRECTORY_SEPARATOR, $student_image_name);
+            }else{
+                $student_image_name = "";
+            }
 
-        if ($request->hasFile('student_main_image')){
-            $student_image = $request->file('student_main_image');
-            $student_image_name = $request->reg_no.'.'.$student_image->getClientOriginalExtension();
-            $student_image->move(public_path().DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'studentProfile'.DIRECTORY_SEPARATOR, $student_image_name);
-        }else{
-            $student_image_name = "";
-        }
+            if ($request->hasFile('student_signature_main_image')){
+                $student_signature_image = $request->file('student_signature_main_image');
+                $student_signature_image_name = $request->reg_no.'_signature.'.$student_signature_image->getClientOriginalExtension();
+                $student_signature_image->move(public_path().DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'studentProfile'.DIRECTORY_SEPARATOR, $student_signature_image_name);
+            }else{
+                $student_signature_image_name = "";
+            }
 
-        if ($request->hasFile('student_signature_main_image')){
-            $student_signature_image = $request->file('student_signature_main_image');
-            $student_signature_image_name = $request->reg_no.'_signature.'.$student_signature_image->getClientOriginalExtension();
-            $student_signature_image->move(public_path().DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'studentProfile'.DIRECTORY_SEPARATOR, $student_signature_image_name);
-        }else{
-            $student_signature_image_name = "";
-        }
+            $request->request->add(['created_by' => auth()->user()->id]);
+            $request->request->add(['semester' => $request->get('semester')]);
+            $request->request->add(['student_image' => $student_image_name]);
+            $request->request->add(['student_signature' => $student_signature_image_name]);
 
-        $request->request->add(['created_by' => auth()->user()->id]);
-        $request->request->add(['semester' => $request->get('semester')]);
-        $request->request->add(['student_image' => $student_image_name]);
-        $request->request->add(['student_signature' => $student_signature_image_name]);
+            // Add Devanagari name fields
+            $request->request->add(['first_name_dev' => $request->get('first_name_dev')]);
+            $request->request->add(['middle_name_dev' => $request->get('middle_name_dev')]);
+            $request->request->add(['last_name_dev' => $request->get('last_name_dev')]);
 
-        // Add Devanagari name fields
-        $request->request->add(['first_name_dev' => $request->get('first_name_dev')]);
-        $request->request->add(['middle_name_dev' => $request->get('middle_name_dev')]);
-        $request->request->add(['last_name_dev' => $request->get('last_name_dev')]);
+            $student = Student::create($request->all());
 
-        $student = Student::create($request->all());
+            if ($student) {
+                Log::info('Student base record created', ['student_id' => $student->id]);
+            }
 
-        $parential_image_path = public_path().DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'parents'.DIRECTORY_SEPARATOR;
+            $parential_image_path = public_path().DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'parents'.DIRECTORY_SEPARATOR;
 
-        if ($request->hasFile('father_main_image')){
-            $father_image = $request->file('father_main_image');
-            $father_image_name = $student->reg_no.'_father.'.$father_image->getClientOriginalExtension();
-            $father_image->move($parential_image_path, $father_image_name);
-        }else{
-            $father_image_name = "";
-        }
+            if ($request->hasFile('father_main_image')){
+                $father_image = $request->file('father_main_image');
+                $father_image_name = $student->reg_no.'_father.'.$father_image->getClientOriginalExtension();
+                $father_image->move($parential_image_path, $father_image_name);
+            }else{
+                $father_image_name = "";
+            }
 
-        if ($request->hasFile('mother_main_image')){
-            $mother_image = $request->file('mother_main_image');
-            $mother_image_name = $student->reg_no.'_mother.'.$mother_image->getClientOriginalExtension();
-            $mother_image->move($parential_image_path, $mother_image_name);
-        }else{
-            $mother_image_name = "";
-        }
+            if ($request->hasFile('mother_main_image')){
+                $mother_image = $request->file('mother_main_image');
+                $mother_image_name = $student->reg_no.'_mother.'.$mother_image->getClientOriginalExtension();
+                $mother_image->move($parential_image_path, $mother_image_name);
+            }else{
+                $mother_image_name = "";
+            }
 
-        if ($request->hasFile('guardian_main_image')){
-            $guardian_image = $request->file('guardian_main_image');
-            $guardian_image_name = $student->reg_no.'_guardian.'.$guardian_image->getClientOriginalExtension();
-            $guardian_image->move($parential_image_path, $guardian_image_name);
-        }else{
-            $guardian_image_name = "";
-        }
+            if ($request->hasFile('guardian_main_image')){
+                $guardian_image = $request->file('guardian_main_image');
+                $guardian_image_name = $student->reg_no.'_guardian.'.$guardian_image->getClientOriginalExtension();
+                $guardian_image->move($parential_image_path, $guardian_image_name);
+            }else{
+                $guardian_image_name = "";
+            }
 
-        $request->request->add(['father_image' => $father_image_name]);
-        $request->request->add(['mother_image' => $mother_image_name]);
-        $request->request->add(['guardian_image' => $guardian_image_name]);
+            $request->request->add(['father_image' => $father_image_name]);
+            $request->request->add(['mother_image' => $mother_image_name]);
+            $request->request->add(['guardian_image' => $guardian_image_name]);
 
-        $request->request->add(['students_id' => $student->id]);
-        $addressinfo = Addressinfo::create($request->all());
-        $parentdetail = ParentDetail::create($request->all());
+            $request->request->add(['students_id' => $student->id]);
+            $addressinfo = Addressinfo::create($request->all());
+            if ($addressinfo) {
+                Log::info('Address info created', ['address_id' => $addressinfo->id]);
+            }
+            $parentdetail = ParentDetail::create($request->all());
+            if ($parentdetail) {
+                Log::info('Parent details created', ['parent_id' => $parentdetail->id]);
+            }
 
-        if($request->guardian_link_id == null){
-            $guardian = GuardianDetail::create($request->all());
-            $studentGuardian = StudentGuardian::create([
-                'students_id' => $student->id,
-                'guardians_id' => $guardian->id,
-            ]);
-        }else{
-            $studentGuardian = StudentGuardian::create([
-                'students_id' => $student->id,
-                'guardians_id' => $request->guardian_link_id,
-            ]);
-        }
-
-        /*Academic Info Start*/
-        if ($student && $request->has('institution')) {
-            foreach ($request->get('institution') as $key => $institute) {
-                AcademicInfo::create([
+            if($request->guardian_link_id == null){
+                $guardian = GuardianDetail::create($request->all());
+                if ($guardian) {
+                    Log::info('Guardian created/linked', ['guardian_id' => $guardian->id]);
+                }
+                $studentGuardian = StudentGuardian::create([
                     'students_id' => $student->id,
-                    'institution' => $institute,
-                    'board' => $request->get('board')[$key],
-                    'pass_year' => $request->get('pass_year')[$key],
-                    'symbol_no' => $request->get('symbol_no')[$key],
-                    'percentage' => $request->get('percentage')[$key],
-                    'division_grade' => $request->get('division_grade')[$key],
-                    'major_subjects' => $request->get('major_subjects')[$key],
-                    'remark' => $request->get('remark')[$key],
-                    'created_by' => auth()->user()->id,
+                    'guardians_id' => $guardian->id,
+                ]);
+            }else{
+                $studentGuardian = StudentGuardian::create([
+                    'students_id' => $student->id,
+                    'guardians_id' => $request->guardian_link_id,
                 ]);
             }
-        }
-        /*Academic Info End*/
 
-        /*SMS & Email Alert*/
-        $alert = AlertSetting::select('sms','email','subject','template')->where('event','=','StudentRegistration')->first();
-        if(!$alert){
+            /*Academic Info Start*/
+            if ($student && $request->has('institution')) {
+                foreach ($request->get('institution') as $key => $institute) {
+                    AcademicInfo::create([
+                        'students_id' => $student->id,
+                        'institution' => $institute,
+                        'board' => $request->get('board')[$key],
+                        'pass_year' => $request->get('pass_year')[$key],
+                        'symbol_no' => $request->get('symbol_no')[$key],
+                        'percentage' => $request->get('percentage')[$key],
+                        'division_grade' => $request->get('division_grade')[$key],
+                        'major_subjects' => $request->get('major_subjects')[$key],
+                        'remark' => $request->get('remark')[$key],
+                        'created_by' => auth()->user()->id,
+                    ]);
+                }
+            }
+            /*Academic Info End*/
 
-        }else{
-            //Dear {{first_name}}, you are successfully registered in our institution with RegNo.{{reg_no}}. Thank You.
-            $subject = $alert->subject;
-            $message = $alert->template;
-            $message = str_replace('{{first_name}}', $student->first_name, $message );
-            $message = str_replace('{{reg_no}}', $student->reg_no, $message );
-            $emailIds[] = $student->email;
-            $contactNumbers[] = $addressinfo->mobile_1;
+            /*SMS & Email Alert*/
+            $alert = AlertSetting::select('sms','email','subject','template')->where('event','=','StudentRegistration')->first();
+            if(!$alert){
 
-            /*Now Send SMS On First Mobile Number*/
-            if($alert->sms == 1){
-                $contactNumbers = $this->contactFilter($contactNumbers);
-                $smssuccess = $this->sendSMS($contactNumbers,$message);
+            }else{
+                //Dear {{first_name}}, you are successfully registered in our institution with RegNo.{{reg_no}}. Thank You.
+                $subject = $alert->subject;
+                $message = $alert->template;
+                $message = str_replace('{{first_name}}', $student->first_name, $message );
+                $message = str_replace('{{reg_no}}', $student->reg_no, $message );
+                $emailIds[] = $student->email;
+                $contactNumbers[] = $addressinfo->mobile_1;
+
+                /*Now Send SMS On First Mobile Number*/
+                if($alert->sms == 1){
+                    $contactNumbers = $this->contactFilter($contactNumbers);
+                    $smssuccess = $this->sendSMS($contactNumbers,$message);
+                }
+
+                /*Now Send Email With Subject*/
+                if($alert->email == 1){
+                    $emailIds = $this->emailFilter($emailIds);
+                    /*sending email*/
+                    $emailSuccess = $this->sendEmail($emailIds, $subject, $message);
+                }
+            }
+            //end sms email
+
+            DB::commit();
+            Log::info('Student registration completed successfully');
+            $request->session()->flash($this->message_success, $this->panel. ' Created Successfully.');
+
+            if($request->add_student_another) {
+                return back();
+            }else{
+                return redirect()->route($this->base_route);
             }
 
-            /*Now Send Email With Subject*/
-            if($alert->email == 1){
-                $emailIds = $this->emailFilter($emailIds);
-                /*sending email*/
-                $emailSuccess = $this->sendEmail($emailIds, $subject, $message);
-            }
-        }
-        //end sms email
-
-        $request->session()->flash($this->message_success, $this->panel. ' Created Successfully.');
-
-        if($request->add_student_another) {
+        } catch (\Exception $e) {
+            DB::rollback();
+            Log::error('Student registration failed', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ]);
+            $request->session()->flash($this->message_danger, 'Failed to register student. Please try again.');
             return back();
-        }else{
-            return redirect()->route($this->base_route);
         }
     }
 
@@ -321,7 +354,7 @@ class StudentController extends CollegeBaseController
 
       
 
-        $data['academicInfos'] = $data['student']->academicInfo()->orderBy('sorting_order','asc')->get();
+        $data['academics'] = $data['student']->academicInfo()->orderBy('sorting_order','asc')->get();
 
         /*Exam Score*/
         /*filter student with schedule subject markledger*/
@@ -489,271 +522,399 @@ class StudentController extends CollegeBaseController
 
     public function update(EditValidation $request, $id)
     {
-        if (!$row = Student::find($id))
+        if (!$row = Student::find($id)) {
+            Log::warning('Student not found for update', ['id' => $id]);
             return parent::invalidRequest();
-
-        if ($request->hasFile('student_main_image')) {
-            // remove old image from folder
-            if (file_exists($this->folder_path.$row->student_image))
-                @unlink($this->folder_path.$row->student_image);
-
-            /*upload new student image*/
-            $student_image = $request->file('student_main_image');
-            $student_image_name = $request->reg_no.'.'.$student_image->getClientOriginalExtension();
-            $student_image->move($this->folder_path, $student_image_name);
         }
 
-        if ($request->hasFile('student_signature_main_image')) {
-            // remove old image from folder
-            if (file_exists($this->folder_path.$row->student_signature))
-                @unlink($this->folder_path.$row->student_signature);
-
-            /*upload new student signature*/
-            $student_signature = $request->file('student_signature_main_image');
-            $student_signature_name = $request->reg_no.'_signature.'.$student_signature->getClientOriginalExtension();
-            $student_signature->move($this->folder_path, $student_signature_name);
-        }
-
-        $request->request->add(['updated_by' => auth()->user()->id]);
-        $request->request->add(['student_image' => isset($student_image_name)?$student_image_name:$row->student_image]);
-        $request->request->add(['student_signature' => isset($student_signature_name)?$student_signature_name:$row->student_signature]);
-
-        // Add Devanagari name fields
-        $request->request->add(['first_name_dev' => $request->get('first_name_dev')]);
-        $request->request->add(['middle_name_dev' => $request->get('middle_name_dev')]);
-        $request->request->add(['last_name_dev' => $request->get('last_name_dev')]);
-
-        $student = $row->update($request->all());
-
-        /*Update Associate Address Info*/
-        $row->address()->update([
-            'address'    =>  $request->address,
-            'state'      =>  $request->state,
-            'country'    =>  $request->country,
-            'temp_address' =>  $request->temp_address,
-            'temp_state' =>  $request->temp_state,
-            'temp_country' =>  $request->temp_country,
-            'home_phone'   =>  $request->home_phone,
-            'mobile_1'   =>  $request->mobile_1,
-            'mobile_2'   =>  $request->mobile_2
-
-        ]);
-
-        /*Update Associate Parents Info with Images*/
-        $parent = $row->parents()->first();
-        $guardian = $row->guardian()->first();
-
-        $parential_image_path = public_path().DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'parents'.DIRECTORY_SEPARATOR;
-        if ($request->hasFile('father_main_image')){
-            // remove old image from folder
-            if (file_exists($parential_image_path.$parent->father_image))
-                @unlink($parential_image_path.$parent->father_image);
-
-            $father_image = $request->file('father_main_image');
-            $father_image_name = $row->reg_no.'_father.'.$father_image->getClientOriginalExtension();
-            $father_image->move($parential_image_path, $father_image_name);
-        }
-
-        if ($request->hasFile('mother_main_image')){
-            // remove old image from folder
-            if (file_exists($parential_image_path.$parent->mother_image))
-                @unlink($parential_image_path.$parent->mother_image);
-
-            $mother_image = $request->file('mother_main_image');
-            $mother_image_name = $row->reg_no.'_mother.'.$mother_image->getClientOriginalExtension();
-            $mother_image->move($parential_image_path, $mother_image_name);
-        }
-
-
-        if ($request->hasFile('guardian_main_image')){
-            // remove old image from folder
-            if (file_exists($parential_image_path.$guardian->guardian_image))
-                @unlink($parential_image_path.$guardian->guardian_image);
-
-            $guardian_image = $request->file('guardian_main_image');
-            $guardian_image_name = $row->reg_no.'_guardian.'.$guardian_image->getClientOriginalExtension();
-            $guardian_image->move($parential_image_path, $guardian_image_name);
-        }
-
-        $father_image_name = isset($father_image_name)?$father_image_name:$parent->father_image;
-        $mother_image_name = isset($mother_image_name)?$mother_image_name:$parent->mother_image;
-        $guardian_image_name = isset($guardian_image_name)?$guardian_image_name:$guardian->guardian_image;
-
-        $row->parents()->update([
-            'grandfather_first_name'    =>  $request->grandfather_first_name,
-            'grandfather_middle_name'   =>  $request->grandfather_middle_name,
-            'grandfather_last_name'     =>  $request->grandfather_last_name,
-            'father_first_name'         =>  $request->father_first_name,
-            'father_middle_name'        =>  $request->father_middle_name,
-            'father_last_name'          =>  $request->father_last_name,
-            'father_qualification'        =>  $request->father_qualification,
-            'father_occupation'         =>  $request->father_occupation,
-            'father_office'             =>  $request->father_office,
-            'father_office_number'      =>  $request->father_office_number,
-            'father_residence_number'   =>  $request->father_residence_number,
-            'father_mobile_1'           =>  $request->father_mobile_1,
-            'father_mobile_2'           =>  $request->father_mobile_2,
-            'father_email'              =>  $request->father_email,
-            'mother_first_name'         =>  $request->mother_first_name,
-            'mother_middle_name'        =>  $request->mother_middle_name,
-            'mother_last_name'          =>  $request->mother_last_name,
-            'mother_qualification'        =>  $request->mother_qualification,
-            'mother_occupation'         =>  $request->mother_occupation,
-            'mother_office'             =>  $request->mother_office,
-            'mother_office_number'      =>  $request->mother_office_number,
-            'mother_residence_number'   =>  $request->mother_residence_number,
-            'mother_mobile_1'           =>  $request->mother_mobile_1,
-            'mother_mobile_2'           =>  $request->mother_mobile_2,
-            'mother_email'              =>  $request->mother_email,
-            'father_image'              =>  $father_image_name,
-            'mother_image'              =>  $mother_image_name
-
-        ]);
-
-        //if guardian link modified or not condition
-        if($request->guardian_link_id == null){
-            $sgd = $row->guardian()->first();
-            $guardiansInfo = [
-                'guardian_first_name'         =>  $request->guardian_first_name,
-                'guardian_middle_name'        =>  $request->guardian_middle_name,
-                'guardian_last_name'          =>  $request->guardian_last_name,
-                'guardian_qualification'        =>  $request->guardian_qualification,
-                'guardian_occupation'         =>  $request->guardian_occupation,
-                'guardian_office'             =>  $request->guardian_office,
-                'guardian_office_number'      =>  $request->guardian_office_number,
-                'guardian_residence_number'   =>  $request->guardian_residence_number,
-                'guardian_mobile_1'           =>  $request->guardian_mobile_1,
-                'guardian_mobile_2'           =>  $request->guardian_mobile_2,
-                'guardian_email'              =>  $request->guardian_email,
-                'guardian_relation'           =>  $request->guardian_relation,
-                'guardian_address'            =>  $request->guardian_address,
-                'guardian_image'              =>  $guardian_image_name
-            ];
-            GuardianDetail::where('id',$sgd->guardians_id)->update($guardiansInfo);
-        }else{
-            $studentGuardian = StudentGuardian::where('students_id', $row->id)->update([
-                'students_id' => $row->id,
-                'guardians_id' => $request->guardian_link_id,
+        DB::beginTransaction();
+        try {
+            Log::info('Starting student update process', [
+                'student_id' => $id,
+                'reg_no' => $request->reg_no
             ]);
-        }
 
-        /*Academic Info Start*/
-        if ($row && $request->has('institution')) {
-            foreach ($request->get('institution') as $key => $institution) {
-                $academicInfoId = isset($request->get('academic_info_id')[$key])?$request->get('academic_info_id')[$key]:$key+1;
-                $academicInfoExist = AcademicInfo::where('id',$academicInfoId)->first();
-                if($academicInfoExist){
-                    $academicInfoUpdate = [
-                        'students_id' => $row->id,
-                        'institution' => $institution,
-                        'board' => $request->get('board')[$key],
-                        'pass_year' => $request->get('pass_year')[$key],
-                        'symbol_no' => $request->get('symbol_no')[$key],
-                        'percentage' => $request->get('percentage')[$key],
-                        'division_grade' => $request->get('division_grade')[$key],
-                        'major_subjects' => $request->get('major_subjects')[$key],
-                        'remark' => $request->get('remark')[$key],
-                        'sorting_order' => $key+1,
-                        'last_updated_by' => auth()->user()->id
-                    ];
-                    $academicInfoExist->update($academicInfoUpdate);
-                }else{
-                    AcademicInfo::create([
-                        'students_id' => $row->id,
-                        'institution' => $institution,
-                        'board' => $request->get('board')[$key],
-                        'pass_year' => $request->get('pass_year')[$key],
-                        'symbol_no' => $request->get('symbol_no')[$key],
-                        'percentage' => $request->get('percentage')[$key],
-                        'division_grade' => $request->get('division_grade')[$key],
-                        'major_subjects' => $request->get('major_subjects')[$key],
-                        'remark' => $request->get('remark')[$key],
-                        'sorting_order' => $key+1,
-                        'created_by' => auth()->user()->id,
+            if ($request->hasFile('student_main_image')) {
+                // remove old image from folder
+                if (file_exists($this->folder_path.$row->student_image))
+                    @unlink($this->folder_path.$row->student_image);
+
+                /*upload new student image*/
+                $student_image = $request->file('student_main_image');
+                $student_image_name = $request->reg_no.'.'.$student_image->getClientOriginalExtension();
+                $student_image->move($this->folder_path, $student_image_name);
+            }
+
+            if ($request->hasFile('student_signature_main_image')) {
+                // remove old image from folder
+                if (file_exists($this->folder_path.$row->student_signature))
+                    @unlink($this->folder_path.$row->student_signature);
+
+                /*upload new student signature*/
+                $student_signature = $request->file('student_signature_main_image');
+                $student_signature_name = $request->reg_no.'_signature.'.$student_signature->getClientOriginalExtension();
+                $student_signature->move($this->folder_path, $student_signature_name);
+            }
+
+            $request->request->add(['updated_by' => auth()->user()->id]);
+            $request->request->add(['student_image' => isset($student_image_name)?$student_image_name:$row->student_image]);
+            $request->request->add(['student_signature' => isset($student_signature_name)?$student_signature_name:$row->student_signature]);
+
+            // Add Devanagari name fields
+            $request->request->add(['first_name_dev' => $request->get('first_name_dev')]);
+            $request->request->add(['middle_name_dev' => $request->get('middle_name_dev')]);
+            $request->request->add(['last_name_dev' => $request->get('last_name_dev')]);
+
+            $student = $row->update($request->all());
+
+            if ($student) {
+                Log::info('Student base record updated', ['student_id' => $id]);
+            }
+
+            /*Update Associate Address Info*/
+            $row->address()->update([
+                'address'    =>  $request->address,
+                'state'      =>  $request->state,
+                'country'    =>  $request->country,
+                'temp_address' =>  $request->temp_address,
+                'temp_state' =>  $request->temp_state,
+                'temp_country' =>  $request->temp_country,
+                'home_phone'   =>  $request->home_phone,
+                'mobile_1'   =>  $request->mobile_1,
+                'mobile_2'   =>  $request->mobile_2
+
+            ]);
+
+            if ($request->address) {
+                Log::info('Address info updated', [
+                    'student_id' => $id,
+                    'address' => $request->address
+                ]);
+            }
+
+            /*Update Associate Parents Info with Images*/
+            $parent = $row->parents()->first();
+            $guardian = $row->guardian()->first();
+
+            $parential_image_path = public_path().DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'parents'.DIRECTORY_SEPARATOR;
+            if ($request->hasFile('father_main_image')){
+                // remove old image from folder
+                if (file_exists($parential_image_path.$parent->father_image))
+                    @unlink($parential_image_path.$parent->father_image);
+
+                $father_image = $request->file('father_main_image');
+                $father_image_name = $row->reg_no.'_father.'.$father_image->getClientOriginalExtension();
+                $father_image->move($parential_image_path, $father_image_name);
+            }
+
+            if ($request->hasFile('mother_main_image')){
+                // remove old image from folder
+                if (file_exists($parential_image_path.$parent->mother_image))
+                    @unlink($parential_image_path.$parent->mother_image);
+
+                $mother_image = $request->file('mother_main_image');
+                $mother_image_name = $row->reg_no.'_mother.'.$mother_image->getClientOriginalExtension();
+                $mother_image->move($parential_image_path, $mother_image_name);
+            }
+
+
+            if ($request->hasFile('guardian_main_image')){
+                // remove old image from folder
+                if (file_exists($parential_image_path.$guardian->guardian_image))
+                    @unlink($parential_image_path.$guardian->guardian_image);
+
+                $guardian_image = $request->file('guardian_main_image');
+                $guardian_image_name = $row->reg_no.'_guardian.'.$guardian_image->getClientOriginalExtension();
+                $guardian_image->move($parential_image_path, $guardian_image_name);
+            }
+
+            $father_image_name = isset($father_image_name)?$father_image_name:$parent->father_image;
+            $mother_image_name = isset($mother_image_name)?$mother_image_name:$parent->mother_image;
+            $guardian_image_name = isset($guardian_image_name)?$guardian_image_name:$guardian->guardian_image;
+
+            $row->parents()->update([
+                'grandfather_first_name'    =>  $request->grandfather_first_name,
+                'grandfather_middle_name'   =>  $request->grandfather_middle_name,
+                'grandfather_last_name'     =>  $request->grandfather_last_name,
+                'father_first_name'         =>  $request->father_first_name,
+                'father_middle_name'        =>  $request->father_middle_name,
+                'father_last_name'          =>  $request->father_last_name,
+                'father_qualification'        =>  $request->father_qualification,
+                'father_occupation'         =>  $request->father_occupation,
+                'father_office'             =>  $request->father_office,
+                'father_office_number'      =>  $request->father_office_number,
+                'father_residence_number'   =>  $request->father_residence_number,
+                'father_mobile_1'           =>  $request->father_mobile_1,
+                'father_mobile_2'           =>  $request->father_mobile_2,
+                'father_email'              =>  $request->father_email,
+                'mother_first_name'         =>  $request->mother_first_name,
+                'mother_middle_name'        =>  $request->mother_middle_name,
+                'mother_last_name'          =>  $request->mother_last_name,
+                'mother_qualification'        =>  $request->mother_qualification,
+                'mother_occupation'         =>  $request->mother_occupation,
+                'mother_office'             =>  $request->mother_office,
+                'mother_office_number'      =>  $request->mother_office_number,
+                'mother_residence_number'   =>  $request->mother_residence_number,
+                'mother_mobile_1'           =>  $request->mother_mobile_1,
+                'mother_mobile_2'           =>  $request->mother_mobile_2,
+                'mother_email'              =>  $request->mother_email,
+                'father_image'              =>  $father_image_name,
+                'mother_image'              =>  $mother_image_name
+
+            ]);
+
+            if ($request->father_first_name) {
+                Log::info('Parent info updated', [
+                    'student_id' => $id,
+                    'father_name' => $request->father_first_name
+                ]);
+            }
+
+            //if guardian link modified or not condition
+            if($request->guardian_link_id == null){
+                $sgd = $row->guardian()->first();
+                $guardiansInfo = [
+                    'guardian_first_name'         =>  $request->guardian_first_name,
+                    'guardian_middle_name'        =>  $request->guardian_middle_name,
+                    'guardian_last_name'          =>  $request->guardian_last_name,
+                    'guardian_qualification'        =>  $request->guardian_qualification,
+                    'guardian_occupation'         =>  $request->guardian_occupation,
+                    'guardian_office'             =>  $request->guardian_office,
+                    'guardian_office_number'      =>  $request->guardian_office_number,
+                    'guardian_residence_number'   =>  $request->guardian_residence_number,
+                    'guardian_mobile_1'           =>  $request->guardian_mobile_1,
+                    'guardian_mobile_2'           =>  $request->guardian_mobile_2,
+                    'guardian_email'              =>  $request->guardian_email,
+                    'guardian_relation'           =>  $request->guardian_relation,
+                    'guardian_address'            =>  $request->guardian_address,
+                    'guardian_image'              =>  $guardian_image_name
+                ];
+                GuardianDetail::where('id',$sgd->guardians_id)->update($guardiansInfo);
+
+                if ($request->guardian_first_name) {
+                    Log::info('Guardian info updated', [
+                        'student_id' => $id,
+                        'guardian_id' => $sgd->guardians_id
+                    ]);
+                }
+            }else{
+                $studentGuardian = StudentGuardian::where('students_id', $row->id)->update([
+                    'students_id' => $row->id,
+                    'guardians_id' => $request->guardian_link_id,
+                ]);
+
+                if ($request->guardian_link_id) {
+                    Log::info('Guardian link updated', [
+                        'student_id' => $id,
+                        'new_guardian_id' => $request->guardian_link_id
                     ]);
                 }
             }
-        }
-        /*Academic Info End*/
-        $request->session()->flash($this->message_success, $this->panel. ' Info Updated Successfully.');
-        //return redirect()->route($this->base_route);
-        return back();
 
+            /*Academic Info Start*/
+            if ($row && $request->has('institution')) {
+                foreach ($request->get('institution') as $key => $institution) {
+                    $academicInfoId = isset($request->get('academic_info_id')[$key])?$request->get('academic_info_id')[$key]:$key+1;
+                    $academicInfoExist = AcademicInfo::where('id',$academicInfoId)->first();
+                    if($academicInfoExist){
+                        $academicInfoUpdate = [
+                            'students_id' => $row->id,
+                            'institution' => $institution,
+                            'board' => $request->get('board')[$key],
+                            'pass_year' => $request->get('pass_year')[$key],
+                            'symbol_no' => $request->get('symbol_no')[$key],
+                            'percentage' => $request->get('percentage')[$key],
+                            'division_grade' => $request->get('division_grade')[$key],
+                            'major_subjects' => $request->get('major_subjects')[$key],
+                            'remark' => $request->get('remark')[$key],
+                            'sorting_order' => $key+1,
+                            'last_updated_by' => auth()->user()->id
+                        ];
+                        $academicInfoExist->update($academicInfoUpdate);
+                    }else{
+                        AcademicInfo::create([
+                            'students_id' => $row->id,
+                            'institution' => $institution,
+                            'board' => $request->get('board')[$key],
+                            'pass_year' => $request->get('pass_year')[$key],
+                            'symbol_no' => $request->get('symbol_no')[$key],
+                            'percentage' => $request->get('percentage')[$key],
+                            'division_grade' => $request->get('division_grade')[$key],
+                            'major_subjects' => $request->get('major_subjects')[$key],
+                            'remark' => $request->get('remark')[$key],
+                            'sorting_order' => $key+1,
+                            'created_by' => auth()->user()->id,
+                        ]);
+                    }
+                }
+            }
+            /*Academic Info End*/
+
+            DB::commit();
+            Log::info('Student update completed successfully');
+            $request->session()->flash($this->message_success, $this->panel. ' Info Updated Successfully.');
+            return back();
+
+        } catch (\Exception $e) {
+            DB::rollback();
+            Log::error('Student update failed', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString(),
+                'student_id' => $id
+            ]);
+            $request->session()->flash($this->message_danger, 'Failed to update student. Please try again.');
+            return back();
+        }
     }
 
     public function delete(Request $request, $id)
     {
-        if (!$row = Student::find($id)) return parent::invalidRequest();
-
-        // Begin database transaction
-        DB::beginTransaction();
         try {
-            // Delete user accounts
-            User::where(['role_id' => 6, 'hook_id'=> $id])->delete();
-            User::where(['role_id' => 7, 'hook_id'=> $id])->delete();
-
-            // Delete documents and notes
-            $row->studentDocuments()->delete();
-            $row->studentNotes()->delete();
-
-            // Delete certificates
-            $row->certificateHistory()->delete();
-            $row->attendanceCertificate()->delete();
-            $row->bonafideCertificate()->delete();
-            $row->courseCompletionCertificate()->delete();
-            $row->transferCertificate()->delete();
-
-            // Delete academic records
-            $row->markLedger()->delete();
-            $row->regularAttendance()->delete();
-            $row->academicInfo()->delete();
-
-            // Delete fee records
-            $row->feeCollect()->delete();
-            $row->feeMaster()->delete();
-
-            // Delete parent, address and guardian info
-            $row->parents()->delete();
-            $row->address()->delete();
-            
-            // Delete guardian link and guardian if no other students linked
-            $guardian = $row->guardian()->first();
-            if($guardian) {
-                $studentGuardian = StudentGuardian::where('students_id', $row->id)->first();
-                if($studentGuardian) {
-                    // Check if guardian is linked to other students
-                    $otherLinks = StudentGuardian::where('guardians_id', $guardian->id)
-                        ->where('students_id', '!=', $row->id)
-                        ->count();
-                        
-                    if($otherLinks == 0) {
-                        // Delete guardian if not linked to other students
-                        GuardianDetail::find($guardian->id)->delete();
-                    }
-                    $studentGuardian->delete();
-                }
+            if (!$row = Student::find($id)) {
+                Log::warning('Student not found for deletion', [
+                    'id' => $id,
+                    'user_id' => auth()->id()
+                ]);
+                return parent::invalidRequest();
             }
 
-            // Delete student images
-            if (file_exists($this->folder_path.$row->student_image))
-                @unlink($this->folder_path.$row->student_image);
+            DB::beginTransaction();
+            
+            try {
+                Log::info('Starting student deletion process', [
+                    'student_id' => $id,
+                    'reg_no' => $row->reg_no,
+                    'user_id' => auth()->id()
+                ]);
 
-            if (file_exists($this->folder_path.$row->student_signature))
-                @unlink($this->folder_path.$row->student_signature);
+                // Delete user accounts
+                $userDeleted = User::where(['role_id' => 6, 'hook_id'=> $id])->delete();
+                $guardianUserDeleted = User::where(['role_id' => 7, 'hook_id'=> $id])->delete();
+                
+                Log::info('User accounts deleted', [
+                    'student_user_deleted' => $userDeleted,
+                    'guardian_user_deleted' => $guardianUserDeleted
+                ]);
 
-            // Finally delete student
-            $row->delete();
+                // Delete related records with logging
+                $deletedCounts = [
+                    'documents' => $row->studentDocuments()->delete(),
+                    'notes' => $row->studentNotes()->delete(),
+                    'certificates' => [
+                        'history' => $row->certificateHistory()->delete(),
+                        'attendance' => $row->attendanceCertificate()->delete(),
+                        'bonafide' => $row->bonafideCertificate()->delete(),
+                        'completion' => $row->courseCompletionCertificate()->delete(),
+                        'transfer' => $row->transferCertificate()->delete(),
+                    ],
+                    'academic' => [
+                        'markLedger' => $row->markLedger()->delete(),
+                        'attendance' => $row->regularAttendance()->delete(),
+                        'info' => $row->academicInfo()->delete(),
+                    ],
+                    'fees' => [
+                        'collect' => $row->feeCollect()->delete(),
+                        'master' => $row->feeMaster()->delete(),
+                    ]
+                ];
 
-            DB::commit();
-            $request->session()->flash($this->message_success, $this->panel.' Deleted Successfully.');
+                Log::info('Related records deleted', ['counts' => $deletedCounts]);
 
+                // Handle guardian deletion
+                $guardian = $row->guardian()->first();
+                if ($guardian) {
+                    $studentGuardian = StudentGuardian::where('students_id', $row->id)->first();
+                    if ($studentGuardian) {
+                        $otherLinks = StudentGuardian::where('guardians_id', $studentGuardian->guardians_id)
+                            ->where('students_id', '!=', $row->id)
+                            ->count();
+                        
+                        Log::info('Guardian check', [
+                            'guardian_id' => $studentGuardian->guardians_id,
+                            'other_links' => $otherLinks
+                        ]);
+
+                        if ($otherLinks == 0) {
+                            // Get guardian record before deleting
+                            $guardianToDelete = GuardianDetail::find($studentGuardian->guardians_id);
+                            if ($guardianToDelete) {
+                                $guardianToDelete->delete();
+                                Log::info('Guardian deleted', ['guardian_id' => $studentGuardian->guardians_id]);
+                            } else {
+                                Log::warning('Guardian record not found for deletion', [
+                                    'guardian_id' => $studentGuardian->guardians_id
+                                ]);
+                            }
+                        }
+                        
+                        // Delete student-guardian link
+                        $studentGuardian->delete();
+                        Log::info('Student-guardian link deleted', [
+                            'student_id' => $row->id,
+                            'guardian_id' => $studentGuardian->guardians_id
+                        ]);
+                    }
+                }
+
+                // Delete parent record
+                $parent = $row->parents()->first();
+                if ($parent) {
+                    // Delete parent images if they exist
+                    $parential_image_path = public_path().DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'parents'.DIRECTORY_SEPARATOR;
+                    
+                    if ($parent->father_image && file_exists($parential_image_path.$parent->father_image)) {
+                        @unlink($parential_image_path.$parent->father_image);
+                    }
+                    if ($parent->mother_image && file_exists($parential_image_path.$parent->mother_image)) {
+                        @unlink($parential_image_path.$parent->mother_image);
+                    }
+                    
+                    $parent->delete();
+                    Log::info('Parent record deleted', ['parent_id' => $parent->id]);
+                }
+
+                // Delete address record
+                $address = $row->address()->first();
+                if ($address) {
+                    $address->delete();
+                    Log::info('Address record deleted', ['address_id' => $address->id]);
+                }
+
+                // Finally delete student
+                $row->delete();
+
+                DB::commit();
+                Log::info('Student deletion completed successfully', [
+                    'student_id' => $id,
+                    'reg_no' => $row->reg_no
+                ]);
+
+                $request->session()->flash($this->message_success, $this->panel.' Deleted Successfully.');
+                return back();
+
+            } catch (\Exception $e) {
+                DB::rollback();
+                Log::error('Student deletion failed', [
+                    'error' => $e->getMessage(),
+                    'trace' => $e->getTraceAsString(),
+                    'student_id' => $id,
+                    'line' => $e->getLine(),
+                    'file' => $e->getFile()
+                ]);
+                $request->session()->flash($this->message_danger, 'Failed to delete '.$this->panel.'. Please try again.');
+                return back();
+            }
         } catch (\Exception $e) {
-            DB::rollback();
-            $request->session()->flash($this->message_danger, 'Failed to delete '.$this->panel.'. Please try again.');
+            Log::error('Fatal error in student deletion', [
+                'error' => $e->getMessage(),
+                'trace' => $e->getTraceAsString(),
+                'student_id' => $id,
+                'line' => $e->getLine(),
+                'file' => $e->getFile()
+            ]);
+            $request->session()->flash($this->message_danger, 'A system error occurred. Please try again.');
             return back();
         }
-
-        return back();
     }
 
     public function active(request $request, $id)
@@ -1094,7 +1255,7 @@ class StudentController extends CollegeBaseController
                 'first_name'                    => 'required | max:100',
                 'last_name'                     => 'required | max:25',
                 'date_of_birth'                 => 'required',
-                'adhar_no'                       => 'required | unique:students,adhar_no',
+                'adhar_no'                      => 'required | unique:students,adhar_no',
                 'gender'                        => 'required',
                 'religion'                      => 'max:15',
                 'caste'                         => 'max:15',

@@ -33,7 +33,6 @@ class EditValidation extends FormRequest
             'first_name'                    => 'required | max:25',
             'last_name'                     => 'required | max:25',
             'date_of_birth'                 => 'required',
-            'adhar_no'                      => 'required | unique:students,adhar_no,'.$this->request->get('id'),
             'gender'                        => 'required',
             'religion'                      =>'max:25',
             'caste'                         =>'max:25',
