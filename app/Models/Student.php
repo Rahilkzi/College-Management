@@ -44,9 +44,10 @@ class Student extends BaseModel
         return $this->hasMany(Note::class,'member_id','id')->where('member_type','=','student');
     }
 
-    public function studentDocuments()
+    public function documents()
     {
-        return $this->hasMany(Document::class,'member_id','id')->where('member_type','=','student');
+        return $this->hasMany(Document::class, 'member_id')
+                    ->where('member_type', 'student');
     }
 
 

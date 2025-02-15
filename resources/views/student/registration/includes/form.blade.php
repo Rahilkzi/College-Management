@@ -7,8 +7,11 @@
         <li>
             <a data-toggle="tab" href="#academicInfo"><i class="fa fa-certificate bigger-110"></i> Academic Info</a>
         </li>
-        <li class="">
+        <li>
             <a data-toggle="tab" href="#profileimage"><i class="fa fa-image bigger-110"></i> Profile Images</a>
+        </li>
+        <li>
+            <a data-toggle="tab" href="#documents"><i class="fa fa-file bigger-110"></i> Documents</a>
         </li>
     </ul>
 
@@ -24,6 +27,10 @@
 
         <div id="profileimage" class="tab-pane">
             @include('student.registration.includes.forms.profileimage')
+        </div>
+
+        <div id="documents" class="tab-pane">
+            @include('student.registration.includes.forms.documents')
         </div>
     </div>
 
