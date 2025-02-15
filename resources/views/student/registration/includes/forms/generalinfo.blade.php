@@ -79,22 +79,39 @@
         </div>
     @endif
 </div>
-
 <div class="form-group">
-    {!! Form::label('first_name', 'NAME OF STUDENT', ['class' => 'col-sm-3 control-label',]) !!}
+    {!! Form::label('first_name', 'NAME OF STUDENT', ['class' => 'col-sm-3 control-label']) !!}
     <div class="col-sm-3">
-        {!! Form::text('first_name', null, ["class" => "form-control border-form upper","required"]) !!}
+        {!! Form::text('first_name', null, ["class" => "form-control border-form upper", "required", "onkeyup" => "convertToDevanagari(this, 'devnagari_first_name')"]) !!}
         @include('includes.form_fields_validation_message', ['name' => 'first_name'])
     </div>
     <div class="col-sm-3">
-        {!! Form::text('middle_name', null, ["class" => "form-control border-form upper"]) !!}
+        {!! Form::text('middle_name', null, ["class" => "form-control border-form upper", "onkeyup" => "convertToDevanagari(this, 'devnagari_middle_name')"]) !!}
         @include('includes.form_fields_validation_message', ['name' => 'middle_name'])
     </div>
     <div class="col-sm-3">
-        {!! Form::text('last_name', null, ["class" => "form-control border-form upper","required"]) !!}
+        {!! Form::text('last_name', null, ["class" => "form-control border-form upper", "required", "onkeyup" => "convertToDevanagari(this, 'devnagari_last_name')"]) !!}
         @include('includes.form_fields_validation_message', ['name' => 'last_name'])
     </div>
 </div>
+
+<!-- Devanagari Section -->
+<div class="form-group">
+    {!! Form::label('first_name_dev', 'NAME OF STUDENT IN DEVANAGARI', ['class' => 'col-sm-3 control-label']) !!}
+    <div class="col-sm-3">
+        {!! Form::text('first_name_dev', null, ["class" => "form-control border-form", "id" => "devnagari_first_name", "readonly", "placeholder" => "देवनागरी में नाम"]) !!}
+        @include('includes.form_fields_validation_message', ['name' => 'first_name_dev'])
+    </div>
+    <div class="col-sm-3">
+        {!! Form::text('middle_name_dev', null, ["class" => "form-control border-form", "id" => "devnagari_middle_name", "readonly", "placeholder" => "देवनागरी में नाम"]) !!}
+        @include('includes.form_fields_validation_message', ['name' => 'middle_name_dev'])
+    </div>
+    <div class="col-sm-3">
+        {!! Form::text('last_name_dev', null, ["class" => "form-control border-form", "id" => "devnagari_last_name", "readonly", "placeholder" => "देवनागरी में नाम"]) !!}
+        @include('includes.form_fields_validation_message', ['name' => 'last_name_dev'])
+    </div>
+</div>
+
 
 <div class="form-group">
     {!! Form::label('date_of_birth', 'Date of Birth', ['class' => 'col-sm-2 control-label']) !!}
@@ -105,7 +122,7 @@
 
     {!! Form::label('gender', 'Gender', ['class' => 'col-sm-2 control-label']) !!}
     <div class="col-sm-2">
-        {!! Form::select('gender', ['' => '','MALE' => 'MALE', 'FEMALE' => 'FEMALE', 'OTHER' => 'OTHER'], null, ['class'=>'form-control border-form',"required"]); !!}
+        {!! Form::select('gender', ['' => '','MALE' => 'MALE', 'FEMALE' => 'FEMALE', 'OTHER' => 'OTHER'], null, ['class'=>'form-control border-form',"required"]) !!}
         @include('includes.form_fields_validation_message', ['name' => 'gender'])
     </div>
 

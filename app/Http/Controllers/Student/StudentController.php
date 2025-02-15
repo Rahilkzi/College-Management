@@ -151,6 +151,11 @@ class StudentController extends CollegeBaseController
         $request->request->add(['student_image' => $student_image_name]);
         $request->request->add(['student_signature' => $student_signature_image_name]);
 
+        // Add Devanagari name fields
+        $request->request->add(['first_name_dev' => $request->get('first_name_dev')]);
+        $request->request->add(['middle_name_dev' => $request->get('middle_name_dev')]);
+        $request->request->add(['last_name_dev' => $request->get('last_name_dev')]);
+
         $student = Student::create($request->all());
 
         $parential_image_path = public_path().DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'parents'.DIRECTORY_SEPARATOR;
@@ -261,7 +266,9 @@ class StudentController extends CollegeBaseController
         $data = [];
         $data['student'] = Student::select('students.id','students.reg_no', 'students.reg_date', 'students.serial_no',
             'students.faculty','students.semester','students.batch', 'students.academic_status', 'students.first_name', 'students.middle_name',
-            'students.last_name', 'students.date_of_birth', 'students.gender', 'students.blood_group',  'students.religion', 'students.caste','students.nationality',
+            'students.last_name', 'students.first_name_dev', 'students.middle_name_dev', 'students.last_name_dev', 'students.first_name_dev', 
+            'students.middle_name_dev', 'students.last_name_dev', 'students.first_name_dev', 'students.middle_name_dev', 'students.last_name_dev', 
+            'students.date_of_birth','students.gender', 'students.blood_group',  'students.religion', 'students.caste','students.nationality',
             'students.mother_tongue', 'students.email', 'students.extra_info', 'students.status', 'pd.grandfather_first_name',
             'pd.grandfather_middle_name', 'pd.grandfather_last_name', 'pd.father_first_name', 'pd.father_middle_name',
             'pd.father_last_name', 'pd.father_qualification', 'pd.father_occupation', 'pd.father_office', 'pd.father_office_number',
@@ -440,7 +447,8 @@ class StudentController extends CollegeBaseController
 
         $data['row'] = Student::select('students.id','students.reg_no', 'students.reg_date', 'students.serial_no',
             'students.faculty','students.semester','students.batch', 'students.academic_status', 'students.first_name', 'students.middle_name',
-            'students.last_name', 'students.date_of_birth', 'students.gender', 'students.blood_group', 'students.religion', 'students.caste', 'students.nationality',
+            'students.last_name', 'students.first_name_dev', 'students.middle_name_dev', 'students.last_name_dev',
+            'students.date_of_birth', 'students.gender', 'students.blood_group', 'students.religion', 'students.caste', 'students.nationality',
             'students.mother_tongue', 'students.email', 'students.extra_info','students.student_image', 'students.student_signature', 'students.status',
             'pd.grandfather_first_name',
             'pd.grandfather_middle_name', 'pd.grandfather_last_name', 'pd.father_first_name', 'pd.father_middle_name',
@@ -509,6 +517,11 @@ class StudentController extends CollegeBaseController
         $request->request->add(['updated_by' => auth()->user()->id]);
         $request->request->add(['student_image' => isset($student_image_name)?$student_image_name:$row->student_image]);
         $request->request->add(['student_signature' => isset($student_signature_name)?$student_signature_name:$row->student_signature]);
+
+        // Add Devanagari name fields
+        $request->request->add(['first_name_dev' => $request->get('first_name_dev')]);
+        $request->request->add(['middle_name_dev' => $request->get('middle_name_dev')]);
+        $request->request->add(['last_name_dev' => $request->get('last_name_dev')]);
 
         $student = $row->update($request->all());
 
@@ -1144,6 +1157,9 @@ class StudentController extends CollegeBaseController
                 "first_name"            => $row['first_name'],
                 "middle_name"           => $row['middle_name'],
                 "last_name"             => $row['last_name'],
+                "first_name_dev"        => $row['first_name_dev'],
+                "middle_name_dev"       => $row['middle_name_dev'],
+                "last_name_dev"         => $row['last_name_dev'],
                 "date_of_birth"         => $date_of_birth,
                 "gender"                => $row['gender'],
                 "blood_group"           => $row['blood_group'],
