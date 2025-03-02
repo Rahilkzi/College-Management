@@ -99,7 +99,7 @@
                             @if(isset($data['general_setting']->institute))
                                 <span class="white" id="id-text2">{{$data['general_setting']->institute}}</span>
                             @else
-                                <span class="red">UNLIMITED | </span>
+                                <span class="red">T.P Shetye | </span>
                                 <span class="white" id="id-text2">Edu Firm</span>
                             @endif
                         @endif

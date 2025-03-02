@@ -7,7 +7,7 @@
         @if(isset($generalSetting->institute))
             IMS | {{$generalSetting->institute}}
         @else
-            UNLIMITED Edu Firm
+            T.P Shetye Edu Firm
         @endif
     </title>
 
@@ -50,7 +50,7 @@
                     <div class="center" style="margin-top: 30%;">
                         <h1>
                             <i class="ace-icon fa fa-3x fa-graduation-cap blue" ></i><br>
-                            <span class="red">UNLIMITED</span>
+                            <span class="red">T.P Shetye</span>
                             <span class="white" id="id-text2">Edu Firm</span>
                         </h1>
                         <h5 class="blue" id="id-company-text">&copy; Business With Technology</h5>

@@ -2,7 +2,7 @@
     <ul class="nav nav-tabs padding-12 tab-color-blue background-blue" id="myTab4">
         <li class="active">
             <a data-toggle="tab" href="#registrationinfo">
-                <i class="fa fa-user bigger-110"></i>  {{ $panel }}General Information
+                <i class="fa fa-user bigger-110"></i> {{ $panel }}General Information
             </a>
         </li>
         <li class="">
@@ -12,7 +12,8 @@
 
     <div class="tab-content">
         <div id="registrationinfo" class="tab-pane active">
-            <span class="label label-info arrowed-in arrowed-right arrowed responsive">Red mark input are required. </span>
+            <span class="label label-info arrowed-in arrowed-right arrowed responsive">Red mark input are required.
+            </span>
             <hr class="hr-16">
             <div class="form-group">
                 {!! Form::label('reg_no', 'REG. NO.', ['class' => 'col-sm-1 control-label']) !!}
@@ -23,7 +24,7 @@
 
                 {!! Form::label('join_date', 'Join Date', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-2">
-                    {!! Form::text('join_date', null, ["class" => "form-control date-picker border-form input-mask-date","required"]) !!}
+                    {!! Form::text('join_date', null, ["class" => "form-control date-picker border-form input-mask-date", "required"]) !!}
                     @include('includes.form_fields_validation_message', ['name' => 'join_date'])
                 </div>
 
@@ -37,7 +38,7 @@
             <div class="form-group">
                 {!! Form::label('first_name', 'NAME OF STAFF', ['class' => 'col-sm-3 control-label',]) !!}
                 <div class="col-sm-3">
-                    {!! Form::text('first_name', null, ["placeholder" => "FIRST NAME", "class" => "form-control border-form upper","required"]) !!}
+                    {!! Form::text('first_name', null, ["placeholder" => "FIRST NAME", "class" => "form-control border-form upper", "required"]) !!}
                     @include('includes.form_fields_validation_message', ['name' => 'first_name'])
                 </div>
                 <div class="col-sm-3">
@@ -45,7 +46,7 @@
                     @include('includes.form_fields_validation_message', ['name' => 'middle_name'])
                 </div>
                 <div class="col-sm-3">
-                    {!! Form::text('last_name', null, ["placeholder" => "LAST NAME", "class" => "form-control border-form upper","required"]) !!}
+                    {!! Form::text('last_name', null, ["placeholder" => "LAST NAME", "class" => "form-control border-form upper", "required"]) !!}
                     @include('includes.form_fields_validation_message', ['name' => 'last_name'])
                 </div>
             </div>
@@ -66,20 +67,24 @@
             <div class="form-group">
                 {!! Form::label('date_of_birth', 'Date of Birth', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-2">
-                    {!! Form::text('date_of_birth', null, ["placeholder" => "", "class" => "form-control date-picker border-form input-mask-date","required"]) !!}
+                    {!! Form::text('date_of_birth', null, ["placeholder" => "", "class" => "form-control date-picker border-form input-mask-date", "required"]) !!}
                     @include('includes.form_fields_validation_message', ['name' => 'date_of_birth'])
                 </div>
 
                 {!! Form::label('gender', 'Gender', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-2">
-                    {!! Form::select('gender', ['' => '','MALE' => 'MALE', 'FEMALE' => 'FEMALE', 'OTHER' => 'OTHER'], null, ['class'=>'form-control border-form',"required"]); !!}
+                    {!! Form::select('gender', ['' => '', 'MALE' => 'MALE', 'FEMALE' => 'FEMALE', 'OTHER' => 'OTHER'], null, ['class' => 'form-control border-form', "required"]) !!}
                     @include('includes.form_fields_validation_message', ['name' => 'gender'])
                 </div>
 
                 {!! Form::label('blood_group', 'Blood Group', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-2">
-                    {!! Form::select('blood_group', ['' => '','A+' => 'A+', 'A-' => 'A-', 'B+' => 'B+','B-' => 'B-','AB+' => 'AB+', 'AB-' => 'AB-', 'O+' => 'O+','O-' => 'O-', ], null,
-                    [ 'class'=>'form-control border-form']); !!}
+                    {!! Form::select(
+                        'blood_group',
+                        ['' => '', 'A+' => 'A+', 'A-' => 'A-', 'B+' => 'B+', 'B-' => 'B-', 'AB+' => 'AB+', 'AB-' => 'AB-', 'O+' => 'O+', 'O-' => 'O-',],
+                        null,
+                        ['class' => 'form-control border-form']
+                    ) !!}
                     @include('includes.form_fields_validation_message', ['name' => 'blood_group'])
                 </div>
             </div>
@@ -87,7 +92,7 @@
             <div class="form-group">
                 {!! Form::label('nationality', 'Nationality', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-2">
-                    {!! Form::text('nationality', null, ["placeholder" => "", "class" => "form-control border-form upper","required"]) !!}
+                    {!! Form::text('nationality', null, ["placeholder" => "", "class" => "form-control border-form upper", "required"]) !!}
                     @include('includes.form_fields_validation_message', ['name' => 'nationality'])
                 </div>
 
@@ -115,7 +120,7 @@
 
                 {!! Form::label('mobile_1', 'Mobile 1', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-2">
-                    {!! Form::text('mobile_1', null, ["class" => "form-control border-form input-mask-mobile","required"]) !!}
+                    {!! Form::text('mobile_1', null, ["class" => "form-control border-form input-mask-mobile", "required"]) !!}
                     @include('includes.form_fields_validation_message', ['name' => 'mobile_1'])
                 </div>
 
@@ -132,19 +137,19 @@
             <div class="form-group">
                 {!! Form::label('address', 'Address', ['class' => 'col-sm-1 control-label']) !!}
                 <div class="col-sm-3">
-                    {!! Form::text('address', null, ["class" => "form-control border-form upper","required"]) !!}
+                    {!! Form::text('address', null, ["class" => "form-control border-form upper", "required"]) !!}
                     @include('includes.form_fields_validation_message', ['name' => 'address'])
                 </div>
 
                 {!! Form::label('state', 'State', ['class' => 'col-sm-1 control-label']) !!}
                 <div class="col-sm-3">
-                    {!! Form::text('state', null, ["class" => "form-control border-form upper","required"]) !!}
+                    {!! Form::text('state', null, ["class" => "form-control border-form upper", "required"]) !!}
                     @include('includes.form_fields_validation_message', ['name' => 'state'])
                 </div>
 
                 {!! Form::label('country', 'Country', ['class' => 'col-sm-1 control-label']) !!}
                 <div class="col-sm-3">
-                    {!! Form::text('country', null, ["class" => "form-control border-form upper","required"]) !!}
+                    {!! Form::text('country', null, ["class" => "form-control border-form upper", "required"]) !!}
                     @include('includes.form_fields_validation_message', ['name' => 'country'])
                 </div>
             </div>
@@ -155,7 +160,7 @@
             <div class="control-group col-sm-12">
                 <div class="radio">
                     <label>
-                        {!! Form::checkbox('permanent_address_copier', '', false, ['class' => 'ace', "onclick"=>"CopyAddress(this.form)"]) !!}
+                        {!! Form::checkbox('permanent_address_copier', '', false, ['class' => 'ace', "onclick" => "CopyAddress(this.form)"]) !!}
                         <span class="lbl"> Temporary Address Same As Permanent Address</span>
                     </label>
                 </div>
@@ -189,7 +194,7 @@
             <div class="form-group">
                 {!! Form::label('qualification', 'Qualification', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-4">
-                    {!! Form::text('qualification', null, ["class" => "form-control border-form upper","required"]) !!}
+                    {!! Form::text('qualification', null, ["class" => "form-control border-form upper", "required"]) !!}
                     @include('includes.form_fields_validation_message', ['name' => 'qualification'])
                 </div>
 
@@ -203,13 +208,13 @@
             <div class="form-group">
                 {!! Form::label('experience_info', 'Experience Info', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-4">
-                    {!! Form::textarea('experience_info', null, ["class" => "form-control border-form ", "rows"=>"3"]) !!}
+                    {!! Form::textarea('experience_info', null, ["class" => "form-control border-form ", "rows" => "3"]) !!}
                     @include('includes.form_fields_validation_message', ['name' => 'experience_info'])
                 </div>
 
                 {!! Form::label('other_info', 'Other Info', ['class' => 'col-sm-2 control-label']) !!}
                 <div class="col-sm-4">
-                    {!! Form::textarea('other_info', null, ["class" => "form-control border-form", "rows"=>"3"]) !!}
+                    {!! Form::textarea('other_info', null, ["class" => "form-control border-form", "rows" => "3"]) !!}
                     @include('includes.form_fields_validation_message', ['name' => 'other_info'])
                 </div>
             </div>
@@ -233,7 +238,8 @@
                     <label class="col-sm-2 control-label">Existing Image</label>
                     <div class="col-sm-10">
                         @if ($data['row']->staff_image)
-                            <img id="avatar"  src="{{ asset('images/'.$folder_name.'/'.$data['row']->staff_image) }}" class="img-responsive" width="100">
+                            <img id="avatar" src="{{ asset('images/' . $folder_name . '/' . $data['row']->staff_image) }}"
+                                class="img-responsive" width="100">
                         @else
                             <p>No image.</p>
                         @endif

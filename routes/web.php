@@ -1311,9 +1311,7 @@ Route::group(['prefix' => 'meeting/',                                    'as' =>
     Route::get('send-alert/{event}/{id}',      ['as' => '.send-alert',             'middleware' => ['ability:super-admin,sms-email-meeting'],     'uses' => 'ZoomMeetingController@meetingAlert']);
 });
 
-Route::get('qr-code', function () {
-    //return QrCode::size(500)->generate('Welcome to http://unlimitededufirm.com');
-});
+Route::get('qr-code', 'QrCodeController@generate');
 
 /*Inventory Grouping*/
 Route::group(['prefix' => 'inventory/',                                   'as' => 'inventory.',                                    'namespace' => 'Inventory\\'], function () {

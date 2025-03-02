@@ -27,7 +27,7 @@ class AddValidation extends FormRequest
             'guardian_first_name'             => 'required | max:15',
             'guardian_middle_name'            => 'max:15',
             'guardian_last_name'              => 'required | max:15',
-            'guardian_eligibility'            => 'max:50',
+            'guardian_qualification'          => 'max:50',
             'guardian_occupation'             => 'max:50',
             'guardian_office'                 => 'max:100',
             'guardian_office_number'          => 'max:15',

@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Unlimited EduFirm'),
+    'name' => env('APP_NAME', 'T.P Shetye EduFirm'),
 
     /*
     |--------------------------------------------------------------------------
@@ -184,8 +184,8 @@ return [
         OwenIt\Auditing\AuditingServiceProvider::class,
 
         Srmklive\PayPal\Providers\PayPalServiceProvider::class,
-        Unicodeveloper\Paystack\PaystackServiceProvider::class
-
+        Unicodeveloper\Paystack\PaystackServiceProvider::class,
+        SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class,
 
     ],
 
@@ -249,6 +249,7 @@ return [
         'Pesapal' => Knox\Pesapal\Facades\Pesapal::class,
         'Paystack' => Unicodeveloper\Paystack\Facades\Paystack::class,
 
+        'QrCode' => SimpleSoftwareIO\QrCode\Facades\QrCode::class,
 
     ],
 

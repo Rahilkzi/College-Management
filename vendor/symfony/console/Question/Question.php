@@ -210,7 +210,7 @@ class Question
     /**
      * Sets the maximum number of attempts.
      *
-     * Null means an unlimited number of attempts.
+     * Null means an T.P Shetye number of attempts.
      *
      * @param int|null $attempts
      *
@@ -232,7 +232,7 @@ class Question
     /**
      * Gets the maximum number of attempts.
      *
-     * Null means an unlimited number of attempts.
+     * Null means an T.P Shetye number of attempts.
      *
      * @return int|null
      */

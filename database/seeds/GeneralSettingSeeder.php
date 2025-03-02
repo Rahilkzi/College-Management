@@ -17,7 +17,7 @@ class GeneralSettingSeeder extends Seeder
                 'updated_at' => \Carbon\Carbon::now(),
                 'created_by' => 1,
                 'last_updated_by' => 1,
-                'institute' => 'Unlimited EduFirm',
+                'institute' => 'T.P Shetye EduFirm',
                 'status' => 1,
                 'public_registration' => 0
             ],

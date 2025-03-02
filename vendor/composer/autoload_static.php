@@ -696,7 +696,7 @@ class ComposerStaticInit82a6feb918d196a08784052e98c92c5b
         'App\\Charts\\SalaryChart' => __DIR__ . '/../..' . '/app/Charts/SalaryChart.php',
         'App\\Charts\\SampleChart' => __DIR__ . '/../..' . '/app/Charts/SampleChart.php',
         'App\\Charts\\TransactionChart' => __DIR__ . '/../..' . '/app/Charts/TransactionChart.php',
-        'App\\Console\\Commands\\BackupDatabaseCommand' => __DIR__ . '/../..' . '/app/Console/Commands/1BackupDatabaseCommand.php',
+        'App\\Console\\Commands\\BackupDatabaseCommand' => __DIR__ . '/../..' . '/app/Console/Commands/BackupDatabaseCommand.php',
         'App\\Console\\Commands\\BalanceFeesReminder' => __DIR__ . '/../..' . '/app/Console/Commands/BalanceFeesReminder.php',
         'App\\Console\\Commands\\BirthdayWish' => __DIR__ . '/../..' . '/app/Console/Commands/BirthdayWish.php',
         'App\\Console\\Commands\\LibraryClearance' => __DIR__ . '/../..' . '/app/Console/Commands/LibraryClearance.php',

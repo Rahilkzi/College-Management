@@ -1,12 +1,5 @@
 <?php
-/*
- * Mr. Umesh Kumar Yadav
- * Business With Technology Pvt. Ltd.
- * Kathmandu-32 (Subidhanagar, Tinkune), Nepal
- * +977-9868156047
- * freelancerumeshnepal@gmail.com
- * https://codecanyon.net/item/unlimited-edu-firm-school-college-information-management-system/21850988
- */
+
 
 namespace App\Http\Controllers\Academic;
 
@@ -113,14 +106,19 @@ class FacultyController extends CollegeBaseController
 
     public function delete(Request $request, $id)
     {
-        if (!$row = Faculty::find($id)) return parent::invalidRequest();
+        if (!$row = Faculty::find($id))
+            return parent::invalidRequest();
 
-        $row->delete();
+        // Pehle related semesters ko detach karo
         $row->semester()->detach();
 
-        $request->session()->flash($this->message_success, $this->panel.' Deleted Successfully.');
+        // Fir faculty ko delete karo
+        $row->delete();
+
+        $request->session()->flash($this->message_success, $this->panel . ' Deleted Successfully.');
         return redirect()->route($this->base_route);
     }
+
 
     public function bulkAction(Request $request)
     {

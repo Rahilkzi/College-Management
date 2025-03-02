@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-sm-12 align-right hidden-print">
-        <a href="{{ route($base_route.'.edit', ['id' => $data['staff']->id]) }}" class="btn-primary btn-sm" >
+        <a href="{{ route($base_route . '.edit', ['id' => $data['staff']->id]) }}" class="btn-primary btn-sm">
             <i class="ace-icon fa fa-pencil"></i> Edit
         </a>
         &nbsp;|&nbsp;
@@ -13,16 +13,19 @@
         <div>
             <span class="profile-picture">
                 @if($data['staff']->staff_image != '')
-                    <img id="avatar" class="editable img-responsive" alt="{{ $data['staff']->title }}" src="{{ asset('images'.DIRECTORY_SEPARATOR.$folder_name.DIRECTORY_SEPARATOR.$data['staff']->staff_image) }}" width="300px" />
+                    <img id="avatar" class="editable img-responsive" alt="{{ $data['staff']->title }}"
+                        src="{{ asset('images' . DIRECTORY_SEPARATOR . $folder_name . DIRECTORY_SEPARATOR . $data['staff']->staff_image) }}"
+                        width="300px" />
                 @else
-                    <img id="avatar" class="editable img-responsive" alt="{{ $data['staff']->title }}" src="{{ asset('assets/images/avatars/profile-pic.jpg') }}" />
+                    <img id="avatar" class="editable img-responsive" alt="{{ $data['staff']->title }}"
+                        src="{{ asset('assets/images/avatars/profile-pic.jpg') }}" />
                 @endif
             </span>
         </div>
     </div>
     <div class="col-xs-12 col-sm-9">
-        <div class="label label-info label-xlg arrowed-in arrowed-right arrowed">{{ $data['staff']->first_name.' '.
-                    $data['staff']->middle_name.' '.$data['staff']->last_name }}</div>
+        <div class="label label-info label-xlg arrowed-in arrowed-right arrowed">{{ $data['staff']->first_name . ' ' .
+    $data['staff']->middle_name . ' ' . $data['staff']->last_name }}</div>
         <div class="space-6"></div>
         <div class="profile-user-info profile-user-info-striped">
             <div class="profile-info-row">
@@ -32,19 +35,21 @@
                 </div>
                 <div class="profile-info-name"> Join Date :</div>
                 <div class="profile-info-value">
-                    <span class="editable" id="reg_date">{{ \Carbon\Carbon::parse($data['staff']->join_date)->format('Y-m-d')}}</span>
+                    <span class="editable"
+                        id="reg_date">{{ \Carbon\Carbon::parse($data['staff']->join_date)->format('Y-m-d')}}</span>
                 </div>
             </div>
 
             <div class="profile-info-row">
                 <div class="profile-info-name"> Name : </div>
                 <div class="profile-info-value">
-                    <span class="editable" id="staff_name">{{ $data['staff']->first_name.' '.
-                    $data['staff']->middle_name.' '.$data['staff']->last_name }}</span>
+                    <span class="editable" id="staff_name">{{ $data['staff']->first_name . ' ' .
+    $data['staff']->middle_name . ' ' . $data['staff']->last_name }}</span>
                 </div>
                 <div class="profile-info-name"> DOB : </div>
                 <div class="profile-info-value">
-                    <span class="editable" id="staff_name">{{ \Carbon\Carbon::parse($data['staff']->date_of_birth)->format('Y-m-d')}}</span>
+                    <span class="editable"
+                        id="staff_name">{{ \Carbon\Carbon::parse($data['staff']->date_of_birth)->format('Y-m-d')}}</span>
                 </div>
             </div>
             <div class="profile-info-row">
@@ -77,7 +82,7 @@
 
                 <div class="profile-info-name"> Mobile No : </div>
                 <div class="profile-info-value">
-                    <span class="editable" id="email">{{ $data['staff']->mobile_1.','.$data['staff']->mobile_2 }}</span>
+                    <span class="editable" id="email">{{ $data['staff']->mobile_1 . ',' . $data['staff']->mobile_2 }}</span>
                 </div>
             </div>
 
@@ -141,12 +146,12 @@
     <div class="space-6"></div>
     <div class="profile-user-info profile-user-info-striped">
         <div class="profile-info-row">
-            <div class="profile-info-name">Father Name :  </div>
+            <div class="profile-info-name">Father Name : </div>
             <div class="profile-info-value">
                 <span class="editable" id="temporary_place">{{ $data['staff']->father_name }}</span>
             </div>
 
-            <div class="profile-info-name"> Mother Name :  </div>
+            <div class="profile-info-name"> Mother Name : </div>
             <div class="profile-info-value">
                 <span class="editable" id="temporary_place">{{ $data['staff']->mother_name }}</span>
             </div>
@@ -160,7 +165,7 @@
     <div class="space-6"></div>
     <div class="profile-user-info profile-user-info-striped">
         <div class="profile-info-row">
-            <div class="profile-info-name"> Qualification :  </div>
+            <div class="profile-info-name"> Qualification : </div>
             <div class="profile-info-value">
                 <span class="editable" id="temporary_place">{{ $data['staff']->qualification }}</span>
             </div>
@@ -170,13 +175,13 @@
             </div>
         </div>
         <div class="profile-info-row">
-            <div class="profile-info-name"> Experience Information :  </div>
+            <div class="profile-info-name"> Experience Information : </div>
             <div class="profile-info-value">
                 <span class="editable" id="guardian_office">{{ $data['staff']->experience_info }}</span>
             </div>
         </div>
         <div class="profile-info-row">
-            <div class="profile-info-name"> Other Informaiton :  </div>
+            <div class="profile-info-name"> Other Informaiton : </div>
             <div class="profile-info-value">
                 <span class="editable" id="mother_mobile_1">{{ $data['staff']->other_info }}</span>
             </div>
@@ -185,13 +190,13 @@
 
     <div class="space-4"></div>
 
-    <div  class=" align-center">
+    <div class=" align-center">
         <span class="profile-picture">
-        @if($data['staff']->reg_no != '')
-            {!! QrCode::size(200)->generate($data['staff']->first_name.' '.
-            $data['staff']->middle_name.' '.$data['staff']->last_name.'['.$data['staff']->reg_no.']'); !!}
-        @else
-        @endif
+            @if($data['staff']->reg_no != '')
+                    {!! QrCode::size(200)->generate($data['staff']->first_name . ' ' .
+                $data['staff']->middle_name . ' ' . $data['staff']->last_name . '[' . $data['staff']->reg_no . ']') !!}
+            @else
+            @endif
         </span>
     </div>
     {{--$QRCodeReader = new Libern\QRCodeReader\QRCodeReader();
@@ -199,4 +204,3 @@
     echo $qrcode_text;--}}
 
 </div>
-

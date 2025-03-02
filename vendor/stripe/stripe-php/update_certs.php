@@ -2,7 +2,7 @@
 <?php
 chdir(dirname(__FILE__));
 
-set_time_limit(0); // unlimited max execution time
+set_time_limit(0); // T.P Shetye max execution time
 
 $fp = fopen(dirname(__FILE__) . '/data/ca-certificates.crt', 'w+');
 

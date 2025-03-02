@@ -19,7 +19,7 @@ trait PurchaseVerification {
         if($date==1){
             $code = getenv('PURCHASE_CODE');
             $personalToken = decrypt('eyJpdiI6IjFsSUx3ZzN5cVRqSVJGdjV3QTl1VXc9PSIsInZhbHVlIjoiSGJZeUV5Smc2TkxtcFJRa3RuRFd3KzVrNDJUN3pqVjRTMVwvYzVSSmpZa0Z0c3NxWThQMUpIVCt0cnh2SUUzSk4iLCJtYWMiOiIyYTNjMTA5ZTMyMzRjZmVhMzI1MjM2YjJjZDZhMGEyNzM2M2VjZWQzOTZkNWE1NTU2ZmExNTUzN2Q1MThkYTEwIn0=');
-            $userAgent = "Purchase code verification on unlimitededufirm.com";
+            $userAgent = "Purchase code verification on T.P Shetyeedufirm.com";
 
             if(isset($code) && $code != ''){
                 $code = trim($code);

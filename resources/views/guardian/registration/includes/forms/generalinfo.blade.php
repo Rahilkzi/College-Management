@@ -18,10 +18,10 @@
     </div>
 
     <div class="form-group">
-        {!! Form::label('guardian_eligibility', 'Eligibility', ['class' => 'col-sm-2 control-label']) !!}
+        {!! Form::label('guardian_qualification', 'Qualification', ['class' => 'col-sm-2 control-label']) !!}
         <div class="col-sm-4">
-            {!! Form::text('guardian_eligibility', null, ["placeholder" => "", "class" => "form-control border-form upper"]) !!}
-            @include('includes.form_fields_validation_message', ['name' => 'guardian_eligibility'])
+            {!! Form::text('guardian_qualification', null, ["placeholder" => "", "class" => "form-control border-form upper"]) !!}
+            @include('includes.form_fields_validation_message', ['name' => 'guardian_qualification'])
         </div>
 
         {!! Form::label('guardian_occupation', 'Occupation', ['class' => 'col-sm-2 control-label']) !!}

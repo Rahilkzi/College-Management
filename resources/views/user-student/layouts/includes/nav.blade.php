@@ -8,7 +8,7 @@
                         {{$generalSetting->institute}}
                         <strong class="text-capitalize orange2"> IMS </strong>
                     @else
-                        UNLIMITED Edu Firm
+                        T.P Shetye Edu Firm
                     @endif
                 </small>
             </a>

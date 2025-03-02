@@ -1,12 +1,5 @@
 <?php
-/*
- * Mr. Umesh Kumar Yadav
- * Business With Technology Pvt. Ltd.
- * Kathmandu-32 (Subidhanagar, Tinkune), Nepal
- * +977-9868156047
- * freelancerumeshnepal@gmail.com
- * https://codecanyon.net/item/unlimited-edu-firm-school-college-information-management-system/21850988
- */
+
 
 namespace App\Http\Controllers\Account\Payroll;
 

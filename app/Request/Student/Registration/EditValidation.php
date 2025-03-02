@@ -94,6 +94,7 @@ class EditValidation extends FormRequest
     {
         return [
             'reg_no.unique'                  => 'Enter Unique Reg.No.',
+            'adhar_no.unique'                => 'Enter Unique Aadhaar No.',
 
         ];
     }

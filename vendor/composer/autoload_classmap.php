@@ -29,7 +29,7 @@ return array(
     'App\\Charts\\SalaryChart' => $baseDir . '/app/Charts/SalaryChart.php',
     'App\\Charts\\SampleChart' => $baseDir . '/app/Charts/SampleChart.php',
     'App\\Charts\\TransactionChart' => $baseDir . '/app/Charts/TransactionChart.php',
-    'App\\Console\\Commands\\BackupDatabaseCommand' => $baseDir . '/app/Console/Commands/1BackupDatabaseCommand.php',
+    'App\\Console\\Commands\\BackupDatabaseCommand' => $baseDir . '/app/Console/Commands/BackupDatabaseCommand.php',
     'App\\Console\\Commands\\BalanceFeesReminder' => $baseDir . '/app/Console/Commands/BalanceFeesReminder.php',
     'App\\Console\\Commands\\BirthdayWish' => $baseDir . '/app/Console/Commands/BirthdayWish.php',
     'App\\Console\\Commands\\LibraryClearance' => $baseDir . '/app/Console/Commands/LibraryClearance.php',

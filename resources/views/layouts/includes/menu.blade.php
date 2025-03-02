@@ -5,7 +5,7 @@
 
     <ul class="nav nav-list">
         {{-- Dashboard --}}
-        <li class="{!! request()->is('/')?'active':'' !!}">
+        <li class="{!! request()->is('/') ? 'active' : '' !!}">
             <a href="{{ route('home') }}" >
                 <i class="menu-icon fa fa-tachometer"></i>
                 <span class="menu-text"> Dashboard </span>
@@ -16,9 +16,9 @@
     
 
         {{-- Staff & Student --}}
-        @ability('super-admin','student-staff')
-            @if( isset($generalSetting) && $generalSetting->student_staff ==1)
-                <li class="{!! request()->is('student*')||request()->is('staff*')?'active open':'' !!}  hover">
+        @ability('super-admin', 'student-staff')
+            @if(isset($generalSetting) && $generalSetting->student_staff == 1)
+                <li class="{!! request()->is('student*') || request()->is('staff*') ? 'active open' : '' !!}  hover">
                 <a href="#" class="dropdown-toggle">
                     <i class="menu-icon fa fa-users" aria-hidden="true"></i>
                     <span class="menu-text"> Student&Staff</span>
@@ -29,7 +29,7 @@
                 <b class="arrow"></b>
 
                 <ul class="submenu">
-                    <li class="{!! request()->is('student*')?'active open':'' !!} hover">
+                    <li class="{!! request()->is('student*') ? 'active open' : '' !!} hover">
                         <a href="#" class="dropdown-toggle">
                             <i class="menu-icon fa fa-caret-right"></i>
                             Student
@@ -37,7 +37,7 @@
                         </a>
                         <b class="arrow"></b>
                         <ul class="submenu">
-                            <li class="{!! request()->is('student')?'active':'' !!} hover">
+                            <li class="{!! request()->is('student') ? 'active' : '' !!} hover">
                                 <a href="{{ route('student') }}" accesskey="S">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Student Detail
@@ -46,7 +46,7 @@
                                 <b class="arrow"></b>
                             </li>
 
-                            <li class="{!! request()->is('student/registration')?'active':'' !!} hover">
+                            <li class="{!! request()->is('student/registration') ? 'active' : '' !!} hover">
                                 <a href="{{ route('student.registration') }}">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Registration
@@ -54,7 +54,7 @@
                                 <b class="arrow"></b>
                             </li>
 
-                            <li class="{!! request()->is('student/import')?'active':'' !!} hover">
+                            <li class="{!! request()->is('student/import') ? 'active' : '' !!} hover">
                                 <a href="{{ route('student.import') }}">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Bulk Import
@@ -62,7 +62,7 @@
                                 <b class="arrow"></b>
                             </li>
 
-                            <li class="{!! request()->is('student/transfer')?'active':'' !!} hover">
+                            <li class="{!! request()->is('student/transfer') ? 'active' : '' !!} hover">
                                 <a href="{{ route('student.transfer') }}">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Transfer Student
@@ -70,7 +70,7 @@
 
                                 <b class="arrow"></b>
                             </li>
-                            <li class="{!! request()->is('student/document')?'active':'' !!} hover">
+                            <li class="{!! request()->is('student/document') ? 'active' : '' !!} hover">
                                 <a href="{{ route('student.document') }}"  accesskey="U">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Document Upload
@@ -78,14 +78,14 @@
                                 <b class="arrow"></b>
                             </li>
 
-                            <li class="{!! request()->is('student/note')?'active':'' !!} hover">
+                            <li class="{!! request()->is('student/note') ? 'active' : '' !!} hover">
                                 <a href="{{ route('student.note') }}">
                                     <i class="menu-icon fa fa-caret-right"  accesskey="N"></i>
                                     Create Notes
                                 </a>
                                 <b class="arrow"></b>
                             </li>
-                            <li class="{!! request()->is('report/student*')?'active':'' !!} hover">
+                            <li class="{!! request()->is('report/student*') ? 'active' : '' !!} hover">
                                 <a href="{{ route('report.student') }}">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Student Complete Records
@@ -96,7 +96,7 @@
                         </ul>
                     </li>
 
-                    <li class="{!! request()->is('guardian*')?'active open':'' !!} hover">
+                    <li class="{!! request()->is('guardian*') ? 'active open' : '' !!} hover">
                         <a href="#" class="dropdown-toggle">
                             <i class="menu-icon fa fa-caret-right"></i>
                             Guardian
@@ -104,7 +104,7 @@
                         </a>
                         <b class="arrow"></b>
                         <ul class="submenu">
-                            <li class="{!! request()->is('guardian')?'active':'' !!} hover">
+                            <li class="{!! request()->is('guardian') ? 'active' : '' !!} hover">
                                 <a href="{{ route('guardian') }}" accesskey="S">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Guardian Detail
@@ -113,7 +113,7 @@
                                 <b class="arrow"></b>
                             </li>
 
-                            <li class="{!! request()->is('guardian/registration')?'active':'' !!} hover">
+                            <li class="{!! request()->is('guardian/registration') ? 'active' : '' !!} hover">
                                 <a href="{{ route('guardian.registration') }}">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Registration
@@ -124,7 +124,7 @@
                         </ul>
                     </li>
 
-                    <li class="{!! request()->is('staff*')?'active open':'' !!} hover">
+                    <li class="{!! request()->is('staff*') ? 'active open' : '' !!} hover">
                         <a href="#" class="dropdown-toggle">
                             <i class="menu-icon fa fa-caret-right"></i>
                             Staff
@@ -132,7 +132,7 @@
                         </a>
                         <b class="arrow"></b>
                         <ul class="submenu">
-                            <li class="{!! request()->is('staff')?'active':'' !!}  hover">
+                            <li class="{!! request()->is('staff') ? 'active' : '' !!}  hover">
                                 <a href="{{ route('staff') }}">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Staff Detail
@@ -141,7 +141,7 @@
                                 <b class="arrow"></b>
                             </li>
 
-                            <li class="{!! request()->is('staff/add')?'active':'' !!}  hover">
+                            <li class="{!! request()->is('staff/add') ? 'active' : '' !!}  hover">
                                 <a href="{{ route('staff.add') }}">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Registration
@@ -149,7 +149,7 @@
 
                                 <b class="arrow"></b>
                             </li>
-                            <li class="{!! request()->is('staff/import')?'active':'' !!} hover">
+                            <li class="{!! request()->is('staff/import') ? 'active' : '' !!} hover">
                                 <a href="{{ route('staff.import') }}">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Bulk Import
@@ -157,7 +157,7 @@
                                 <b class="arrow"></b>
                             </li>
 
-                            <li class="{!! request()->is('staff/document')?'active':'' !!} hover">
+                            <li class="{!! request()->is('staff/document') ? 'active' : '' !!} hover">
                                 <a href="{{ route('staff.document') }}"  accesskey="U">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Document Upload
@@ -165,7 +165,7 @@
                                 <b class="arrow"></b>
                             </li>
 
-                            <li class="{!! request()->is('staff/note')?'active':'' !!} hover">
+                            <li class="{!! request()->is('staff/note') ? 'active' : '' !!} hover">
                                 <a href="{{ route('staff.note') }}">
                                     <i class="menu-icon fa fa-caret-right"  accesskey="N"></i>
                                     Create Notes
@@ -173,7 +173,7 @@
                                 <b class="arrow"></b>
                             </li>
 
-                            <li class="{!! request()->is('staff/designation')?'active':'' !!} hover">
+                            <li class="{!! request()->is('staff/designation') ? 'active' : '' !!} hover">
                                 <a href="{{ route('staff.designation') }}">
                                     <i class="menu-icon fa fa-caret-right"  accesskey="N"></i>
                                     Designations
@@ -181,7 +181,7 @@
                                 <b class="arrow"></b>
                             </li>
 
-                            <li class="{!! request()->is('report/staff*')?'active':'' !!} hover">
+                            <li class="{!! request()->is('report/staff*') ? 'active' : '' !!} hover">
                                 <a href="{{ route('report.staff') }}">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Staff Complete Records
@@ -197,9 +197,9 @@
         @endability
 
         {{-- Account --}}
-        @ability('super-admin','account')
-            @if( isset($generalSetting) && $generalSetting->account ==1)
-                <li class="{!! request()->is('account/*')?'active open':'' !!}  hover">
+        @ability('super-admin', 'account')
+            @if(isset($generalSetting) && $generalSetting->account == 1)
+                <li class="{!! request()->is('account/*') ? 'active open' : '' !!}  hover">
                 <a href="#" class="dropdown-toggle">
                     <i class="menu-icon fa fa-calculator" aria-hidden="true"></i>
                     <span class="menu-text"> Account</span>
@@ -210,7 +210,7 @@
                 <b class="arrow"></b>
 
                 <ul class="submenu">
-                    <li class="{!! request()->is('account/fees*')?'active open':'' !!} hover">
+                    <li class="{!! request()->is('account/fees*') ? 'active open' : '' !!} hover">
                             <a href="#" class="dropdown-toggle">
                                 <i class="menu-icon fa fa-caret-right"></i>
                                 <i class="fa fa-calculator"></i>  Fees Collection
@@ -218,7 +218,7 @@
                             </a>
                         <b class="arrow"></b>
                         <ul class="submenu">
-                            <li class="{!! request()->is('account/fees')?'active':'' !!}  hover">
+                            <li class="{!! request()->is('account/fees') ? 'active' : '' !!}  hover">
                                 <a href="{{ route('account.fees') }}">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Receive Detail
@@ -227,7 +227,7 @@
                                 <b class="arrow"></b>
                             </li>
 
-                            <li class="{!! request()->is('account/fees/quick-receive')?'active':'' !!}  hover">
+                            <li class="{!! request()->is('account/fees/quick-receive') ? 'active' : '' !!}  hover">
                                 <a href="{{ route('account.fees.quick-receive') }}">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Quick Receive
@@ -236,7 +236,7 @@
                                 <b class="arrow"></b>
                             </li>
 
-                            <li class="{!! request()->is('account/fees/collection')?'active':'' !!} hover">
+                            <li class="{!! request()->is('account/fees/collection') ? 'active' : '' !!} hover">
                                 <a href="{{ route('account.fees.collection') }}" accesskey="R">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Collect Fees
@@ -245,7 +245,7 @@
                                 <b class="arrow"></b>
                             </li>
 
-                            <li class="{!! request()->is('account/fees/balance')?'active':'' !!}  hover">
+                            <li class="{!! request()->is('account/fees/balance') ? 'active' : '' !!}  hover">
                                 <a href="{{ route('account.fees.balance') }}">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Balance Fees Report
@@ -254,7 +254,7 @@
                                 <b class="arrow"></b>
                             </li>
 
-                            <li class="{!! request()->is('account/fees/master/add')?'active':'' !!} hover">
+                            <li class="{!! request()->is('account/fees/master/add') ? 'active' : '' !!} hover">
                                 <a href="{{ route('account.fees.master.add') }}">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Add Fees
@@ -262,7 +262,7 @@
                                 <b class="arrow"></b>
                             </li>
 
-                            <li class="{!! request()->is('account/fees/online-payment')?'active':'' !!} hover">
+                            <li class="{!! request()->is('account/fees/online-payment') ? 'active' : '' !!} hover">
                                 <a href="{{ route('account.fees.online-payment') }}">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Online Payments
@@ -270,7 +270,7 @@
                                 <b class="arrow"></b>
                             </li>
 
-                            <li class="{!! request()->is('account/fees/head')?'active':'' !!}  hover">
+                            <li class="{!! request()->is('account/fees/head') ? 'active' : '' !!}  hover">
                                 <a href="{{ route('account.fees.head') }}">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Fees Head
@@ -281,7 +281,7 @@
                             </ul>
                     </li>
 
-                    <li class="{!! request()->is('account.transaction*')?'active open':'' !!} hover">
+                    <li class="{!! request()->is('account.transaction*') ? 'active open' : '' !!} hover">
                         <a href="#" class="dropdown-toggle">
                             <i class="menu-icon fa fa-caret-right"></i>
                             <i class="fa fa-newspaper-o"></i> Ledger & Transaction
@@ -289,7 +289,7 @@
                         </a>
                         <b class="arrow"></b>
                         <ul class="submenu">
-                            <li class="{!! request()->is('account/transaction/add')?'active':'' !!} hover">
+                            <li class="{!! request()->is('account/transaction/add') ? 'active' : '' !!} hover">
                                 <a href="{{ route('account.transaction.add') }}">
                                     <i class="menu-icon fa fa-plus"></i>
                                     Transaction
@@ -297,7 +297,7 @@
                                 <b class="arrow"></b>
                             </li>
 
-                            <li class="{!! request()->is('account/transaction/multi-add')?'active':'' !!} hover">
+                            <li class="{!! request()->is('account/transaction/multi-add') ? 'active' : '' !!} hover">
                                 <a href="{{ route('account.transaction.multi-add') }}">
                                     <i class="menu-icon fa fa-plus"></i>
                                     Multi Transaction
@@ -305,7 +305,7 @@
                                 <b class="arrow"></b>
                             </li>
 
-                            <li class="{!! request()->is('account/transaction')?'active':'' !!} hover">
+                            <li class="{!! request()->is('account/transaction') ? 'active' : '' !!} hover">
                                 <a href="{{ route('account.transaction') }}" accesskey="R">
                                     <i class="menu-icon fa fa-list"></i>
                                     Transaction Detail
@@ -314,7 +314,7 @@
                                 <b class="arrow"></b>
                             </li>
 
-                            <li class="{!! request()->is('account/transfer')?'active':'' !!} hover">
+                            <li class="{!! request()->is('account/transfer') ? 'active' : '' !!} hover">
                                 <a href="{{ route('account.transfer') }}">
                                     <i class="menu-icon fa fa-exchange"></i>
                                     Acc to Acc Transfer
@@ -323,7 +323,7 @@
                                 <b class="arrow"></b>
                             </li>
 
-                            <li class="{!! request()->is('account/transaction-head')?'active':'' !!} hover">
+                            <li class="{!! request()->is('account/transaction-head') ? 'active' : '' !!} hover">
                                 <a href="{{ route('account.transaction-head') }}">
                                     <i class="menu-icon fa fa-newspaper-o"></i>
                                     Ledger/Account
@@ -331,14 +331,14 @@
                                 <b class="arrow"></b>
                             </li>
 
-                            <li class="{!! request()->is('account/transaction/account-group')?'active':'' !!} hover">
+                            <li class="{!! request()->is('account/transaction/account-group') ? 'active' : '' !!} hover">
                                 <a href="{{ route('account.transaction.account-group') }}">
                                     <i class="menu-icon fa fa-newspaper-o"></i>
                                     Account Groups
                                 </a>
                                 <b class="arrow"></b>
                             </li>
-                            <li class="{!! request()->is('account/transaction/account-group/chart-of-account')?'active':'' !!} hover">
+                            <li class="{!! request()->is('account/transaction/account-group/chart-of-account') ? 'active' : '' !!} hover">
                                 <a href="{{ route('account.transaction.account-group.chart-of-account') }}">
                                     <i class="menu-icon fa fa-newspaper-o"></i>
                                     Charts of Account
@@ -349,7 +349,7 @@
                         </ul>
                     </li>
 
-                    <li class="{!! request()->is('account/bank*')?'active open':'' !!} hover">
+                    <li class="{!! request()->is('account/bank*') ? 'active open' : '' !!} hover">
                         <a href="#" class="dropdown-toggle">
                             <i class="menu-icon fa fa-caret-right"></i>
                             <i class="fa fa-bank"></i> Separate Banking
@@ -357,20 +357,20 @@
                         </a>
                         <b class="arrow"></b>
                         <ul class="submenu">
-                            <li class="{!! request()->is('account/bank')?'active':'' !!} hover">
+                            <li class="{!! request()->is('account/bank') ? 'active' : '' !!} hover">
                                 <a href="{{ route('account.bank') }}">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Manage Bank Accounts
                                 </a>
                             </li>
-                            <li class="{!! request()->is('account/bank/add')?'active':'' !!} hover">
+                            <li class="{!! request()->is('account/bank/add') ? 'active' : '' !!} hover">
                                 <a href="{{ route('account.bank.add') }}">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Add New Bank
                                 </a>
                             </li>
 
-                            <li class="{!! request()->is('account/bank-transaction')?'active':'' !!} hover">
+                            <li class="{!! request()->is('account/bank-transaction') ? 'active' : '' !!} hover">
                                 <a href="{{ route('account.bank-transaction') }}">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Transaction Detail
@@ -379,7 +379,7 @@
                                 <b class="arrow"></b>
                             </li>
 
-                            <li class="{!! request()->is('account/bank-transaction/add')?'active':'' !!} hover">
+                            <li class="{!! request()->is('account/bank-transaction/add') ? 'active' : '' !!} hover">
                                 <a href="{{ route('account.bank-transaction.add') }}">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     New Transaction
@@ -391,7 +391,7 @@
                         </ul>
                     </li>
 
-                    <li class="{!! request()->is('account/payroll*')?'active open':'' !!} hover">
+                    <li class="{!! request()->is('account/payroll*') ? 'active open' : '' !!} hover">
                         <a href="#" class="dropdown-toggle">
                             <i class="menu-icon fa fa-caret-right"></i>
                             <i class="fa fa-user-secret"></i>  Payroll
@@ -399,7 +399,7 @@
                         </a>
                         <b class="arrow"></b>
                         <ul class="submenu">
-                            <li class="{!! request()->is('account/payroll')?'active':'' !!}  hover">
+                            <li class="{!! request()->is('account/payroll') ? 'active' : '' !!}  hover">
                                 <a href="{{ route('account.payroll') }}">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Paid Detail
@@ -408,7 +408,7 @@
                                 <b class="arrow"></b>
                             </li>
 
-                            <li class="{!! request()->is('account/salary/payment')?'active':'' !!} hover">
+                            <li class="{!! request()->is('account/salary/payment') ? 'active' : '' !!} hover">
                                 <a href="{{ route('account.salary.payment') }}" accesskey="R">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Salary Pay
@@ -417,7 +417,7 @@
                                 <b class="arrow"></b>
                             </li>
 
-                            <li class="{!! request()->is('account/payroll/master*')?'active':'' !!} hover">
+                            <li class="{!! request()->is('account/payroll/master*') ? 'active' : '' !!} hover">
                                 <a href="{{ route('account.payroll.master.add') }}">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Add Payroll
@@ -426,7 +426,7 @@
                                 <b class="arrow"></b>
                             </li>
 
-                            <li class="{!! request()->is('account/payroll/balance')?'active':'' !!}  hover">
+                            <li class="{!! request()->is('account/payroll/balance') ? 'active' : '' !!}  hover">
                                 <a href="{{ route('account.payroll.balance') }}">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Balance Salary Report
@@ -435,7 +435,7 @@
                                 <b class="arrow"></b>
                             </li>
 
-                            <li class="{!! request()->is('account/payroll/head')?'active':'' !!}  hover">
+                            <li class="{!! request()->is('account/payroll/head') ? 'active' : '' !!}  hover">
                                 <a href="{{ route('account.payroll.head') }}">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Salary Head
@@ -447,7 +447,7 @@
                         </ul>
                     </li>
 
-                    <li class="{!! request()->is('account/report*')?'active open':'' !!} hover">
+                    <li class="{!! request()->is('account/report*') ? 'active open' : '' !!} hover">
                         <a href="#" class="dropdown-toggle">
                             <i class="menu-icon fa fa-caret-right"></i>
                             <i class="fa fa-print"></i> Account Report
@@ -455,55 +455,55 @@
                         </a>
                         <b class="arrow"></b>
                         <ul class="submenu">
-                            <li class="{!! request()->is('account/report/cash-book*')?'active':'' !!} hover">
+                            <li class="{!! request()->is('account/report/cash-book*') ? 'active' : '' !!} hover">
                                 <a href="{{ route('account.report.cash-book') }}">
                                     <i class="menu-icon fa fa-rupee"></i>
                                     Cash Book
                                 </a>
                             </li>
 
-                            <li class="{!! request()->is('account/report/fee-collection')?'active':'' !!} hover">
+                            <li class="{!! request()->is('account/report/fee-collection') ? 'active' : '' !!} hover">
                                 <a href="{{ route('account.report.fee-collection') }}">
                                     <i class="menu-icon fa fa-calculator"></i>
                                     Fee Collection
                                 </a>
                             </li>
 
-                            <li class="{!! request()->is('account/report/fee-online-payment')?'active':'' !!} hover">
+                            <li class="{!! request()->is('account/report/fee-online-payment') ? 'active' : '' !!} hover">
                                 <a href="{{ route('account.report.fee-online-payment') }}">
                                     <i class="menu-icon fa fa-globe"></i>
                                     Online Payments
                                 </a>
                             </li>
 
-                            <li class="{!! request()->is('account/report/fee-collection-head*')?'active':'' !!} hover">
+                            <li class="{!! request()->is('account/report/fee-collection-head*') ? 'active' : '' !!} hover">
                                 <a href="{{ route('account.report.fee-collection-head') }}">
                                     <i class="menu-icon fa fa-calculator"></i>
                                     Fee Collection Head
                                 </a>
                             </li>
 
-                            <li class="{!! request()->is('account/report/balance-fee*')?'active':'' !!} hover">
+                            <li class="{!! request()->is('account/report/balance-fee*') ? 'active' : '' !!} hover">
                                 <a href="{{ route('account.report.balance-fee') }}">
                                     <i class="menu-icon fa fa-calculator"></i>
                                     Fee Balance
                                 </a>
                             </li>
 
-                            <li class="{!! request()->is('account/transaction-head/view*')?'active':'' !!} hover">
+                            <li class="{!! request()->is('account/transaction-head/view*') ? 'active' : '' !!} hover">
                                 <a href="{{ route('account.transaction-head.view') }}">
                                     <i class="menu-icon fa fa-newspaper-o"></i>
                                     Statement of Ledger
                                 </a>
                             </li>
-                            <li class="{!! request()->is('account/transaction-head/balance-statement*')?'active':'' !!} hover">
+                            <li class="{!! request()->is('account/transaction-head/balance-statement*') ? 'active' : '' !!} hover">
                                 <a href="{{ route('account.transaction-head.balance-statement') }}" accesskey="B">
                                     <i class="menu-icon fa fa-newspaper-o"></i>
                                     Ledger Balance
                                 </a>
                             </li>
 
-                            <li class="{!! request()->is('account/transaction/account-group/chart-of-account')?'active':'' !!} hover">
+                            <li class="{!! request()->is('account/transaction/account-group/chart-of-account') ? 'active' : '' !!} hover">
                                 <a href="{{ route('account.transaction.account-group.chart-of-account') }}">
                                     <i class="menu-icon fa fa-newspaper-o"></i>
                                     Charts of Account
@@ -518,11 +518,66 @@
             @endif
         @endability
 
+
+        {{-- Attendance --}}
+        @ability('super-admin', 'attendance')
+        @if(isset($generalSetting) && $generalSetting->attendance == 1)
+            <li class="{!! request()->is('attendance*') ? 'active' : '' !!} hover">
+                <a href="#" class="dropdown-toggle">
+                    <i class="menu-icon fa fa-calendar" aria-hidden="true"></i>
+                    <span class="menu-text"> Attendance</span>
+                    <b class="arrow fa fa-angle-down"></b>
+                </a>
+                <b class="arrow"></b>
+                <ul class="submenu">
+
+
+                    <li class="hover">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            Student Attendance
+                            <b class="arrow fa fa-angle-r"></b>
+                        </a>
+                        <b class="arrow"></b>
+                        <ul class="submenu">
+                            <li class="{!! request()->is('attendance/student*') ? 'active' : '' !!} hover">
+                                <a href="{{ route('attendance.student') }}">
+                                    <i class="menu-icon fa fa-caret-right"></i>
+                                    Regular Attendance
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+                            <li class="{!! request()->is('attendance/subject*') ? 'active' : '' !!} hover">
+                                <a href="{{ route('attendance.subject') }}">
+                                    <i class="menu-icon fa fa-caret-right"></i>
+                                    Subject Wise Attendance
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    <li class="{!! request()->is('attendance/master*') ? 'active' : '' !!} hover">
+                        <a href="{{ route('attendance.master') }}">
+                            <i class="menu-icon fa fa-caret-right"></i>
+                            Monthly Calendar
+                        </a>
+
+                        <b class="arrow"></b>
+                    </li>
+
+                </ul>
+            </li>
+        @endif
+        @endability
     
    
-        @ability('super-admin','examination')
-            @if( isset($generalSetting) && $generalSetting->exam == 1)
-                <li class="{!! request()->is('exam*')?'active':'' !!} hover">
+        @ability('super-admin', 'examination')
+            @if(isset($generalSetting) && $generalSetting->exam == 1)
+                <li class="{!! request()->is('exam*') ? 'active' : '' !!} hover">
                 <a href="#" class="dropdown-toggle">
                     <i class="menu-icon fa fa-line-chart"  aria-hidden="true"></i>
                     <span class="menu-text"> Exam</span>
@@ -533,7 +588,7 @@
                 <b class="arrow"></b>
 
                 <ul class="submenu">
-                    <li class="{!! request()->is('exam/schedule*')?'active':'' !!} hover">
+                    <li class="{!! request()->is('exam/schedule*') ? 'active' : '' !!} hover">
                         <a href="{{ route('exam.schedule') }}">
                             <i class="menu-icon fa fa-caret-right"></i>
                             Schedule Exam
@@ -541,7 +596,7 @@
                         <b class="arrow"></b>
                     </li>
 
-                    <li class="{!! request()->is('exam/mark-ledger')?'active':'' !!}  hover">
+                    <li class="{!! request()->is('exam/mark-ledger') ? 'active' : '' !!}  hover">
                         <a href="{{ route('exam.mark-ledger') }}">
                             <i class="menu-icon fa fa-caret-right"></i>
                             Mark Ledger
@@ -549,7 +604,7 @@
                         <b class="arrow"></b>
                     </li>
 
-                    <li class="{!! request()->is('exam')?'active':'' !!} hover">
+                    <li class="{!! request()->is('exam') ? 'active' : '' !!} hover">
                         <a href="{{ route('exam') }}">
                             <i class="menu-icon fa fa-caret-right"></i>
                             Exams Head
@@ -557,21 +612,21 @@
                         <b class="arrow"></b>
                     </li>
 
-                    <li class="{!! request()->is('exam/admit-card*')?'active':'' !!} hover">
+                    <li class="{!! request()->is('exam/admit-card*') ? 'active' : '' !!} hover">
                         <a href="{{ route('exam.admit-card') }}">
                             <i class="menu-icon fa fa-caret-right"></i>
                             Admit Card
                         </a>
                         <b class="arrow"></b>
                     </li>
-                    <li class="{!! request()->is('exam/routine*')?'active':'' !!} hover">
+                    <li class="{!! request()->is('exam/routine*') ? 'active' : '' !!} hover">
                         <a href="{{ route('exam.routine') }}">
                             <i class="menu-icon fa fa-caret-right"></i>
                             Routine/Schedule
                         </a>
                         <b class="arrow"></b>
                     </li>
-                    <li class="{!! request()->is('exam/mark-sheet*')?'active':'' !!} hover">
+                    <li class="{!! request()->is('exam/mark-sheet*') ? 'active' : '' !!} hover">
                         <a href="{{ route('exam.mark-sheet') }}">
                             <i class="menu-icon fa fa-caret-right"></i>
                             Grade/Mark/Ledger Sheet
@@ -584,86 +639,93 @@
         @endability
 
         {{-- Examination --}}
-        @ability('super-admin','certificate')
-            @if( isset($generalSetting) && $generalSetting->certificate ==1)
-                <li class="{!! request()->is('certificate*')?'active':'' !!} hover">
-                <a href="#" class="dropdown-toggle">
-                    <i class="menu-icon fa fa-certificate"  aria-hidden="true"></i>
-                    <span class="menu-text"> Certificate</span>
+        @ability('super-admin', 'certificate')
+            @if(isset($generalSetting) && $generalSetting->certificate == 1)
+                    <li class="{!! request()->is('certificate*') ? 'active' : '' !!} hover">
+                    <a href="#" class="dropdown-toggle">
+                        <i class="menu-icon fa fa-certificate"  aria-hidden="true"></i>
+                        <span class="menu-text"> Certificate</span>
 
-                    <b class="arrow fa fa-angle-down"></b>
-                </a>
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a>
 
-                <b class="arrow"></b>
+                    <b class="arrow"></b>
 
-                <ul class="submenu">
-                    <li class="{!! request()->is('certificate/issue')?'active':'' !!} hover">
-                        <a href="{{ route('certificate.issue') }}">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            Issue Certificate
-                        </a>
-                        <b class="arrow"></b>
-                    </li>
+                    <ul class="submenu">
+                        <li class="{!! request()->is('certificate/issue') ? 'active' : '' !!} hover">
+                            <a href="{{ route('certificate.issue') }}">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                Issue Certificate
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
 
-                  
+                            <li class="{!! request()->is('certificate/attendance*') ? 'active' : '' !!} hover">
+                                <a href="{{ route('certificate.attendance') }}">
+                                    <i class="menu-icon fa fa-caret-right"></i>
+                                    Attendance Certificate
+                                </a>
+                                <b class="arrow"></b>
+                            </li>
 
-                    <li class="{!! request()->is('certificate/transfer*')?'active':'' !!} hover">
-                        <a href="{{ route('certificate.transfer') }}">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            Transfer Certificate
-                        </a>
-                        <b class="arrow"></b>
-                    </li>
 
-                    <li class="{!! request()->is('certificate/character*')?'active':'' !!} hover">
-                        <a href="{{ route('certificate.character') }}">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            Character Certificate
-                        </a>
-                        <b class="arrow"></b>
-                    </li>
+                        <li class="{!! request()->is('certificate/transfer*') ? 'active' : '' !!} hover">
+                            <a href="{{ route('certificate.transfer') }}">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                Transfer Certificate
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
 
-                    <li class="{!! request()->is('certificate/bonafide*')?'active':'' !!} hover">
-                        <a href="{{ route('certificate.bonafide') }}">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            Bonafide Certificate
-                        </a>
-                        <b class="arrow"></b>
-                    </li>
+                        <li class="{!! request()->is('certificate/character*') ? 'active' : '' !!} hover">
+                            <a href="{{ route('certificate.character') }}">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                Character Certificate
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
 
-                    <li class="{!! request()->is('certificate/course-completion*')?'active':'' !!} hover">
-                        <a href="{{ route('certificate.course-completion') }}">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            Course Completion Cer.
-                        </a>
-                        <b class="arrow"></b>
-                    </li>
+                        <li class="{!! request()->is('certificate/bonafide*') ? 'active' : '' !!} hover">
+                            <a href="{{ route('certificate.bonafide') }}">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                Bonafide Certificate
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
 
-                    <li class="{!! request()->is('certificate/issue-history*')?'active':'' !!} hover">
-                        <a href="{{ route('certificate.issue-history') }}">
-                            <i class="menu-icon fa fa-history"></i>
-                            Issue History
-                        </a>
+                        <li class="{!! request()->is('certificate/course-completion*') ? 'active' : '' !!} hover">
+                            <a href="{{ route('certificate.course-completion') }}">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                Course Completion Cer.
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
 
-                        <b class="arrow"></b>
-                    </li>
+                        <li class="{!! request()->is('certificate/issue-history*') ? 'active' : '' !!} hover">
+                            <a href="{{ route('certificate.issue-history') }}">
+                                <i class="menu-icon fa fa-history"></i>
+                                Issue History
+                            </a>
 
-                    <li class="{!! request()->is('certificate/generate*')?'active':'' !!} hover">
-                        <a href="{{ route('certificate.generate') }}">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            Custom Print
-                        </a>
-                        <b class="arrow"></b>
-                    </li>
-                    <li class="{!! request()->is('certificate/template*')?'active':'' !!} hover">
-                        <a href="{{ route('certificate.template') }}">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            Certificate Template
-                        </a>
-                        <b class="arrow"></b>
-                    </li>
-                </ul>
-            </li>
+                            <b class="arrow"></b>
+                        </li>
+
+                        <li class="{!! request()->is('certificate/generate*') ? 'active' : '' !!} hover">
+                            <a href="{{ route('certificate.generate') }}">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                Custom Print
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                        <li class="{!! request()->is('certificate/template*') ? 'active' : '' !!} hover">
+                            <a href="{{ route('certificate.template') }}">
+                                <i class="menu-icon fa fa-caret-right"></i>
+                                Certificate Template
+                            </a>
+                            <b class="arrow"></b>
+                        </li>
+                    </ul>
+                </li>
             @endif
         @endability
 
@@ -701,9 +763,9 @@
 
     
 
-        @ability('super-admin','download')
-        @if( isset($generalSetting) && $generalSetting->upload_download ==1)
-            <li class="{!! request()->is('download*')?'active':'' !!} hover">
+        @ability('super-admin', 'download')
+        @if(isset($generalSetting) && $generalSetting->upload_download == 1)
+            <li class="{!! request()->is('download*') ? 'active' : '' !!} hover">
                 <a href="{{ route('download') }}">
                     <i class="menu-icon fa fa-download"></i>
                     Download
@@ -717,7 +779,7 @@
 
 
         {{-- Reports --}}
-        @ability('super-admin','report')
+        @ability('super-admin', 'report')
         {{--<li class="{!! request()->is('report*')?'active':'' !!} hover">
             <a href="#" class="dropdown-toggle">
                 <i class="menu-icon fa fa-bar-chart"  aria-hidden="true"></i>
@@ -818,9 +880,9 @@
         @endability
 
         {{-- Info Center --}}
-        @ability('super-admin','alert-center')
-            @if( isset($generalSetting) && $generalSetting->alert ==1)
-                <li class="{!! request()->is('info*')?'active':'' !!} hover">
+        @ability('super-admin', 'alert-center')
+            @if(isset($generalSetting) && $generalSetting->alert == 1)
+                <li class="{!! request()->is('info*') ? 'active' : '' !!} hover">
                 <a href="#" class="dropdown-toggle">
                     <i class="menu-icon fa fa-bullhorn" aria-hidden="true"></i>
                     <span class="menu-text"> Alert </span>
@@ -829,7 +891,7 @@
                 </a>
                 <b class="arrow"></b>
                 <ul class="submenu">
-                    <li class="{!! request()->is('info/notice*')?'active':'' !!} hover">
+                    <li class="{!! request()->is('info/notice*') ? 'active' : '' !!} hover">
                         <a href="{{ route('info.notice') }}" accesskey="L">
                             <i class="menu-icon fa fa-caret-right"></i>
                             User Notice
@@ -837,7 +899,7 @@
 
                         <b class="arrow"></b>
                     </li>
-                    <li class="{!! request()->is('info/smsemail*')?'active':'' !!} hover">
+                    <li class="{!! request()->is('info/smsemail*') ? 'active' : '' !!} hover">
                         <a href="{{ route('info.smsemail') }}">
                             <i class="menu-icon fa fa-caret-right"></i>
                             SMS / E-mail
@@ -852,8 +914,8 @@
         @endability
 
         {{-- Academic --}}
-        @ability('super-admin','academic')
-            @if( isset($generalSetting) && $generalSetting->academic ==1)
+        @ability('super-admin', 'academic')
+            @if(isset($generalSetting) && $generalSetting->academic == 1)
                 <li class="hover">
                 <a href="#" class="dropdown-toggle">
                     <i class="menu-icon  fa fa-graduation-cap" aria-hidden="true"></i>
@@ -864,7 +926,7 @@
                 <b class="arrow"></b>
 
                 <ul class="submenu">
-                    <li class="{!! request()->is('faculty*') || request()->is('semester*')?'active':'' !!} hover">
+                    <li class="{!! request()->is('faculty*') || request()->is('semester*') ? 'active' : '' !!} hover">
                         <a href="#" class="dropdown-toggle">
                             <i class="menu-icon fa fa-caret-right"></i>
                             Academic Level
@@ -872,7 +934,7 @@
                         </a>
                         <b class="arrow"></b>
                         <ul class="submenu">
-                            <li class="{!! request()->is('faculty*')?'active':'' !!} hover">
+                            <li class="{!! request()->is('faculty*') ? 'active' : '' !!} hover">
                                 <a href="{{ route('faculty') }}">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Faculty/Level/Class
@@ -880,7 +942,7 @@
                                 <b class="arrow"></b>
                             </li>
 
-                            <li class="{!! request()->is('semester*')?'active':'' !!} hover">
+                            <li class="{!! request()->is('semester*') ? 'active' : '' !!} hover">
                                 <a href="{{ route('semester') }}">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Semester/Section
@@ -888,7 +950,7 @@
                                 <b class="arrow"></b>
                             </li>
 
-                            <li class="{!! request()->is('student-batch*')?'active':'' !!} hover">
+                            <li class="{!! request()->is('student-batch*') ? 'active' : '' !!} hover">
                                 <a href="{{ route('student-batch') }}">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Batch
@@ -897,7 +959,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="{!! request()->is('grading*') || request()->is('subject*')?'active':'' !!} hover">
+                    <li class="{!! request()->is('grading*') || request()->is('subject*') ? 'active' : '' !!} hover">
                         <a href="#" class="dropdown-toggle">
                             <i class="menu-icon fa fa-caret-right"></i>
                             Grading/Subject
@@ -905,7 +967,7 @@
                         </a>
                         <b class="arrow"></b>
                         <ul class="submenu">
-                            <li class="{!! request()->is('grading*')?'active':'' !!} hover">
+                            <li class="{!! request()->is('grading*') ? 'active' : '' !!} hover">
                                 <a href="{{ route('grading') }}">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Grading
@@ -913,7 +975,7 @@
                                 <b class="arrow"></b>
                             </li>
 
-                            <li class="{!! request()->is('subject*')?'active':'' !!} hover">
+                            <li class="{!! request()->is('subject*') ? 'active' : '' !!} hover">
                                 <a href="{{ route('subject') }}">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Course / Subject
@@ -923,7 +985,7 @@
                         </ul>
                     </li>
 
-                    <li class="{!! request()->is('*status')?'active':'' !!} hover">
+                    <li class="{!! request()->is('*status') ? 'active' : '' !!} hover">
                         <a href="#" class="dropdown-toggle">
                             <i class="menu-icon fa fa-caret-right"></i>
                             Status Setting
@@ -931,7 +993,7 @@
                         </a>
                         <b class="arrow"></b>
                         <ul class="submenu">
-                            <li class="{!! request()->is('student-status*')?'active':'' !!} hover">
+                            <li class="{!! request()->is('student-status*') ? 'active' : '' !!} hover">
                                 <a href="{{ route('student-status') }}">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Student Status
@@ -943,7 +1005,7 @@
                          
 
                            
-                            <li class="{!! request()->is('customer-status*')?'active':'' !!} hover">
+                            <li class="{!! request()->is('customer-status*') ? 'active' : '' !!} hover">
                                 <a href="{{ route('customer-status') }}">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Customer Status
@@ -955,7 +1017,7 @@
                     </li>
 
 
-                    <li class="{!! request()->is('year*') || request()->is('month*')?'active':'' !!} hover">
+                    <li class="{!! request()->is('year*') || request()->is('month*') ? 'active' : '' !!} hover">
                         <a href="#" class="dropdown-toggle">
                             <i class="menu-icon fa fa-caret-right"></i>
                             Year & Month
@@ -963,7 +1025,7 @@
                         </a>
                         <b class="arrow"></b>
                         <ul class="submenu">
-                            <li class="{!! request()->is('year*')?'active':'' !!} hover">
+                            <li class="{!! request()->is('year*') ? 'active' : '' !!} hover">
                                 <a href="{{ route('year') }}">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Year
@@ -971,7 +1033,7 @@
 
                                 <b class="arrow"></b>
                             </li>
-                            <li class="{!! request()->is('month*')?'active':'' !!} hover">
+                            <li class="{!! request()->is('month*') ? 'active' : '' !!} hover">
                                 <a href="{{ route('month') }}">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Month
@@ -979,7 +1041,7 @@
 
                                 <b class="arrow"></b>
                             </li>
-                            <li class="{!! request()->is('day*')?'active':'' !!} hover">
+                            <li class="{!! request()->is('day*') ? 'active' : '' !!} hover">
                                 <a href="{{ route('day') }}">
                                     <i class="menu-icon fa fa-caret-right"></i>
                                     Day
@@ -989,7 +1051,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="{!! request()->is('payment-method*')?'active':'' !!} hover">
+                    <li class="{!! request()->is('payment-method*') ? 'active' : '' !!} hover">
                         <a href="{{ route('payment-method') }}">
                             <i class="menu-icon fa fa-caret-right"></i>
                             Payment Methods
@@ -1003,8 +1065,8 @@
         @endability
 
         {{-- Help --}}
-        @ability('super-admin','help')
-            @if( isset($generalSetting) && $generalSetting->help ==1)
+        @ability('super-admin', 'help')
+            @if(isset($generalSetting) && $generalSetting->help == 1)
                 <li class="hover">
                 <a href="#" target="_blank" class="dropdown-toggle">
                     <i class="menu-icon  fa fa-question" aria-hidden="true"></i>
@@ -1016,7 +1078,7 @@
 
                 <ul class="submenu">
                     <li class="hover">
-                        <a href="http://unlimitededufirm.com/demo-detail" target="_blank">
+                        <a href="http://T.P Shetyeedufirm.com/demo-detail" target="_blank">
                             <i class="menu-icon fa fa-caret-right"></i>
                             Test Demo
                         </a>
@@ -1028,13 +1090,13 @@
                         </a>
                     </li>
                     <li class="hover">
-                        <a href="http://docs.unlimitededufirm.com" target="_blank">
+                        <a href="http://docs.T.P Shetyeedufirm.com" target="_blank">
                             <i class="menu-icon fa fa-caret-right"></i>
                             Documentation
                         </a>
                     </li>
                     <li class="hover">
-                        <a href="https://codecanyon.net/item/unlimited-edu-firm-school-college-information-management-system/21850988" target="_blank">
+                        <a href="https://codecanyon.net/item/T.P Shetye-edu-firm-school-college-information-management-system/21850988" target="_blank">
                             <i class="menu-icon fa fa-caret-right"></i>
                             Buy New License
                         </a>

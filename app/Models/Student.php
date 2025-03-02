@@ -7,8 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Student extends BaseModel
 {
     protected $fillable = ['created_by', 'last_updated_by', 'reg_no', 'reg_date', 'university_reg','faculty','semester','batch',
-        'academic_status', 'first_name', 'middle_name', 'last_name', 'date_of_birth', 'gender', 'blood_group', 'nationality',
-        'religion', 'caste','mother_tongue', 'email', 'extra_info', 'student_image','student_signature','status'];
+        'academic_status', 'first_name', 'middle_name', 'last_name', 'devnagari_first_name', 'devnagari_middle_name', 'devnagari_last_name',
+         'date_of_birth', 'gender', 'blood_group', 'adhar_no', 'nationality','religion', 'caste','mother_tongue', 'email', 'extra_info', 'student_image','student_signature','status', 'serial_no',
+         'first_name_dev',
+         'middle_name_dev', 
+         'last_name_dev'];
 
     public function address()
     {
@@ -63,36 +66,7 @@ class Student extends BaseModel
         return $this->hasMany(ExamMarkLedger::class, 'students_id', 'id');
     }
 
-    //assignment Answer
-    public function assignmentAnswers()
-    {
-        return $this->hasMany(AssignmentAnswer::class,'students_id','id');
 
-    }
-
-    //Library Member
-    public function libraryMember()
-    {
-        return $this->hasMany(LibraryMember::class,'member_id','id')->where('user_type','=',1);
-    }
-
-    //Library Book Requested by Member
-    /*public function bookRequest()
-    {
-        return $this->hasMany(BookRequest::class,'member_id','id');
-    }*/
-
-    //transport User
-    public function transportUser()
-    {
-        return $this->hasMany(TransportUser::class,'member_id','id')->where('user_type','=',1);
-    }
-
-    //Hostel Resident
-    public function hostelResident()
-    {
-        return $this->hasMany(Resident::class,'member_id','id')->where('user_type','=',1);
-    }
 
     //Regular Attendance
     public function regularAttendance()

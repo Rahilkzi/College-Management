@@ -47,12 +47,12 @@
                                 </li>
                                 <li>
                                     <i class="ace-icon fa fa-hand-o-right blue"></i>
-                                    <a href="https://codecanyon.net/item/unlimited-edu-firm-school-college-information-management-system/21850988" target="_blank">Buy New License</a>
+                                    <a href="https://codecanyon.net/item/T.P Shetye-edu-firm-school-college-information-management-system/21850988" target="_blank">Buy New License</a>
                                 </li>
 
                                 <li>
                                     <i class="ace-icon fa fa-hand-o-right blue"></i>
-                                    <a href="http://unlimitededufirm.com/support" target="_blank">Contact Developer for support.</a>
+                                    <a href="http://T.P Shetyeedufirm.com/support" target="_blank">Contact Developer for support.</a>
                                     <p>
                                         Email/Skype:freelancerumeshnepal@gmail.com<br>
                                         WhatsApp/Viber/Imo:+977-9868156047
