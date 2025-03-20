@@ -81,7 +81,7 @@ if (! function_exists('array_first')) {
      * @param  mixed  $default
      * @return mixed
      */
-    function array_first($array, callable $callback = null, $default = null)
+    function array_first($array, ?callable $callback = null, $default = null)
     {
         return Arr::first($array, $callback, $default);
     }
@@ -120,7 +120,7 @@ if (! function_exists('array_get')) {
      * Get an item from an array using "dot" notation.
      *
      * @param  \ArrayAccess|array  $array
-     * @param  string  $key
+     * @param  string|int  $key
      * @param  mixed  $default
      * @return mixed
      */
@@ -153,7 +153,7 @@ if (! function_exists('array_last')) {
      * @param  mixed  $default
      * @return mixed
      */
-    function array_last($array, callable $callback = null, $default = null)
+    function array_last($array, ?callable $callback = null, $default = null)
     {
         return Arr::last($array, $callback, $default);
     }
@@ -199,7 +199,7 @@ if (! function_exists('array_prepend')) {
      */
     function array_prepend($array, $value, $key = null)
     {
-        return Arr::prepend($array, $value, $key);
+        return Arr::prepend(...func_get_args());
     }
 }
 
