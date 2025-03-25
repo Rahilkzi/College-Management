@@ -33,9 +33,9 @@
             </select>
         </div>
 
-        <label class="col-sm-2 control-label">Sem./Sec.</label>
+        <label class="col-sm-2 control-label">Div./Sem./Sec.</label>
         <div class="col-sm-3">
-            <select name="semester" class="form-control semester" required> </select>
+            <select name="semester" class="form-control semester"> </select>
             @include('includes.form_fields_validation_message', ['name' => 'semester'])
         </div>
     @else
@@ -45,7 +45,7 @@
             @include('includes.form_fields_validation_message', ['name' => 'faculty'])
         </div>
 
-        <label class="col-sm-2 control-label">Sem./Sec.</label>
+        <label class="col-sm-2 control-label">Div./Sem./Sec.</label>
         <div class="col-sm-3">
             {!! Form::select('semester', $data['semester'], null, ['class' => 'form-control', "disabled"]) !!}
             @include('includes.form_fields_validation_message', ['name' => 'semester'])
@@ -100,15 +100,15 @@
 <div class="form-group">
     {!! Form::label('first_name_dev', 'NAME OF STUDENT IN DEVANAGARI', ['class' => 'col-sm-3 control-label']) !!}
     <div class="col-sm-3">
-        {!! Form::text('first_name_dev', null, ["class" => "form-control border-form", "id" => "devnagari_first_name", "readonly", "placeholder" => "देवनागरी में नाम"]) !!}
+        {!! Form::text('first_name_dev', null, ["class" => "form-control border-form", "id" => "devnagari_first_name", "placeholder" => "देवनागरी में नाम"]) !!}
         @include('includes.form_fields_validation_message', ['name' => 'first_name_dev'])
     </div>
     <div class="col-sm-3">
-        {!! Form::text('middle_name_dev', null, ["class" => "form-control border-form", "id" => "devnagari_middle_name", "readonly", "placeholder" => "देवनागरी में नाम"]) !!}
+        {!! Form::text('middle_name_dev', null, ["class" => "form-control border-form", "id" => "devnagari_middle_name", "placeholder" => "देवनागरी में नाम"]) !!}
         @include('includes.form_fields_validation_message', ['name' => 'middle_name_dev'])
     </div>
     <div class="col-sm-3">
-        {!! Form::text('last_name_dev', null, ["class" => "form-control border-form", "id" => "devnagari_last_name", "readonly", "placeholder" => "देवनागरी में नाम"]) !!}
+        {!! Form::text('last_name_dev', null, ["class" => "form-control border-form", "id" => "devnagari_last_name", "placeholder" => "देवनागरी में नाम"]) !!}
         @include('includes.form_fields_validation_message', ['name' => 'last_name_dev'])
     </div>
 </div>
@@ -142,7 +142,7 @@
 <div class="form-group">
     {!! Form::label('adhar_no', 'Aadhaar No', ['class' => 'col-sm-2 control-label']) !!}
     <div class="col-sm-2">
-        {!! Form::text('adhar_no', null, ["placeholder" => "", "class" => "form-control border-form upper", "required"]) !!}
+        {!! Form::text('adhar_no', null, ["placeholder" => "", "class" => "form-control border-form upper"]) !!}
         @include('includes.form_fields_validation_message', ['name' => 'adhar_no'])
     </div>
 
@@ -162,7 +162,7 @@
 <div class="form-group">
     {!! Form::label('nationality', 'Nationality', ['class' => 'col-sm-2 control-label']) !!}
     <div class="col-sm-2">
-        {!! Form::text('nationality', null, ["placeholder" => "", "class" => "form-control border-form upper", "required"]) !!}
+        {!! Form::text('nationality', null, ["placeholder" => "", "class" => "form-control border-form upper"]) !!}
         @include('includes.form_fields_validation_message', ['name' => 'nationality'])
     </div>
 

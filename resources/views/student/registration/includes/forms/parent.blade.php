@@ -24,7 +24,7 @@
 <div class="form-group">
     {!! Form::label('father_name', 'NAME OF FATHER', ['class' => 'col-sm-3 control-label']) !!}
     <div class="col-sm-3">
-        {!! Form::text('father_first_name', null, [ "class" => "form-control border-form upper","required"]) !!}
+        {!! Form::text('father_first_name', null, [ "class" => "form-control border-form upper"]) !!}
         @include('includes.form_fields_validation_message', ['name' => 'father_first_name'])
     </div>
     <div class="col-sm-3">
@@ -32,7 +32,7 @@
         @include('includes.form_fields_validation_message', ['name' => 'father_first_name'])
     </div>
     <div class="col-sm-3">
-        {!! Form::text('father_last_name', null, [ "class" => "form-control border-form upper","required"]) !!}
+        {!! Form::text('father_last_name', null, [ "class" => "form-control border-form upper"]) !!}
         @include('includes.form_fields_validation_message', ['name' => 'father_last_name'])
     </div>
 </div>
@@ -99,7 +99,7 @@
 <div class="form-group">
     {!! Form::label('mother_name', 'NAME OF MOTHER', ['class' => 'col-sm-3 control-label']) !!}
     <div class="col-sm-3">
-        {!! Form::text('mother_first_name', null, [ "class" => "form-control border-form upper","required"]) !!}
+        {!! Form::text('mother_first_name', null, [ "class" => "form-control border-form upper"]) !!}
         @include('includes.form_fields_validation_message', ['name' => 'mother_first_name'])
     </div>
     <div class="col-sm-3">
@@ -107,7 +107,7 @@
         @include('includes.form_fields_validation_message', ['name' => 'mother_first_name'])
     </div>
     <div class="col-sm-3">
-        {!! Form::text('mother_last_name', null, [ "class" => "form-control border-form upper","required"]) !!}
+        {!! Form::text('mother_last_name', null, [ "class" => "form-control border-form upper"]) !!}
         @include('includes.form_fields_validation_message', ['name' => 'mother_last_name'])
     </div>
 </div>
@@ -197,7 +197,7 @@
     <div class="form-group">
         {!! Form::label('guardian_name', 'NAME OF GUARDIAN', ['class' => 'col-sm-3 control-label']) !!}
         <div class="col-sm-3">
-            {!! Form::text('guardian_first_name', null, [ "class" => "form-control border-form upper","required"]) !!}
+            {!! Form::text('guardian_first_name', null, [ "class" => "form-control border-form upper"]) !!}
             @include('includes.form_fields_validation_message', ['name' => 'guardian_first_name'])
         </div>
         <div class="col-sm-3">
@@ -205,7 +205,7 @@
             @include('includes.form_fields_validation_message', ['name' => 'guardian_first_name'])
         </div>
         <div class="col-sm-3">
-            {!! Form::text('guardian_last_name', null, [ "class" => "form-control border-form upper","required"]) !!}
+            {!! Form::text('guardian_last_name', null, [ "class" => "form-control border-form upper"]) !!}
             @include('includes.form_fields_validation_message', ['name' => 'guardian_last_name'])
         </div>
     </div>
@@ -247,7 +247,7 @@
 
         {!! Form::label('guardian_mobile_1', 'Mobile 1', ['class' => 'col-sm-2 control-label']) !!}
         <div class="col-sm-4">
-            {!! Form::text('guardian_mobile_1', null, ["class" => "form-control border-form input-mask-mobile","required"]) !!}
+            {!! Form::text('guardian_mobile_1', null, ["class" => "form-control border-form input-mask-mobile"]) !!}
             @include('includes.form_fields_validation_message', ['name' => 'guardian_mobile_1'])
         </div>
     </div>
@@ -268,13 +268,13 @@
     <div class="form-group">
         {!! Form::label('guardian_relation', 'Relation', ['class' => 'col-sm-2 control-label']) !!}
         <div class="col-sm-4">
-            {!! Form::text('guardian_relation', null, ["class" => "form-control border-form upper","required"]) !!}
+            {!! Form::text('guardian_relation', null, ["class" => "form-control border-form upper"]) !!}
             @include('includes.form_fields_validation_message', ['name' => 'guardian_relation'])
         </div>
 
         {!! Form::label('guardian_address', 'Guardian Address', ['class' => 'col-sm-2 control-label']) !!}
         <div class="col-sm-4">
-            {!! Form::text('guardian_address', null, ["class" => "form-control border-form upper", "required"]) !!}
+            {!! Form::text('guardian_address', null, ["class" => "form-control border-form upper"]) !!}
             @include('includes.form_fields_validation_message', ['name' => 'guardian_address'])
         </div>
     </div>
