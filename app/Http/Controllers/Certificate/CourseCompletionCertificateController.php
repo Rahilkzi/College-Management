@@ -170,7 +170,7 @@ class CourseCompletionCertificateController extends CollegeBaseController
 
     public function view(Request $request, $id)
     {
-        $data['student'] = Student::select('students.id','students.reg_no', 'students.reg_date', 'students.university_reg',
+        $data['student'] = Student::select('students.id','students.reg_no', 'students.reg_date', 'students.serial_no',
 
             'students.faculty','students.semester','students.batch', 'students.academic_status', 'students.first_name', 'students.middle_name',
             'students.last_name', 'students.date_of_birth', 'students.gender', 'students.blood_group',  'students.religion', 'students.caste','students.nationality',
@@ -265,7 +265,7 @@ class CourseCompletionCertificateController extends CollegeBaseController
         $certificateTemplate = CertificateTemplate::where('certificate','COURSE COMPLETION')->first();
 
         $filteredStudent = $students->filter(function ($student, $key) use($certificateTemplate) {
-            $data = Student::select('students.id','students.reg_no', 'students.reg_date', 'students.university_reg',
+            $data = Student::select('students.id','students.reg_no', 'students.reg_date', 'students.serial_no',
                 'students.faculty','students.semester', 'students.academic_status', 'students.first_name', 'students.middle_name',
                 'students.last_name', 'students.date_of_birth', 'students.gender', 'students.blood_group',  'students.religion', 'students.caste','students.nationality',
                 'students.mother_tongue', 'students.email', 'students.extra_info', 'students.status',

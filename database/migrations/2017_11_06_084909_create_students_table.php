@@ -22,7 +22,7 @@ class CreateStudentsTable extends Migration
 
             $table->string('reg_no', '25')->unique();
             $table->dateTime('reg_date');
-            $table->string('university_reg', '100')->nullable();
+            $table->string('serial_no', '100')->nullable();
 
             $table->unsignedInteger('faculty')->nullable();
             $table->unsignedInteger('semester')->nullable();

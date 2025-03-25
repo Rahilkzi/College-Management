@@ -157,10 +157,10 @@
 
 
             <div class="profile-info-row">
-                @if($data['student']->university_reg != "")
+                @if($data['student']->serial_no != "")
                     <div class="profile-info-name"> Univ.Reg.: </div>
                     <div class="profile-info-value">
-                        <span class="editable" id="university_reg">{{ $data['student']->university_reg }}</span>
+                        <span class="editable" id="serial_no">{{ $data['student']->serial_no }}</span>
                     </div>
                 @endif
                 @if($data['student']->date_of_birth != "")

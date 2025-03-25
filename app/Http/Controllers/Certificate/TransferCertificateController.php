@@ -213,7 +213,7 @@ class TransferCertificateController extends CollegeBaseController
 
     public function view(Request $request, $id)
     {
-        $data['student'] = Student::select('students.id','students.reg_no', 'students.reg_date', 'students.university_reg',
+        $data['student'] = Student::select('students.id','students.reg_no', 'students.reg_date', 'students.serial_no',
             'students.faculty','students.semester','students.batch', 'students.academic_status', 'students.first_name', 'students.middle_name',
             'students.last_name', 'students.date_of_birth', 'students.gender', 'students.blood_group',  'students.religion', 'students.caste','students.nationality',
             'students.mother_tongue','students.student_image', 'pd.father_first_name', 'pd.father_middle_name', 'pd.father_last_name',
@@ -308,7 +308,7 @@ class TransferCertificateController extends CollegeBaseController
         $certificateTemplate = CertificateTemplate::where('certificate','TRANSFER')->first();
 
         $filteredStudent = $students->filter(function ($student, $key) use($certificateTemplate) {
-            $data = Student::select('students.id','students.reg_no', 'students.reg_date', 'students.university_reg',
+            $data = Student::select('students.id','students.reg_no', 'students.reg_date', 'students.serial_no',
                 'students.faculty','students.semester','students.batch', 'students.academic_status', 'students.first_name', 'students.middle_name',
                 'students.last_name', 'students.date_of_birth', 'students.gender', 'students.blood_group',  'students.religion',
                 'students.caste','students.nationality', 'students.mother_tongue', 'students.email', 'students.extra_info',
@@ -340,7 +340,7 @@ class TransferCertificateController extends CollegeBaseController
             $student->tc_num = $data->tc_num;
             $student->faculty = $data->faculty;
             $student->reg_no = $data->reg_no;
-            $student->university_reg = $data->university_reg;
+            $student->serial_no = $data->serial_no;
             $student->certificate = $certificateTemplate->certificate;
 
             $text = str_replace('{{date_of_leaving}}', Carbon::parse($data->date_of_leaving)->format('d-m-Y'), $certificateTemplate->template);

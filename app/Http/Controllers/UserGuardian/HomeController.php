@@ -153,7 +153,7 @@ class HomeController extends CollegeBaseController
         $data = [];
         $data['student_id'] = $id;
 
-        $data['student'] = Student::select('students.id','students.reg_no', 'students.reg_date', 'students.university_reg',
+        $data['student'] = Student::select('students.id','students.reg_no', 'students.reg_date', 'students.serial_no',
             'students.faculty','students.semester', 'students.academic_status', 'students.first_name', 'students.middle_name',
             'students.last_name', 'students.date_of_birth', 'students.gender', 'students.blood_group', 'students.nationality',
             'students.mother_tongue', 'students.email', 'students.extra_info', 'students.student_image', 'students.status', 'pd.grandfather_first_name',
@@ -251,7 +251,7 @@ class HomeController extends CollegeBaseController
         $data = [];
         $data['student_id'] = $id;
 
-        $data['student'] = Student::select('students.id','students.reg_no', 'students.reg_date', 'students.university_reg',
+        $data['student'] = Student::select('students.id','students.reg_no', 'students.reg_date', 'students.serial_no',
             'students.faculty','students.semester', 'students.academic_status', 'students.first_name', 'students.middle_name',
             'students.last_name', 'students.date_of_birth', 'students.gender', 'students.blood_group', 'students.nationality',
             'students.mother_tongue', 'students.email', 'students.extra_info', 'students.student_image', 'students.status')
@@ -283,7 +283,7 @@ class HomeController extends CollegeBaseController
         $data = [];
         $data['student_id'] = $id;
 
-        $data['student'] = Student::select('students.id','students.reg_no', 'students.reg_date', 'students.university_reg',
+        $data['student'] = Student::select('students.id','students.reg_no', 'students.reg_date', 'students.serial_no',
             'students.faculty','students.semester', 'students.academic_status', 'students.first_name', 'students.middle_name',
             'students.last_name', 'students.date_of_birth', 'students.gender', 'students.blood_group', 'students.nationality',
             'students.mother_tongue', 'students.email', 'students.extra_info', 'students.student_image', 'students.status')
@@ -367,7 +367,7 @@ class HomeController extends CollegeBaseController
         $reg_no = $this->getStudentById($id);
         $data = [];
         $data['student_id'] = $id;
-        $data['student'] = Student::select('students.id','students.reg_no', 'students.reg_date', 'students.university_reg',
+        $data['student'] = Student::select('students.id','students.reg_no', 'students.reg_date', 'students.serial_no',
             'students.faculty','students.semester', 'students.academic_status', 'students.first_name', 'students.middle_name',
             'students.last_name', 'students.date_of_birth', 'students.gender', 'students.blood_group', 'students.nationality',
             'students.mother_tongue', 'students.email', 'students.extra_info', 'students.student_image', 'students.status')
@@ -392,7 +392,7 @@ class HomeController extends CollegeBaseController
         $id = Crypt::decryptString($id);
         $data = [];
         $data['student_id'] = $id;
-        $data['student'] = Student::select('students.id','students.reg_no', 'students.reg_date', 'students.university_reg',
+        $data['student'] = Student::select('students.id','students.reg_no', 'students.reg_date', 'students.serial_no',
             'students.faculty','students.semester', 'students.academic_status', 'students.first_name', 'students.middle_name',
             'students.last_name', 'students.date_of_birth', 'students.gender', 'students.blood_group', 'students.nationality',
             'students.mother_tongue', 'students.email', 'students.extra_info', 'students.student_image', 'students.status')
@@ -418,7 +418,7 @@ class HomeController extends CollegeBaseController
         $data = [];
         $data['student_id'] = $id;
 
-        $data['student'] = Student::select('students.id','students.reg_no', 'students.reg_date', 'students.university_reg',
+        $data['student'] = Student::select('students.id','students.reg_no', 'students.reg_date', 'students.serial_no',
             'students.faculty','students.semester', 'students.academic_status', 'students.first_name', 'students.middle_name',
             'students.last_name', 'students.date_of_birth', 'students.gender', 'students.blood_group', 'students.nationality',
             'students.mother_tongue', 'students.email', 'students.extra_info', 'students.student_image', 'students.status')
@@ -439,7 +439,7 @@ class HomeController extends CollegeBaseController
         $data = [];
         $data['student_id'] = $id;
 
-        $data['student'] = Student::select('students.id','students.reg_no', 'students.reg_date', 'students.university_reg',
+        $data['student'] = Student::select('students.id','students.reg_no', 'students.reg_date', 'students.serial_no',
             'students.faculty','students.semester', 'students.academic_status', 'students.first_name', 'students.middle_name',
             'students.last_name', 'students.date_of_birth', 'students.gender', 'students.blood_group', 'students.nationality',
             'students.mother_tongue', 'students.email', 'students.extra_info', 'students.student_image', 'students.status')

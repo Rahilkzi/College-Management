@@ -85,7 +85,7 @@
                             <td> {{  ViewHelper::getSemesterTitle( $student->semester ) }}</td>
                             <td><a href="{{ route('student.view', ['id' => $student->id]) }}">{{ $student->reg_no }}</a></td>
                             <td>{{ \Carbon\Carbon::parse($student->reg_date)->format('Y-m-d')}} </td>
-                            <td>{{ $student->university_reg }}</td>
+                            <td>{{ $student->serial_no }}</td>
                             <td><a href="{{ route('student.view', ['id' => $student->id]) }}"> {{ $student->first_name.' '.$student->middle_name.' '. $student->last_name }}</a></td>
                             <td>{{ \Carbon\Carbon::parse($student->date_of_birth)->format('Y-m-d')}}</td>
 

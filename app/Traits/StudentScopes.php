@@ -193,7 +193,7 @@ trait StudentScopes{
         $text = str_replace('{{reg_no}}', $student->reg_no, $text);
         //$text = str_replace('{{reg_date}}', $dateOfBirth.'['.$this->dateToWord($dateOfBirth).']', $text);
         $text = str_replace('{{reg_date}}', $regDate, $text);
-        $text = str_replace('{{university_reg}}', $student->university_reg, $text);
+        $text = str_replace('{{serial_no}}', $student->serial_no, $text);
         $text = str_replace('{{faculty}}', $faculty, $text);
         $text = str_replace('{{semester}}', $semester, $text);
         $text = str_replace('{{batch}}', $batch, $text);

@@ -13,10 +13,10 @@
         @include('includes.form_fields_validation_message', ['name' => 'reg_date'])
     </div>
 
-    {!! Form::label('university_reg', 'UNIVERSITY REG. NO.', ['class' => 'col-sm-2 control-label']) !!}
+    {!! Form::label('serial_no', 'UNIVERSITY REG. NO.', ['class' => 'col-sm-2 control-label']) !!}
     <div class="col-sm-2">
-        {!! Form::text('university_reg', null, ["placeholder" => "", "class" => "form-control border-form", "disabled"]) !!}
-        @include('includes.form_fields_validation_message', ['name' => 'university_reg'])
+        {!! Form::text('serial_no', null, ["placeholder" => "", "class" => "form-control border-form", "disabled"]) !!}
+        @include('includes.form_fields_validation_message', ['name' => 'serial_no'])
     </div>
 </div>
 
