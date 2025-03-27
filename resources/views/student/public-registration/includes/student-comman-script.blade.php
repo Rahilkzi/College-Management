@@ -6,18 +6,18 @@
         //date
         var today = new Date();
         var dd = today.getDate();
-        var mm = today.getMonth()+1; //January is 0!
+        var mm = today.getMonth() + 1; //January is 0!
 
         var yyyy = today.getFullYear();
-        if(dd<10){
-            dd='0'+dd;
+        if (dd < 10) {
+            dd = '0' + dd;
         }
-        if(mm<10){
-            mm='0'+mm;
+        if (mm < 10) {
+            mm = '0' + mm;
         }
-        var today = yyyy +'-'+mm+'-'+ dd;
-        $("#reg_date").val( today );
-        $(".reg_date").val( today );
+        var today = yyyy + '-' + mm + '-' + dd;
+        $("#reg_date").val(today);
+        $(".reg_date").val(today);
         /*enddate*/
 
 
@@ -30,8 +30,8 @@
 
 
     /*Change Field Value on Capital Letter When Keyup*/
-    $(function() {
-        $('.upper').keyup(function() {
+    $(function () {
+        $('.upper').keyup(function () {
             this.value = this.value.toUpperCase();
         });
     });
@@ -56,8 +56,8 @@
                     $.notify(data.message, "warning");
                 } else {
                     //$('.semester').html('').append('<option value="0">Select Div./Sem./Sec</option>');
-                    $.each(data.semester, function(key,valueObj){
-                        $('.semester').append('<option value="'+valueObj.id+'">'+valueObj.semester+'</option>');
+                    $.each(data.semester, function (key, valueObj) {
+                        $('.semester').append('<option value="' + valueObj.id + '">' + valueObj.semester + '</option>');
                     });
                 }
             }
@@ -69,10 +69,18 @@
     /*copy Father Detail on Guardian Detail*//*guardian_is*/
     function FatherAsGuardian(f) {
         document.getElementById('guardian-detail').style.display = 'block';
-        if(f.guardian_is.value == 'father_as_guardian') {
+        if (f.guardian_is.value == 'father_as_guardian') {
             f.guardian_first_name.value = f.father_first_name.value;
             f.guardian_middle_name.value = f.father_middle_name.value;
             f.guardian_last_name.value = f.father_last_name.value;
+            f.guardian_qualification.value = f.father_qualification.value;
+            f.guardian_occupation.value = f.father_occupation.value;
+            f.guardian_office.value = f.father_office.value;
+            f.guardian_office_number.value = f.father_office_number.value;
+            f.guardian_residence_number.value = f.father_residence_number.value;
+            f.guardian_mobile_1.value = f.father_mobile_1.value;
+            f.guardian_mobile_2.value = f.father_mobile_2.value;
+            f.guardian_email.value = f.father_email.value;
             f.guardian_relation.value = "FATHER";
             f.mother_as_guardian.checked == false;
             f.other_guardian.checked == false;
@@ -82,10 +90,18 @@
     /*copy Mother Detail on Guardian Detail*/
     function MotherAsGuardian(f) {
         document.getElementById('guardian-detail').style.display = 'block';
-        if(f.guardian_is.value == 'mother_as_guardian') {
+        if (f.guardian_is.value == 'mother_as_guardian') {
             f.guardian_first_name.value = f.mother_first_name.value;
-            f.guardian_middle_name.value = f.mother_middle_name.value;
+            // f.guardian_middle_name.value = f.mother_middle_name.value;
             f.guardian_last_name.value = f.mother_last_name.value;
+            f.guardian_qualification.value = f.mother_qualification.value;
+            f.guardian_occupation.value = f.mother_occupation.value;
+            f.guardian_office.value = f.mother_office.value;
+            f.guardian_office_number.value = f.mother_office_number.value;
+            f.guardian_residence_number.value = f.mother_residence_number.value;
+            f.guardian_mobile_1.value = f.mother_mobile_1.value;
+            f.guardian_mobile_2.value = f.mother_mobile_2.value;
+            f.guardian_email.value = f.mother_email.value;
             f.guardian_relation.value = "MOTHER";
             f.father_as_guardian.checked == false;
             f.other_guardian.checked == false;
@@ -95,7 +111,7 @@
     /*Blank Guardian Detail to Enter New*/
     function OtherGuardian(f) {
         document.getElementById('guardian-detail').style.display = 'block';
-        if(f.guardian_is.value == 'other_guardian') {
+        if (f.guardian_is.value == 'other_guardian') {
             f.guardian_first_name.value = "";
             f.guardian_middle_name.value = "";
             f.guardian_last_name.value = "";
@@ -106,24 +122,24 @@
         }
     }
 
-    if(!ace.vars['touch']) {
-        $('.chosen-select').chosen({allow_single_deselect:true});
+    if (!ace.vars['touch']) {
+        $('.chosen-select').chosen({ allow_single_deselect: true });
         //resize the chosen on window resize
 
         $(window)
             .off('resize.chosen')
-            .on('resize.chosen', function() {
-                $('.chosen-select').each(function() {
+            .on('resize.chosen', function () {
+                $('.chosen-select').each(function () {
                     var $this = $(this);
-                    $this.next().css({'width': $this.parent().width()});
+                    $this.next().css({ 'width': $this.parent().width() });
                 })
             }).trigger('resize.chosen');
         //resize chosen on sidebar collapse/expand
-        $(document).on('settings.ace.chosen', function(e, event_name, event_val) {
-            if(event_name != 'sidebar_collapsed') return;
-            $('.chosen-select').each(function() {
+        $(document).on('settings.ace.chosen', function (e, event_name, event_val) {
+            if (event_name != 'sidebar_collapsed') return;
+            $('.chosen-select').each(function () {
                 var $this = $(this);
-                $this.next().css({'width': $this.parent().width()});
+                $this.next().css({ 'width': $this.parent().width() });
             })
         });
     }

@@ -14,7 +14,7 @@
                         @include($view_path . '.includes.breadcrumb-primary')
                         <small>
                             <i class="ace-icon fa fa-angle-double-right"></i>
-                            Edit  Registration
+                            Edit Registration
                         </small>
                     </h1>
                 </div><!-- /.page-header -->
@@ -25,20 +25,21 @@
                         <!-- PAGE CONTENT BEGINS -->
                         @include('includes.validation_error_messages')
                         <div class="align-right hidden-print">
-                            <a class="btn-primary btn-sm" href="{{ route($base_route . '.view', ['id' => $data['row']->id]) }}"  >
+                            <a class="btn-primary btn-sm"
+                                href="{{ route($base_route . '.view', ['id' => $data['row']->id]) }}">
                                 <i class="ace-icon fa fa-eye"></i> View Staff Profile
                             </a>
                         </div>
 
                         {!! Form::model($data['row'], [
-    'route' => [$base_route . '.update', $data['row']->id],
-    'method' => 'POST',
-    'class' => 'form-horizontal',
-    'id' => 'validation-form',
-    "enctype" => "multipart/form-data"
-]) !!}
+        'route' => [$base_route . '.update', $data['row']->id],
+        'method' => 'POST',
+        'class' => 'form-horizontal',
+        'id' => 'validation-form',
+        "enctype" => "multipart/form-data"
+    ]) !!}
                         {!! Form::hidden('id', $data['row']->id) !!}
-                       {{-- {!! Form::text('address_id', $data['row']->address_id) !!}
+                        {{-- {!! Form::text('address_id', $data['row']->address_id) !!}
                         {!! Form::text('parents_id', $data['row']->parents_id) !!}
                         {!! Form::text('guardian_id', $data['row']->guardian_id) !!}--}}
                         @include($view_path . '.includes.form')
@@ -46,7 +47,7 @@
                             <div class="col-md-12 align-right">
                                 <button class="btn btn-info" type="submit">
                                     <i class="fa fa-save bigger-110"></i>
-                Update
+                                    Update
                                 </button>
                             </div>
                         </div>
@@ -81,8 +82,8 @@
                         $.notify(data.message, "warning");
                     } else {
                         $('.semester_select').html('').append('<option value="0">Select Div./Sem./Sec</option>');
-                        $.each(data.semester, function(key,valueObj){
-                            $('.semester_select').append('<option value="'+valueObj.id+'">'+valueObj.semester+'</option>');
+                        $.each(data.semester, function (key, valueObj) {
+                            $('.semester_select').append('<option value="' + valueObj.id + '">' + valueObj.semester + '</option>');
                         });
                     }
                 }
@@ -286,17 +287,17 @@
             );
         });
 
-        $(function() {
-            $('#faculty').change(function(){
+        $(function () {
+            $('#faculty').change(function () {
                 $('#row_dim').hide();
 
             });
         });
 
-        $(function() {
+        $(function () {
             $('#faculty').hide();
-            $('#type').change(function(){
-                if($('#type').val() == 'parcel') {
+            $('#type').change(function () {
+                if ($('#type').val() == 'parcel') {
                     $('#row_dim').show();
                 } else {
                     $('#row_dim').hide();
@@ -305,8 +306,8 @@
         });
 
         /*Change Field Value on Capital Letter When Keyup*/
-        $(function() {
-            $('.upper').keyup(function() {
+        $(function () {
+            $('.upper').keyup(function () {
                 this.value = this.value.toUpperCase();
             });
         });
@@ -315,7 +316,7 @@
 
         /*copy permanent address on temporary address*/
         function CopyAddress(f) {
-            if(f.permanent_address_copier.checked == true) {
+            if (f.permanent_address_copier.checked == true) {
                 f.temporary_place.value = f.permanent_place.value;
                 f.temporary_district.value = f.permanent_district.value;
                 f.temporary_zone.value = f.permanent_zone.value;
@@ -325,7 +326,7 @@
 
         /*copy Father Detail on Guardian Detail*//*guardian_is*/
         function FatherAsGuardian(f) {
-            if(f.guardian_is.value == 'father_as_guardian') {
+            if (f.guardian_is.value == 'father_as_guardian') {
                 f.guardian_first_name.value = f.father_first_name.value;
                 f.guardian_middle_name.value = f.father_middle_name.value;
                 f.guardian_last_name.value = f.father_last_name.value;
@@ -336,6 +337,7 @@
                 f.guardian_residence_number.value = f.father_residence_number.value;
                 f.guardian_mobile_1.value = f.father_mobile_1.value;
                 f.guardian_mobile_2.value = f.father_mobile_2.value;
+                f.guardian_email.value = f.father_email.value;
                 f.guardian_relation.value = "FATHER";
                 f.mother_as_guardian.checked == false;
                 f.other_guardian.checked == false;
@@ -344,7 +346,7 @@
 
         /*copy Mother Detail on Guardian Detail*/
         function MotherAsGuardian(f) {
-            if(f.guardian_is.value == 'mother_as_guardian') {
+            if (f.guardian_is.value == 'mother_as_guardian') {
                 f.guardian_first_name.value = f.mother_first_name.value;
                 f.guardian_middle_name.value = f.mother_middle_name.value;
                 f.guardian_last_name.value = f.mother_last_name.value;
@@ -355,6 +357,7 @@
                 f.guardian_residence_number.value = f.mother_residence_number.value;
                 f.guardian_mobile_1.value = f.mother_mobile_1.value;
                 f.guardian_mobile_2.value = f.mother_mobile_2.value;
+                f.guardian_email.value = f.mother_email.value;
                 f.guardian_relation.value = "MOTHER";
                 f.father_as_guardian.checked == false;
                 f.other_guardian.checked == false;
@@ -363,7 +366,7 @@
 
         /*Blank Guardian Detail to Enter New*/
         function OtherGuardian(f) {
-            if(f.guardian_is.value == 'other_guardian') {
+            if (f.guardian_is.value == 'other_guardian') {
                 f.guardian_first_name.value = "";
                 f.guardian_middle_name.value = "";
                 f.guardian_last_name.value = "";
@@ -385,5 +388,3 @@
     @include('includes.scripts.datepicker_script')
 
 @endsection
-
-
