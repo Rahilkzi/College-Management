@@ -11,7 +11,7 @@
                 @include('layouts.includes.template_setting')
                 <div class="page-header">
                     <h1>
-                        @include($view_path.'.includes.breadcrumb-primary')
+                        @include($view_path . '.includes.breadcrumb-primary')
                         <small>
                             <i class="ace-icon fa fa-angle-double-right"></i>
                             Edit  Registration
@@ -20,23 +20,28 @@
                 </div><!-- /.page-header -->
                 <div class="row">
                     <div class="col-xs-12">
-                        @include($view_path.'.includes.buttons')
+                        @include($view_path . '.includes.buttons')
                         @include('includes.flash_messages')
                         <!-- PAGE CONTENT BEGINS -->
                         @include('includes.validation_error_messages')
                         <div class="align-right hidden-print">
-                            <a class="btn-primary btn-sm" href="{{ route($base_route.'.view', ['id' => $data['row']->id]) }}"  >
+                            <a class="btn-primary btn-sm" href="{{ route($base_route . '.view', ['id' => $data['row']->id]) }}"  >
                                 <i class="ace-icon fa fa-eye"></i> View Staff Profile
                             </a>
                         </div>
 
-                        {!! Form::model($data['row'], ['route' => [$base_route.'.update', $data['row']->id], 'method' => 'POST', 'class' => 'form-horizontal',
-                   'id' => 'validation-form', "enctype" => "multipart/form-data"]) !!}
+                        {!! Form::model($data['row'], [
+    'route' => [$base_route . '.update', $data['row']->id],
+    'method' => 'POST',
+    'class' => 'form-horizontal',
+    'id' => 'validation-form',
+    "enctype" => "multipart/form-data"
+]) !!}
                         {!! Form::hidden('id', $data['row']->id) !!}
                        {{-- {!! Form::text('address_id', $data['row']->address_id) !!}
                         {!! Form::text('parents_id', $data['row']->parents_id) !!}
                         {!! Form::text('guardian_id', $data['row']->guardian_id) !!}--}}
-                        @include($view_path.'.includes.form')
+                        @include($view_path . '.includes.form')
                         <div class="clearfix form-actions">
                             <div class="col-md-12 align-right">
                                 <button class="btn btn-info" type="submit">
@@ -324,7 +329,7 @@
                 f.guardian_first_name.value = f.father_first_name.value;
                 f.guardian_middle_name.value = f.father_middle_name.value;
                 f.guardian_last_name.value = f.father_last_name.value;
-                f.guardian_eligibility.value = f.father_eligibility.value;
+                f.guardian_qualification.value = f.father_qualification.value;
                 f.guardian_occupation.value = f.father_occupation.value;
                 f.guardian_office.value = f.father_office.value;
                 f.guardian_office_number.value = f.father_office_number.value;
@@ -343,7 +348,7 @@
                 f.guardian_first_name.value = f.mother_first_name.value;
                 f.guardian_middle_name.value = f.mother_middle_name.value;
                 f.guardian_last_name.value = f.mother_last_name.value;
-                f.guardian_eligibility.value = f.mother_eligibility.value;
+                f.guardian_qualification.value = f.mother_qualification.value;
                 f.guardian_occupation.value = f.mother_occupation.value;
                 f.guardian_office.value = f.mother_office.value;
                 f.guardian_office_number.value = f.mother_office_number.value;
@@ -362,7 +367,7 @@
                 f.guardian_first_name.value = "";
                 f.guardian_middle_name.value = "";
                 f.guardian_last_name.value = "";
-                f.guardian_eligibility.value = "";
+                f.guardian_qualification.value = "";
                 f.guardian_occupation.value = "";
                 f.guardian_office.value = "";
                 f.guardian_office_number.value = "";

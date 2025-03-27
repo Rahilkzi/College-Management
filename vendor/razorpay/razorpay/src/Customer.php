@@ -52,16 +52,16 @@ class Customer extends Entity
         return $this->request('DELETE', $entityUrl);
     }
 
-    public function requestEligibilityCheck($attributes = array())
+    public function requestqualificationCheck($attributes = array())
     {
-        $entityUrl = $this->getEntityUrl(). '/eligibility';
+        $entityUrl = $this->getEntityUrl(). '/qualification';
 
         return $this->request('POST', $entityUrl, $attributes);
     }
 
-    public function fetchEligibility($id)
+    public function fetchqualification($id)
     {
-        $entityUrl = $this->getEntityUrl(). '/eligibility/'. $id;
+        $entityUrl = $this->getEntityUrl(). '/qualification/'. $id;
 
         return $this->request('GET', $entityUrl);
     }

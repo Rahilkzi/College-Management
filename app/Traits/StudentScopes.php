@@ -219,7 +219,7 @@ trait StudentScopes{
         $text = str_replace('{{mother_name}}', $motherName, $text);
         $text = str_replace('{{parents_name}}', $parentsName, $text);
         $text = str_replace('{{guardian_name}}', $guardianName, $text);
-        $text = str_replace('{{father_eligibility}}', $student->father_eligibility, $text);
+        $text = str_replace('{{father_qualification}}', $student->father_qualification, $text);
         $text = str_replace('{{father_occupation}}', $student->father_occupation, $text);
         $text = str_replace('{{father_office}}', $student->father_office, $text);
         $text = str_replace('{{father_office_number}}', $student->father_office_number, $text);
@@ -227,7 +227,7 @@ trait StudentScopes{
         $text = str_replace('{{father_mobile_1}}', $student->father_mobile_1, $text);
         $text = str_replace('{{father_mobile_2}}', $student->father_mobile_2, $text);
         $text = str_replace('{{father_email}}', $student->father_email, $text);
-        $text = str_replace('{{mother_eligibility}}', $student->mother_eligibility, $text);
+        $text = str_replace('{{mother_qualification}}', $student->mother_qualification, $text);
         $text = str_replace('{{mother_occupation}}', $student->mother_occupation, $text);
         $text = str_replace('{{mother_office}}', $student->mother_office, $text);
         $text = str_replace('{{mother_office_number}}', $student->mother_office_number, $text);
@@ -235,7 +235,7 @@ trait StudentScopes{
         $text = str_replace('{{mother_mobile_1}}', $student->mother_mobile_1, $text);
         $text = str_replace('{{mother_mobile_2}}', $student->mother_mobile_2, $text);
         $text = str_replace('{{mother_email}}', $student->mother_email, $text);
-        $text = str_replace('{{guardian_eligibility}}', $student->guardian_eligibility, $text);
+        $text = str_replace('{{guardian_qualification}}', $student->guardian_qualification, $text);
         $text = str_replace('{{guardian_occupation}}', $student->guardian_occupation, $text);
         $text = str_replace('{{guardian_office}}', $student->guardian_office, $text);
         $text = str_replace('{{guardian_office_number}}', $student->guardian_office_number, $text);

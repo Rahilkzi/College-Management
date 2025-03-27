@@ -38,10 +38,10 @@
 </div>
 
 <div class="form-group">
-    {!! Form::label('father_eligibility', 'Eligibility', ['class' => 'col-sm-2 control-label']) !!}
+    {!! Form::label('father_qualification', 'qualification', ['class' => 'col-sm-2 control-label']) !!}
     <div class="col-sm-4">
-        {!! Form::text('father_eligibility', null, ["placeholder" => "", "class" => "form-control border-form upper"]) !!}
-        @include('includes.form_fields_validation_message', ['name' => 'father_eligibility'])
+        {!! Form::text('father_qualification', null, ["placeholder" => "", "class" => "form-control border-form upper"]) !!}
+        @include('includes.form_fields_validation_message', ['name' => 'father_qualification'])
     </div>
 
     {!! Form::label('father_occupation', 'Occupation', ['class' => 'col-sm-2 control-label']) !!}
@@ -113,10 +113,10 @@
 </div>
 
 <div class="form-group">
-    {!! Form::label('mother_eligibility', 'Eligibility', ['class' => 'col-sm-2 control-label']) !!}
+    {!! Form::label('mother_qualification', 'qualification', ['class' => 'col-sm-2 control-label']) !!}
     <div class="col-sm-4">
-        {!! Form::text('mother_eligibility', null, ["placeholder" => "", "class" => "form-control border-form upper"]) !!}
-        @include('includes.form_fields_validation_message', ['name' => 'mother_eligibility'])
+        {!! Form::text('mother_qualification', null, ["placeholder" => "", "class" => "form-control border-form upper"]) !!}
+        @include('includes.form_fields_validation_message', ['name' => 'mother_qualification'])
     </div>
 
     {!! Form::label('mother_occupation', 'Occupation', ['class' => 'col-sm-2 control-label']) !!}
@@ -211,10 +211,10 @@
     </div>
 
     <div class="form-group">
-        {!! Form::label('guardian_eligibility', 'Eligibility', ['class' => 'col-sm-2 control-label']) !!}
+        {!! Form::label('guardian_qualification', 'qualification', ['class' => 'col-sm-2 control-label']) !!}
         <div class="col-sm-4">
-            {!! Form::text('guardian_eligibility', null, ["placeholder" => "", "class" => "form-control border-form upper"]) !!}
-            @include('includes.form_fields_validation_message', ['name' => 'guardian_eligibility'])
+            {!! Form::text('guardian_qualification', null, ["placeholder" => "", "class" => "form-control border-form upper"]) !!}
+            @include('includes.form_fields_validation_message', ['name' => 'guardian_qualification'])
         </div>
 
         {!! Form::label('guardian_occupation', 'Occupation', ['class' => 'col-sm-2 control-label']) !!}

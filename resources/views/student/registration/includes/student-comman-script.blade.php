@@ -127,7 +127,7 @@
             f.guardian_first_name.value = f.father_first_name.value;
             f.guardian_middle_name.value = f.father_middle_name.value;
             f.guardian_last_name.value = f.father_last_name.value;
-            f.guardian_eligibility.value = f.father_eligibility.value;
+            f.guardian_qualification.value = f.father_qualification.value;
             f.guardian_occupation.value = f.father_occupation.value;
             f.guardian_office.value = f.father_office.value;
             f.guardian_office_number.value = f.father_office_number.value;
@@ -149,7 +149,7 @@
             f.guardian_first_name.value = f.mother_first_name.value;
             f.guardian_middle_name.value = f.mother_middle_name.value;
             f.guardian_last_name.value = f.mother_last_name.value;
-            f.guardian_eligibility.value = f.mother_eligibility.value;
+            f.guardian_qualification.value = f.mother_qualification.value;
             f.guardian_occupation.value = f.mother_occupation.value;
             f.guardian_office.value = f.mother_office.value;
             f.guardian_office_number.value = f.mother_office_number.value;
@@ -171,7 +171,7 @@
             f.guardian_first_name.value = "";
             f.guardian_middle_name.value = "";
             f.guardian_last_name.value = "";
-            f.guardian_eligibility.value = "";
+            f.guardian_qualification.value = "";
             f.guardian_occupation.value = "";
             f.guardian_office.value = "";
             f.guardian_office_number.value = "";
@@ -191,7 +191,7 @@
         f.guardian_first_name.value = f.father_first_name.value;
         f.guardian_middle_name.value = f.father_middle_name.value;
         f.guardian_last_name.value = f.father_last_name.value;
-        f.guardian_eligibility.value = f.father_eligibility.value;
+        f.guardian_qualification.value = f.father_qualification.value;
         f.guardian_occupation.value = f.father_occupation.value;
         f.guardian_office.value = f.father_office.value;
         f.guardian_office_number.value = f.father_office_number.value;
