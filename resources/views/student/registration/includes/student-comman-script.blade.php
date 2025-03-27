@@ -100,7 +100,7 @@
                 if (data.error) {
                     $.notify(data.message, "warning");
                 } else {
-                    $('.semester').html('').append('<option value="">Select Sem./Sec.</option>');
+                    $('.semester').html('').append('<option value="">Select Div./Sem./Sec</option>');
                     $.each(data.semester, function(key,valueObj){
                         $('.semester').append('<option value="'+valueObj.id+'">'+valueObj.semester+'</option>');
                     });

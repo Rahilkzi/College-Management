@@ -10,7 +10,7 @@
     <tr>
         <td class="text-right">Faculty/Class : </td>
         <td>{{ ViewHelper::getFacultyTitle($student->faculty) }}</td>
-        <td class="text-right">Sem./Sec. : </td>
+        <td class="text-right">Div./Sem./Sec : </td>
         <td>{{ ViewHelper::getSemesterTitle($student->semester) }}</td>
     </tr>
 

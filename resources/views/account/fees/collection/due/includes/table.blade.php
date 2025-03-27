@@ -19,7 +19,7 @@
                 <table {{--id="dynamic-table"--}} class="table table-striped table-bordered table-hover">
                     <thead class="header">
                         <tr role="row">
-                            <th class="sorting_disabled">Sem./Sec.</th>
+                            <th class="sorting_disabled">Div./Sem./Sec</th>
                             <th class="center">
                                 <label class="pos-rel">
                                     <input type="checkbox" class="ace" />

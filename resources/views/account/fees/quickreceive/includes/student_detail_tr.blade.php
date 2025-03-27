@@ -57,7 +57,7 @@
                 <div class="profile-info-value">
                     <span class="editable" id="faculty">{{  ViewHelper::getFacultyTitle( $student->faculty ) }}</span>
                 </div>
-                <div class="profile-info-name"> Sem./Sec. :</div>
+                <div class="profile-info-name"> Div./Sem./Sec :</div>
                 <div class="profile-info-value">
                     <span class="editable" id="semester">{{  ViewHelper::getSemesterTitle( $student->semester ) }}</span>
                 </div>

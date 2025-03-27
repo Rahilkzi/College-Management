@@ -55,7 +55,7 @@
                 if (data.error) {
                     $.notify(data.message, "warning");
                 } else {
-                    //$('.semester').html('').append('<option value="0">Select Sem./Sec.</option>');
+                    //$('.semester').html('').append('<option value="0">Select Div./Sem./Sec</option>');
                     $.each(data.semester, function(key,valueObj){
                         $('.semester').append('<option value="'+valueObj.id+'">'+valueObj.semester+'</option>');
                     });

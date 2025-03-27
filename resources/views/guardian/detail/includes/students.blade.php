@@ -36,7 +36,7 @@
                 <tr>
                     <th>S.N.</th>
                     <th>Faculty/Class</th>
-                    <th>Sem./Sec.</th>
+                    <th>Div./Sem./Sec</th>
                     <th>Reg.Num</th>
                     <th>Student Name</th>
                     <th>Status</th>

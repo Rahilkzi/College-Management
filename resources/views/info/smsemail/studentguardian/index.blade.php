@@ -157,7 +157,7 @@
                    if (data.error) {
                        toastr.info(data.message);
                    } else {
-                       $('.semester_select').html('').append('<option value="0">Select Sem./Sec.</option>');
+                       $('.semester_select').html('').append('<option value="0">Select Div./Sem./Sec</option>');
                        $.each(data.semester, function(key,valueObj){
                            $('.semester_select').append('<option value="'+valueObj.id+'">'+valueObj.semester+'</option>');
                        });

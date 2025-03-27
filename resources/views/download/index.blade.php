@@ -55,7 +55,7 @@
                     if (data.error) {
                         $.notify(data.message, "warning");
                     } else {
-                        $('.semesters_id').html('').append('<option value="0">Select Sem./Sec.</option>');
+                        $('.semesters_id').html('').append('<option value="0">Select Div./Sem./Sec</option>');
                         $.each(data.semester, function(key,valueObj){
                             $('.semesters_id').append('<option value="'+valueObj.id+'">'+valueObj.semester+'</option>');
                         });
@@ -76,7 +76,7 @@
             }
 
             if (semester == 0) {
-                toastr.info("Please, Select Sem./Sec.", "Info:");
+                toastr.info("Please, Select Div./Sem./Sec", "Info:");
                 return false;
             }
 
