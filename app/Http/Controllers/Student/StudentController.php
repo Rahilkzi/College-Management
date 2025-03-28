@@ -106,6 +106,7 @@ class StudentController extends CollegeBaseController
         try {
             Log::info('Starting student registration process', [
                 'reg_no' => $request->reg_no,
+                'serial_no' => $request->serial_no,
                 'faculty' => $request->faculty
             ]);
 
@@ -130,6 +131,26 @@ class StudentController extends CollegeBaseController
             }else{
                 $request->request->add(['reg_no' => $request->reg_no]);
             }
+
+
+            if (!isset($request->serial_no)) {
+                // RegNo Generator Start
+                $oldStudent = Student::where('faculty', $request->faculty)->latest()->first();
+                $sn = $oldStudent ? intval(substr($oldStudent->serial_no, -4)) + 1 : 1;
+
+                $sn = str_pad($sn, 4, '0', STR_PAD_LEFT);
+                $year = substr(Year::where('active_status', 1)->first()->title, -2);
+                $faculty = Faculty::find(intval($request->faculty));
+                $facultyName = $faculty ? $faculty->faculty : '';
+
+                $SrNum = $facultyName . $year . '-' . $sn;
+                // reg generator End
+
+                $request->request->add(['serial_no' => $SrNum]);
+            } else {
+                $request->request->add(['serial_no' => $request->serial_no]);
+            }
+
 
             if ($request->hasFile('student_main_image')){
                 $student_image = $request->file('student_main_image');
@@ -526,6 +547,8 @@ class StudentController extends CollegeBaseController
                 'student_id' => $id,
                 'reg_no' => $request->reg_no
             ]);
+
+        
 
             if ($request->hasFile('student_main_image')) {
                 // remove old image from folder
