@@ -34,7 +34,7 @@ class FeesBaseController extends CollegeBaseController
                 'fee_collections.date', 'fee_collections.discount', 'fee_collections.fine', 'fee_collections.paid_amount',
                 'fee_collections.payment_mode','fee_collections.note','fee_collections.created_by','fee_collections.status as fc_status',
                 'fm.status as fm_status','fm.fee_head',
-                'students.reg_no','students.reg_date', 'students.first_name','students.middle_name', 'students.last_name','students.semester')
+                'students.reg_no','students.serial_no','students.reg_date', 'students.first_name','students.middle_name', 'students.last_name','students.semester')
                 ->where(function ($query) use ($request) {
 
                     $this->commonStudentFilterCondition($query, $request);
@@ -74,7 +74,7 @@ class FeesBaseController extends CollegeBaseController
                 'fee_collections.date', 'fee_collections.discount', 'fee_collections.fine', 'fee_collections.paid_amount',
                 'fee_collections.payment_mode','fee_collections.note','fee_collections.created_by','fee_collections.status as fc_status',
                 'fm.status as fm_status','fm.fee_head',
-                'students.reg_no','students.reg_date', 'students.first_name','students.middle_name', 'students.last_name','students.semester')
+                'students.reg_no','students.serial_no','students.reg_date', 'students.first_name','students.middle_name', 'students.last_name','students.semester')
                 ->whereYear('fee_collections.date', '=', $year)
                 ->join('students', 'students.id','=','fee_collections.students_id')
                 ->join('fee_masters as fm','fm.id','=','fee_collections.fee_masters_id')
@@ -100,7 +100,7 @@ class FeesBaseController extends CollegeBaseController
     {
         $data = [];
 
-        $students = Student::select('students.id','students.reg_no','students.reg_date', 'students.first_name',
+        $students = Student::select('students.id','students.reg_no','students.serial_no','students.reg_date', 'students.first_name',
             'students.middle_name', 'students.last_name','students.faculty','students.semester', 'students.student_image','students.status',
             'pd.father_first_name', 'pd.father_middle_name','pd.father_last_name')
             ->where(function ($query) use ($request) {

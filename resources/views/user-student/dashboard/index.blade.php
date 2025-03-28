@@ -115,7 +115,7 @@
                                     </div>
 
                                     <div class="profile-info-row">
-                                        <div class="profile-info-name"> Univ.Reg.: </div>
+                                        <div class="profile-info-name"> Serial No :</div>
                                         <div class="profile-info-value">
                                             <span class="editable" id="serial_no">{{ $data['student']->serial_no }}</span>
                                         </div>

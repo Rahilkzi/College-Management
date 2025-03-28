@@ -36,7 +36,7 @@ class FeesCollectionController extends CollegeBaseController
     public function index(Request $request)
     {
         $data = [];
-        $data['student'] = Student::select('students.id','students.reg_no','students.reg_date', 'students.first_name',
+        $data['student'] = Student::select('students.id','students.reg_no','students.serial_no','students.reg_date', 'students.first_name',
             'students.middle_name', 'students.last_name','students.faculty','students.semester','ai.mobile_1', 'pd.father_first_name', 'pd.father_middle_name',
             'pd.father_last_name','students.academic_status','students.status')
             ->where(function ($query) use ($request) {
@@ -60,7 +60,7 @@ class FeesCollectionController extends CollegeBaseController
     {
         $data = [];
         $today = Carbon::parse(today())->format('Y-m-d');
-        $data['student'] = Student::select('students.id','students.reg_no','students.reg_date', 'students.first_name',
+        $data['student'] = Student::select('students.id','students.reg_no','students.serial_no','students.reg_date', 'students.first_name',
             'students.middle_name', 'students.last_name','students.faculty','students.semester','students.date_of_birth',
             'students.email', 'ai.mobile_1', 'pd.father_first_name', 'pd.father_middle_name', 'pd.father_last_name',
             'students.student_image','students.status')
@@ -324,7 +324,7 @@ class FeesCollectionController extends CollegeBaseController
     {
         $data = [];
         $today = Carbon::parse(today())->format('Y-m-d');
-        $data['student'] = Student::select('students.id','students.reg_no','students.reg_date', 'students.first_name',
+        $data['student'] = Student::select('students.id','students.reg_no','students.serial_no','students.reg_date', 'students.first_name',
             'students.middle_name', 'students.last_name','students.faculty','students.semester','students.date_of_birth',
             'students.email', 'ai.mobile_1', 'pd.father_first_name', 'pd.father_middle_name', 'pd.father_last_name',
             'students.student_image','students.status')
