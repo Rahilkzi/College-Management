@@ -56,6 +56,22 @@ class StudentController extends CollegeBaseController
         $this->folder_path = public_path().DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.$this->folder_name.DIRECTORY_SEPARATOR;
     }
 
+
+    public function searchByName(Request $request)
+    {
+        $name = $request->get('name');
+
+        $students = Student::where(function ($query) use ($name) {
+            $query->where('first_name', 'like', '%' . $name . '%')
+                ->orWhere('middle_name', 'like', '%' . $name . '%')
+                ->orWhere('last_name', 'like', '%' . $name . '%');
+        })
+            ->select('id', 'reg_no', 'first_name', 'middle_name', 'last_name')
+            ->limit(10)
+            ->get();
+
+        return response()->json($students);
+    }
     public function index(Request $request)
     {
         $data = [];

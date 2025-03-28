@@ -169,6 +169,7 @@ Route::group(['prefix' => 'front/',                                    'as' => '
 Route::group(['prefix' => 'student/',                                   'as' => 'student',                                     'namespace' => 'Student\\'], function () {
 
     Route::get('',                          ['as' => '',                         'middleware' => ['ability:super-admin,student-index'],                  'uses' => 'StudentController@index']);
+    Route::get('search-by-name', 'StudentController@searchByName')->name('student.search.by.name');
     Route::get('registration',              ['as' => '.registration',            'middleware' => ['ability:super-admin,student-registration'],           'uses' => 'StudentController@registration']);
     Route::post('register',                 ['as' => '.register',                'middleware' => ['ability:super-admin,student-registration'],            'uses' => 'StudentController@register']);
     Route::get('{id}/view',                 ['as' => '.view',                    'middleware' => ['ability:super-admin,student-view'],                   'uses' => 'StudentController@view']);
