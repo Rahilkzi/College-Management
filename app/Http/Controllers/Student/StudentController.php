@@ -110,27 +110,34 @@ class StudentController extends CollegeBaseController
                 'faculty' => $request->faculty
             ]);
 
-            if(!isset($request->reg_no)){
-                //RegNo Generator Start
-                $oldStudent = Student::where('faculty',$request->faculty)->orderBy('id', 'DESC')->first();
-                if (!$oldStudent){
-                    $sn = 1;
-                }else{
-                    $oldReg = intval(substr($oldStudent->reg_no,-4));
+            if (!isset($request->reg_no)) {
+                // RegNo Generator Start
+                $oldStudent = Student::where('faculty', $request->faculty)->orderBy('id', 'DESC')->first();
+
+                if (!$oldStudent) {
+                    $sn = 1;  // Start from 1 if no previous student exists
+                } else {
+                    // Get the last 4 digits of the registration number and increment by 1
+                    $oldReg = intval(substr($oldStudent->reg_no, -4));
                     $sn = $oldReg + 1;
                 }
 
-                $sn = substr("00000{$sn}", -4);
-                $year = intval(substr(Year::where('active_status','=',1)->first()->title,-2));
-                $faculty = Faculty::find(intval($request->faculty));
-                $facultyCode = $faculty->faculty_code;
-                //$regNum = $faculty.'-'.$year.'-'.$sn;
-                $regNum = $facultyCode.$year.$sn;
-                //reg generator End
+                // Ensure the serial number is always 4 digits
+                $sn = substr("00000{$sn}", -5);
+
+                // Set the prefix for the registration number (e.g., 'TEMP-')
+                $prefix = 'TEMP-';
+
+                // Add the prefix and the serial number
+                $regNum = $prefix . $sn;
+
+                // RegNo Generator End
                 $request->request->add(['reg_no' => $regNum]);
-            }else{
+            } else {
+                // If reg_no is already provided in the request, use it
                 $request->request->add(['reg_no' => $request->reg_no]);
             }
+
 
 
             if (!isset($request->serial_no)) {
@@ -138,7 +145,7 @@ class StudentController extends CollegeBaseController
                 $oldStudent = Student::where('faculty', $request->faculty)->latest()->first();
                 $sn = $oldStudent ? intval(substr($oldStudent->serial_no, -4)) + 1 : 1;
 
-                $sn = str_pad($sn, 4, '0', STR_PAD_LEFT);
+                $sn = str_pad($sn, 5, '0', STR_PAD_LEFT);
                 $year = substr(Year::where('active_status', 1)->first()->title, -2);
                 $faculty = Faculty::find(intval($request->faculty));
                 $facultyName = $faculty ? $faculty->faculty : '';
