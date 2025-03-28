@@ -1064,46 +1064,5 @@
             @endif
         @endability
 
-        {{-- Help --}}
-        @ability('super-admin', 'help')
-            @if(isset($generalSetting) && $generalSetting->help == 1)
-                <li class="hover">
-                <a href="#" target="_blank" class="dropdown-toggle">
-                    <i class="menu-icon  fa fa-question" aria-hidden="true"></i>
-                    <span class="menu-text"> Help </span>
-                    <b class="arrow fa fa-angle-down"></b>
-                </a>
-
-                <b class="arrow"></b>
-
-                <ul class="submenu">
-                    <li class="hover">
-                        <a href="http://T.P Shetyeedufirm.com/demo-detail" target="_blank">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            Test Demo
-                        </a>
-                    </li>
-                    <li class="hover">
-                        <a href="https://www.youtube.com/watch?v=2jgA9WY8IzQ&list=PLCtD_CGPAQJ2zSk5cDUkkfWGdtMGsF9n0" target="_blank">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            Video Tutorial
-                        </a>
-                    </li>
-                    <li class="hover">
-                        <a href="http://docs.T.P Shetyeedufirm.com" target="_blank">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            Documentation
-                        </a>
-                    </li>
-                    <li class="hover">
-                        <a href="https://codecanyon.net/item/T.P Shetye-edu-firm-school-college-information-management-system/21850988" target="_blank">
-                            <i class="menu-icon fa fa-caret-right"></i>
-                            Buy New License
-                        </a>
-                    </li>
-                </ul>
-            </li>
-            @endif
-        @endability
     </ul><!-- /.nav-list -->
 </div>
