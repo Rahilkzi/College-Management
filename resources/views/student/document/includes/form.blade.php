@@ -90,7 +90,7 @@
                                     `<div class="search-result-item" 
                                     data-regno="${student.reg_no}"
                                     style="padding: 5px; cursor: pointer; border-bottom: 1px solid #eee;">
-                                    ${student.first_name} ${student.middle_name} ${student.last_name} (${student.reg_no})
+                                    ${student.first_name} ${student.middle_name} ${student.last_name} ${student.faculty} (${student.reg_no})
                                 </div>`
                                 );
                             });

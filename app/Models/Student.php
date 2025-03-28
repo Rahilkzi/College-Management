@@ -18,6 +18,13 @@ class Student extends BaseModel
         return $this->hasOne(Addressinfo::class,'students_id', 'id');
     }
 
+    // Student.php model
+    public function facultyRelation()
+    {
+        // Assuming Faculty model exists and students.faculty matches faculties.name
+        return $this->belongsTo(Faculty::class, 'faculty', 'id');
+    }
+
     public function parents()
     {
         return $this->hasOne(ParentDetail::class, 'students_id', 'id');
