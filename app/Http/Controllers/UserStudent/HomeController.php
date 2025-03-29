@@ -112,6 +112,7 @@ class HomeController extends CollegeBaseController
         $data['feeCompare']->dataset('Income', 'doughnut',[$feeCollection, $dueFee])
             ->options(['borderColor' => '#46b8da', 'backgroundColor'=>['#46b8da','#FF6384'] ]);
 
+      
 
         return view(parent::loadDataToView($this->view_path.'.dashboard.index'), compact('data'));
 
