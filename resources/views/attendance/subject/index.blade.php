@@ -8,7 +8,7 @@
     <div class="main-content">
         <div class="main-content-inner">
             <div class="page-content">
-                @include('layouts.includes.template_setting')
+               
                 <div class="page-header">
                     <h1>
                         @include($view_path.'.includes.breadcrumb-primary')

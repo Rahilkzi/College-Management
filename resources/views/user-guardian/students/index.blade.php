@@ -8,7 +8,7 @@
     <div class="main-content">
         <div class="main-content-inner">
             <div class="page-content">
-                @include('user-student.layouts.includes.template_setting')
+                @include('user-student.')
                 <div class="page-header">
                     <h1>
                         Guardian

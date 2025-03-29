@@ -94,7 +94,7 @@ if(empty($posted['hash']) && sizeof($posted) > 0) {
     <div class="main-content">
         <div class="main-content-inner">
             <div class="page-content">
-                @include('layouts.includes.template_setting')
+               
                 <div class="page-header">
                     <h1>
                         PayUMoney Payment
