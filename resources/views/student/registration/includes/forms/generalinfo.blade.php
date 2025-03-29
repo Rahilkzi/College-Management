@@ -41,13 +41,13 @@
     @else
         <label class="col-sm-2 control-label">Faculty/Class</label>
         <div class="col-sm-5">
-            {!! Form::select('faculty', $data['faculties'], null, ['class' => 'form-control chosen-select', "disabled"]) !!}
+            {!! Form::select('faculty', $data['faculties'], null, ['class' => 'form-control chosen-select']) !!}
             @include('includes.form_fields_validation_message', ['name' => 'faculty'])
         </div>
 
         <label class="col-sm-2 control-label">Div./Sem./Sec</label>
         <div class="col-sm-3">
-            {!! Form::select('semester', $data['semester'], null, ['class' => 'form-control', "disabled"]) !!}
+            {!! Form::select('semester', $data['semester'], null, ['class' => 'form-control']) !!}
             @include('includes.form_fields_validation_message', ['name' => 'semester'])
         </div>
     @endif

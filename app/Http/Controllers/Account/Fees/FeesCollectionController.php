@@ -98,10 +98,17 @@ class FeesCollectionController extends CollegeBaseController
     public function add(Request $request, $id)
     {
         $data = [];
-        $data['fee_master'] = FeeMaster::select('id', 'students_id', 'semester', 'fee_head','fee_due_date','fee_amount','status')
-            ->where('students_id','=',$data['student']->id)
+        $data['fee_master'] = FeeMaster::select('id', 'students_id', 'semester', 'fee_head', 'fee_due_date', 'fee_amount', 'status')
+            ->where('students_id', '=', $data['student']->id)
             ->get();
 
+        // After fetching the data, you can check if 'semester' exists for each record
+        foreach ($data['fee_master'] as $fee) {
+            if (!$fee->semester) {
+                // Handle case where 'semester' is not available (e.g., set a default value or remove it)
+                $fee->semester = '';  // Example of setting a default value
+            }
+        }
 
         $data['url'] = URL::current();
         $data['filter_query'] = $this->filter_query;
