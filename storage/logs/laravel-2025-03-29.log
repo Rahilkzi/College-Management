@@ -1,0 +1,40 @@
+[2025-03-29 10:19:30] local.INFO: Starting student update process {"student_id":"42","reg_no":"TEMP-00001"} 
+[2025-03-29 10:19:30] local.INFO: Student base record updated {"student_id":"42"} 
+[2025-03-29 10:19:30] local.INFO: Address info updated {"student_id":"42","address":"LANJA"} 
+[2025-03-29 10:19:30] local.INFO: Student update completed successfully  
+[2025-03-29 10:19:47] local.INFO: Starting student update process {"student_id":"42","reg_no":"TEMP-00001"} 
+[2025-03-29 10:19:47] local.INFO: Student base record updated {"student_id":"42"} 
+[2025-03-29 10:19:47] local.INFO: Address info updated {"student_id":"42","address":"LANJA"} 
+[2025-03-29 10:19:47] local.INFO: Student update completed successfully  
+[2025-03-29 10:19:58] local.INFO: Starting student update process {"student_id":"42","reg_no":"TEMP-00001"} 
+[2025-03-29 10:19:58] local.INFO: Student base record updated {"student_id":"42"} 
+[2025-03-29 10:19:58] local.INFO: Address info updated {"student_id":"42","address":"LANJA"} 
+[2025-03-29 10:19:58] local.INFO: Student update completed successfully  
+[2025-03-29 10:20:02] local.INFO: Starting student update process {"student_id":"42","reg_no":"TEMP-00001"} 
+[2025-03-29 10:20:02] local.INFO: Student base record updated {"student_id":"42"} 
+[2025-03-29 10:20:02] local.INFO: Address info updated {"student_id":"42","address":"LANJA"} 
+[2025-03-29 10:20:02] local.INFO: Student update completed successfully  
+[2025-03-29 10:20:17] local.INFO: Starting student update process {"student_id":"42","reg_no":"TEMP-00001"} 
+[2025-03-29 10:20:17] local.INFO: Student base record updated {"student_id":"42"} 
+[2025-03-29 10:20:17] local.INFO: Address info updated {"student_id":"42","address":"LANJA"} 
+[2025-03-29 10:20:17] local.INFO: Student update completed successfully  
+[2025-03-29 10:20:45] local.INFO: Starting student update process {"student_id":"42","reg_no":"TEMP-00001"} 
+[2025-03-29 10:20:45] local.INFO: Student base record updated {"student_id":"42"} 
+[2025-03-29 10:20:45] local.INFO: Address info updated {"student_id":"42","address":"LANJA"} 
+[2025-03-29 10:20:45] local.INFO: Student update completed successfully  
+[2025-03-29 10:20:54] local.INFO: Starting student update process {"student_id":"42","reg_no":"TEMP-00001"} 
+[2025-03-29 10:20:54] local.INFO: Student base record updated {"student_id":"42"} 
+[2025-03-29 10:20:54] local.INFO: Address info updated {"student_id":"42","address":"LANJA"} 
+[2025-03-29 10:20:54] local.INFO: Student update completed successfully  
+[2025-03-29 10:21:31] local.INFO: Starting student update process {"student_id":"42","reg_no":"TEMP-00001"} 
+[2025-03-29 10:21:31] local.INFO: Student base record updated {"student_id":"42"} 
+[2025-03-29 10:21:31] local.INFO: Address info updated {"student_id":"42","address":"LANJA"} 
+[2025-03-29 10:21:31] local.INFO: Student update completed successfully  
+[2025-03-29 10:21:53] local.INFO: Starting student update process {"student_id":"42","reg_no":"TEMP-00001"} 
+[2025-03-29 10:21:53] local.INFO: Student base record updated {"student_id":"42"} 
+[2025-03-29 10:21:53] local.INFO: Address info updated {"student_id":"42","address":"LANJA"} 
+[2025-03-29 10:21:53] local.INFO: Student update completed successfully  
+[2025-03-29 10:22:20] local.INFO: Starting student update process {"student_id":"42","reg_no":"TEMP-00001"} 
+[2025-03-29 10:22:20] local.INFO: Student base record updated {"student_id":"42"} 
+[2025-03-29 10:22:20] local.INFO: Address info updated {"student_id":"42","address":"LANJA"} 
+[2025-03-29 10:22:20] local.INFO: Student update completed successfully  

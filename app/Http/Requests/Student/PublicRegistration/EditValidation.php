@@ -32,7 +32,7 @@ class EditValidation extends FormRequest
             'gender'                        => 'required',
             'religion'                      =>'max:25',
             'caste'                         =>'max:25',
-            'nationality'                   => 'required | max:25',
+            'nationality'                   => 'max:25',
             'address'                       => 'required | max:100',
             'state'                         => 'required | max:25',
             'country'                       => 'required | max:25',
