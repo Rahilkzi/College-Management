@@ -190,8 +190,8 @@ Route::group(['prefix' => 'student/',                                   'as' => 
     Route::get('import',                      ['as' => '.import',             'middleware' => ['ability:super-admin,student-registration'],           'uses' => 'StudentController@importStudent']);
     Route::post('import',                     ['as' => '.bulk.import',        'middleware' => ['ability:super-admin,student-registration'],             'uses' => 'StudentController@handleImportStudent']);
 
-    Route::get('attendance/student/import', ['as' => 'attendance.student.import', 'uses' => 'AttendanceController@importAttendance']);
-    Route::post('attendance/student/bulk-import', ['as' => 'attendance.student.bulk.import', 'uses' => 'AttendanceController@handleImportAttendance']);
+    // Route::get('attendance/student/import', ['as' => 'attendance.student.import', 'uses' => 'AttendanceController@importAttendance']);
+    // Route::post('attendance/student/bulk-import', ['as' => 'attendance.student.bulk.import', 'uses' => 'AttendanceController@handleImportAttendance']);
 
     /*Student transfer */
     Route::get('transfer',                  ['as' => '.transfer',                  'middleware' => ['ability:super-admin,student-transfer'],      'uses' => 'StudentController@transfer']);
