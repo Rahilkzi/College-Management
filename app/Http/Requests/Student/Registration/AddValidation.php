@@ -24,7 +24,11 @@ class AddValidation extends FormRequest
     public function rules()
     {
         return [
+<<<<<<< HEAD
             //'reg_no'                        => 'nullable  | max:25 | unique:students,reg_no',
+=======
+            'reg_no'                        => 'nullable  | max:25 | unique:students,reg_no',
+>>>>>>> 98dfd27d (fix registration)
             'reg_date'                      => 'required',
             'faculty'                       => 'required | exists:faculties,id',
             'semester'                      => 'nullable | exists:semesters,id',

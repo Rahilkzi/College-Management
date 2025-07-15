@@ -157,54 +157,68 @@ class StudentController extends CollegeBaseController
     {
         DB::beginTransaction();
         try {
-            Log::info('Starting student registration process', [
-                'reg_no' => $request->reg_no,
-                'serial_no' => $request->serial_no,
-                'faculty' => $request->faculty
-            ]);
-
-            if (!isset($request->reg_no)) {
+            if (empty($request->reg_no)) {
                 // RegNo Generator Start
-                $oldStudent = Student::where('faculty', $request->faculty)->orderBy('id', 'DESC')->first();
+                // Get the absolute latest student to ensure global reg_no uniqueness
+                $latestStudent = Student::orderBy('id', 'desc')->first();
 
-                if (!$oldStudent) {
-                    $sn = 1;  // Start from 1 if no previous student exists
-                } else {
-                    // Get the last 4 digits of the registration number and increment by 1
-                    $oldReg = intval(substr($oldStudent->reg_no, -4));
-                    $sn = $oldReg + 1;
+
+                $sn = 1; // Default starting number
+                if ($latestStudent) {
+                    // Extract the numeric part of the registration number
+                    $lastRegNum = $latestStudent->reg_no;
+                    $numericPart = intval(preg_replace('/[^0-9]/', '', $lastRegNum));
+                    if ($numericPart > 0) {
+                        $sn = $numericPart + 1;
+                    }
                 }
 
-                // Ensure the serial number is always 4 digits
-                $sn = substr("00000{$sn}", -5);
 
-                // Set the prefix for the registration number (e.g., 'TEMP-')
+                // Format the serial number with leading zeros
+                $sn = str_pad($sn, 5, '0', STR_PAD_LEFT);
+
+                // Set the prefix for the registration number
                 $prefix = 'TEMP-';
 
-                // Add the prefix and the serial number
+                // Combine prefix and serial number
                 $regNum = $prefix . $sn;
 
                 // RegNo Generator End
                 $request->request->add(['reg_no' => $regNum]);
-            } else {
-                // If reg_no is already provided in the request, use it
-                $request->request->add(['reg_no' => $request->reg_no]);
             }
 
 
 
-            if (!isset($request->serial_no)) {
-                // RegNo Generator Start
-                $oldStudent = Student::where('faculty', $request->faculty)->latest()->first();
-                $sn = $oldStudent ? intval(substr($oldStudent->serial_no, -4)) + 1 : 1;
+            if (empty($request->serial_no)) {
+                // Serial Number Generator Start
+                $latestStudent = Student::where('faculty', $request->faculty)->latest()->first();
+                
+                $sn = 1; // Default starting number
+                if ($latestStudent && !empty($latestStudent->serial_no)) {
+                    // Extract the numeric part after the last '-'
+                    $parts = explode('-', $latestStudent->serial_no);
+                    $numericPart = intval(end($parts));
+                    if ($numericPart >= 0) {
+                        $sn = $numericPart + 1;
+                    }
+                }
 
-                $sn = str_pad($sn, 5, '0', STR_PAD_LEFT);
-                $year = substr(Year::where('active_status', 1)->first()->title, -2);
+                $sn_padded = str_pad($sn, 5, '0', STR_PAD_LEFT);
+                
+                $year = '';
+                $activeYear = Year::where('active_status', 1)->first();
+                if ($activeYear) {
+                    $year = substr($activeYear->title, -2);
+                }
+
+                $facultyName = '';
                 $faculty = Faculty::find(intval($request->faculty));
-                $facultyName = $faculty ? $faculty->faculty : '';
+                if ($faculty) {
+                    $facultyName = $faculty->faculty;
+                }
 
-                $SrNum = $facultyName . $year . '-' . $sn;
-                // reg generator End
+                $SrNum = $facultyName . $year . '-' . $sn_padded;
+                // Serial Number generator End
 
                 $request->request->add(['serial_no' => $SrNum]);
             } else {
@@ -240,8 +254,10 @@ class StudentController extends CollegeBaseController
 
             $student = Student::create($request->all());
 
-            if ($student) {
-                Log::info('Student base record created', ['student_id' => $student->id]);
+            if (!$student) {
+                DB::rollBack();
+                $request->session()->flash($this->message_danger, 'Error in Student Registration. Please check logs for details.');
+                return back();
             }
 
             $parential_image_path = public_path() . DIRECTORY_SEPARATOR . 'images' . DIRECTORY_SEPARATOR . 'parents' . DIRECTORY_SEPARATOR;
