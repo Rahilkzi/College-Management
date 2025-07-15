@@ -7,7 +7,7 @@
     <div class="main-content">
         <div class="main-content-inner">
             <div class="page-content">
-                @include('layouts.includes.template_setting')
+               
                 <div class="page-header">
                     <h1>
                         @include($view_path.'.includes.breadcrumb-primary')
@@ -48,7 +48,7 @@
                                         <td> {{  ViewHelper::getFacultyTitle( $student->faculty ) }}</td>
                                     </tr>
                                     <tr>
-                                        <th>Sem./Sec.</th>
+                                        <th>Div./Sem./Sec</th>
                                         <td> {{  ViewHelper::getSemesterTitle( $student->semester ) }}</td>
                                     </tr>
                                     <tr>

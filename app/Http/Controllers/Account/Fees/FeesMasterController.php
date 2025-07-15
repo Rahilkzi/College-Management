@@ -30,7 +30,7 @@ class FeesMasterController extends CollegeBaseController
         if($request->all()) {
             $data['fee_master'] = FeeMaster::select('fee_masters.id', 'fee_masters.students_id', 'fee_masters.semester',
                 'fee_masters.fee_head', 'fee_masters.fee_due_date', 'fee_masters.fee_amount', 'fee_masters.status',
-                'students.reg_no', 'students.reg_date', 'students.first_name', 'students.middle_name', 'students.last_name', 'students.semester')
+                'students.reg_no','students.serial_no', 'students.reg_date', 'students.first_name', 'students.middle_name', 'students.last_name', 'students.semester')
                 ->where(function ($query) use ($request) {
 
                     $this->commonStudentFilterCondition($query, $request);
@@ -71,7 +71,7 @@ class FeesMasterController extends CollegeBaseController
             $year = $this->getActiveYear();
             $data['fee_master'] = FeeMaster::select('fee_masters.id', 'fee_masters.students_id', 'fee_masters.semester',
                 'fee_masters.fee_head', 'fee_masters.fee_due_date', 'fee_masters.fee_amount', 'fee_masters.status',
-                'students.reg_no', 'students.reg_date', 'students.first_name', 'students.middle_name', 'students.last_name', 'students.semester')
+                'students.reg_no','students.serial_no', 'students.reg_date', 'students.first_name', 'students.middle_name', 'students.last_name', 'students.semester')
                 ->whereYear('fee_masters.fee_due_date', '=', $year)
                 ->orderBy('fee_masters.fee_due_date', 'desc')
                 ->join('students', 'students.id', '=', 'fee_masters.students_id')
@@ -96,7 +96,7 @@ class FeesMasterController extends CollegeBaseController
             if ($request->has('facility')) {
                 /*with library facility*/
                 if ($request->get('facility') == 1) {
-                    $data['student'] = Student::select('students.id', 'students.reg_no', 'students.reg_date', 'students.first_name',
+                    $data['student'] = Student::select('students.id', 'students.reg_no','students.serial_no', 'students.reg_date', 'students.first_name',
                         'students.middle_name', 'students.last_name', 'students.faculty', 'students.semester', 'students.academic_status', 'students.status')
                         ->where(function ($query) use ($request) {
                             $this->commonStudentFilterCondition($query, $request);
@@ -108,7 +108,7 @@ class FeesMasterController extends CollegeBaseController
 
                 /*with Hostel facility*/
                 if ($request->get('facility') == 2) {
-                    $data['student'] = Student::select('students.id', 'students.reg_no', 'students.reg_date', 'students.first_name',
+                    $data['student'] = Student::select('students.id', 'students.reg_no','students.serial_no', 'students.reg_date', 'students.first_name',
                         'students.middle_name', 'students.last_name', 'students.faculty', 'students.semester', 'students.academic_status', 'students.status')
                         ->where(function ($query) use ($request) {
                             $this->commonStudentFilterCondition($query, $request);
@@ -120,7 +120,7 @@ class FeesMasterController extends CollegeBaseController
 
                 /*with transport facility*/
                 if ($request->get('facility') == 3) {
-                    $data['student'] = Student::select('students.id', 'students.reg_no', 'students.reg_date', 'students.first_name',
+                    $data['student'] = Student::select('students.id', 'students.reg_no','students.serial_no', 'students.reg_date', 'students.first_name',
                         'students.middle_name', 'students.last_name', 'students.faculty', 'students.semester', 'students.academic_status', 'students.status')
                         ->where(function ($query) use ($request) {
                             $this->commonStudentFilterCondition($query, $request);
@@ -131,7 +131,7 @@ class FeesMasterController extends CollegeBaseController
                 }
 
             } else {
-                $data['student'] = Student::select('students.id', 'students.reg_no', 'students.reg_date', 'students.first_name',
+                $data['student'] = Student::select('students.id', 'students.reg_no','students.serial_no', 'students.reg_date', 'students.first_name',
                     'students.middle_name', 'students.last_name', 'students.faculty', 'students.semester', 'students.academic_status', 'students.status')
                     ->where(function ($query) use ($request) {
                         $this->commonStudentFilterCondition($query, $request);

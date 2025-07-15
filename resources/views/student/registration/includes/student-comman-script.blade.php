@@ -78,8 +78,8 @@
 
 
     /*Change Field Value on Capital Letter When Keyup*/
-    $(function() {
-        $('.upper').keyup(function() {
+    $(function () {
+        $('.upper').keyup(function () {
             this.value = this.value.toUpperCase();
         });
     });
@@ -100,9 +100,9 @@
                 if (data.error) {
                     $.notify(data.message, "warning");
                 } else {
-                    $('.semester').html('').append('<option value="0">Select Sem./Sec.</option>');
-                    $.each(data.semester, function(key,valueObj){
-                        $('.semester').append('<option value="'+valueObj.id+'">'+valueObj.semester+'</option>');
+                    $('.semester').html('').append('<option value="">Select Div./Sem./Sec</option>');
+                    $.each(data.semester, function (key, valueObj) {
+                        $('.semester').append('<option value="' + valueObj.id + '">' + valueObj.semester + '</option>');
                     });
                 }
             }
@@ -112,7 +112,7 @@
 
     /*copy permanent address on temporary address*/
     function CopyAddress(f) {
-        if(f.permanent_address_copier.checked == true) {
+        if (f.permanent_address_copier.checked == true) {
             f.temp_address.value = f.address.value;
             f.temp_state.value = f.state.value;
             f.temp_country.value = f.country.value;
@@ -123,17 +123,18 @@
     function FatherAsGuardian(f) {
         document.getElementById('guardian-detail').style.display = 'block';
         document.getElementById('link-guardian-detail').style.display = 'none';
-        if(f.guardian_is.value == 'father_as_guardian') {
+        if (f.guardian_is.value == 'father_as_guardian') {
             f.guardian_first_name.value = f.father_first_name.value;
             f.guardian_middle_name.value = f.father_middle_name.value;
             f.guardian_last_name.value = f.father_last_name.value;
-            f.guardian_eligibility.value = f.father_eligibility.value;
+            f.guardian_qualification.value = f.father_qualification.value;
             f.guardian_occupation.value = f.father_occupation.value;
             f.guardian_office.value = f.father_office.value;
             f.guardian_office_number.value = f.father_office_number.value;
             f.guardian_residence_number.value = f.father_residence_number.value;
             f.guardian_mobile_1.value = f.father_mobile_1.value;
             f.guardian_mobile_2.value = f.father_mobile_2.value;
+            f.guardian_email.value = f.father_email.value;
             f.guardian_relation.value = "FATHER";
             f.mother_as_guardian.checked == false;
             f.other_guardian.checked == false;
@@ -145,17 +146,18 @@
         document.getElementById('guardian-detail').style.display = 'block';
         document.getElementById('link-guardian-detail').style.display = 'none';
 
-        if(f.guardian_is.value == 'mother_as_guardian') {
+        if (f.guardian_is.value == 'mother_as_guardian') {
             f.guardian_first_name.value = f.mother_first_name.value;
             f.guardian_middle_name.value = f.mother_middle_name.value;
             f.guardian_last_name.value = f.mother_last_name.value;
-            f.guardian_eligibility.value = f.mother_eligibility.value;
+            f.guardian_qualification.value = f.mother_qualification.value;
             f.guardian_occupation.value = f.mother_occupation.value;
             f.guardian_office.value = f.mother_office.value;
             f.guardian_office_number.value = f.mother_office_number.value;
             f.guardian_residence_number.value = f.mother_residence_number.value;
             f.guardian_mobile_1.value = f.mother_mobile_1.value;
             f.guardian_mobile_2.value = f.mother_mobile_2.value;
+            f.guardian_email.value = f.mother_email.value;
             f.guardian_relation.value = "MOTHER";
             f.father_as_guardian.checked == false;
             f.other_guardian.checked == false;
@@ -167,11 +169,11 @@
         document.getElementById('guardian-detail').style.display = 'block';
         document.getElementById('link-guardian-detail').style.display = 'none';
 
-        if(f.guardian_is.value == 'other_guardian') {
+        if (f.guardian_is.value == 'other_guardian') {
             f.guardian_first_name.value = "";
             f.guardian_middle_name.value = "";
             f.guardian_last_name.value = "";
-            f.guardian_eligibility.value = "";
+            f.guardian_qualification.value = "";
             f.guardian_occupation.value = "";
             f.guardian_office.value = "";
             f.guardian_office_number.value = "";
@@ -191,7 +193,7 @@
         f.guardian_first_name.value = f.father_first_name.value;
         f.guardian_middle_name.value = f.father_middle_name.value;
         f.guardian_last_name.value = f.father_last_name.value;
-        f.guardian_eligibility.value = f.father_eligibility.value;
+        f.guardian_qualification.value = f.father_qualification.value;
         f.guardian_occupation.value = f.father_occupation.value;
         f.guardian_office.value = f.father_office.value;
         f.guardian_office_number.value = f.father_office_number.value;

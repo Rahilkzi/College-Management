@@ -8,7 +8,6 @@
     <div class="main-content">
         <div class="main-content-inner">
             <div class="page-content">
-                @include('user-student.layouts.includes.template_setting')
                 <div class="page-header">
                     <h1>
                         Dashboard
@@ -115,9 +114,9 @@
                                     </div>
 
                                     <div class="profile-info-row">
-                                        <div class="profile-info-name"> Univ.Reg.: </div>
+                                        <div class="profile-info-name"> Serial No :</div>
                                         <div class="profile-info-value">
-                                            <span class="editable" id="university_reg">{{ $data['student']->university_reg }}</span>
+                                            <span class="editable" id="serial_no">{{ $data['student']->serial_no }}</span>
                                         </div>
                                         <div class="profile-info-name"> DOB : </div>
                                         <div class="profile-info-value">

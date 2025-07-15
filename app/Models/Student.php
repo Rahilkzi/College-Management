@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Student extends BaseModel
 {
-    protected $fillable = ['created_by', 'last_updated_by', 'reg_no', 'reg_date', 'university_reg','faculty','semester','batch',
+    protected $fillable = ['created_by', 'last_updated_by', 'reg_no', 'reg_date', 'serial_no','faculty','semester','batch',
         'academic_status', 'first_name', 'middle_name', 'last_name', 'devnagari_first_name', 'devnagari_middle_name', 'devnagari_last_name',
          'date_of_birth', 'gender', 'blood_group', 'adhar_no', 'nationality','religion', 'caste','mother_tongue', 'email', 'extra_info', 'student_image','student_signature','status', 'serial_no',
          'first_name_dev',
@@ -16,6 +16,13 @@ class Student extends BaseModel
     public function address()
     {
         return $this->hasOne(Addressinfo::class,'students_id', 'id');
+    }
+
+    // Student.php model
+    public function facultyRelation()
+    {
+        // Assuming Faculty model exists and students.faculty matches faculties.name
+        return $this->belongsTo(Faculty::class, 'faculty', 'id');
     }
 
     public function parents()

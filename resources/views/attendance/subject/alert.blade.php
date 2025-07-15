@@ -10,7 +10,7 @@
     <div class="main-content">
         <div class="main-content-inner">
             <div class="page-content">
-                @include('layouts.includes.template_setting')
+               
                 <div class="page-header">
                     <h1>
                         @include($view_path.'.includes.breadcrumb-primary')
@@ -46,10 +46,10 @@
 
                                 </div>
 
-                                <label class="col-sm-1 control-label">Sem./Sec.</label>
+                                <label class="col-sm-1 control-label">Div./Sem./Sec</label>
                                 <div class="col-sm-2">
                                     <select name="semester_select" class="form-control semester_select" onChange ="loadSubject(this)">
-                                        <option> Select Sem./Sec. </option>
+                                        <option> Select Div./Sem./Sec </option>
                                     </select>
                                 </div>
                             </div>
@@ -125,7 +125,7 @@
                     if (data.error) {
                         toastr.warning(data.error, "Warning");
                     } else {
-                        $('.semester_select').html('').append('<option value="0">Select Sem./Sec.</option>');
+                        $('.semester_select').html('').append('<option value="0">Select Div./Sem./Sec</option>');
                         $.each(data.semester, function(key,valueObj){
                             $('.semester_select').append('<option value="'+valueObj.id+'">'+valueObj.semester+'</option>');
                         });
@@ -153,7 +153,7 @@
             }
 
             if (semester == 0) {
-                toastr.info("Please, Select Sem./Sec.", "Info:");
+                toastr.info("Please, Select Div./Sem./Sec", "Info:");
                 return false;
             }
 

@@ -36,7 +36,7 @@ class FeesCollectionController extends CollegeBaseController
     public function index(Request $request)
     {
         $data = [];
-        $data['student'] = Student::select('students.id','students.reg_no','students.reg_date', 'students.first_name',
+        $data['student'] = Student::select('students.id','students.reg_no','students.serial_no','students.reg_date', 'students.first_name',
             'students.middle_name', 'students.last_name','students.faculty','students.semester','ai.mobile_1', 'pd.father_first_name', 'pd.father_middle_name',
             'pd.father_last_name','students.academic_status','students.status')
             ->where(function ($query) use ($request) {
@@ -60,7 +60,7 @@ class FeesCollectionController extends CollegeBaseController
     {
         $data = [];
         $today = Carbon::parse(today())->format('Y-m-d');
-        $data['student'] = Student::select('students.id','students.reg_no','students.reg_date', 'students.first_name',
+        $data['student'] = Student::select('students.id','students.reg_no','students.serial_no','students.reg_date', 'students.first_name',
             'students.middle_name', 'students.last_name','students.faculty','students.semester','students.date_of_birth',
             'students.email', 'ai.mobile_1', 'pd.father_first_name', 'pd.father_middle_name', 'pd.father_last_name',
             'students.student_image','students.status')
@@ -98,10 +98,17 @@ class FeesCollectionController extends CollegeBaseController
     public function add(Request $request, $id)
     {
         $data = [];
-        $data['fee_master'] = FeeMaster::select('id', 'students_id', 'semester', 'fee_head','fee_due_date','fee_amount','status')
-            ->where('students_id','=',$data['student']->id)
+        $data['fee_master'] = FeeMaster::select('id', 'students_id', 'semester', 'fee_head', 'fee_due_date', 'fee_amount', 'status')
+            ->where('students_id', '=', $data['student']->id)
             ->get();
 
+        // After fetching the data, you can check if 'semester' exists for each record
+        foreach ($data['fee_master'] as $fee) {
+            if (!$fee->semester) {
+                // Handle case where 'semester' is not available (e.g., set a default value or remove it)
+                $fee->semester = '';  // Example of setting a default value
+            }
+        }
 
         $data['url'] = URL::current();
         $data['filter_query'] = $this->filter_query;
@@ -324,7 +331,7 @@ class FeesCollectionController extends CollegeBaseController
     {
         $data = [];
         $today = Carbon::parse(today())->format('Y-m-d');
-        $data['student'] = Student::select('students.id','students.reg_no','students.reg_date', 'students.first_name',
+        $data['student'] = Student::select('students.id','students.reg_no','students.serial_no','students.reg_date', 'students.first_name',
             'students.middle_name', 'students.last_name','students.faculty','students.semester','students.date_of_birth',
             'students.email', 'ai.mobile_1', 'pd.father_first_name', 'pd.father_middle_name', 'pd.father_last_name',
             'students.student_image','students.status')
@@ -572,7 +579,7 @@ class FeesCollectionController extends CollegeBaseController
 
     public function studentDetail(Request $request)
     {
-        $student = Student::select('id', 'reg_no', 'reg_date', 'university_reg','faculty','semester',
+        $student = Student::select('id', 'reg_no', 'reg_date', 'serial_no','faculty','semester',
             'academic_status', 'first_name', 'middle_name', 'last_name', 'date_of_birth', 'gender',
             'email', 'extra_info', 'student_image','student_signature','status')
             ->where('id', '=', $request->get('id'))->first();

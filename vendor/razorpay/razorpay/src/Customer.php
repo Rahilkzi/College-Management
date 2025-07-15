@@ -37,4 +37,32 @@ class Customer extends Entity
 
         return $token;
     }
+
+    public function addBankAccount($attributes = array())
+    {
+        $entityUrl = $this->getEntityUrl().$this->id. '/bank_account';
+
+        return $this->request('POST', $entityUrl, $attributes);
+    }
+
+    public function deleteBankAccount($bank_id)
+    {
+        $entityUrl = $this->getEntityUrl() . $this->id. '/bank_account/'. $bank_id;
+
+        return $this->request('DELETE', $entityUrl);
+    }
+
+    public function requestqualificationCheck($attributes = array())
+    {
+        $entityUrl = $this->getEntityUrl(). '/qualification';
+
+        return $this->request('POST', $entityUrl, $attributes);
+    }
+
+    public function fetchqualification($id)
+    {
+        $entityUrl = $this->getEntityUrl(). '/qualification/'. $id;
+
+        return $this->request('GET', $entityUrl);
+    }
 }

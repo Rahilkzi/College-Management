@@ -14,7 +14,7 @@
                     </th>
                     <th>S.N.</th>
                     <th>CODE - {{ $panel }}</th>
-                    <th>Sem./Sec.</th>
+                    <th>Div./Sem./Sec</th>
                     <th>Status</th>
                     <th></th>
                 </tr>

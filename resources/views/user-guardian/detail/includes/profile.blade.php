@@ -120,9 +120,9 @@
 
 
             <div class="profile-info-row">
-                <div class="profile-info-name"> Univ.Reg.: </div>
+                <div class="profile-info-name"> Serial No :</div>
                 <div class="profile-info-value">
-                    <span class="editable" id="university_reg">{{ $data['student']->university_reg }}</span>
+                    <span class="editable" id="serial_no">{{ $data['student']->serial_no }}</span>
                 </div>
                 <div class="profile-info-name"> DOB : </div>
                 <div class="profile-info-value">
@@ -228,9 +228,9 @@
             <div class="profile-info-value">
                 <span class="editable" id="temporary_place">{{ $data['student']->father_first_name.' '.$data['student']->father_middle_name.' '.$data['student']->father_last_name }}</span>
             </div>
-            <div class="profile-info-name"> Eligibility :</div>
+            <div class="profile-info-name"> qualification :</div>
             <div class="profile-info-value">
-                <span class="editable" id="father_eligibility">{{ $data['student']->father_eligibility }}</span>
+                <span class="editable" id="father_qualification">{{ $data['student']->father_qualification }}</span>
             </div>
             <div class="profile-info-name"> Occupation :</div>
             <div class="profile-info-value">
@@ -274,9 +274,9 @@
             <div class="profile-info-value">
                 <span class="editable" id="temporary_place">{{ $data['student']->mother_first_name.' '.$data['student']->mother_middle_name.' '.$data['student']->mother_last_name }}</span>
             </div>
-            <div class="profile-info-name"> Eligibility :</div>
+            <div class="profile-info-name"> qualification :</div>
             <div class="profile-info-value">
-                <span class="editable" id="mother_eligibility">{{ $data['student']->mother_eligibility }}</span>
+                <span class="editable" id="mother_qualification">{{ $data['student']->mother_qualification }}</span>
             </div>
             <div class="profile-info-name"> Occupation : </div>
             <div class="profile-info-value">
@@ -322,9 +322,9 @@
             <div class="profile-info-value">
                 <span class="editable" id="temporary_place">{{ $data['student']->guardian_first_name.' '.$data['student']->guardian_middle_name.' '.$data['student']->guardian_last_name }}</span>
             </div>
-            <div class="profile-info-name"> Eligibility :</div>
+            <div class="profile-info-name"> qualification :</div>
             <div class="profile-info-value">
-                <span class="editable" id="guardian_eligibility">{{ $data['student']->guardian_eligibility }}</span>
+                <span class="editable" id="guardian_qualification">{{ $data['student']->guardian_qualification }}</span>
             </div>
             <div class="profile-info-name"> Occupation :</div>
             <div class="profile-info-value">

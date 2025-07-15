@@ -100,9 +100,9 @@
                 <div class="profile-info-value">
                     <span class="editable" id="temporary_place">{{ $data['guardian']->guardian_first_name.' '.$data['guardian']->guardian_middle_name.' '.$data['guardian']->guardian_last_name }}</span>
                 </div>
-                <div class="profile-info-name"> Eligibility :</div>
+                <div class="profile-info-name"> qualification :</div>
                 <div class="profile-info-value">
-                    <span class="editable" id="guardian_eligibility">{{ $data['guardian']->guardian_eligibility }}</span>
+                    <span class="editable" id="guardian_qualification">{{ $data['guardian']->guardian_qualification }}</span>
                 </div>
 
             </div>

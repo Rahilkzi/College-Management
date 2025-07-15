@@ -9,7 +9,7 @@
     <div class="main-content">
         <div class="main-content-inner">
             <div class="page-content">
-                @include('layouts.includes.template_setting')
+               
 
                 <div class="page-header">
                     <h1>
@@ -109,7 +109,7 @@
                     if (data.error) {
                         toastr.warning(data.error, "Warning");
                     } else {
-                        $('.semester_select').html('').append('<option value="0">Select Sem./Sec.</option>');
+                        $('.semester_select').html('').append('<option value="0">Select Div./Sem./Sec</option>');
                         $.each(data.semester, function(key,valueObj){
                             $('.semester_select').append('<option value="'+valueObj.id+'">'+valueObj.semester+'</option>');
                         });
@@ -148,7 +148,7 @@
             }
 
             if (semester == 0) {
-                toastr.info("Please, Select Sem./Sec.", "Info:");
+                toastr.info("Please, Select Div./Sem./Sec", "Info:");
                 return false;
             }
 
@@ -213,7 +213,7 @@
             }
 
             if (semester == 0) {
-                toastr.info("Please, Select Sem./Sec.", "Info:");
+                toastr.info("Please, Select Div./Sem./Sec", "Info:");
                 return false;
             }
 
@@ -283,7 +283,7 @@
             }
 
             if (semester == 0) {
-                toastr.info("Please, Select Sem./Sec.", "Info:");
+                toastr.info("Please, Select Div./Sem./Sec", "Info:");
                 return false;
             }
 

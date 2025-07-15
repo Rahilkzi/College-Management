@@ -20,7 +20,7 @@
                         @include('includes.form_fields_validation_message', ['name' => 'faculty'])
                     </div>
 
-                    <label class="col-sm-1 control-label">Sem./Sec.</label>
+                    <label class="col-sm-1 control-label">Div./Sem./Sec</label>
                     <div class="col-sm-2">
                         {!! Form::select('semester', $data['semester'], null, ['class' => 'form-control',"readonly"]) !!}
                         @include('includes.form_fields_validation_message', ['name' => 'semester'])
@@ -46,10 +46,10 @@
                         @include('includes.form_fields_validation_message', ['name' => 'reg_date'])
                     </div>
 
-                    {!! Form::label('university_reg', 'UNIVERSITY REG. NO.', ['class' => 'col-sm-2 control-label']) !!}
+                    {!! Form::label('serial_no', 'UNIVERSITY REG. NO.', ['class' => 'col-sm-2 control-label']) !!}
                     <div class="col-sm-3">
-                        {!! Form::text('university_reg', null, ["placeholder" => "", "class" => "form-control border-form","readonly"]) !!}
-                        @include('includes.form_fields_validation_message', ['name' => 'university_reg'])
+                        {!! Form::text('serial_no', null, ["placeholder" => "", "class" => "form-control border-form","readonly"]) !!}
+                        @include('includes.form_fields_validation_message', ['name' => 'serial_no'])
                     </div>
                 </div>
 

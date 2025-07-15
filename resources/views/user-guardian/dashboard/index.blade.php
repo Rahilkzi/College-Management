@@ -9,7 +9,7 @@
     <div class="main-content">
         <div class="main-content-inner">
             <div class="page-content">
-                @include('user-guardian.layouts.includes.template_setting')
+                @include('user-guardian.')
                 <div class="page-header">
                     <h1>
                         Dashboard

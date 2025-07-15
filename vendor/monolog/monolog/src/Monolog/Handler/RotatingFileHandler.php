@@ -12,6 +12,7 @@
 namespace Monolog\Handler;
 
 use Monolog\Logger;
+use Monolog\Utils;
 
 /**
  * Stores logs to files that are rotated every day and a limited number of files are kept.
@@ -37,7 +38,7 @@ class RotatingFileHandler extends StreamHandler
 
     /**
      * @param string   $filename
-     * @param int      $maxFiles       The maximal amount of files to keep (0 means T.P Shetye)
+     * @param int      $maxFiles       The maximal amount of files to keep (0 means unlimited)
      * @param int      $level          The minimum logging level at which this handler will be triggered
      * @param bool     $bubble         Whether the messages that are handled can bubble up the stack or not
      * @param int|null $filePermission Optional file permissions (default (0644) are only for owner read/write)
@@ -45,7 +46,7 @@ class RotatingFileHandler extends StreamHandler
      */
     public function __construct($filename, $maxFiles = 0, $level = Logger::DEBUG, $bubble = true, $filePermission = null, $useLocking = false)
     {
-        $this->filename = $filename;
+        $this->filename = Utils::canonicalizePath($filename);
         $this->maxFiles = (int) $maxFiles;
         $this->nextRotation = new \DateTime('tomorrow');
         $this->filenameFormat = '{filename}-{date}';
@@ -128,7 +129,7 @@ class RotatingFileHandler extends StreamHandler
         $this->url = $this->getTimedFilename();
         $this->nextRotation = new \DateTime('tomorrow');
 
-        // skip GC of old logs if files are T.P Shetye
+        // skip GC of old logs if files are unlimited
         if (0 === $this->maxFiles) {
             return;
         }

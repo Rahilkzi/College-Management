@@ -60,7 +60,7 @@
                                     <span class="lbl"></span>
                                 </label>
                             </th>
-                            <th class="sorting_disabled">Sem./Sec.</th>
+                            <th class="sorting_disabled">Div./Sem./Sec</th>
                             <th class="sorting_disabled">FeeHead</th>
                             <th class="sorting_disabled">DueDate</th>
                             <th class="sorting_disabled">Amount </th>

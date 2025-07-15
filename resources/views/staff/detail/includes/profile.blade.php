@@ -171,7 +171,7 @@
             </div>
             <div class="profile-info-name"> Experience :</div>
             <div class="profile-info-value">
-                <span class="editable" id="guardian_eligibility">{{ $data['staff']->experience }}</span>
+                <span class="editable" id="guardian_qualification">{{ $data['staff']->experience }}</span>
             </div>
         </div>
         <div class="profile-info-row">

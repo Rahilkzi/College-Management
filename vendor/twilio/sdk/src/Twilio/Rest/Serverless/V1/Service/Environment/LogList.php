@@ -120,7 +120,7 @@ class LogList extends ListResource {
      * Request is executed immediately
      *
      * @param string $targetUrl API-generated URL for the requested results page
-     * @return \Twilio\Page Page of LogInstance
+     * @return \Twilio\Page Page of stance
      */
     public function getPage($targetUrl) {
         $response = $this->version->getDomain()->getClient()->request(

@@ -23,9 +23,9 @@
                 <div class="profile-info-value">
                     <span class="editable" id="reg_no"><a href="{{ route('student.view', ['id' => $data['student']->id]) }}">{{ $data['student']->reg_no }}</a></span>
                 </div>
-                <div class="profile-info-name"> Uni. Reg.No. : </div>
+                <div class="profile-info-name"> Serial No. : </div>
                 <div class="profile-info-value">
-                    <span class="editable" id="student_name">{{ $data['student']->univ_reg }}</span>
+                    <span class="editable" id="student_name">{{ $data['student']->serial_no }}</span>
                 </div>
             </div>
 

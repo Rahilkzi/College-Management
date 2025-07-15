@@ -16,13 +16,13 @@
                     </th>
                     <th>S.N.</th>
                     <th>Faculty/Class</th>
-                    <th>Sem./Sec.</th>
+                    <th>Div./Sem./Sec</th>
                     <th>Reg.Num</th>
                     {{--<th>Reg.Date</th>--}}
                     <th>Student Name</th>
                     <th>Status</th>
                     <th>Action</th>
-                    <th>Service Activation</th>
+               
                 </tr>
                 </thead>
                 <tbody>
@@ -107,31 +107,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td>
-                                <div class="hidden-sm hidden-xs action-buttons">
-                                    <a href="{{ route('library.member.quick-membership', ['reg_no' => $student->reg_no,'user_type' => 1,'status' => 'active',]) }}" class="btn btn-primary btn-minier">
-                                        <i class="ace-icon fa fa-book bigger-130"></i>
-                                    </a>
-
-                                    <a class="open-ActiveAgain label label-primary" data-toggle="modal"
-                                       data-target="#activeAgain"
-                                       data-id="{{ $student->id }}"
-                                       data-reg="{{ $student->reg_no }}">
-                                         <span>
-                                             <i class="ace-icon fa fa-bed bigger-130"></i>
-                                         </span>
-                                    </a>
-
-                                    <a class="open-TransportActiveAgain label label-primary" data-toggle="modal"
-                                       data-target="#TransportActiveAgain"
-                                       data-id="{{ $student->id }}"
-                                       data-reg="{{ $student->reg_no }}">
-                                         <span>
-                                             <i class="ace-icon fa fa-bus bigger-130"></i>
-                                         </span>
-                                    </a>
-                                </div>
-                            </td>
+                      
                         </tr>
                         @php($i++)
                     @endforeach

@@ -16,7 +16,7 @@
                         <th>S.N.</th>
                         <th>Reg. Num.</th>
                         <th>Name of Student</th>
-                        <th>Sem./Sec.</th>
+                        <th>Div./Sem./Sec</th>
                         <th>Fee Head</th>
                         <th>Due Date</th>
                         <th>Fee Amount</th>

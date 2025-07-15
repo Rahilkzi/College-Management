@@ -192,7 +192,7 @@ class CharacterCertificateController extends CollegeBaseController
 
     public function view(Request $request, $id)
     {
-        $data['student'] = Student::select('students.id','students.reg_no', 'students.reg_date', 'students.university_reg',
+        $data['student'] = Student::select('students.id','students.reg_no', 'students.reg_date', 'students.serial_no',
             'students.faculty','students.semester','students.batch', 'students.academic_status', 'students.first_name', 'students.middle_name',
             'students.last_name', 'students.date_of_birth', 'students.gender', 'students.blood_group',  'students.religion', 'students.caste','students.nationality',
             'students.mother_tongue','students.student_image', 'pd.father_first_name', 'pd.father_middle_name', 'pd.father_last_name',
@@ -289,7 +289,7 @@ class CharacterCertificateController extends CollegeBaseController
         $certificateTemplate = CertificateTemplate::where('certificate','CHARACTER')->first();
 
         $filteredStudent = $students->filter(function ($student, $key) use($certificateTemplate) {
-            $data = Student::select('students.id','students.reg_no', 'students.reg_date', 'students.university_reg',
+            $data = Student::select('students.id','students.reg_no', 'students.reg_date', 'students.serial_no',
                 'students.faculty','students.semester','students.batch', 'students.academic_status', 'students.first_name', 'students.middle_name',
                 'students.last_name', 'students.date_of_birth', 'students.gender', 'students.blood_group',  'students.religion',
                 'students.caste','students.nationality', 'students.mother_tongue', 'students.email', 'students.extra_info',
@@ -298,12 +298,12 @@ class CharacterCertificateController extends CollegeBaseController
                 'ai.mobile_1', 'ai.mobile_2',
                 'pd.grandfather_first_name',
                 'pd.grandfather_middle_name', 'pd.grandfather_last_name', 'pd.father_first_name', 'pd.father_middle_name',
-                'pd.father_last_name', 'pd.father_eligibility', 'pd.father_occupation', 'pd.father_office', 'pd.father_office_number',
+                'pd.father_last_name', 'pd.father_qualification', 'pd.father_occupation', 'pd.father_office', 'pd.father_office_number',
                 'pd.father_residence_number', 'pd.father_mobile_1', 'pd.father_mobile_2', 'pd.father_email', 'pd.mother_first_name',
-                'pd.mother_middle_name', 'pd.mother_last_name', 'pd.mother_eligibility', 'pd.mother_occupation', 'pd.mother_office',
+                'pd.mother_middle_name', 'pd.mother_last_name', 'pd.mother_qualification', 'pd.mother_occupation', 'pd.mother_office',
                 'pd.mother_office_number', 'pd.mother_residence_number', 'pd.mother_mobile_1', 'pd.mother_mobile_2', 'pd.mother_email',
                 'gd.id as guardian_id', 'gd.guardian_first_name', 'gd.guardian_middle_name', 'gd.guardian_last_name',
-                'gd.guardian_eligibility', 'gd.guardian_occupation', 'gd.guardian_office', 'gd.guardian_office_number', 'gd.guardian_residence_number',
+                'gd.guardian_qualification', 'gd.guardian_occupation', 'gd.guardian_office', 'gd.guardian_office_number', 'gd.guardian_residence_number',
                 'gd.guardian_mobile_1', 'gd.guardian_mobile_2', 'gd.guardian_email', 'gd.guardian_relation', 'gd.guardian_address',
                 'students.student_image','students.student_signature', 'pd.father_image', 'pd.mother_image', 'gd.guardian_image',
                 'cc.date_of_issue', 'cc.cc_num', 'cc.year',  'cc.character','cc.ref_text')
@@ -320,7 +320,7 @@ class CharacterCertificateController extends CollegeBaseController
             $student->cc_num = $data->cc_num;
             $student->faculty = $data->faculty;
             $student->reg_no = $data->reg_no;
-            $student->university_reg = $data->university_reg;
+            $student->serial_no = $data->serial_no;
             $student->certificate = $certificateTemplate->certificate;
 
             $text = str_replace('{{date_of_issue}}', Carbon::parse($data->date_of_leaving)->format('d-m-Y'), $certificateTemplate->template);

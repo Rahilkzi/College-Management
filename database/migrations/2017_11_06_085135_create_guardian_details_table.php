@@ -23,7 +23,7 @@ class CreateGuardianDetailsTable extends Migration
             $table->string('guardian_first_name', '15');
             $table->string('guardian_middle_name', '15')->nullable();
             $table->string('guardian_last_name', '15');
-            $table->string('guardian_eligibility', '50')->nullable();
+            $table->string('guardian_qualification', '50')->nullable();
             $table->string('guardian_occupation', '50')->nullable();
             $table->string('guardian_office', '100')->nullable();
             $table->string('guardian_office_number', '15')->nullable();

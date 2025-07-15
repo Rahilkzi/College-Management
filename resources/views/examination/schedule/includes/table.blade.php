@@ -15,7 +15,7 @@
                     <th>Month</th>
                     <th>Exam</th>
                     <th>Faculty/Class</th>
-                    <th>Sem./Sec.</th>
+                    <th>Div./Sem./Sec</th>
                     <th>Result Status</th>
                     <th>Exam Status</th>
                     <th></th>

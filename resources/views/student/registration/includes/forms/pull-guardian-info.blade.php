@@ -12,9 +12,9 @@
         <div class="profile-info-value">
             <span class="editable" id="temporary_place">{{ $guardianInfo->guardian_first_name.' '.$guardianInfo->guardian_middle_name.' '.$guardianInfo->guardian_last_name }}</span>
         </div>
-        <div class="profile-info-name"> Eligibility :</div>
+        <div class="profile-info-name"> qualification :</div>
         <div class="profile-info-value">
-            <span class="editable" id="guardian_eligibility">{{ $guardianInfo->guardian_eligibility }}</span>
+            <span class="editable" id="guardian_qualification">{{ $guardianInfo->guardian_qualification }}</span>
         </div>
 
     </div>
@@ -89,9 +89,9 @@
                 <div class="profile-info-value">
                     <span class="editable" id="temporary_place">{{ $guardianInfo->guardian_first_name.' '.$guardianInfo->guardian_middle_name.' '.$guardianInfo->guardian_last_name }}</span>
                 </div>
-                <div class="profile-info-name"> Eligibility :</div>
+                <div class="profile-info-name"> qualification :</div>
                 <div class="profile-info-value">
-                    <span class="editable" id="guardian_eligibility">{{ $guardianInfo->guardian_eligibility }}</span>
+                    <span class="editable" id="guardian_qualification">{{ $guardianInfo->guardian_qualification }}</span>
                 </div>
 
             </div>

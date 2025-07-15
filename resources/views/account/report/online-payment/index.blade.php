@@ -8,7 +8,7 @@
     <div class="main-content ">
         <div class="main-content-inner">
             <div class="page-content">
-                @include('layouts.includes.template_setting')
+               
                 <div class="page-header hidden-print">
                     <h1>
                         @include($view_path.'.includes.breadcrumb-primary')
@@ -112,7 +112,7 @@
                     if (data.error) {
                         $.notify(data.message, "warning");
                     } else {
-                        $('.semester_select').html('').append('<option value="0">Select Sem./Sec.</option>');
+                        $('.semester_select').html('').append('<option value="0">Select Div./Sem./Sec</option>');
                         $.each(data.semester, function(key,valueObj){
                             $('.semester_select').append('<option value="'+valueObj.id+'">'+valueObj.semester+'</option>');
                         });

@@ -157,10 +157,10 @@
 
 
             <div class="profile-info-row">
-                @if($data['student']->university_reg != "")
-                    <div class="profile-info-name"> Univ.Reg.: </div>
+                @if($data['student']->serial_no != "")
+                    <div class="profile-info-name"> Serial No :</div>
                     <div class="profile-info-value">
-                        <span class="editable" id="university_reg">{{ $data['student']->university_reg }}</span>
+                        <span class="editable" id="serial_no">{{ $data['student']->serial_no }}</span>
                     </div>
                 @endif
                 @if($data['student']->date_of_birth != "")
@@ -321,10 +321,10 @@
                         id="temporary_place">{{ $data['student']->father_first_name . ' ' . $data['student']->father_middle_name . ' ' . $data['student']->father_last_name }}</span>
                 </div>
             @endif
-            @if($data['student']->father_eligibility != "")
-                <div class="profile-info-name"> Eligibility :</div>
+            @if($data['student']->father_qualification != "")
+                <div class="profile-info-name"> qualification :</div>
                 <div class="profile-info-value">
-                    <span class="editable" id="father_eligibility">{{ $data['student']->father_eligibility }}</span>
+                    <span class="editable" id="father_qualification">{{ $data['student']->father_qualification }}</span>
                 </div>
             @endif
             @if($data['student']->father_occupation != "")
@@ -387,10 +387,10 @@
                         id="temporary_place">{{ $data['student']->mother_first_name . ' ' . $data['student']->mother_middle_name . ' ' . $data['student']->mother_last_name }}</span>
                 </div>
             @endif
-            @if($data['student']->mother_eligibility != "")
-                <div class="profile-info-name"> Eligibility :</div>
+            @if($data['student']->mother_qualification != "")
+                <div class="profile-info-name"> qualification :</div>
                 <div class="profile-info-value">
-                    <span class="editable" id="mother_eligibility">{{ $data['student']->mother_eligibility }}</span>
+                    <span class="editable" id="mother_qualification">{{ $data['student']->mother_qualification }}</span>
                 </div>
             @endif
             @if($data['student']->mother_occupation != "")
@@ -455,10 +455,10 @@
                         id="temporary_place">{{ $data['student']->guardian_first_name . ' ' . $data['student']->guardian_middle_name . ' ' . $data['student']->guardian_last_name }}</span>
                 </div>
             @endif
-            @if($data['student']->guardian_eligibility != "")
-                <div class="profile-info-name"> Eligibility :</div>
+            @if($data['student']->guardian_qualification != "")
+                <div class="profile-info-name"> qualification :</div>
                 <div class="profile-info-value">
-                    <span class="editable" id="guardian_eligibility">{{ $data['student']->guardian_eligibility }}</span>
+                    <span class="editable" id="guardian_qualification">{{ $data['student']->guardian_qualification }}</span>
                 </div>
             @endif
             @if($data['student']->guardian_occupation != "")

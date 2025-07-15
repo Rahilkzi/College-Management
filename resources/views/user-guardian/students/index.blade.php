@@ -8,7 +8,7 @@
     <div class="main-content">
         <div class="main-content-inner">
             <div class="page-content">
-                @include('user-student.layouts.includes.template_setting')
+                @include('user-student.')
                 <div class="page-header">
                     <h1>
                         Guardian
@@ -59,9 +59,9 @@
 
 
                                             <div class="profile-info-row">
-                                                <div class="profile-info-name"> Univ.Reg.: </div>
+                                                <div class="profile-info-name"> Serial No :</div>
                                                 <div class="profile-info-value">
-                                                    <span class="editable" id="university_reg">{{ $student->university_reg }}</span>
+                                                    <span class="editable" id="serial_no">{{ $student->serial_no }}</span>
                                                 </div>
                                                 <div class="profile-info-name"> DOB : </div>
                                                 <div class="profile-info-value">

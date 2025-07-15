@@ -16,7 +16,7 @@
                 <tr>
                     <th>S.N.</th>
                     <th>Faculty/Class</th>
-                    <th>Sem./Sec.</th>
+                    <th>Div./Sem./Sec</th>
                     <th>Reg. Num.</th>
                     <th>Reg. Date</th>
                     <th>University Reg.</th>
@@ -44,7 +44,7 @@
 
                     <th>Grand Father Name</th>
                     <th>Father Name</th>
-                    <th>Father Eligibility</th>
+                    <th>Father qualification</th>
                     <th>Father Occupation</th>
                     <th>Father Office</th>
                     <th>Father Office Number</th>
@@ -53,7 +53,7 @@
                     <th>Father Email</th>
 
                     <th>Mother Name</th>
-                    <th>Mother Eligibility</th>
+                    <th>Mother qualification</th>
                     <th>Mother Occupation</th>
                     <th>Mother Office</th>
                     <th>Mother Office Number</th>
@@ -62,7 +62,7 @@
                     <th>Mother Email</th>
 
                     <th>Guardian Name</th>
-                    <th>Guardian Eligibility</th>
+                    <th>Guardian qualification</th>
                     <th>Guardian Occupation</th>
                     <th>Guardian Office</th>
                     <th>Guardian Office Number</th>
@@ -85,7 +85,7 @@
                             <td> {{  ViewHelper::getSemesterTitle( $student->semester ) }}</td>
                             <td><a href="{{ route('student.view', ['id' => $student->id]) }}">{{ $student->reg_no }}</a></td>
                             <td>{{ \Carbon\Carbon::parse($student->reg_date)->format('Y-m-d')}} </td>
-                            <td>{{ $student->university_reg }}</td>
+                            <td>{{ $student->serial_no }}</td>
                             <td><a href="{{ route('student.view', ['id' => $student->id]) }}"> {{ $student->first_name.' '.$student->middle_name.' '. $student->last_name }}</a></td>
                             <td>{{ \Carbon\Carbon::parse($student->date_of_birth)->format('Y-m-d')}}</td>
 
@@ -113,7 +113,7 @@
 
                             <td>{{ $student->grandfather_first_name.' '.$student->grandfather_middle_name.' '. $student->grandfather_last_name }}</td>
                             <td>{{ $student->father_first_name.' '.$student->father_middle_name.' '. $student->father_last_name }}</td>
-                            <td>{{ $student->father_eligibility }}</td>
+                            <td>{{ $student->father_qualification }}</td>
                             <td>{{ $student->father_occupation }}</td>
                             <td>{{ $student->father_office }}</td>
                             <td>{{ $student->father_office_number }}</td>
@@ -122,7 +122,7 @@
                             <td>{{ $student->father_email }}</td>
 
                             <td>{{ $student->mother_first_name.' '.$student->mother_middle_name.' '. $student->mother_last_name }}</td>
-                            <td>{{ $student->mother_eligibility }}</td>
+                            <td>{{ $student->mother_qualification }}</td>
                             <td>{{ $student->mother_occupation }}</td>
                             <td>{{ $student->mother_office }}</td>
                             <td>{{ $student->mother_office_number }}</td>
@@ -131,7 +131,7 @@
                             <td>{{ $student->mother_email }}</td>
 
                             <td>{{ $student->guardian_first_name.' '.$student->guardian_middle_name.' '. $student->guardian_last_name }}</td>
-                            <td>{{ $student->guardian_eligibility }}</td>
+                            <td>{{ $student->guardian_qualification }}</td>
                             <td>{{ $student->guardian_occupation }}</td>
                             <td>{{ $student->guardian_office }}</td>
                             <td>{{ $student->guardian_office_number }}</td>

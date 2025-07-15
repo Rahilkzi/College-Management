@@ -29,10 +29,10 @@
 
             </div>
 
-            <label class="col-sm-2 control-label">Sem./Sec.</label>
+            <label class="col-sm-2 control-label">Div./Sem./Sec</label>
             <div class="col-sm-3">
                 <select name="semester_select" class="form-control semester_select" onChange="loadStudent(this)">
-                    <option value="0"> Select Sem./Sec.... </option>
+                    <option value="0"> Select Div./Sem./Sec... </option>
                 </select>
             </div>
 

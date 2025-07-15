@@ -29,7 +29,7 @@ class CreateParentDetailsTable extends Migration
             $table->string('father_first_name', '15');
             $table->string('father_middle_name', '15')->nullable();
             $table->string('father_last_name', '15');
-            $table->string('father_eligibility', '50')->nullable();
+            $table->string('father_qualification', '50')->nullable();
             $table->string('father_occupation', '50')->nullable();
             $table->string('father_office', '100')->nullable();
             $table->string('father_office_number', '15')->nullable();
@@ -41,7 +41,7 @@ class CreateParentDetailsTable extends Migration
             $table->string('mother_first_name', '15');
             $table->string('mother_middle_name', '15')->nullable();
             $table->string('mother_last_name', '15');
-            $table->string('mother_eligibility', '50')->nullable();
+            $table->string('mother_qualification', '50')->nullable();
             $table->string('mother_occupation', '50')->nullable();
             $table->string('mother_office', '100')->nullable();
             $table->string('mother_office_number', '15')->nullable();
