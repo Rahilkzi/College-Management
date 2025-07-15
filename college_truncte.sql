@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 15, 2025 at 03:27 PM
+-- Generation Time: Jul 15, 2025 at 05:34 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -990,7 +990,7 @@ CREATE TABLE `general_settings` (
 --
 
 INSERT INTO `general_settings` (`id`, `created_at`, `updated_at`, `created_by`, `last_updated_by`, `institute`, `salogan`, `copyright`, `address`, `phone`, `email`, `website`, `favicon`, `logo`, `print_header`, `print_footer`, `facebook`, `twitter`, `linkedIn`, `youtube`, `googlePlus`, `instagram`, `whatsApp`, `skype`, `pinterest`, `wordpress`, `time_zones_id`, `quick_menu`, `public_registration`, `front_desk`, `student_staff`, `account`, `inventory`, `library`, `attendance`, `exam`, `certificate`, `hostel`, `transport`, `assignment`, `upload_download`, `meeting`, `alert`, `academic`, `help`, `status`) VALUES
-(1, '2020-05-04 17:10:05', '2025-01-28 19:02:48', 1, 1, 'TP SHETTEY', NULL, 'Copyright © 2025.TP SHETTEY right reserved', 'Lanja', '0000000000', 'tpshettey@gmail.com', NULL, '5156.png', '6514.png', '<p>u</p>', '<p>u</p>', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 274, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
+(1, '2020-05-04 17:10:05', '2025-01-28 19:02:48', 1, 1, 'TP SHETTEY', NULL, 'Copyright © 2025.TP SHETTEY right reserved', 'Lanja', '0000000000', 'tpshettey@gmail.com', NULL, '5156.png', '6514.png', '<p>u</p>', '<p>u</p>', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 274, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
 
 -- --------------------------------------------------------
 
