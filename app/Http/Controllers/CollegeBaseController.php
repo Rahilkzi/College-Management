@@ -161,6 +161,11 @@ class CollegeBaseController extends Controller
 
     protected function profileImageSrc()
     {
+
+        $user = auth()->user();
+        if (!$user) {
+            return null;
+        }
         if(auth()->user()->hasRole('student')) {
             $id = auth()->user()->hook_id;
             $student = Student::select('student_image')->find($id);
